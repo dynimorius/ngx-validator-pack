@@ -84,6 +84,6 @@
     "typescript": "~5.4.2"
   },
   "peerDependencies": {
-    "@angular/forms": "^17.3.0"
+    "ngx-validator-pack": "0.0.1"
   }
 }
