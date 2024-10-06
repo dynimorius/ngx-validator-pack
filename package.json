@@ -65,6 +65,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@dynamize/ngx-validator-pack": "file:",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -82,8 +83,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^17.3.0",
     "typescript": "~5.4.2"
-  },
-  "peerDependencies": {
-    "ngx-validator-pack": "0.0.1"
   }
 }

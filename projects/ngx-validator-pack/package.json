@@ -7,6 +7,7 @@
     "@angular/forms": "^17.3.0"
   },
   "dependencies": {
+    "ngx-validator-pack": "file:",
     "tslib": "^2.3.0"
   },
   "sideEffects": false
