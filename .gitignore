@@ -1,5 +1,5 @@
 # Ignore cache created with the Angular CLI.
 .angular/
 
-# Ignore instaled libraries 
+# Ignore installed libraries
 node_modules
