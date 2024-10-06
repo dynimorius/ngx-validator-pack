@@ -1,8 +1,0 @@
-import type { ParsedConfiguration } from '@angular/compiler-cli';
-import { InjectionToken, Provider } from 'injection-js';
-import { Transform } from '../../graph/transform';
-import { TransformProvider } from '../../graph/transform.di';
-export declare const provideTsConfig: (values?: ParsedConfiguration | string) => Provider;
-export declare const DEFAULT_TS_CONFIG_TOKEN: InjectionToken<string | ParsedConfiguration>;
-export declare const INIT_TS_CONFIG_TOKEN: InjectionToken<Transform>;
-export declare const INIT_TS_CONFIG_TRANSFORM: TransformProvider;
