@@ -1,0 +1,10 @@
+<div class="snippets-content">
+    <div class="snippets-header">
+        <div class="snippet-tab" (click)="switchSnippet('ts')">TypeScript</div>
+        <div class="snippet-tab" (click)="switchSnippet('html')">HTML</div>
+        <div class="snippet-tab" (click)="copySnippet()"><img src="../../../assets/content_copy_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Copy Icon"></div>
+    </div>
+    <div class="snippets">
+        <pre>{{snippetToShow}}</pre>
+    </div>
+</div>

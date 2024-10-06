@@ -1,0 +1,72 @@
+{
+  "name": "@dynamize/ngx-validator-pack",
+  "version": "1.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve examples",
+    "build": "ng build",
+    "watch": "ng build ngx-validator-pack --watch",
+    "test": "ng test"
+  },
+  "description": "An extension pack of Angular form validators.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynimorius/ngx-validator-pack"
+  },
+  "private": false,
+  "keywords": [
+    "Angular",
+    "Angular 2",
+    "Angular2",
+    "Forms",
+    "Form",
+    "Validation",
+    "Validator",
+    "AbstractControl",
+    "Abstract Control",
+    "FromControl",
+    "From Control",
+    "FormGroup",
+    "Form Group",
+    "Input",
+    "Reactive forms",
+    "PrimeNG",
+    "Angular Materials"
+  ],
+  "author": "Slavko Mihajlovic - dynimorius",
+  "bugs": {
+    "url": "https://github.com/dynimorius/ngx-validator-pack/issues"
+  },
+  "homepage": "https://github.com/dynimorius/ngx-validator-pack#readme",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/animations": "^17.3.0",
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/forms": "^17.3.0",
+    "@angular/platform-browser": "^17.3.0",
+    "@angular/platform-browser-dynamic": "^17.3.0",
+    "@angular/router": "^17.3.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.9",
+    "@angular/cli": "^17.3.3",
+    "@angular/compiler-cli": "^17.3.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^17.3.0",
+    "typescript": "~5.4.2"
+  },
+  "peerDependencies": {
+    "@angular/forms": "^17.3.0"
+  }
+}

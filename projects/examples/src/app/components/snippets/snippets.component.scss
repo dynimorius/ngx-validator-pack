@@ -1,0 +1,42 @@
+.snippets-content {
+    width: 45vw;
+    min-height: 130px;
+    border: 1px solid rgb(170, 169, 169);
+    border-radius: 10px;
+    background-color: rgb(4, 58, 75) !important;
+    margin: 10px;
+    overflow: hidden;
+
+    * {
+        background: none;
+    }
+}
+
+.snippets-header {
+    width: 45vw;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    background-color: rgb(30, 140, 148) !important;  
+}
+
+.snippet-tab {
+    padding: 5px;
+}
+
+.copy,
+.snippet-tab {
+    background: none;
+    color: whitesmoke;
+    cursor: pointer;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.snippet-tab:hover {
+    background-color: rgba(0,0,0, 0.3);
+}
+.snippets {
+    padding-left: 10px;
+    color: antiquewhite;
+}

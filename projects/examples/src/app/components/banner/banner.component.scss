@@ -1,0 +1,19 @@
+#banner-content {
+    height: 210px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(232,98,28,1), transparent);
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    background: none;
+}
+
+h1 {
+    background: none;
+    color: white;
+}

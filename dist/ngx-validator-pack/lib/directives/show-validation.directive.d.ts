@@ -1,0 +1,32 @@
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+import { ElementRef, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { NgControl, ValidationErrors } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { ShowValidationStyle } from '../interfaces/show-validation-styles';
+import * as i0 from "@angular/core";
+export declare class ShowValidationDirective implements OnInit, OnDestroy {
+    private elementRef;
+    private renderer;
+    private control;
+    controlSub: Subscription;
+    parent: HTMLElement;
+    self: HTMLElement;
+    container: HTMLElement;
+    span: HTMLElement | null;
+    errorStyle: ShowValidationStyle;
+    constructor(elementRef: ElementRef, renderer: Renderer2, control: NgControl);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    setStyles(): void;
+    showError(errors: ValidationErrors | null): void;
+    hideError(): void;
+    getValidationMessage(errors: ValidationErrors | null): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ShowValidationDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ShowValidationDirective, "[showValidation]", never, { "errorStyle": { "alias": "errorStyle"; "required": false; }; }, {}, never, never, true, never>;
+}
