@@ -3,5 +3,6 @@
   "dest": "../../dist/ngx-validator-pack",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["ngx-validator-pack"]
 }
