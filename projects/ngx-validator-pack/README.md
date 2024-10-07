@@ -1,4 +1,4 @@
-<img src="./D_dynamize-angular-icon.png" 
+<img src="./imgs/D_dynamize-angular-icon.png" 
         alt="Picture" 
         width="400" 
         height="400" 
@@ -1028,6 +1028,7 @@ The result of the code above is:
 ```
 
 The result of the code above is:
+
 <img src="./imgs/Show_Validation_Example_3_PrimeNg.png" 
   alt="Picture" 
   width="auto" 
