@@ -19,7 +19,7 @@
     - [Date Validators](#date-validators)
     - [Conditional Validators](#conditional-validators)
   - [Ngx Prebuilt Validators](#ngx-prebuilt-validators)
-    - [Address](#adress)
+    - [Address](#address)
     - [Alphabet](#alphabet)
     - [Date](#date)
     - [Email](#email)
@@ -109,8 +109,11 @@ In this example we are checking if the input is not a word regexp, if not we wil
 Additionally we can supply two other optional parameters, first being the name of the error and
 the second a string which will represent the error content / message.
 
-Additional parameter example:
+### Additional parameter example:
 <a name="additional-params"></a>
+
+In this example we are using regexpValidator and regexpNotValidator, but implementation is
+identical for all other ngx validators.
 
 ```javascript
 import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pack';
@@ -133,8 +136,8 @@ export class AppComponent implements OnInit {
         [
           regexpValidator(
             /(s|regexp)/,
-            'example_regexp_error',
-            'RegExp validation works!'
+            'example_regexp_error',        // Error name
+            'RegExp validation works!'     // Error Message
           ),
         ],
       ],
@@ -143,8 +146,8 @@ export class AppComponent implements OnInit {
         [
           regexpNotValidator(
             /(s|regexp)/,
-            'example_regexp_not_error',
-            'RegExp Not validation works!'
+            'example_regexp_not_error',     // Error name
+            'RegExp Not validation works!'  // Error Message
           ),
         ],
       ],
@@ -154,6 +157,7 @@ export class AppComponent implements OnInit {
 ```
 
 ### Date Validators
+<a name="date-validators"></a>
 
 We have three types of validators to compare date values (date picker values).
 
@@ -245,6 +249,7 @@ the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params).
 
 ### Conditional Validators
+<a name="conditional-validators"></a>
 
 We have three conditional validators we can use:
 
@@ -313,4 +318,556 @@ export class AppComponent implements OnInit{
 Additionally we can supply two other optional parameters, first being the name of the error and
 the second a string which will represent the error content / message. 
 Please check the example here: [additional parameters example](#additional-params).
+
+## Ngx Prebuilt Validators
+<a name="ngx-prebuilt-validators"></a>
+
+There is a number of prebuilt validators for most common text input validations.
+
+### Address
+<a name="address"></a>
+
+We can use <marl>addressValidator</marl> to validate the most common USA address format
+(example: 3344 W Alameda Avenue, Lakewood, CO 80222).
+
+```javascript
+import { addressValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      address: [null, [addressValidator()]]
+    })
+  }
+}
+```
+
+### Additional parameter example for Prebuilt Validators:
+<a name="additional-params-prebuilt"></a>
+
+```javascript
+import { addressValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      address: [null, [addressValidator(
+        'address_error_example',  // Error name
+        'Wrong address input!'    // Error Message
+      )]]
+    })
+  }
+}
+```
+
+### Alphabet
+<a name="alphabet"></a>
+
+<mark>alphabetOnlyValidator</mark> will return an error if any charter other then alphabetical are 
+in the given input.
+
+```javascript
+import { alphabetOnlyValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      alphabet: [null, [alphabetOnlyValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Date
+<a name="date"></a>
+
+We have two validators to validate text inputs for a date format:
+
+<mark>dateDD_MM_YYYYValidator</mark> checks for following formats: dd-MM-YYYY, dd.MM.YYYY or 
+dd/MM/YYYY.
+
+<mark>dateYYYY_MM_DDValidator</mark>checks for following format YYYY-MM-dd.
+
+```javascript
+import { dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator} from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      dateDDMMYYYY: [null, [dateDD_MM_YYYYValidator()]],
+      dateYYYYMMDD: [null, [dateYYYY_MM_DDValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Email
+<a name="email"></a>
+
+We can use <mark>emailValidator</mark> to validate a text input for an email format.
+(example: local-part@domain.com)
+
+```javascript
+import { emailValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      email: [null, [emailValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### IP Address
+<a name="ip-address"></a>
+
+We can preform ip address validation on a text input with the following validators:
+
+<mark>ipAddressValidator</mark> preforms a check for both IPv4 and IPv6 formats.
+(format examples:  x.x.x.x or y:y:y:y:y:y:y:y)
+
+<mark>iPv4Validator</mark> preforms a check for a IPv4 format. (x.x.x.x)
+
+<mark>iPv6Validator</mark> preforms a check for a IPv6 format. (y:y:y:y:y:y:y:y)
+
+```javascript
+import {   
+  ipAddressValidator,
+  iPv4Validator,
+  iPv6Validator 
+  } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      ipAddress: [null, [ipAddressValidator()]],
+      ipv4: [null, [iPv4Validator()]],
+      ipv6: [null, [iPv6Validator()]]
+    })
+  }
+}
+```
+
+### Numeric
+<a name="numeric"></a>
+
+<mark>numericsOnlyValidator</mark> will return an error if any charter other then numerical are 
+in the given input.
+
+```javascript
+import { numericsOnlyValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      numeric: [null, [numericsOnlyValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Special Characters
+<a name="specials"></a>
+
+<mark>noSpecialsValidator</mark> will return an error if any spacial charter are in the given input.
+
+```javascript
+import { noSpecialsValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      noSpecial: [null, [noSpecialsValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Passport
+<a name="passport"></a>
+
+<mark>passportValidator</mark> checks if the value is in a proper passport format. 
+(you can check a list of passport format examples here: <a href="https://www.microfocus.com/documentation/idol/IDOL_24_3/EductionGrammars_24.3_Documentation/PII/Content/PII/PII_Examples_Passport.htm">list of passport examples</a>)
+
+```javascript
+import { passportValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      passport: [null, [passportValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Password
+<a name="password"></a>
+
+<mark>passwordValidator</mark> checks for password strength on a given input.
+(Has at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and has
+length of at least 8 characters).
+
+```javascript
+import { passwordValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      password: [null, [passwordValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Phone
+<a name="phone"></a>
+
+<mark>phoneNumberValidator</mark> checks for following formats: (000) 000 0000, (000)-000-0000,
+(000) 000-0000, (000)000 0000, (000)000-0000.
+
+```javascript
+import { phoneNumberValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      phone: [null, [phoneNumberValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Space
+<a name="space"></a>
+
+<mark>singleSpaceValidator</mark> will return an error if an input consists of a single space
+charter.
+
+<mark>spaceRestrictionValidator</mark> will return an error if a given input starts or ends with a space charter.
+
+```javascript
+import { singleSpaceValidator, spaceRestrictionValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      space: [null, [singleSpaceValidator()]],
+      spaceRes: [null, [spaceRestrictionValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Social Security Number
+<a name="ssn"></a>
+
+<mark>ssnValidator</mark> will check for the following ssn formats: AAA-GGG-SSSS or AAAGGGSSSS.
+
+```javascript
+import { ssnValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      ssn: [null, [ssnValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Time
+<a name="time"></a>
+
+we can use the following three validators to validate text inputs for time formats:
+
+<mark>timeHH_MM_12Validator</mark> validates if the value is in HH:MM 12-hour format with 
+optional leading 0.
+
+<mark>timeHH_MM_24Validator</mark> validates if the value is in HH:MM 24-hour format with 
+optional leading 0.
+
+<mark>timeHH_MM_SS_24Validator</mark> validates if the value is in HH:MM:SS 24-hour format.
+
+```javascript
+import { 
+  timeHH_MM_12Validator,
+  timeHH_MM_24Validator,
+  timeHH_MM_SS_24Validator
+ } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      timeHHMM12: [null, [timeHH_MM_12Validator()]],
+      timeHHMM24: [null, [timeHH_MM_24Validator()]],
+      timeHHMMSS24: [null, [timeHH_MM_SS_24Validator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### URL
+<a name="url"></a>
+
+<mark>urlValidator</mark> checks the given input for a url format.
+
+```javascript
+import { urlValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      url: [null, [urlValidator()]]
+    })
+  }
+}
+```
+It has two optional parameters first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params-prebuilt).
+
+### Zip Code
+<a name="zip-code"></a>
+
+<mark>zipCodeValidator</mark> checks for a valid zip code format.
+(format examples: 00000 or 00000-0000)
+
+```javascript
+import { zipCodeValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      zipCode: [null, [zipCodeValidator()]]
+    })
+  }
+}
+```
 
