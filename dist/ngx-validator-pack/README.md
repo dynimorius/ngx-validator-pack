@@ -109,6 +109,9 @@ In this example we are checking if the input is not a word regexp, if not we wil
 Additionally we can supply two other optional parameters, first being the name of the error and
 the second a string which will represent the error content / message.
 
+Additional parameter example:
+<a name="additional-params"></a>
+
 ```javascript
 import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pack';
 
@@ -238,14 +241,26 @@ export class AppComponent implements OnInit{
 The available comparisons are: '<', '>', '==', '===', '<=', '>='.
 
 Additionally we can supply two other optional parameters, first being the name of the error and
-the second a string which will represent the error content / message.
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params).
+
+### Conditional Validators
+
+We have three conditional validators we can use:
+
+<mark>requiredWhenValidator</mark> excepts a conditional function or a boolean value,
+and will return an error if a conditional is satisfied.
+
+<mark>linkToValidator</mark> links to another form control in the form group and will
+return an error if a given form control does not have a value but a linked one does.
+
+<mark>linkedToValidator</mark> returns an error if a form control it is linked to does
+not have a value but a given control does.
+
+requiredWhenValidator Example:
 
 ```javascript
-import {
-  earlierThenValidator,
-  compareToValidator,
-  laterThenValidator,
-} from '@dynamize/ngx-validator-pack';
+import { requiredWhenValidator } from '@dynamize/ngx-validator-pack';
 
 @Component({
   selector: 'app-root',
@@ -254,41 +269,48 @@ import {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
   exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) {}
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
-      controlDate: [null],
-      compareDate: [
-        null,
-        [
-          compareToValidator(
-            'controlDate',
-            '>=',
-            'compere_example_error',
-            'It Works!!'
-          ),
-        ],
-      ],
-      earlierDate: [
-        null,
-        [
-          earlierThenValidator(new Date()),
-          'earlier_ten_example_error',
-          'It Works!!',
-        ],
-      ],
-      laterDate: [
-        null,
-        [
-          laterThenValidator(new Date()),
-          'later_then_example_error',
-          'It Works!!',
-        ],
-      ],
-    });
+      requiredWhen: [null, [requiredWhenValidator(this.randomBool())]]
+    })
   }
 }
 ```
+
+linkToValidator and linkedToValidator Example:
+
+```javascript
+import { linkToValidator, linkedToValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      linkTo: [null, [linkToValidator("linkedTo")]],
+      linkedTo: [null, [linkedToValidator("linkTo")]],
+    })
+  }
+}
+```
+
+Additionally we can supply two other optional parameters, first being the name of the error and
+the second a string which will represent the error content / message. 
+Please check the example here: [additional parameters example](#additional-params).
+
