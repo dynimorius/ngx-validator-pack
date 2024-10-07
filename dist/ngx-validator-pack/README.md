@@ -35,7 +35,8 @@
     - [URL](#url)
     - [Zip Code](#zip-code)
   - [Ngx Form Group](#ngx-form-group-validators)
-  
+  - [Showing validation](#showing-validation)
+
 ## Installation
 
 ```bash
@@ -105,7 +106,7 @@ export class AppComponent implements OnInit{
 
 In this example we are checking if the input is not a word regexp, if not we will get an error.
 
-Additionally we can supply two other optional parameters, first being the name of the error and 
+Additionally we can supply two other optional parameters, first being the name of the error and
 the second a string which will represent the error content / message.
 
 ```javascript
@@ -158,9 +159,136 @@ We have three types of validators to compare date values (date picker values).
 <mark>laterThenValidator</mark> checks if a picked date is later then a give one.
 
 <mark>compareToValidator</mark> compares the value of a given input to the value of the form control
-whose name was given as a first parameter. The second parameter is a string representing 
-the comparison.  
+whose name was given as a first parameter. The second parameter is a string representing
+the comparison.
 
+earlierThenValidator Example:
 
+```javascript
+import { earlierThenValidator } from '@dynamize/ngx-validator-pack';
 
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) { }
 
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      earlierDate: [null, [earlierThenValidator(new Date())]]
+    })
+  }
+}
+```
+
+laterThenValidator Example:
+
+```javascript
+import { laterThenValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      laterDate: [null, [laterThenValidator(new Date())]]
+    })
+  }
+}
+```
+
+compareToValidator Example:
+
+```javascript
+import { compareToValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      controlDate: [null],
+      compareDate: [null, [compareToValidator("controlDate", ">=")]]
+    })
+  }
+}
+```
+
+The available comparisons are: '<', '>', '==', '===', '<=', '>='.
+
+Additionally we can supply two other optional parameters, first being the name of the error and
+the second a string which will represent the error content / message.
+
+```javascript
+import {
+  earlierThenValidator,
+  compareToValidator,
+  laterThenValidator,
+} from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit {
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      controlDate: [null],
+      compareDate: [
+        null,
+        [
+          compareToValidator(
+            'controlDate',
+            '>=',
+            'compere_example_error',
+            'It Works!!'
+          ),
+        ],
+      ],
+      earlierDate: [
+        null,
+        [
+          earlierThenValidator(new Date()),
+          'earlier_ten_example_error',
+          'It Works!!',
+        ],
+      ],
+      laterDate: [
+        null,
+        [
+          laterThenValidator(new Date()),
+          'later_then_example_error',
+          'It Works!!',
+        ],
+      ],
+    });
+  }
+}
+```
