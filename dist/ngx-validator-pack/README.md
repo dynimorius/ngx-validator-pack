@@ -871,3 +871,52 @@ export class AppComponent implements OnInit{
 }
 ```
 
+## Ngx Form Group
+<a name="ngx-form-group-validators"></a>
+
+The following validators preform validation on a Form Group rather the Form Control.
+They all take two parameters, first one being the name of the control which should be required 
+if the condition is met and the second parameter is the name of the control which is being checked.
+
+<mark>requiredIf</mark> assigns a required status to a given control if the control which is being checked has a value and the given control does not.
+
+<mark>requiredIfNot</mark> assigns a required status to a given control if the control which is being checked does not have a value and the given control does.
+
+<mark>requiredEther</mark> assigns a required status to a given control if the control which is being checked and a given control do not have values.
+
+```javascript
+import { requiredEther, requiredIf, requiredIfNot } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      compare: [null],
+      if: [null],
+      ifNot: [null],
+      ether: [null]
+    }, {
+      validators: [
+        requiredIf('if', 'compare'),
+        requiredIfNot('ifNot', 'compare'),
+        requiredEther('ether', 'compare')
+      ]
+    })
+  }
+}
+```
+
+## Showing validation
+<a name="showing-validation"></a>
+
