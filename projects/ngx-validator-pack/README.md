@@ -1,4 +1,5 @@
-<img title="Dynamized Angular Icon" alt="icon" src="./D_dynamize-angular-icon.png">
+<img title="Dynamized Angular Icon" alt="icon" src="./D_dynamize-angular-icon.png" width="300" height="300">
+
 # Ngx Validator Pack
 <a name="start"></a
 
