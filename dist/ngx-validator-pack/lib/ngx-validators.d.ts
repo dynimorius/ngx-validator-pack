@@ -15,7 +15,7 @@ import { ComparisonOperations } from "./helpers/date";
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const regexpMatchValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
+export declare const regexpValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
@@ -24,7 +24,7 @@ export declare const regexpMatchValidator: (regexp: RegExp, errorName?: string, 
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const regexpNotAMatchValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
+export declare const regexpNotValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
  * Checks if the date in the given FromControl / AbstractControl is earlier then
  * the value in the specified FromControl / AbstractControl

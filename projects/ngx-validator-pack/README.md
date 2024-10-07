@@ -1,24 +1,32 @@
-# NgxValidatorPack
+<img title="Dynamized Angular Icon" alt="icon" src="./D_dynamize-angular-icon.png">
+# Ngx Validator Pack
+<a name="start"></a
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+#### _A pack of validators for Angular Form Group and Form Controls_
 
-## Code scaffolding
+## Table of Contents
 
-Run `ng generate component component-name --project ngx-validator-pack` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-validator-pack`.
-> Note: Don't forget to add `--project ngx-validator-pack` or else it will be added to the default project in your `angular.json` file. 
+- [Ngx Validator Pack](#ngx-validator-pack)
+      - [_A pack of validators for Angular Form Group and Form Controls_](#a-pack-of-validators-for-angular-form-group-and-form-controls)
+  - [Ngx Validators](#ngx-validators)
+    - [RegExp Validators](#regexp-validators)
+    - [Date Validators](#date-validators)
+    - [Conditional Validators](#conditional-validators)
+  - [Ngx Prebuilt Validators](#ngx-prebuilt-validators)
+    - [Address](#adress)
+    - [Alphabet](#alphabet)
+    - [Date](#date)
+    - [Email](#email)
+    - [IP Address](#ip-address)
+    - [Numeric](#numeric)
+    - [Special Characters](#specials)
+    - [Passport](#passport)
+    - [Password](#password)
+    - [Phone](#phone)
+    - [Space](#space)
+    - [Social Security Number](#ssn)
+    - [Time](#time)
+    - [URL](#url)
+    - [Zip Code](#zip-code)
+  - [Ngx Form Group](#ngx-form-group-validators)
 
-## Build
-
-Run `ng build ngx-validator-pack` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build ngx-validator-pack`, go to the dist folder `cd dist/ngx-validator-pack` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-validator-pack` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

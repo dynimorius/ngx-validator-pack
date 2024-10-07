@@ -8,8 +8,8 @@
 
 import { ValidationErrors } from "@angular/forms";
 import {
-  regexpMatchValidator,
-  regexpNotAMatchValidator,
+  regexpValidator,
+  regexpNotValidator,
 } from "./ngx-validators";
 import {
   address,
@@ -47,7 +47,7 @@ export const addressValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     address,
     (errorName = "address"),
     (error =
@@ -66,7 +66,7 @@ export const alphabetOnlyValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     lettersOnly,
     (errorName = "alphabetOnly"),
     (error = "Only alphabetic characters are allowed.")
@@ -84,7 +84,7 @@ export const dateDD_MM_YYYYValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     dateDD_MM_YYYY,
     (errorName = "dateDD_MM_YYYY"),
     (error =
@@ -103,7 +103,7 @@ export const dateYYYY_MM_DDValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     dateYYYY_MM_DD,
     (errorName = "dateYYYY_MM_DD"),
     (error = "Please input a value in a format: YYYY-MM-dd.")
@@ -121,7 +121,7 @@ export const emailValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     email,
     (errorName = "email"),
     (error = "Please input a value in a format: local-part@domain.com.")
@@ -139,7 +139,7 @@ export const ipAddressValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     IPAddressV4AndV6,
     (errorName = "ipAddress"),
     (error =
@@ -158,7 +158,7 @@ export const iPv4Validator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     IPAddressV4,
     (errorName = "iPv4"),
     (error = "Please input a value in a format: x.x.x.x.")
@@ -176,7 +176,7 @@ export const iPv6Validator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     IPAddressV6,
     (errorName = "iPv6"),
     (error = "Please input a value in a format: y:y:y:y:y:y:y:y.")
@@ -194,7 +194,7 @@ export const numericsOnlyValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     numbersOnly,
     (errorName = "numericsOnly"),
     (error = "Only numeric characters are allowed.")
@@ -211,7 +211,7 @@ export const noSpecialsValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     noSpecial,
     (errorName = "noSpecials"),
     (error = "No special characters are allowed.")
@@ -228,7 +228,7 @@ export const passportValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     passport,
     (errorName = "passport"),
     (error = "Incorrect passport format.")
@@ -247,7 +247,7 @@ export const passwordValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     passwordStrength,
     (errorName = "password"),
     (error =
@@ -266,7 +266,7 @@ export const phoneNumberValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     phoneNumber,
     (errorName = "phoneNumber"),
     (error = "Please input a value in a format: (000) 000 0000.")
@@ -284,7 +284,7 @@ export const singleSpaceValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpNotAMatchValidator(
+  regexpNotValidator(
     singleSpace,
     (errorName = "singleSpace"),
     (error = "A single space character is not allowed.")
@@ -302,7 +302,7 @@ export const spaceRestrictionValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     spaceRestriction,
     (errorName = "spaceRestriction"),
     (error = "Value can not start or end with a space character.")
@@ -320,7 +320,7 @@ export const ssnValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     ssn,
     (errorName = "ssn"),
     (error =
@@ -339,7 +339,7 @@ export const timeHH_MM_12Validator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     timeHH_MM_12,
     (errorName = "timeHH_MM_12"),
     (error = "Please input a value in a HH:MM 12-hour format.")
@@ -357,7 +357,7 @@ export const timeHH_MM_24Validator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     timeHH_MM_24,
     (errorName = "timeHH_MM_24"),
     (error = "Please input a value in a HH:MM 24-hour format.")
@@ -375,7 +375,7 @@ export const timeHH_MM_SS_24Validator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     timeHH_MM_SS_24,
     (errorName = "timeHH_MM_SS_24"),
     (error = "Please input a value in a HH:MM:SS 24-hour format.")
@@ -393,7 +393,7 @@ export const urlValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     url,
     (errorName = "url"),
     (error = "Improper URL format.")
@@ -411,7 +411,7 @@ export const zipCodeValidator = (
   errorName?: string,
   error?: ValidationErrors | string
 ): ValidationErrors | null =>
-  regexpMatchValidator(
+  regexpValidator(
     zipCode,
     (errorName = "zipCode"),
     (error = "Improper zip code format.")

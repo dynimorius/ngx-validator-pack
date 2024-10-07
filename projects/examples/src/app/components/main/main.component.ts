@@ -19,8 +19,8 @@ import {
   passportValidator,
   passwordValidator,
   phoneNumberValidator,
-  regexpMatchValidator,
-  regexpNotAMatchValidator,
+  regexpValidator,
+  regexpNotValidator,
   requiredWhenValidator,
   singleSpaceValidator,
   spaceRestrictionValidator,
@@ -106,7 +106,7 @@ export class MainComponent implements OnInit {
   regexpNotTSSnippet: string = regexpNotTSSnippet;
   regexpNotHTMLSnippet: string = regexpNotHTMLSnippet;
   
-  constructor(private fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.mainForm = this.fb.group({
@@ -137,8 +137,8 @@ export class MainComponent implements OnInit {
       requiredWhen: [null, [requiredWhenValidator(() => this.required)]],
       linkTo: [null, [linkToValidator("linkedTo")]],
       linkedTo: [null, [linkedToValidator("linkTo")]],
-      regexp: [null, regexpMatchValidator(/(s|regexp)/)],
-      regexpNot: [null, regexpNotAMatchValidator(/(s|regexp)/)],
+      regexp: [null, regexpValidator(/(s|regexp)/)],
+      regexpNot: [null, regexpNotValidator(/(s|regexp)/)],
     });
 
     this.mainForm.valueChanges.subscribe(() => {

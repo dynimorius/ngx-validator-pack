@@ -1,5 +1,5 @@
 /**
  * Generated bundle index. Do not edit.
  */
-/// <amd-module name="ngx-validator-pack" />
+/// <amd-module name="@dynamize/ngx-validator-pack" />
 export * from './public-api';

@@ -11,7 +11,7 @@
     "skipLibCheck": true,
     "paths": {
       "ngx-validator-pack": [
-        "./dist/ngx-validator-pack"
+        "./projects/ngx-validator-pack/src/public-api.ts"
       ]
     },
     "esModuleInterop": true,

@@ -52,10 +52,10 @@ const compare = (date1, date2, comparison) => {
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const regexpMatchValidator = (regexp, errorName, error) => (control) => {
+const regexpValidator = (regexp, errorName, error) => (control) => {
     error = error || "This control did not match a given regular expression.";
     const errors = typeof error === "string"
-        ? { [errorName || "regexpValidator"]: error }
+        ? { [errorName ?? "regexpValidator"]: error }
         : error;
     return !control.value || regexp.test(control.value) ? null : errors;
 };
@@ -67,10 +67,10 @@ const regexpMatchValidator = (regexp, errorName, error) => (control) => {
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const regexpNotAMatchValidator = (regexp, errorName, error) => (control) => {
+const regexpNotValidator = (regexp, errorName, error) => (control) => {
     error = error || "This control matched a given regular expression.";
     const errors = typeof error === "string"
-        ? { [errorName || "regexpValidator"]: error }
+        ? { [errorName ?? "regexpValidator"]: error }
         : error;
     return !control.value || !regexp.test(control.value) ? null : errors;
 };
@@ -86,7 +86,7 @@ const regexpNotAMatchValidator = (regexp, errorName, error) => (control) => {
 const earlierThenValidator = (date, errorName, error) => (control) => {
     error = error || `This control must have a value earlier then ${date}.`;
     const errors = typeof error === "string"
-        ? { [errorName || "earlierThen"]: error }
+        ? { [errorName ?? "earlierThen"]: error }
         : error;
     return prepareToCompare(control?.value) < prepareToCompare(date)
         ? null
@@ -103,7 +103,7 @@ const earlierThenValidator = (date, errorName, error) => (control) => {
  */
 const laterThenValidator = (date, errorName, error) => (control) => {
     error = error || `This control must have a value later then ${date}.`;
-    const errors = typeof error === "string" ? { [errorName || "laterThen"]: error } : error;
+    const errors = typeof error === "string" ? { [errorName ?? "laterThen"]: error } : error;
     return prepareToCompare(control?.value) > prepareToCompare(date)
         ? null
         : errors;
@@ -123,7 +123,7 @@ const compareToValidator = (filedName, comparison, errorName, error) => (control
     if (date) {
         error = error || `Value comparison with ${date} failed.`;
         const errors = typeof error === "string"
-            ? { [errorName || "dateComparison"]: error }
+            ? { [errorName ?? "dateComparison"]: error }
             : error;
         return control.value && compareDates(control.value, date, comparison)
             ? null
@@ -142,7 +142,7 @@ const compareToValidator = (filedName, comparison, errorName, error) => (control
 const requiredWhenValidator = (conditional, errorName, error) => (control) => {
     error = error || "This control has a conditional set on it.";
     const errors = typeof error === "string"
-        ? { [errorName || "requiredWhen"]: error }
+        ? { [errorName ?? "requiredWhen"]: error }
         : error;
     const outcome = typeof conditional === "function" ? conditional() : conditional;
     return !control.value && outcome ? errors : null;
@@ -158,7 +158,7 @@ const requiredWhenValidator = (conditional, errorName, error) => (control) => {
  */
 const linkToValidator = (linkTo, errorName, error) => (control) => {
     error = error || `This control has a link to ${linkTo}.`;
-    const errors = typeof error === "string" ? { [errorName || "linkTo"]: error } : error;
+    const errors = typeof error === "string" ? { [errorName ?? "linkTo"]: error } : error;
     const linkedTo = control.parent?.get(linkTo);
     return !control?.value && !!linkedTo?.value ? errors : null;
 };
@@ -174,7 +174,7 @@ const linkToValidator = (linkTo, errorName, error) => (control) => {
  */
 const linkedToValidator = (linkedTo, errorName, error) => (control) => {
     error = error || `This control is linked to ${linkedTo}.`;
-    const errors = typeof error === "string" ? { [errorName || "linkTo"]: error } : error;
+    const errors = typeof error === "string" ? { [errorName ?? "linkTo"]: error } : error;
     const link = control.parent?.get(linkedTo);
     return !!control?.value && !link?.value ? errors : null;
 };
@@ -248,7 +248,7 @@ const zipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const addressValidator = (errorName, error) => regexpMatchValidator(address, (errorName = "address"), (error =
+const addressValidator = (errorName, error) => regexpValidator(address, (errorName = "address"), (error =
     "Please input a value in a format of: Street number Street Name, City, State ZIP code."));
 /**
  * Checks if a value in the given FromControl / AbstractControl consists of only
@@ -258,7 +258,7 @@ const addressValidator = (errorName, error) => regexpMatchValidator(address, (er
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const alphabetOnlyValidator = (errorName, error) => regexpMatchValidator(lettersOnly, (errorName = "alphabetOnly"), (error = "Only alphabetic characters are allowed."));
+const alphabetOnlyValidator = (errorName, error) => regexpValidator(lettersOnly, (errorName = "alphabetOnly"), (error = "Only alphabetic characters are allowed."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
@@ -267,7 +267,7 @@ const alphabetOnlyValidator = (errorName, error) => regexpMatchValidator(letters
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const dateDD_MM_YYYYValidator = (errorName, error) => regexpMatchValidator(dateDD_MM_YYYY, (errorName = "dateDD_MM_YYYY"), (error =
+const dateDD_MM_YYYYValidator = (errorName, error) => regexpValidator(dateDD_MM_YYYY, (errorName = "dateDD_MM_YYYY"), (error =
     "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -277,7 +277,7 @@ const dateDD_MM_YYYYValidator = (errorName, error) => regexpMatchValidator(dateD
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const dateYYYY_MM_DDValidator = (errorName, error) => regexpMatchValidator(dateYYYY_MM_DD, (errorName = "dateYYYY_MM_DD"), (error = "Please input a value in a format: YYYY-MM-dd."));
+const dateYYYY_MM_DDValidator = (errorName, error) => regexpValidator(dateYYYY_MM_DD, (errorName = "dateYYYY_MM_DD"), (error = "Please input a value in a format: YYYY-MM-dd."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * local-part@domain.com.
@@ -286,7 +286,7 @@ const dateYYYY_MM_DDValidator = (errorName, error) => regexpMatchValidator(dateY
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const emailValidator = (errorName, error) => regexpMatchValidator(email, (errorName = "email"), (error = "Please input a value in a format: local-part@domain.com."));
+const emailValidator = (errorName, error) => regexpValidator(email, (errorName = "email"), (error = "Please input a value in a format: local-part@domain.com."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: x.x.x.x or y:y:y:y:y:y:y:y.
@@ -295,7 +295,7 @@ const emailValidator = (errorName, error) => regexpMatchValidator(email, (errorN
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const ipAddressValidator = (errorName, error) => regexpMatchValidator(IPAddressV4AndV6, (errorName = "ipAddress"), (error =
+const ipAddressValidator = (errorName, error) => regexpValidator(IPAddressV4AndV6, (errorName = "ipAddress"), (error =
     "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y"));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -305,7 +305,7 @@ const ipAddressValidator = (errorName, error) => regexpMatchValidator(IPAddressV
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const iPv4Validator = (errorName, error) => regexpMatchValidator(IPAddressV4, (errorName = "iPv4"), (error = "Please input a value in a format: x.x.x.x."));
+const iPv4Validator = (errorName, error) => regexpValidator(IPAddressV4, (errorName = "iPv4"), (error = "Please input a value in a format: x.x.x.x."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * y:y:y:y:y:y:y:y.
@@ -314,7 +314,7 @@ const iPv4Validator = (errorName, error) => regexpMatchValidator(IPAddressV4, (e
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const iPv6Validator = (errorName, error) => regexpMatchValidator(IPAddressV6, (errorName = "iPv6"), (error = "Please input a value in a format: y:y:y:y:y:y:y:y."));
+const iPv6Validator = (errorName, error) => regexpValidator(IPAddressV6, (errorName = "iPv6"), (error = "Please input a value in a format: y:y:y:y:y:y:y:y."));
 /**
  * Checks if a value in the given FromControl / AbstractControl consists of only
  * numeric characters.
@@ -323,7 +323,7 @@ const iPv6Validator = (errorName, error) => regexpMatchValidator(IPAddressV6, (e
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const numericsOnlyValidator = (errorName, error) => regexpMatchValidator(numbersOnly, (errorName = "numericsOnly"), (error = "Only numeric characters are allowed."));
+const numericsOnlyValidator = (errorName, error) => regexpValidator(numbersOnly, (errorName = "numericsOnly"), (error = "Only numeric characters are allowed."));
 /**
  * Checks if a value in the given FromControl / AbstractControl has any special characters.
  *
@@ -331,7 +331,7 @@ const numericsOnlyValidator = (errorName, error) => regexpMatchValidator(numbers
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const noSpecialsValidator = (errorName, error) => regexpMatchValidator(noSpecial, (errorName = "noSpecials"), (error = "No special characters are allowed."));
+const noSpecialsValidator = (errorName, error) => regexpValidator(noSpecial, (errorName = "noSpecials"), (error = "No special characters are allowed."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a proper passport format
  *
@@ -339,7 +339,7 @@ const noSpecialsValidator = (errorName, error) => regexpMatchValidator(noSpecial
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const passportValidator = (errorName, error) => regexpMatchValidator(passport, (errorName = "passport"), (error = "Incorrect passport format."));
+const passportValidator = (errorName, error) => regexpValidator(passport, (errorName = "passport"), (error = "Incorrect passport format."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a strong password format
  * (Has at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and has
@@ -349,7 +349,7 @@ const passportValidator = (errorName, error) => regexpMatchValidator(passport, (
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const passwordValidator = (errorName, error) => regexpMatchValidator(passwordStrength, (errorName = "password"), (error =
+const passwordValidator = (errorName, error) => regexpValidator(passwordStrength, (errorName = "password"), (error =
     "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -359,7 +359,7 @@ const passwordValidator = (errorName, error) => regexpMatchValidator(passwordStr
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const phoneNumberValidator = (errorName, error) => regexpMatchValidator(phoneNumber, (errorName = "phoneNumber"), (error = "Please input a value in a format: (000) 000 0000."));
+const phoneNumberValidator = (errorName, error) => regexpValidator(phoneNumber, (errorName = "phoneNumber"), (error = "Please input a value in a format: (000) 000 0000."));
 /**
  * Checks if a value in the given FromControl / AbstractControl consists of a single space
  * character.
@@ -368,7 +368,7 @@ const phoneNumberValidator = (errorName, error) => regexpMatchValidator(phoneNum
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const singleSpaceValidator = (errorName, error) => regexpNotAMatchValidator(singleSpace, (errorName = "singleSpace"), (error = "A single space character is not allowed."));
+const singleSpaceValidator = (errorName, error) => regexpNotValidator(singleSpace, (errorName = "singleSpace"), (error = "A single space character is not allowed."));
 /**
  * Checks if a value in the given FromControl / AbstractControl starts or ends with a
  * space character.
@@ -377,7 +377,7 @@ const singleSpaceValidator = (errorName, error) => regexpNotAMatchValidator(sing
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const spaceRestrictionValidator = (errorName, error) => regexpMatchValidator(spaceRestriction, (errorName = "spaceRestriction"), (error = "Value can not start or end with a space character."));
+const spaceRestrictionValidator = (errorName, error) => regexpValidator(spaceRestriction, (errorName = "spaceRestriction"), (error = "Value can not start or end with a space character."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: AAA-GGG-SSSS or AAAGGGSSSS.
@@ -386,7 +386,7 @@ const spaceRestrictionValidator = (errorName, error) => regexpMatchValidator(spa
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const ssnValidator = (errorName, error) => regexpMatchValidator(ssn, (errorName = "ssn"), (error =
+const ssnValidator = (errorName, error) => regexpValidator(ssn, (errorName = "ssn"), (error =
     "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a
@@ -396,7 +396,7 @@ const ssnValidator = (errorName, error) => regexpMatchValidator(ssn, (errorName 
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const timeHH_MM_12Validator = (errorName, error) => regexpMatchValidator(timeHH_MM_12, (errorName = "timeHH_MM_12"), (error = "Please input a value in a HH:MM 12-hour format."));
+const timeHH_MM_12Validator = (errorName, error) => regexpValidator(timeHH_MM_12, (errorName = "timeHH_MM_12"), (error = "Please input a value in a HH:MM 12-hour format."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM 24-hour with optional leading 0.
@@ -405,7 +405,7 @@ const timeHH_MM_12Validator = (errorName, error) => regexpMatchValidator(timeHH_
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const timeHH_MM_24Validator = (errorName, error) => regexpMatchValidator(timeHH_MM_24, (errorName = "timeHH_MM_24"), (error = "Please input a value in a HH:MM 24-hour format."));
+const timeHH_MM_24Validator = (errorName, error) => regexpValidator(timeHH_MM_24, (errorName = "timeHH_MM_24"), (error = "Please input a value in a HH:MM 24-hour format."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM:SS 24-hour.
@@ -414,7 +414,7 @@ const timeHH_MM_24Validator = (errorName, error) => regexpMatchValidator(timeHH_
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const timeHH_MM_SS_24Validator = (errorName, error) => regexpMatchValidator(timeHH_MM_SS_24, (errorName = "timeHH_MM_SS_24"), (error = "Please input a value in a HH:MM:SS 24-hour format."));
+const timeHH_MM_SS_24Validator = (errorName, error) => regexpValidator(timeHH_MM_SS_24, (errorName = "timeHH_MM_SS_24"), (error = "Please input a value in a HH:MM:SS 24-hour format."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in a
  * correct url format.
@@ -423,7 +423,7 @@ const timeHH_MM_SS_24Validator = (errorName, error) => regexpMatchValidator(time
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const urlValidator = (errorName, error) => regexpMatchValidator(url, (errorName = "url"), (error = "Improper URL format."));
+const urlValidator = (errorName, error) => regexpValidator(url, (errorName = "url"), (error = "Improper URL format."));
 /**
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: 00000 or 00000-0000.
@@ -432,7 +432,7 @@ const urlValidator = (errorName, error) => regexpMatchValidator(url, (errorName 
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const zipCodeValidator = (errorName, error) => regexpMatchValidator(zipCode, (errorName = "zipCode"), (error = "Improper zip code format."));
+const zipCodeValidator = (errorName, error) => regexpValidator(zipCode, (errorName = "zipCode"), (error = "Improper zip code format."));
 
 /**
  * @license
@@ -612,5 +612,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { ShowValidationDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpMatchValidator, regexpNotAMatchValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
-//# sourceMappingURL=ngx-validator-pack.mjs.map
+export { ShowValidationDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpNotValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
+//# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map

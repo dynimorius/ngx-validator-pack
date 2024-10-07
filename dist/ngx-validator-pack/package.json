@@ -1,17 +1,54 @@
 {
-  "name": "ngx-validator-pack",
-  "version": "0.0.0-watch+1728235535185",
+  "name": "@dynamize/ngx-validator-pack",
+  "version": "0.0.0-watch+1728289854832",
+  "description": "An extension pack of Angular form validators.",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/forms": "^17.3.0"
   },
   "dependencies": {
-    "ngx-validator-pack": "file:",
+    "@dynamize/ngx-validator-pack": "file:",
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
-  "module": "fesm2022/ngx-validator-pack.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynimorius/ngx-validator-pack"
+  },
+  "private": false,
+  "keywords": [
+    "Angular",
+    "Angular 2",
+    "Angular2",
+    "Forms",
+    "Form",
+    "Validation",
+    "Validator",
+    "AbstractControl",
+    "Abstract Control",
+    "FromControl",
+    "From Control",
+    "FormGroup",
+    "Form Group",
+    "Input",
+    "Reactive forms",
+    "Reactive",
+    "PrimeNG",
+    "Angular Materials",
+    "RegExp",
+    "Regex",
+    "email",
+    "phone",
+    "address"
+  ],
+  "author": "Slavko Mihajlovic - dynimorius",
+  "bugs": {
+    "url": "https://github.com/dynimorius/ngx-validator-pack/issues"
+  },
+  "homepage": "https://github.com/dynimorius/ngx-validator-pack#readme",
+  "license": "ISC",
+  "module": "fesm2022/dynamize-ngx-validator-pack.mjs",
   "typings": "index.d.ts",
   "exports": {
     "./package.json": {
@@ -19,9 +56,9 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2022": "./esm2022/ngx-validator-pack.mjs",
-      "esm": "./esm2022/ngx-validator-pack.mjs",
-      "default": "./fesm2022/ngx-validator-pack.mjs"
+      "esm2022": "./esm2022/dynamize-ngx-validator-pack.mjs",
+      "esm": "./esm2022/dynamize-ngx-validator-pack.mjs",
+      "default": "./fesm2022/dynamize-ngx-validator-pack.mjs"
     }
   }
 }

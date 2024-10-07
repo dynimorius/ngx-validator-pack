@@ -21,7 +21,7 @@ import {
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const regexpMatchValidator =
+export const regexpValidator =
   (
     regexp: RegExp,
     errorName?: string,
@@ -31,7 +31,7 @@ export const regexpMatchValidator =
     error = error || "This control did not match a given regular expression.";
     const errors: ValidationErrors =
       typeof error === "string"
-        ? { [errorName || "regexpValidator"]: error }
+        ? { [errorName ?? "regexpValidator"]: error }
         : error;
 
     return !control.value || regexp.test(control.value) ? null : errors;
@@ -45,7 +45,7 @@ export const regexpMatchValidator =
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const regexpNotAMatchValidator =
+export const regexpNotValidator =
   (
     regexp: RegExp,
     errorName?: string,
@@ -55,7 +55,7 @@ export const regexpNotAMatchValidator =
     error = error || "This control matched a given regular expression.";
     const errors: ValidationErrors =
       typeof error === "string"
-        ? { [errorName || "regexpValidator"]: error }
+        ? { [errorName ?? "regexpValidator"]: error }
         : error;
 
     return !control.value || !regexp.test(control.value) ? null : errors;
@@ -80,7 +80,7 @@ export const earlierThenValidator =
     error = error || `This control must have a value earlier then ${date}.`;
     const errors: ValidationErrors =
       typeof error === "string"
-        ? { [errorName || "earlierThen"]: error }
+        ? { [errorName ?? "earlierThen"]: error }
         : error;
 
     return prepareToCompare(control?.value) < prepareToCompare(date)
@@ -106,7 +106,7 @@ export const laterThenValidator =
   (control: AbstractControl): ValidationErrors | null => {
     error = error || `This control must have a value later then ${date}.`;
     const errors: ValidationErrors =
-      typeof error === "string" ? { [errorName || "laterThen"]: error } : error;
+      typeof error === "string" ? { [errorName ?? "laterThen"]: error } : error;
 
     return prepareToCompare(control?.value) > prepareToCompare(date)
       ? null
@@ -136,7 +136,7 @@ export const compareToValidator =
       error = error || `Value comparison with ${date} failed.`;
       const errors: ValidationErrors =
         typeof error === "string"
-          ? { [errorName || "dateComparison"]: error }
+          ? { [errorName ?? "dateComparison"]: error }
           : error;
       return control.value && compareDates(control.value, date, comparison)
         ? null
@@ -163,7 +163,7 @@ export const requiredWhenValidator =
     error = error || "This control has a conditional set on it.";
     const errors: ValidationErrors =
       typeof error === "string"
-        ? { [errorName || "requiredWhen"]: error }
+        ? { [errorName ?? "requiredWhen"]: error }
         : error;
 
     const outcome =
@@ -189,7 +189,7 @@ export const linkToValidator =
   (control: AbstractControl): ValidationErrors | null => {
     error = error || `This control has a link to ${linkTo}.`;
     const errors: ValidationErrors =
-      typeof error === "string" ? { [errorName || "linkTo"]: error } : error;
+      typeof error === "string" ? { [errorName ?? "linkTo"]: error } : error;
 
     const linkedTo = control.parent?.get(linkTo);
     return !control?.value && !!linkedTo?.value ? errors : null;
@@ -214,7 +214,7 @@ export const linkedToValidator =
   (control: AbstractControl): ValidationErrors | null => {
     error = error || `This control is linked to ${linkedTo}.`;
     const errors: ValidationErrors =
-      typeof error === "string" ? { [errorName || "linkTo"]: error } : error;
+      typeof error === "string" ? { [errorName ?? "linkTo"]: error } : error;
 
     const link = control.parent?.get(linkedTo);
     return !!control?.value && !link?.value ? errors : null;

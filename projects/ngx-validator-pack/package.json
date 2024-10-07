@@ -1,14 +1,51 @@
 {
-  "name": "ngx-validator-pack",
+  "name": "@dynamize/ngx-validator-pack",
   "version": "0.0.1",
+  "description": "An extension pack of Angular form validators.",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/forms": "^17.3.0"
   },
   "dependencies": {
-    "ngx-validator-pack": "file:",
+    "@dynamize/ngx-validator-pack": "file:",
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynimorius/ngx-validator-pack"
+  },
+  "private": false,
+  "keywords": [
+    "Angular",
+    "Angular 2",
+    "Angular2",
+    "Forms",
+    "Form",
+    "Validation",
+    "Validator",
+    "AbstractControl",
+    "Abstract Control",
+    "FromControl",
+    "From Control",
+    "FormGroup",
+    "Form Group",
+    "Input",
+    "Reactive forms",
+    "Reactive",
+    "PrimeNG",
+    "Angular Materials",
+    "RegExp",
+    "Regex",
+    "email",
+    "phone",
+    "address"
+  ],
+  "author": "Slavko Mihajlovic - dynimorius",
+  "bugs": {
+    "url": "https://github.com/dynimorius/ngx-validator-pack/issues"
+  },
+  "homepage": "https://github.com/dynimorius/ngx-validator-pack#readme",
+  "license": "ISC"
 }
