@@ -48,10 +48,10 @@ npm install --save @dynamize/ngx-validator-pack
 
 ### RegExp Validators
 
-There are two types of RegExp validators in the Validator Pack, regexpValidator and regexpNotValidator.
+There are two types of RegExp validators in the Validator Pack, <mark>regexpValidator</mark> and <mark>regexpNotValidator</mark>.
 
-regexpValidator returns an error if the value does not match the regular expression, and
-opposite to it regexpNotValidator returns an error if the value matches the regular expression.
+<mark>regexpValidator</mark> returns an error if the value does not match the regular expression, and
+opposite to it <mark>regexpNotValidator</mark> returns an error if the value matches the regular expression.
 
 regexpValidator Example:
 
@@ -153,11 +153,11 @@ export class AppComponent implements OnInit {
 
 We have three types of validators to compare date values (date picker values).
 
-earlierThenValidator checks if a picked date is earlier then a give one.
+<mark>earlierThenValidator</mark> checks if a picked date is earlier then a give one.
 
-laterThenValidator checks if a picked date is later then a give one.
+<mark>laterThenValidator</mark> checks if a picked date is later then a give one.
 
-compareToValidator compares the value of a given input to the value of the form control
+<mark>compareToValidator</mark> compares the value of a given input to the value of the form control
 whose name was given as a first parameter. The second parameter is a string representing 
 the comparison.  
 
