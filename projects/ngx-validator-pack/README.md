@@ -13,6 +13,7 @@
 ## Table of Contents
 
 - [Ngx Validator Pack](#ngx-validator-pack) - [_A pack of validators for Angular Form Group and Form Controls_](#a-pack-of-validators-for-angular-form-group-and-form-controls)
+  - [Installation](#install)
   - [Ngx Validators](#ngx-validators)
     - [RegExp Validators](#regexp-validators)
     - [Date Validators](#date-validators)
@@ -34,6 +35,12 @@
     - [URL](#url)
     - [Zip Code](#zip-code)
   - [Ngx Form Group](#ngx-form-group-validators)
+  
+## Installation
+
+```bash
+npm install --save @dynamize/ngx-validator-pack
+```
 
 ## Ngx Validators
 
