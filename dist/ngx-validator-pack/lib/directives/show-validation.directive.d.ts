@@ -11,9 +11,9 @@ import { Subscription } from "rxjs";
 import { ShowValidationStyle } from '../interfaces/show-validation-styles';
 import * as i0 from "@angular/core";
 export declare class ShowValidationDirective implements OnInit, OnDestroy {
-    private elementRef;
-    private renderer;
-    private control;
+    private readonly elementRef;
+    private readonly renderer;
+    private readonly control;
     controlSub: Subscription;
     parent: HTMLElement;
     self: HTMLElement;

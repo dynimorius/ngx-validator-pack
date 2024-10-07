@@ -577,7 +577,7 @@ class ShowValidationDirective {
         this.renderer.setStyle(this.span, 'padding', '0px 0px 10px 10px');
     }
     hideError() {
-        if (this.container, this.span) {
+        if (this.container && this.span) {
             this.renderer.removeChild(this.container, this.span);
             this.span = null;
         }

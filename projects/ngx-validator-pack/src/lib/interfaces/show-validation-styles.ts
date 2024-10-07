@@ -13,4 +13,6 @@ export interface ShowValidationStyle {
     background_color?: string;
     border?: string;
     border_radius?: string;
+    width?: string;
+    height?: string;
 }

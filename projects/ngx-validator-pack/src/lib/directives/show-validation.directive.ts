@@ -33,9 +33,9 @@ export class ShowValidationDirective implements OnInit, OnDestroy {
   @Input() errorStyle: ShowValidationStyle = DefaultStyle;
 
   constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private control: NgControl
+    private readonly elementRef: ElementRef,
+    private readonly renderer: Renderer2,
+    private readonly control: NgControl
   ) {}
 
   ngOnInit(): void {
@@ -81,7 +81,7 @@ export class ShowValidationDirective implements OnInit, OnDestroy {
   }
 
   hideError(): void {
-    if(this.container, this.span) {
+    if(this.container && this.span) {
       this.renderer.removeChild(this.container, this.span);
       this.span = null;
     }

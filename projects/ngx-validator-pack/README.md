@@ -36,6 +36,7 @@
     - [Zip Code](#zip-code)
   - [Ngx Form Group](#ngx-form-group-validators)
   - [Showing validation](#showing-validation)
+    -[Styling](#styling) 
 
 ## Installation
 
@@ -62,7 +63,7 @@ import { regexpValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -88,7 +89,7 @@ import { regexpNotValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -110,6 +111,7 @@ Additionally we can supply two other optional parameters, first being the name o
 the second a string which will represent the error content / message.
 
 ### Additional parameter example:
+
 <a name="additional-params"></a>
 
 In this example we are using regexpValidator and regexpNotValidator, but implementation is
@@ -121,7 +123,7 @@ import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pac
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -157,6 +159,7 @@ export class AppComponent implements OnInit {
 ```
 
 ### Date Validators
+
 <a name="date-validators"></a>
 
 We have three types of validators to compare date values (date picker values).
@@ -177,7 +180,7 @@ import { earlierThenValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -201,7 +204,7 @@ import { laterThenValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -225,7 +228,7 @@ import { compareToValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -245,10 +248,11 @@ export class AppComponent implements OnInit{
 The available comparisons are: '<', '>', '==', '===', '<=', '>='.
 
 Additionally we can supply two other optional parameters, first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params).
 
 ### Conditional Validators
+
 <a name="conditional-validators"></a>
 
 We have three conditional validators we can use:
@@ -270,7 +274,7 @@ import { requiredWhenValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -296,7 +300,7 @@ import { linkToValidator, linkedToValidator } from '@dynamize/ngx-validator-pack
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -316,15 +320,17 @@ export class AppComponent implements OnInit{
 ```
 
 Additionally we can supply two other optional parameters, first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params).
 
 ## Ngx Prebuilt Validators
+
 <a name="ngx-prebuilt-validators"></a>
 
 There is a number of prebuilt validators for most common text input validations.
 
 ### Address
+
 <a name="address"></a>
 
 We can use <marl>addressValidator</marl> to validate the most common USA address format
@@ -336,7 +342,7 @@ import { addressValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -355,6 +361,7 @@ export class AppComponent implements OnInit{
 ```
 
 ### Additional parameter example for Prebuilt Validators:
+
 <a name="additional-params-prebuilt"></a>
 
 ```javascript
@@ -363,7 +370,7 @@ import { addressValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -385,9 +392,10 @@ export class AppComponent implements OnInit{
 ```
 
 ### Alphabet
+
 <a name="alphabet"></a>
 
-<mark>alphabetOnlyValidator</mark> will return an error if any charter other then alphabetical are 
+<mark>alphabetOnlyValidator</mark> will return an error if any charter other then alphabetical are
 in the given input.
 
 ```javascript
@@ -396,7 +404,7 @@ import { alphabetOnlyValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -413,16 +421,18 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Date
+
 <a name="date"></a>
 
 We have two validators to validate text inputs for a date format:
 
-<mark>dateDD_MM_YYYYValidator</mark> checks for following formats: dd-MM-YYYY, dd.MM.YYYY or 
+<mark>dateDD_MM_YYYYValidator</mark> checks for following formats: dd-MM-YYYY, dd.MM.YYYY or
 dd/MM/YYYY.
 
 <mark>dateYYYY_MM_DDValidator</mark>checks for following format YYYY-MM-dd.
@@ -433,7 +443,7 @@ import { dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator} from '@dynamize/ngx-v
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -451,11 +461,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Email
+
 <a name="email"></a>
 
 We can use <mark>emailValidator</mark> to validate a text input for an email format.
@@ -467,7 +479,7 @@ import { emailValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -484,33 +496,35 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### IP Address
+
 <a name="ip-address"></a>
 
 We can preform ip address validation on a text input with the following validators:
 
 <mark>ipAddressValidator</mark> preforms a check for both IPv4 and IPv6 formats.
-(format examples:  x.x.x.x or y:y:y:y:y:y:y:y)
+(format examples: x.x.x.x or y:y:y:y:y:y:y:y)
 
 <mark>iPv4Validator</mark> preforms a check for a IPv4 format. (x.x.x.x)
 
 <mark>iPv6Validator</mark> preforms a check for a IPv6 format. (y:y:y:y:y:y:y:y)
 
 ```javascript
-import {   
+import {
   ipAddressValidator,
   iPv4Validator,
-  iPv6Validator 
+  iPv6Validator
   } from '@dynamize/ngx-validator-pack';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -531,9 +545,10 @@ export class AppComponent implements OnInit{
 ```
 
 ### Numeric
+
 <a name="numeric"></a>
 
-<mark>numericsOnlyValidator</mark> will return an error if any charter other then numerical are 
+<mark>numericsOnlyValidator</mark> will return an error if any charter other then numerical are
 in the given input.
 
 ```javascript
@@ -542,7 +557,7 @@ import { numericsOnlyValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -559,11 +574,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Special Characters
+
 <a name="specials"></a>
 
 <mark>noSpecialsValidator</mark> will return an error if any spacial charter are in the given input.
@@ -574,7 +591,7 @@ import { noSpecialsValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -591,14 +608,16 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Passport
+
 <a name="passport"></a>
 
-<mark>passportValidator</mark> checks if the value is in a proper passport format. 
+<mark>passportValidator</mark> checks if the value is in a proper passport format.
 (you can check a list of passport format examples here: <a href="https://www.microfocus.com/documentation/idol/IDOL_24_3/EductionGrammars_24.3_Documentation/PII/Content/PII/PII_Examples_Passport.htm">list of passport examples</a>)
 
 ```javascript
@@ -607,7 +626,7 @@ import { passportValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -624,11 +643,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Password
+
 <a name="password"></a>
 
 <mark>passwordValidator</mark> checks for password strength on a given input.
@@ -641,7 +662,7 @@ import { passwordValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -658,11 +679,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Phone
+
 <a name="phone"></a>
 
 <mark>phoneNumberValidator</mark> checks for following formats: (000) 000 0000, (000)-000-0000,
@@ -674,7 +697,7 @@ import { phoneNumberValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -691,11 +714,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Space
+
 <a name="space"></a>
 
 <mark>singleSpaceValidator</mark> will return an error if an input consists of a single space
@@ -709,7 +734,7 @@ import { singleSpaceValidator, spaceRestrictionValidator } from '@dynamize/ngx-v
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -727,11 +752,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Social Security Number
+
 <a name="ssn"></a>
 
 <mark>ssnValidator</mark> will check for the following ssn formats: AAA-GGG-SSSS or AAAGGGSSSS.
@@ -742,7 +769,7 @@ import { ssnValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -759,25 +786,27 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Time
+
 <a name="time"></a>
 
 we can use the following three validators to validate text inputs for time formats:
 
-<mark>timeHH_MM_12Validator</mark> validates if the value is in HH:MM 12-hour format with 
+<mark>timeHH_MM_12Validator</mark> validates if the value is in HH:MM 12-hour format with
 optional leading 0.
 
-<mark>timeHH_MM_24Validator</mark> validates if the value is in HH:MM 24-hour format with 
+<mark>timeHH_MM_24Validator</mark> validates if the value is in HH:MM 24-hour format with
 optional leading 0.
 
 <mark>timeHH_MM_SS_24Validator</mark> validates if the value is in HH:MM:SS 24-hour format.
 
 ```javascript
-import { 
+import {
   timeHH_MM_12Validator,
   timeHH_MM_24Validator,
   timeHH_MM_SS_24Validator
@@ -786,7 +815,7 @@ import {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -805,11 +834,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### URL
+
 <a name="url"></a>
 
 <mark>urlValidator</mark> checks the given input for a url format.
@@ -820,7 +851,7 @@ import { urlValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -837,11 +868,13 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+
 It has two optional parameters first being the name of the error and
-the second a string which will represent the error content / message. 
+the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params-prebuilt).
 
 ### Zip Code
+
 <a name="zip-code"></a>
 
 <mark>zipCodeValidator</mark> checks for a valid zip code format.
@@ -853,7 +886,7 @@ import { zipCodeValidator } from '@dynamize/ngx-validator-pack';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -872,10 +905,11 @@ export class AppComponent implements OnInit{
 ```
 
 ## Ngx Form Group
+
 <a name="ngx-form-group-validators"></a>
 
 The following validators preform validation on a Form Group rather the Form Control.
-They all take two parameters, first one being the name of the control which should be required 
+They all take two parameters, first one being the name of the control which should be required
 if the condition is met and the second parameter is the name of the control which is being checked.
 
 <mark>requiredIf</mark> assigns a required status to a given control if the control which is being checked has a value and the given control does not.
@@ -890,7 +924,7 @@ import { requiredEther, requiredIf, requiredIfNot } from '@dynamize/ngx-validato
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -919,4 +953,87 @@ export class AppComponent implements OnInit{
 
 ## Showing validation
 <a name="showing-validation"></a>
+
+If you would like to show the validation error message to the user, a really convenient way is
+using a <mark>showValidation</mark> Directive.
+Placing it on an input will automatically show the error message under the input it self.
+
+showValidation Example:
+
+```HTML
+<form [formGroup]="exampleForm" id="examples-content">
+  <input 
+    type="text" 
+    name="address" 
+    id="address" 
+    formControlName="address" 
+    showValidation 
+    />
+</form>
+```
+
+The result of the code above is:
+<img src="./imgs/Show_Validation_Example_1.png" 
+  alt="Picture" 
+  width="auto" 
+  height="300" 
+  style="display: block; margin: 0 auto" />
+
+### Styling
+
+You can pass an <mark>errorStyle</mark> object to customize the look of the validation error:
+
+```HTML
+<form [formGroup]="exampleForm" id="examples-content">
+  <input
+    type="text"
+    name="address"
+    id="address"
+    formControlName="address"
+    showValidation
+    [errorStyle]="{
+      font_size: 'medium',
+      color: '#ad03fc',
+    }"
+  />
+</form>
+```
+The result of the code above is:
+<img src="./imgs/Show_Validation_Example_2.png" 
+  alt="Picture" 
+  width="auto" 
+  height="300" 
+  style="display: block; margin: 0 auto" />
+
+<mark>showValidation</mark> Directive is PrimeNg compatible:
+
+```HTML
+<form [formGroup]="exampleForm" id="examples-content">
+  <div class="flex flex-column gap-2">
+    <label for="address">Address</label>
+    <input
+      type="text"
+      name="address"
+      id="address"
+      formControlName="address"
+      pInputText
+      showValidation
+      [errorStyle]="{
+        width: '300px',
+        color: 'salmon'
+      }"
+    />
+  </div>
+</form>
+```
+
+The result of the code above is:
+<img src="./imgs/Show_Validation_Example_3_PrimeNg.png" 
+  alt="Picture" 
+  width="auto" 
+  height="150" 
+  style="display: block; margin: 0 auto" />
+
+
+
 
