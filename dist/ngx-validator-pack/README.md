@@ -1,14 +1,18 @@
-![Picture](./D_dynamize-angular-icon.png){ width="300" height="300" style="display: block; margin: 0 auto" }
+<img src="./D_dynamize-angular-icon.png" 
+        alt="Picture" 
+        width="400" 
+        height="400" 
+        style="display: block; margin: 0 auto" />
 
 # Ngx Validator Pack
+
 <a name="start"></a>
 
 #### _A pack of validators for Angular Form Group and Form Controls_
 
 ## Table of Contents
 
-- [Ngx Validator Pack](#ngx-validator-pack)
-      - [_A pack of validators for Angular Form Group and Form Controls_](#a-pack-of-validators-for-angular-form-group-and-form-controls)
+- [Ngx Validator Pack](#ngx-validator-pack) - [_A pack of validators for Angular Form Group and Form Controls_](#a-pack-of-validators-for-angular-form-group-and-form-controls)
   - [Ngx Validators](#ngx-validators)
     - [RegExp Validators](#regexp-validators)
     - [Date Validators](#date-validators)
@@ -30,4 +34,126 @@
     - [URL](#url)
     - [Zip Code](#zip-code)
   - [Ngx Form Group](#ngx-form-group-validators)
+
+## Ngx Validators
+
+<a name="ngx-validators"></a>
+
+### RegExp Validators
+
+There are two types of RegExp validators in the Validator Pack, regexpValidator and regexpNotValidator.
+
+regexpValidator returns an error if the value does not match the regular expression, and
+opposite to it regexpNotValidator returns an error if the value matches the regular expression.
+
+regexpValidator Example:
+
+```javascript
+import { regexpValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      regexpInput: [null, [regexpValidator(/(s|regexp)/)]]
+    })
+  }
+}
+```
+
+In this example we are checking if the input is a word regexp, if not we will get an error.
+
+regexpNotValidator Example:
+
+```javascript
+import { regexpNotValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      regexpNotInput: [null, [regexpNotValidator(/(s|regexp)/)]]
+    })
+  }
+}
+```
+
+In this example we are checking if the input is not a word regexp, if not we will get an error.
+
+Additionally we can supply two other optional parameters, first being the name of the error and 
+the second a string which will represent the error content / message.
+
+```javascript
+import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit {
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      regexpInput: [
+        null,
+        [
+          regexpValidator(
+            /(s|regexp)/,
+            'example_regexp_error',
+            'RegExp validation works!'
+          ),
+        ],
+      ],
+      regexpNotInput: [
+        null,
+        [
+          regexpNotValidator(
+            /(s|regexp)/,
+            'example_regexp_not_error',
+            'RegExp Not validation works!'
+          ),
+        ],
+      ],
+    });
+  }
+}
+```
+
+### Date Validators
+
+We have three types of validators to compare date values (date picker values).
+
+earlierThenValidator checks if a picked date is earlier then a give one.
+
+laterThenValidator checks if a picked date is later then a give one.
+
+compareToValidator compares the value of a given input to the value of the form control
+whose name was given as a first parameter. The second parameter is a string representing 
+the comparison.  
+
+
+
 
