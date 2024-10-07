@@ -36,7 +36,8 @@
     - [Zip Code](#zip-code)
   - [Ngx Form Group](#ngx-form-group-validators)
   - [Showing validation](#showing-validation)
-    -[Styling](#styling) 
+    - [Styling](#styling)
+    - [PrimeNG Implementation](#primeng)
 
 ## Installation
 
@@ -49,6 +50,8 @@ npm install --save @dynamize/ngx-validator-pack
 <a name="ngx-validators"></a>
 
 ### RegExp Validators
+
+<a name="regexp-validators"></a>
 
 There are two types of RegExp validators in the Validator Pack, <mark>regexpValidator</mark> and <mark>regexpNotValidator</mark>.
 
@@ -952,6 +955,7 @@ export class AppComponent implements OnInit{
 ```
 
 ## Showing validation
+
 <a name="showing-validation"></a>
 
 If you would like to show the validation error message to the user, a really convenient way is
@@ -962,12 +966,12 @@ showValidation Example:
 
 ```HTML
 <form [formGroup]="exampleForm" id="examples-content">
-  <input 
-    type="text" 
-    name="address" 
-    id="address" 
-    formControlName="address" 
-    showValidation 
+  <input
+    type="text"
+    name="address"
+    id="address"
+    formControlName="address"
+    showValidation
     />
 </form>
 ```
@@ -980,6 +984,8 @@ The result of the code above is:
   style="display: block; margin: 0 auto" />
 
 ### Styling
+
+<a name="styling"></a>
 
 You can pass an <mark>errorStyle</mark> object to customize the look of the validation error:
 
@@ -998,6 +1004,7 @@ You can pass an <mark>errorStyle</mark> object to customize the look of the vali
   />
 </form>
 ```
+
 The result of the code above is:
 <img src="./imgs/Show_Validation_Example_2.png" 
   alt="Picture" 
@@ -1005,7 +1012,11 @@ The result of the code above is:
   height="300" 
   style="display: block; margin: 0 auto" />
 
-<mark>showValidation</mark> Directive is PrimeNg compatible:
+### PrimeNG Implementation
+
+<a name="primeng"></a>
+
+<mark>showValidation</mark> Directive is <mark>PrimeNg</mark> compatible:
 
 ```HTML
 <form [formGroup]="exampleForm" id="examples-content">
@@ -1034,7 +1045,3 @@ The result of the code above is:
   width="auto" 
   height="150" 
   style="display: block; margin: 0 auto" />
-
-
-
-
