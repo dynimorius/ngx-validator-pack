@@ -978,7 +978,7 @@ showValidation Example:
 ```
 
 The result of the code above is:
-<img src="./imgs/Show_Validation_Example_1.png" 
+<img src="../../imgs/Show_Validation_Example_1.png" 
   alt="Picture" 
   width="auto" 
   height="300" 
@@ -1007,7 +1007,7 @@ You can pass an <mark>errorStyle</mark> object to customize the look of the vali
 ```
 
 The result of the code above is:
-<img src="./imgs/Show_Validation_Example_2.png" 
+<img src="../../imgs/Show_Validation_Example_2.png" 
   alt="Picture" 
   width="auto" 
   height="300" 
@@ -1041,7 +1041,7 @@ The result of the code above is:
 
 The result of the code above is:
 
-<img src="./imgs/Show_Validation_Example_3_PrimeNg.png" 
+<img src=".../../imgs/Show_Validation_Example_3_PrimeNg.png" 
   alt="Picture" 
   width="auto" 
   height="150" 

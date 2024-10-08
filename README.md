@@ -29,7 +29,7 @@ Read through our [contributing guidelines][contributing] to learn about our subm
 
  Please read and follow our [Code of Conduct][codeofconduct].
 
-**Found Ngx Validator Pack useful? Give our repo a star :star: :arrow_up:.**
+**Found Ngx Validator Pack useful? Give the repo a star :star: :arrow_up:.**
 
 [contributing]: CONTRIBUTING.md
 [codeofconduct]: CODE_OF_CONDUCT.md
