@@ -1,14 +1,15 @@
-<img src="./imgs/D_dynamize-angular-icon.png" 
-        alt="Picture" 
-        width="400" 
-        height="400" 
-        style="display: block; margin: 0 auto" />
-
-# Ngx Validator Pack
+<h1 align="center">Ngx Validator Pack</h1>
 
 <a name="start"></a>
 
-#### _A pack of validators for Angular Form Group and Form Controls_
+<p align="center">
+  <img src="../../imgs/D_dynamize-angular-icon.png" alt="dynamize-angular-logo" width="120px" height="120px"/>
+  <br>
+  <em>Ngx Validator Pack is a collection of validators designed 
+    <br> to simplify usage and allow quick customization.</em>
+  <br>
+</p>
+
 
 ## Table of Contents
 
