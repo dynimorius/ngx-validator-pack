@@ -1041,7 +1041,7 @@ The result of the code above is:
 
 The result of the code above is:
 
-<img src=".../../imgs/Show_Validation_Example_3_PrimeNg.png" 
+<img src="../../imgs/Show_Validation_Example_3_PrimeNg.png" 
   alt="Picture" 
   width="auto" 
   height="150" 
