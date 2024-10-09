@@ -17,6 +17,7 @@ import { ComparisonOperations } from "./helpers/date";
  */
 export declare const regexpValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * 
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check

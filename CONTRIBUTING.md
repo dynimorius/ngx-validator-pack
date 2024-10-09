@@ -66,7 +66,28 @@ Depending on how large the project is, you may want to outsource the questioning
 ## I Want To Contribute
 
 > ### Legal Notice <!-- omit in toc -->
-> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project license.
+> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project license.>
+
+When contributing we want you to take full ownership and recognition for you work. So we ask you to 
+comment your code accordingly.
+Below you can find a comment template we recommend you use:
+
+```javascript
+/**
+ * @author                            - your name
+ *                                    - GitHub 
+ *                                    - email(optional)                     
+ * 
+ * Class or method explanation
+ *
+ * @param {string}                    - param explanation
+ * @returns {ValidationErrors | null} - return explanation
+ */
+
+```
+One could and should also add any additional tags relevant to the code.
+
+Please check <a href="https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html">JSDoc Reference</a>
 
 ### Reporting Bugs
 
