@@ -980,6 +980,54 @@ export class AppComponent implements OnInit{
 }
 ```
 
+### Custom Messages for Ngx Form Group Validator
+
+Ngx From Group Validator also have an option for custom messaging. But the implementation is
+slightly different again.
+
+The only take one optional parameter which is a custom error message.
+
+```javascript
+import { requiredEther, requiredIf, requiredIfNot } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      compare: [null],
+      if: [null],
+      ifNot: [null],
+      ether: [null]
+    }, {
+        validators: [
+          requiredIf("if", "compare", "Compere input has a value"),
+          requiredIfNot(
+            "ifNot",
+            "compare",
+            `Compere input doesn't have a value`
+          ),
+          requiredEther(
+            "ether",
+            "compare",
+            "Nether the compere input nor this one have a value."
+          ),
+        ],
+    })
+  }
+}
+```
+
 ## Showing validation
 
 <a name="showing-validation"></a>
