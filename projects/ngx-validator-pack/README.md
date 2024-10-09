@@ -10,7 +10,6 @@
   <br>
 </p>
 
-
 ## Table of Contents
 
 - [Ngx Validator Pack](#ngx-validator-pack) - [_A pack of validators for Angular Form Group and Form Controls_](#a-pack-of-validators-for-angular-form-group-and-form-controls)
@@ -882,18 +881,20 @@ export class AppComponent implements OnInit{
 
 ## Custom Messaging
 
-One of the main reason for creating this library if not the main reason is the ability to 
-have a custom error message for each individual implementation of the validators. Let's 
+One of the main reason for creating this library if not the main reason is the ability to
+have a custom error message for each individual implementation of the validators. Let's
 explore this further in this section.
 
 ### Custom Messages for Ngx Validators
+
 <a name="additional-params"></a>
+<a name="ngx-custom-messages"></a>
 
 All ngx validators take addition optional parameters.
 
 <mark>First</mark> one being the name of the error we would like to use.
 
-<mark>Second</mark> one is the error messages we would like to use. 
+<mark>Second</mark> one is the error messages we would like to use.
 
 In this example we are using regexpValidator and regexpNotValidator, but implementation is
 identical for all other ngx validators.
@@ -940,15 +941,17 @@ export class AppComponent implements OnInit {
 ```
 
 ### Custom Messages for Ngx Prebuilt Validators
+
 <a name="additional-params-prebuilt"></a>
+<a name="ngx-custom-prebuilt-messages"></a>
 
 Custom error messages are also available for ngx prebuilt validators. The implementation
-is slightly different as they don't have any required parameters, they in fact only two 
+is slightly different as they don't have any required parameters, they in fact only two
 optional ones.
 
 <mark>First</mark> one being the name of the error we would like to use.
 
-<mark>Second</mark> one is the error messages we would like to use. 
+<mark>Second</mark> one is the error messages we would like to use.
 
 In this example we are using the addressValidator, but implementation is
 identical for all other ngx validators.
@@ -981,6 +984,8 @@ export class AppComponent implements OnInit{
 ```
 
 ### Custom Messages for Ngx Form Group Validator
+
+<a name="ngx-custom-fb-messages"></a>
 
 Ngx From Group Validator also have an option for custom messaging. But the implementation is
 slightly different again.
