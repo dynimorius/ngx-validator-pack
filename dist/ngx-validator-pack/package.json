@@ -45,7 +45,7 @@
   "bugs": {
     "url": "https://github.com/dynimorius/ngx-validator-pack/issues"
   },
-  "homepage": "https://github.com/dynimorius/ngx-validator-pack/projects/ngx-validator-pack#readme",
+  "homepage": "https://github.com/dynimorius/ngx-validator-pack/blob/main/projects/ngx-validator-pack/README.md",
   "license": "ISC",
   "module": "fesm2022/dynamize-ngx-validator-pack.mjs",
   "typings": "index.d.ts",

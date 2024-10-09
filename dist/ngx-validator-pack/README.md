@@ -3,7 +3,7 @@
 <a name="start"></a>
 
 <p align="center">
-  <img src="../../imgs/D_dynamize-angular-icon.png" alt="dynamize-angular-logo" width="120px" height="120px"/>
+  <img src="./imgs/D_dynamize-angular-icon.png" alt="dynamize-angular-logo" width="120px" height="120px"/>
   <br>
   <em>Ngx Validator Pack is a collection of validators designed 
     <br> to simplify usage and allow quick customization.</em>
@@ -1056,7 +1056,7 @@ showValidation Example:
 ```
 
 The result of the code above is:
-<img src="../../imgs/Show_Validation_Example_1.png" 
+<img src="./imgs/Show_Validation_Example_1.png" 
   alt="Picture" 
   width="auto" 
   height="300" 
@@ -1085,7 +1085,7 @@ You can pass an <mark>errorStyle</mark> object to customize the look of the vali
 ```
 
 The result of the code above is:
-<img src="../../imgs/Show_Validation_Example_2.png" 
+<img src="./imgs/Show_Validation_Example_2.png" 
   alt="Picture" 
   width="auto" 
   height="300" 
@@ -1132,7 +1132,7 @@ The available style options are:
 
 The result of the code above is:
 
-<img src="../../imgs/Show_Validation_Example_3_PrimeNg.png" 
+<img src="./imgs/Show_Validation_Example_3_PrimeNg.png" 
   alt="Picture" 
   width="auto" 
   height="150" 
