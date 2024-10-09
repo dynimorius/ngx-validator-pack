@@ -9,6 +9,16 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { removeErrors, setErrors } from "./helpers/errors";
 
+/**
+ * @description
+ * Assigns a required error to the controls with a name was specified in the 
+ * first parameter if the control with a name specified in the second parameter 
+ * has no value.
+ * 
+ * @param {string}                    - control name to receive the required error
+ * @param {string}                    - control name who's value needs to be checked
+ * @returns {ValidationErrors | null} - Validation error
+ */
 export const requiredIf = (
   requiredControlName: string,
   controlToCheckName: string
@@ -28,6 +38,16 @@ export const requiredIf = (
   };
 };
 
+/**
+ * @description
+ * Assigns a required error to the controls with a name was specified in the 
+ * first parameter if the control with a name specified in the second parameter 
+ * has a value.
+ * 
+ * @param {string}                    - control name to receive the required error
+ * @param {string}                    - control name who's value needs to be checked
+ * @returns {ValidationErrors | null} - Validation error
+ */
 export const requiredIfNot = (
   requiredControlName: string,
   controlToCheckName: string
@@ -46,6 +66,15 @@ export const requiredIfNot = (
   };
 };
 
+/**
+ * @description
+ * Assigns a required error to both controls who's names are specified if nether one
+ * has a value.
+ * 
+ * @param {string}                    - name of the first control
+ * @param {string}                    - name of the second control
+ * @returns {ValidationErrors | null} - Validation error
+ */
 export const requiredEther = (
   requiredControlName: string,
   controlToCheckName: string

@@ -77,7 +77,7 @@ Below you can find a comment template we recommend you use:
  * @author                            - your name
  *                                    - GitHub 
  *                                    - email(optional)                     
- * 
+ * @description
  * Class or method explanation
  *
  * @param {string}                    - param explanation

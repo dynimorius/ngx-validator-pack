@@ -1,3 +1,4 @@
+import { ShowValidationDirective } from './../directives/show-validation.directive';
 /**
  * @license
  * Copyright Slavko Mihajlovic All Rights Reserved.
@@ -6,6 +7,12 @@
  * found at https://www.isc.org/licenses/
  */
 
+/**
+ * @description
+ * An interface representing available style options for the 
+ * showValidation Directive
+ * {@link ShowValidationDirective}
+ */
 export interface ShowValidationStyle {
     font_size?: string;
     font_family?: string;

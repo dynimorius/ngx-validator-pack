@@ -14,6 +14,7 @@ import {
 } from "./helpers/date";
 
 /**
+ * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check
@@ -38,6 +39,7 @@ export const regexpValidator =
   };
 
 /**
+ * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check
@@ -62,6 +64,7 @@ export const regexpNotValidator =
   };
 
 /**
+ * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
  * the value in the specified FromControl / AbstractControl
  *
@@ -89,6 +92,7 @@ export const earlierThenValidator =
   };
 
 /**
+ * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl
  *
@@ -114,6 +118,7 @@ export const laterThenValidator =
   };
 
 /**
+ * @description
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl
  *
@@ -146,6 +151,7 @@ export const compareToValidator =
   };
 
 /**
+ * @description
  * Returns a validation error if a condition is met
  *
  * @param {Function | boolean}        - conditional function or a boolean value
@@ -172,6 +178,7 @@ export const requiredWhenValidator =
   };
 
 /**
+ * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it
  *
@@ -196,6 +203,7 @@ export const linkToValidator =
   };
 
 /**
+ * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not
  *
