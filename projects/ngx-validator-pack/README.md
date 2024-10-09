@@ -1091,6 +1091,19 @@ The result of the code above is:
   height="300" 
   style="display: block; margin: 0 auto" />
 
+The available style options are:
+
+| Name             | CSS representation |
+| ---------------- | ------------------ |
+| font_size        | font-size          |
+| font_family      | font-family        |
+| color            | color              |
+| background_color | background-color   |
+| border           | border             |
+| border_radius    | border-radius      |
+| width            | width              |
+| height           | height             |
+
 ### PrimeNG Implementation
 
 <a name="primeng"></a>
