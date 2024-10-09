@@ -13,7 +13,7 @@ import * as i1 from '@angular/forms';
 const prepareToCompare = (date, bufferYears) => {
     if (date) {
         const p_Date = new Date(date);
-        const year = p_Date.getFullYear() + (bufferYears || 0);
+        const year = p_Date.getFullYear() + (bufferYears ?? 0);
         const month = p_Date.getMonth() + 1;
         const day = p_Date.getDate();
         return Number.parseInt(`${year}${month.toString().replace.length > 1 ? month : '0' + month}${day.toString().length > 1 ? day : '0' + day}`);
@@ -45,6 +45,7 @@ const compare = (date1, date2, comparison) => {
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check
@@ -60,6 +61,7 @@ const regexpValidator = (regexp, errorName, error) => (control) => {
     return !control.value || regexp.test(control.value) ? null : errors;
 };
 /**
+ * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check
@@ -75,6 +77,7 @@ const regexpNotValidator = (regexp, errorName, error) => (control) => {
     return !control.value || !regexp.test(control.value) ? null : errors;
 };
 /**
+ * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
  * the value in the specified FromControl / AbstractControl
  *
@@ -93,6 +96,7 @@ const earlierThenValidator = (date, errorName, error) => (control) => {
         : errors;
 };
 /**
+ * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl
  *
@@ -109,6 +113,7 @@ const laterThenValidator = (date, errorName, error) => (control) => {
         : errors;
 };
 /**
+ * @description
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl
  *
@@ -132,6 +137,7 @@ const compareToValidator = (filedName, comparison, errorName, error) => (control
     return null;
 };
 /**
+ * @description
  * Returns a validation error if a condition is met
  *
  * @param {Function | boolean}        - conditional function or a boolean value
@@ -148,6 +154,7 @@ const requiredWhenValidator = (conditional, errorName, error) => (control) => {
     return !control.value && outcome ? errors : null;
 };
 /**
+ * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it
  *
@@ -163,6 +170,7 @@ const linkToValidator = (linkTo, errorName, error) => (control) => {
     return !control?.value && !!linkedTo?.value ? errors : null;
 };
 /**
+ * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not
  *
@@ -458,9 +466,24 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @description
+ * Sets an error on a given control
+ *
+ * @param {AbstractControl}           - FromControl / AbstractControl to set the error to
+ * @param {{ [key: string]: unknown }}- error content
+ */
 const setErrors = (control, error) => {
     control.setErrors({ ...control.errors, ...error });
 };
+/**
+ * @description
+ * Removes errors on a given control
+ *
+ * @param {AbstractControl}           - FromControl / AbstractControl from which
+ *                                      to remove error
+ * @param {string[]}                  - list of error names
+ */
 const removeErrors = (control, keys) => {
     const remainingErrors = keys.reduce((errors, key) => {
         delete errors[key];
@@ -568,6 +591,11 @@ const requiredEther = (requiredControlName, controlToCheckName, error) => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @description
+ * Default styles for the showValidation Directive
+ * {@link ShowValidationDirective}
+ */
 const DefaultStyle = {
     font_size: "small",
     font_family: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
@@ -583,6 +611,21 @@ const DefaultStyle = {
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
+ */
+/**
+ * @description
+ * A directive which will show a validation error message to the
+ * user.
+ * @implements
+ * <input
+ *  type="text"
+ *  formControlName="demoControlName"
+ *  showValidation
+ *  [errorStyle]="{                  - Optional style input
+ *    font_size: 'medium',              used for customizing the look
+ *    color: '#ad03fc',
+ *  }"
+ * />
  */
 class ShowValidationDirective {
     constructor(elementRef, renderer, control) {

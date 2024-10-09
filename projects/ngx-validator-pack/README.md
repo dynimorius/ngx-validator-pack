@@ -1122,7 +1122,7 @@ The available style options are:
       pInputText
       showValidation
       [errorStyle]="{
-        width: '300px',
+        width: '45vw',
         color: 'salmon'
       }"
     />
