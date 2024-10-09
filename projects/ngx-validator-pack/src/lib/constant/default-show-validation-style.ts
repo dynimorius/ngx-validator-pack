@@ -8,6 +8,11 @@
 
 import { ShowValidationStyle } from "../interfaces/show-validation-styles";
 
+/**
+ * @description
+ * Default styles for the showValidation Directive
+ * {@link ShowValidationDirective}
+ */
 export const DefaultStyle: ShowValidationStyle = {
   font_size: "small",
   font_family: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,

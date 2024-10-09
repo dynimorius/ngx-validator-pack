@@ -8,6 +8,7 @@
 import { ValidationErrors, ValidatorFn } from "@angular/forms";
 import { ComparisonOperations } from "./helpers/date";
 /**
+ * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check
@@ -17,7 +18,7 @@ import { ComparisonOperations } from "./helpers/date";
  */
 export declare const regexpValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
- * 
+ * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
  *
  * @param {RegExp}                    - Regular expression to check
@@ -27,6 +28,7 @@ export declare const regexpValidator: (regexp: RegExp, errorName?: string, error
  */
 export declare const regexpNotValidator: (regexp: RegExp, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
  * the value in the specified FromControl / AbstractControl
  *
@@ -37,6 +39,7 @@ export declare const regexpNotValidator: (regexp: RegExp, errorName?: string, er
  */
 export declare const earlierThenValidator: (date: Date, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl
  *
@@ -47,6 +50,7 @@ export declare const earlierThenValidator: (date: Date, errorName?: string, erro
  */
 export declare const laterThenValidator: (date: Date, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * @description
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl
  *
@@ -58,6 +62,7 @@ export declare const laterThenValidator: (date: Date, errorName?: string, error?
  */
 export declare const compareToValidator: (filedName: string, comparison: ComparisonOperations, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * @description
  * Returns a validation error if a condition is met
  *
  * @param {Function | boolean}        - conditional function or a boolean value
@@ -67,6 +72,7 @@ export declare const compareToValidator: (filedName: string, comparison: Compari
  */
 export declare const requiredWhenValidator: (conditional: (() => boolean) | boolean, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it
  *
@@ -77,6 +83,7 @@ export declare const requiredWhenValidator: (conditional: (() => boolean) | bool
  */
 export declare const linkToValidator: (linkTo: string, errorName?: string, error?: ValidationErrors | string) => ValidatorFn;
 /**
+ * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not
  *
