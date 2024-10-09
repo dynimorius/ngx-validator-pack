@@ -35,7 +35,11 @@
     - [Time](#time)
     - [URL](#url)
     - [Zip Code](#zip-code)
-  - [Ngx Form Group](#ngx-form-group-validators)
+  - [Ngx Form Group Validators](#ngx-form-group-validators)
+  - [Custom Messaging](#custom-messaging)
+    - [Custom Messages for Ngx Validators](#ngx-custom-messages)
+    - [Custom Messages for Ngx Prebuilt Validators](#ngx-custom-prebuilt-messages)
+    - [Custom Messages for Ngx Form Group Validator](#ngx-custom-fb-messages)
   - [Showing validation](#showing-validation)
     - [Styling](#styling)
     - [PrimeNG Implementation](#primeng)
@@ -113,54 +117,6 @@ In this example we are checking if the input is not a word regexp, if not we wil
 
 Additionally we can supply two other optional parameters, first being the name of the error and
 the second a string which will represent the error content / message.
-
-### Additional parameter example:
-
-<a name="additional-params"></a>
-
-In this example we are using regexpValidator and regexpNotValidator, but implementation is
-identical for all other ngx validators.
-
-```javascript
-import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pack';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit {
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.exampleForm = this.fb.group({
-      regexpInput: [
-        null,
-        [
-          regexpValidator(
-            /(s|regexp)/,
-            'example_regexp_error',        // Error name
-            'RegExp validation works!'     // Error Message
-          ),
-        ],
-      ],
-      regexpNotInput: [
-        null,
-        [
-          regexpNotValidator(
-            /(s|regexp)/,
-            'example_regexp_not_error',     // Error name
-            'RegExp Not validation works!'  // Error Message
-          ),
-        ],
-      ],
-    });
-  }
-}
-```
 
 ### Date Validators
 
@@ -359,37 +315,6 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       address: [null, [addressValidator()]]
-    })
-  }
-}
-```
-
-### Additional parameter example for Prebuilt Validators:
-
-<a name="additional-params-prebuilt"></a>
-
-```javascript
-import { addressValidator } from '@dynamize/ngx-validator-pack';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.exampleForm = this.fb.group({
-      address: [null, [addressValidator(
-        'address_error_example',  // Error name
-        'Wrong address input!'    // Error Message
-      )]]
     })
   }
 }
@@ -908,7 +833,7 @@ export class AppComponent implements OnInit{
 }
 ```
 
-## Ngx Form Group
+## Ngx Form Group Validators
 
 <a name="ngx-form-group-validators"></a>
 
@@ -950,6 +875,106 @@ export class AppComponent implements OnInit{
         requiredIfNot('ifNot', 'compare'),
         requiredEther('ether', 'compare')
       ]
+    })
+  }
+}
+```
+
+## Custom Messaging
+
+One of the main reason for creating this library if not the main reason is the ability to 
+have a custom error message for each individual implementation of the validators. Let's 
+explore this further in this section.
+
+### Custom Messages for Ngx Validators
+<a name="additional-params"></a>
+
+All ngx validators take addition optional parameters.
+
+<mark>First</mark> one being the name of the error we would like to use.
+
+<mark>Second</mark> one is the error messages we would like to use. 
+
+In this example we are using regexpValidator and regexpNotValidator, but implementation is
+identical for all other ngx validators.
+
+```javascript
+import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit {
+  exampleForm!: FormGroup;
+  constructor(private readonly fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      regexpInput: [
+        null,
+        [
+          regexpValidator(
+            /(s|regexp)/,
+            'example_regexp_error',        // Error name
+            'RegExp validation works!'     // Error Message
+          ),
+        ],
+      ],
+      regexpNotInput: [
+        null,
+        [
+          regexpNotValidator(
+            /(s|regexp)/,
+            'example_regexp_not_error',     // Error name
+            'RegExp Not validation works!'  // Error Message
+          ),
+        ],
+      ],
+    });
+  }
+}
+```
+
+### Custom Messages for Ngx Prebuilt Validators
+<a name="additional-params-prebuilt"></a>
+
+Custom error messages are also available for ngx prebuilt validators. The implementation
+is slightly different as they don't have any required parameters, they in fact only two 
+optional ones.
+
+<mark>First</mark> one being the name of the error we would like to use.
+
+<mark>Second</mark> one is the error messages we would like to use. 
+
+In this example we are using the addressValidator, but implementation is
+identical for all other ngx validators.
+
+```javascript
+import { addressValidator } from '@dynamize/ngx-validator-pack';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit{
+  exampleForm!: FormGroup;
+  randomBool = (): boolean => Math.random() >= 0.5;
+
+  constructor(private readonly fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.exampleForm = this.fb.group({
+      address: [null, [addressValidator(
+        'address_error_example',  // Error name
+        'Wrong address input!'    // Error Message
+      )]]
     })
   }
 }
