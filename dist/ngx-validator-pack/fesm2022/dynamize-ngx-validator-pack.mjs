@@ -241,16 +241,18 @@ const zipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper address format
  * (Street number Street Name, City, State ZIP code)
  * Example: 3344 W Alameda Avenue, Lakewood, CO 80222
+ *
  * @param {string}                    - optional parameter representing error name
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const addressValidator = (errorName, error) => regexpValidator(address, (errorName = "address"), (error =
-    "Please input a value in a format of: Street number Street Name, City, State ZIP code."));
+const addressValidator = (errorName = "address", error = "Please input a value in a format of: Street number Street Name, City, State ZIP code.") => regexpValidator(address, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl consists of only
  * alphabetic characters.
  *
@@ -258,8 +260,9 @@ const addressValidator = (errorName, error) => regexpValidator(address, (errorNa
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const alphabetOnlyValidator = (errorName, error) => regexpValidator(lettersOnly, (errorName = "alphabetOnly"), (error = "Only alphabetic characters are allowed."));
+const alphabetOnlyValidator = (errorName = "alphabetOnly", error = "Only alphabetic characters are allowed.") => regexpValidator(lettersOnly, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
  *
@@ -267,9 +270,9 @@ const alphabetOnlyValidator = (errorName, error) => regexpValidator(lettersOnly,
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const dateDD_MM_YYYYValidator = (errorName, error) => regexpValidator(dateDD_MM_YYYY, (errorName = "dateDD_MM_YYYY"), (error =
-    "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."));
+const dateDD_MM_YYYYValidator = (errorName = "dateDD_MM_YYYY", error = "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY.") => regexpValidator(dateDD_MM_YYYY, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * YYYY-MM-dd.
  *
@@ -277,8 +280,9 @@ const dateDD_MM_YYYYValidator = (errorName, error) => regexpValidator(dateDD_MM_
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const dateYYYY_MM_DDValidator = (errorName, error) => regexpValidator(dateYYYY_MM_DD, (errorName = "dateYYYY_MM_DD"), (error = "Please input a value in a format: YYYY-MM-dd."));
+const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please input a value in a format: YYYY-MM-dd.") => regexpValidator(dateYYYY_MM_DD, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * local-part@domain.com.
  *
@@ -286,8 +290,9 @@ const dateYYYY_MM_DDValidator = (errorName, error) => regexpValidator(dateYYYY_M
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const emailValidator = (errorName, error) => regexpValidator(email, (errorName = "email"), (error = "Please input a value in a format: local-part@domain.com."));
+const emailValidator = (errorName = "email", error = "Please input a value in a format: local-part@domain.com.") => regexpValidator(email, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: x.x.x.x or y:y:y:y:y:y:y:y.
  *
@@ -295,9 +300,9 @@ const emailValidator = (errorName, error) => regexpValidator(email, (errorName =
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const ipAddressValidator = (errorName, error) => regexpValidator(IPAddressV4AndV6, (errorName = "ipAddress"), (error =
-    "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y"));
+const ipAddressValidator = (errorName = "ipAddress", error = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y") => regexpValidator(IPAddressV4AndV6, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * x.x.x.x.
  *
@@ -305,8 +310,9 @@ const ipAddressValidator = (errorName, error) => regexpValidator(IPAddressV4AndV
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const iPv4Validator = (errorName, error) => regexpValidator(IPAddressV4, (errorName = "iPv4"), (error = "Please input a value in a format: x.x.x.x."));
+const iPv4Validator = (errorName = "iPv4", error = "Please input a value in a format: x.x.x.x.") => regexpValidator(IPAddressV4, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * y:y:y:y:y:y:y:y.
  *
@@ -314,8 +320,9 @@ const iPv4Validator = (errorName, error) => regexpValidator(IPAddressV4, (errorN
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const iPv6Validator = (errorName, error) => regexpValidator(IPAddressV6, (errorName = "iPv6"), (error = "Please input a value in a format: y:y:y:y:y:y:y:y."));
+const iPv6Validator = (errorName = "iPv6", error = "Please input a value in a format: y:y:y:y:y:y:y:y.") => regexpValidator(IPAddressV6, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl consists of only
  * numeric characters.
  *
@@ -323,24 +330,27 @@ const iPv6Validator = (errorName, error) => regexpValidator(IPAddressV6, (errorN
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const numericsOnlyValidator = (errorName, error) => regexpValidator(numbersOnly, (errorName = "numericsOnly"), (error = "Only numeric characters are allowed."));
+const numericsOnlyValidator = (errorName = "numericsOnly", error = "Only numeric characters are allowed.") => regexpValidator(numbersOnly, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl has any special characters.
  *
  * @param {string}                    - optional parameter representing error name
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const noSpecialsValidator = (errorName, error) => regexpValidator(noSpecial, (errorName = "noSpecials"), (error = "No special characters are allowed."));
+const noSpecialsValidator = (errorName = "noSpecials", error = "No special characters are allowed.") => regexpValidator(noSpecial, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper passport format
  *
  * @param {string}                    - optional parameter representing error name
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const passportValidator = (errorName, error) => regexpValidator(passport, (errorName = "passport"), (error = "Incorrect passport format."));
+const passportValidator = (errorName = "passport", error = "Incorrect passport format.") => regexpValidator(passport, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a strong password format
  * (Has at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and has
  * length of at least 8 characters).
@@ -349,9 +359,9 @@ const passportValidator = (errorName, error) => regexpValidator(passport, (error
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const passwordValidator = (errorName, error) => regexpValidator(passwordStrength, (errorName = "password"), (error =
-    "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."));
+const passwordValidator = (errorName = "password", error = "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8.") => regexpValidator(passwordStrength, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * (000) 000 0000.
  *
@@ -359,8 +369,9 @@ const passwordValidator = (errorName, error) => regexpValidator(passwordStrength
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const phoneNumberValidator = (errorName, error) => regexpValidator(phoneNumber, (errorName = "phoneNumber"), (error = "Please input a value in a format: (000) 000 0000."));
+const phoneNumberValidator = (errorName = "phoneNumber", error = "Please input a value in a format: (000) 000 0000.") => regexpValidator(phoneNumber, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl consists of a single space
  * character.
  *
@@ -368,8 +379,9 @@ const phoneNumberValidator = (errorName, error) => regexpValidator(phoneNumber, 
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const singleSpaceValidator = (errorName, error) => regexpNotValidator(singleSpace, (errorName = "singleSpace"), (error = "A single space character is not allowed."));
+const singleSpaceValidator = (errorName = "singleSpace", error = "A single space character is not allowed.") => regexpNotValidator(singleSpace, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl starts or ends with a
  * space character.
  *
@@ -377,8 +389,9 @@ const singleSpaceValidator = (errorName, error) => regexpNotValidator(singleSpac
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const spaceRestrictionValidator = (errorName, error) => regexpValidator(spaceRestriction, (errorName = "spaceRestriction"), (error = "Value can not start or end with a space character."));
+const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Value can not start or end with a space character.") => regexpValidator(spaceRestriction, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: AAA-GGG-SSSS or AAAGGGSSSS.
  *
@@ -386,9 +399,9 @@ const spaceRestrictionValidator = (errorName, error) => regexpValidator(spaceRes
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const ssnValidator = (errorName, error) => regexpValidator(ssn, (errorName = "ssn"), (error =
-    "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."));
+const ssnValidator = (errorName = "ssn", error = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.") => regexpValidator(ssn, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM 12-hour with optional leading 0.
  *
@@ -396,8 +409,9 @@ const ssnValidator = (errorName, error) => regexpValidator(ssn, (errorName = "ss
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const timeHH_MM_12Validator = (errorName, error) => regexpValidator(timeHH_MM_12, (errorName = "timeHH_MM_12"), (error = "Please input a value in a HH:MM 12-hour format."));
+const timeHH_MM_12Validator = (errorName = "timeHH_MM_12", error = "Please input a value in a HH:MM 12-hour format.") => regexpValidator(timeHH_MM_12, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM 24-hour with optional leading 0.
  *
@@ -405,8 +419,9 @@ const timeHH_MM_12Validator = (errorName, error) => regexpValidator(timeHH_MM_12
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const timeHH_MM_24Validator = (errorName, error) => regexpValidator(timeHH_MM_24, (errorName = "timeHH_MM_24"), (error = "Please input a value in a HH:MM 24-hour format."));
+const timeHH_MM_24Validator = (errorName = "timeHH_MM_24", error = "Please input a value in a HH:MM 24-hour format.") => regexpValidator(timeHH_MM_24, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM:SS 24-hour.
  *
@@ -414,8 +429,9 @@ const timeHH_MM_24Validator = (errorName, error) => regexpValidator(timeHH_MM_24
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const timeHH_MM_SS_24Validator = (errorName, error) => regexpValidator(timeHH_MM_SS_24, (errorName = "timeHH_MM_SS_24"), (error = "Please input a value in a HH:MM:SS 24-hour format."));
+const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please input a value in a HH:MM:SS 24-hour format.") => regexpValidator(timeHH_MM_SS_24, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * correct url format.
  *
@@ -423,8 +439,9 @@ const timeHH_MM_SS_24Validator = (errorName, error) => regexpValidator(timeHH_MM
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const urlValidator = (errorName, error) => regexpValidator(url, (errorName = "url"), (error = "Improper URL format."));
+const urlValidator = (errorName = "url", error = "Improper URL format.") => regexpValidator(url, errorName, error);
 /**
+ * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: 00000 or 00000-0000.
  *
@@ -432,7 +449,7 @@ const urlValidator = (errorName, error) => regexpValidator(url, (errorName = "ur
  * @param {ValidationErrors | string} - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const zipCodeValidator = (errorName, error) => regexpValidator(zipCode, (errorName = "zipCode"), (error = "Improper zip code format."));
+const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code format.") => regexpValidator(zipCode, errorName, error);
 
 /**
  * @license
@@ -441,24 +458,9 @@ const zipCodeValidator = (errorName, error) => regexpValidator(zipCode, (errorNa
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-/**
- * @description
- * Sets an error on a given control
- *
- * @param {AbstractControl}           - FromControl / AbstractControl to set the error to
- * @param {{ [key: string]: unknown }}- error content
- */
 const setErrors = (control, error) => {
     control.setErrors({ ...control.errors, ...error });
 };
-/**
- * @description
- * Removes errors on a given control
- *
- * @param {AbstractControl}           - FromControl / AbstractControl from which
- *                                      to remove error
- * @param {string[]}                  - list of error names
- */
 const removeErrors = (control, keys) => {
     const remainingErrors = keys.reduce((errors, key) => {
         delete errors[key];
@@ -476,7 +478,18 @@ const removeErrors = (control, keys) => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-const requiredIf = (requiredControlName, controlToCheckName) => {
+/**
+ * @description
+ * Assigns a required error to the controls with a name was specified in the
+ * first parameter if the control with a name specified in the second parameter
+ * has no value.
+ *
+ * @param {string}                    - control name to receive the required error
+ * @param {string}                    - control name who's value needs to be checked
+ * @param {string}                    - error message - optional parameter
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const requiredIf = (requiredControlName, controlToCheckName, error) => {
     return (control) => {
         const required = control?.get(requiredControlName);
         const toCheck = control?.get(controlToCheckName);
@@ -485,13 +498,25 @@ const requiredIf = (requiredControlName, controlToCheckName) => {
             return null;
         }
         else {
-            const errorVal = `Required ${requiredControlName} when having ${controlToCheckName}.`;
+            const errorVal = error ??
+                `Required ${requiredControlName} when having ${controlToCheckName}.`;
             setErrors(required, { required: errorVal });
             return { [errorVal]: true };
         }
     };
 };
-const requiredIfNot = (requiredControlName, controlToCheckName) => {
+/**
+ * @description
+ * Assigns a required error to the controls with a name was specified in the
+ * first parameter if the control with a name specified in the second parameter
+ * has a value.
+ *
+ * @param {string}                    - control name to receive the required error
+ * @param {string}                    - control name who's value needs to be checked
+ * @param {string}                    - error message - optional parameter
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const requiredIfNot = (requiredControlName, controlToCheckName, error) => {
     return (control) => {
         const required = control?.get(requiredControlName);
         const toCheck = control?.get(controlToCheckName);
@@ -500,13 +525,24 @@ const requiredIfNot = (requiredControlName, controlToCheckName) => {
             return null;
         }
         else {
-            const errorVal = `Required ${requiredControlName} when not having ${controlToCheckName}.`;
+            const errorVal = error ??
+                `Required ${requiredControlName} when not having ${controlToCheckName}.`;
             setErrors(required, { required: errorVal });
             return { [errorVal]: true };
         }
     };
 };
-const requiredEther = (requiredControlName, controlToCheckName) => {
+/**
+ * @description
+ * Assigns a required error to both controls who's names are specified if nether one
+ * has a value.
+ *
+ * @param {string}                    - name of the first control
+ * @param {string}                    - name of the second control
+ * @param {string}                    - error message - optional parameter
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const requiredEther = (requiredControlName, controlToCheckName, error) => {
     return (control) => {
         const required = control?.get(requiredControlName);
         const toCheck = control?.get(controlToCheckName);
@@ -516,7 +552,8 @@ const requiredEther = (requiredControlName, controlToCheckName) => {
             return null;
         }
         else {
-            const errorVal = `Required either ${requiredControlName} or ${controlToCheckName}.`;
+            const errorVal = error ??
+                `Required either ${requiredControlName} or ${controlToCheckName}.`;
             setErrors(required, { required: errorVal });
             setErrors(toCheck, { required: errorVal });
             return { [errorVal]: true };
@@ -530,11 +567,6 @@ const requiredEther = (requiredControlName, controlToCheckName) => {
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
- */
-/**
- * @description
- * Default styles for the showValidation Directive
- * {@link ShowValidationDirective}
  */
 const DefaultStyle = {
     font_size: "small",

@@ -14,9 +14,10 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
  *
  * @param {string}                    - control name to receive the required error
  * @param {string}                    - control name who's value needs to be checked
+ * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const requiredIf: (requiredControlName: string, controlToCheckName: string) => (control: AbstractControl) => ValidationErrors | null;
+export declare const requiredIf: (requiredControlName: string, controlToCheckName: string, error?: string) => (control: AbstractControl) => ValidationErrors | null;
 /**
  * @description
  * Assigns a required error to the controls with a name was specified in the
@@ -25,9 +26,10 @@ export declare const requiredIf: (requiredControlName: string, controlToCheckNam
  *
  * @param {string}                    - control name to receive the required error
  * @param {string}                    - control name who's value needs to be checked
+ * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const requiredIfNot: (requiredControlName: string, controlToCheckName: string) => (control: AbstractControl) => ValidationErrors | null;
+export declare const requiredIfNot: (requiredControlName: string, controlToCheckName: string, error?: string) => (control: AbstractControl) => ValidationErrors | null;
 /**
  * @description
  * Assigns a required error to both controls who's names are specified if nether one
@@ -35,6 +37,7 @@ export declare const requiredIfNot: (requiredControlName: string, controlToCheck
  *
  * @param {string}                    - name of the first control
  * @param {string}                    - name of the second control
+ * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const requiredEther: (requiredControlName: string, controlToCheckName: string) => (control: AbstractControl) => ValidationErrors | null;
+export declare const requiredEther: (requiredControlName: string, controlToCheckName: string, error?: string) => (control: AbstractControl) => ValidationErrors | null;
