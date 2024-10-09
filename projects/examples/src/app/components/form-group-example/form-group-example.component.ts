@@ -2,15 +2,19 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { requiredEther, requiredIf, requiredIfNot } from "ngx-validator-pack";
 import { ShowValidationDirective } from "../../../../../ngx-validator-pack/src/public-api";
+import { formGroupHTMLSnippet, formGroupTSSnippet } from "../../snippet-data";
+import { SnippetsComponent } from "../snippets/snippets.component";
 
 @Component({
   selector: "app-form-group-example",
   standalone: true,
-  imports: [ReactiveFormsModule, ShowValidationDirective],
+  imports: [ReactiveFormsModule, ShowValidationDirective, SnippetsComponent],
   templateUrl: "./form-group-example.component.html",
-  styleUrl: "../../app.component.scss",
+  styleUrls: ["./form-group-example.component.scss", "../../app.component.scss"],
 })
 export class FormGroupExampleComponent implements OnInit {
+  tsSnippet = formGroupTSSnippet;
+  htmlSnippet = formGroupHTMLSnippet;
   formValidationForm!: FormGroup;
 
   constructor(private readonly fb: FormBuilder) {}
@@ -25,17 +29,9 @@ export class FormGroupExampleComponent implements OnInit {
       },
       {
         validators: [
-          requiredIf("if", "compare", "Compere input has a value"),
-          requiredIfNot(
-            "ifNot",
-            "compare",
-            `Compere input doesn't have a value`
-          ),
-          requiredEther(
-            "ether",
-            "compare",
-            "Nether the compere input nor this one have a value."
-          ),
+          requiredIf("if", "compare"),
+          requiredIfNot("ifNot", "compare"),
+          requiredEther("ether", "compare"),
         ],
       }
     );

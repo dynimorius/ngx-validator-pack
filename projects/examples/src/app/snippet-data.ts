@@ -524,3 +524,48 @@ export const regexpNotHTMLSnippet = `
     <input type="text" name="regexpNot" id="regexpNot" formControlName="regexpNot" showValidation>
 </form>
 `;
+
+export const formGroupTSSnippet = `
+exampleForm!: FormGroup;
+
+constructor(private fb: FormBuilder) {}
+
+ngOnInit(): void {
+    this.exampleForm.fb.group{
+        compare: [null],
+        if: [null],
+        ifNot: [null],
+        ether: [null]
+    }, {
+        validators: [
+            requiredIf('if', 'compare'),
+            requiredIfNot('ifNot', 'compare'),
+            requiredEther('ether', 'compare')
+      ]
+    })
+}
+`;
+
+export const formGroupHTMLSnippet = `
+<form [formGroup]="exampleForm">
+    <div class="input-wrapper">
+        <label for="compare">This is a control input: </label>
+        <input type="text" name="compare" id="compare" formControlName="compare">
+    </div>
+    <div class="input-wrapper">
+        <h3>requiredIf Example:</h3>
+        <label for="if">This input is valid only if the control input is not empty: </label>
+        <input type="text" name="if" id="if" formControlName="if" showValidation>
+    </div>
+    <div class="input-wrapper">
+        <h3>requiredIfNot Example:</h3>
+        <label for="ifNot">This input is valid only if the control input is empty: </label>
+        <input type="text" name="ifNot" id="ifNot" formControlName="ifNot" showValidation>
+    </div>
+    <div class="input-wrapper">
+        <h3>requiredEther Example:</h3>
+        <label for="ether">This input is valid only if ether it self or control input has a value: </label>
+        <input type="text" name="ether" id="ether" formControlName="ether" showValidation>
+    </div>
+</form>
+`;
