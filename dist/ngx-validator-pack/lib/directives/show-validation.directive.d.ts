@@ -10,6 +10,21 @@ import { NgControl, ValidationErrors } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { ShowValidationStyle } from '../interfaces/show-validation-styles';
 import * as i0 from "@angular/core";
+/**
+ * @description
+ * A directive which will show a validation error message to the
+ * user.
+ * @implements
+ * <input
+ *  type="text"
+ *  formControlName="demoControlName"
+ *  showValidation
+ *  [errorStyle]="{                  - Optional style input
+ *    font_size: 'medium',              used for customizing the look
+ *    color: '#ad03fc',
+ *  }"
+ * />
+ */
 export declare class ShowValidationDirective implements OnInit, OnDestroy {
     private readonly elementRef;
     private readonly renderer;

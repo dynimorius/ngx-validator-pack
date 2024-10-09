@@ -14,7 +14,7 @@ export const prepareToCompare = (
 ): number => {
     if(date) {
         const p_Date = new Date(date);
-        const year = p_Date.getFullYear() + (bufferYears || 0);
+        const year = p_Date.getFullYear() + (bufferYears ?? 0);
         const month = p_Date.getMonth() + 1;
         const day = p_Date.getDate();
         return Number.parseInt(

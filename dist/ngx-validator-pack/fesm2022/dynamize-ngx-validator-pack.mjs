@@ -441,9 +441,24 @@ const zipCodeValidator = (errorName, error) => regexpValidator(zipCode, (errorNa
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @description
+ * Sets an error on a given control
+ *
+ * @param {AbstractControl}           - FromControl / AbstractControl to set the error to
+ * @param {{ [key: string]: unknown }}- error content
+ */
 const setErrors = (control, error) => {
     control.setErrors({ ...control.errors, ...error });
 };
+/**
+ * @description
+ * Removes errors on a given control
+ *
+ * @param {AbstractControl}           - FromControl / AbstractControl from which
+ *                                      to remove error
+ * @param {string[]}                  - list of error names
+ */
 const removeErrors = (control, keys) => {
     const remainingErrors = keys.reduce((errors, key) => {
         delete errors[key];
@@ -515,6 +530,11 @@ const requiredEther = (requiredControlName, controlToCheckName) => {
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
+ */
+/**
+ * @description
+ * Default styles for the showValidation Directive
+ * {@link ShowValidationDirective}
  */
 const DefaultStyle = {
     font_size: "small",

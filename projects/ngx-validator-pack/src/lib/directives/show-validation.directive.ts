@@ -19,6 +19,21 @@ import { Subscription } from "rxjs";
 import { ShowValidationStyle } from '../interfaces/show-validation-styles';
 import { DefaultStyle } from "../constant/default-show-validation-style";
 
+/**
+ * @description
+ * A directive which will show a validation error message to the
+ * user.
+ * @implements
+ * <input
+ *  type="text"
+ *  formControlName="demoControlName"
+ *  showValidation
+ *  [errorStyle]="{                  - Optional style input
+ *    font_size: 'medium',              used for customizing the look
+ *    color: '#ad03fc',
+ *  }"
+ * />
+ */
 @Directive({
   selector: "[showValidation]",
   standalone: true,
