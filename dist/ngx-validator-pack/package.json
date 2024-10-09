@@ -1,6 +1,6 @@
 {
   "name": "@dynamize/ngx-validator-pack",
-  "version": "0.0.0-watch+1728477256416",
+  "version": "1.0.0",
   "description": "An extension pack of Angular form validators.",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
@@ -35,7 +35,6 @@
     "Reactive forms",
     "Reactive",
     "PrimeNG",
-    "Angular Materials",
     "RegExp",
     "Regex",
     "email",

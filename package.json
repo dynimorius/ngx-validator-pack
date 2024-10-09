@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve examples",
-    "build": "ng build",
+    "build": "ng build ngx-validator-pack",
     "watch": "ng build ngx-validator-pack --watch",
     "test": "ng test"
   },
