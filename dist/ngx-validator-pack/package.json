@@ -1,6 +1,6 @@
 {
   "name": "@dynamize/ngx-validator-pack",
-  "version": "1.0.1",
+  "version": "0.0.0-watch+1728506496476",
   "description": "An extension pack of Angular form validators.",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
@@ -45,7 +45,7 @@
   "bugs": {
     "url": "https://github.com/dynimorius/ngx-validator-pack/issues"
   },
-  "homepage": "https://github.com/dynimorius/ngx-validator-pack/blob/main/projects/ngx-validator-pack/README.md",
+  "homepage": "https://github.com/dynimorius/ngx-validator-pack/projects/ngx-validator-pack#readme",
   "license": "ISC",
   "module": "fesm2022/dynamize-ngx-validator-pack.mjs",
   "typings": "index.d.ts",

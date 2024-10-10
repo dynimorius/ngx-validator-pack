@@ -23,7 +23,7 @@ import { DefaultStyle } from "../constant/default-show-validation-style";
  * @description
  * A directive which will show a validation error message to the
  * user.
- * @implements
+ * @implementation
  * <input
  *  type="text"
  *  formControlName="demoControlName"

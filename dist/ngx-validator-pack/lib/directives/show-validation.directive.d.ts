@@ -14,7 +14,7 @@ import * as i0 from "@angular/core";
  * @description
  * A directive which will show a validation error message to the
  * user.
- * @implements
+ * @implementation
  * <input
  *  type="text"
  *  formControlName="demoControlName"
