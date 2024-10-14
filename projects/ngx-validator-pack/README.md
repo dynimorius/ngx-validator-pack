@@ -36,9 +36,9 @@
     - [Zip Code](#zip-code)
   - [Cross Field Validators](#cross-field-validators)
   - [Custom Messaging](#custom-messaging)
-    - [Custom Messages for Ngx Validators](#ngx-custom-messages)
-    - [Custom Messages for Ngx Prebuilt Validators](#ngx-custom-prebuilt-messages)
-    - [Custom Messages for Ngx Form Group Validator](#ngx-custom-fb-messages)
+    - [Custom Messages for Reactive Forms Validators](#ngx-custom-messages)
+    - [Custom Messages for Prebuilt Validators](#ngx-custom-prebuilt-messages)
+    - [Custom Messages for Cross Field Validator](#ngx-custom-fb-messages)
   - [Showing validation](#showing-validation)
     - [Styling](#styling)
     - [PrimeNG Implementation](#primeng)
@@ -885,12 +885,12 @@ One of the main reason for creating this library if not the main reason is the a
 have a custom error message for each individual implementation of the validators. Let's
 explore this further in this section.
 
-### Custom Messages for Ngx Validators
+### Custom Messages for Reactive Forms Validators
 
 <a name="additional-params"></a>
 <a name="ngx-custom-messages"></a>
 
-All ngx validators take addition optional parameters.
+All reactive forms validators take addition optional parameters.
 
 <mark>First</mark> one being the name of the error we would like to use.
 
@@ -940,12 +940,12 @@ export class AppComponent implements OnInit {
 }
 ```
 
-### Custom Messages for Ngx Prebuilt Validators
+### Custom Messages for Prebuilt Validators
 
 <a name="additional-params-prebuilt"></a>
 <a name="ngx-custom-prebuilt-messages"></a>
 
-Custom error messages are also available for ngx prebuilt validators. The implementation
+Custom error messages are also available for prebuilt validators. The implementation
 is slightly different as they don't have any required parameters, they in fact only two
 optional ones.
 
@@ -983,11 +983,11 @@ export class AppComponent implements OnInit{
 }
 ```
 
-### Custom Messages for Ngx Form Group Validator
+### Custom Messages for Cross Field Validator
 
 <a name="ngx-custom-fb-messages"></a>
 
-Ngx From Group Validator also have an option for custom messaging. But the implementation is
+Cross Field Validator also have an option for custom messaging. But the implementation is
 slightly different again.
 
 The only take one optional parameter which is a custom error message.

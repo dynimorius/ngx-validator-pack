@@ -1,11 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
 } from "@angular/forms";
 import {
   addressValidator,
@@ -100,7 +97,6 @@ import {
   zipCodeHTMLSnippet,
   zipCodeTSSnippet,
 } from "../../snippet-data";
-import { address } from "../../../../../ngx-validator-pack/src/lib/constant/regex";
 
 @Component({
   selector: "app-main",
@@ -175,13 +171,7 @@ export class MainComponent implements OnInit {
 
   constructor(private readonly fb: FormBuilder) {}
 
-  sequentialValidator =
-    (config: { [key: string]: RegExp }): ValidatorFn =>
-    (control: AbstractControl): ValidationErrors | null => {
-      const checks = Object.entries(config);
-      let error: string | undefined = checks.find((check): boolean =>check[1].test(control.value))?.[0];
-      return error ? { ["sequentialValidator"]: error } : null;
-    };
+
 
   ngOnInit(): void {
     this.mainForm = this.fb.group({
@@ -214,13 +204,6 @@ export class MainComponent implements OnInit {
       linkedTo: [null, [linkedToValidator("linkTo")]],
       regexp: [null, regexpValidator(/(s|regexp)/)],
       regexpNot: [null, regexpNotValidator(/(s|regexp)/)],
-      sequential: [
-        null,
-        this.sequentialValidator({
-          "Your missing a street Number": /^(\d{1,})$/,
-          "Your missing a street Name": /^(\d{1,}) [a-zA-Z0-9\s]+(\,)?$/,
-        }),
-      ],
     });
 
     this.mainForm.valueChanges.subscribe(() => {
