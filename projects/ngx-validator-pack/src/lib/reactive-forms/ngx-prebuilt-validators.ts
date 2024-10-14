@@ -7,15 +7,14 @@
  */
 
 import { ValidationErrors } from "@angular/forms";
-import { regexpValidator, regexpNotValidator } from "./ngx-validators";
 import {
+  IPAddressV4,
+  IPAddressV4AndV6,
+  IPAddressV6,
   address,
   dateDD_MM_YYYY,
   dateYYYY_MM_DD,
   email,
-  IPAddressV4,
-  IPAddressV4AndV6,
-  IPAddressV6,
   lettersOnly,
   noSpecial,
   numbersOnly,
@@ -30,16 +29,17 @@ import {
   timeHH_MM_SS_24,
   url,
   zipCode,
-} from "./constant/regex";
+} from "../constant/regex";
+import { regexpNotValidator, regexpValidator } from "./ngx-validators";
 
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper address format
  * (Street number Street Name, City, State ZIP code)
  * Example: 3344 W Alameda Avenue, Lakewood, CO 80222
- * 
+ *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const addressValidator = (
@@ -53,7 +53,7 @@ export const addressValidator = (
  * alphabetic characters.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const alphabetOnlyValidator = (
@@ -67,7 +67,7 @@ export const alphabetOnlyValidator = (
  * following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param { string}                   - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const dateDD_MM_YYYYValidator = (
@@ -81,7 +81,7 @@ export const dateDD_MM_YYYYValidator = (
  * YYYY-MM-dd.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const dateYYYY_MM_DDValidator = (
@@ -95,7 +95,7 @@ export const dateYYYY_MM_DDValidator = (
  * local-part@domain.com.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const emailValidator = (
@@ -109,7 +109,7 @@ export const emailValidator = (
  * following formats: x.x.x.x or y:y:y:y:y:y:y:y.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const ipAddressValidator = (
@@ -124,7 +124,7 @@ export const ipAddressValidator = (
  * x.x.x.x.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const iPv4Validator = (
@@ -138,7 +138,7 @@ export const iPv4Validator = (
  * y:y:y:y:y:y:y:y.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const iPv6Validator = (
@@ -152,7 +152,7 @@ export const iPv6Validator = (
  * numeric characters.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const numericsOnlyValidator = (
@@ -165,7 +165,7 @@ export const numericsOnlyValidator = (
  * Checks if a value in the given FromControl / AbstractControl has any special characters.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const noSpecialsValidator = (
@@ -178,7 +178,7 @@ export const noSpecialsValidator = (
  * Checks if a value in the given FromControl / AbstractControl is in a proper passport format
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const passportValidator = (
@@ -193,7 +193,7 @@ export const passportValidator = (
  * length of at least 8 characters).
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const passwordValidator = (
@@ -208,7 +208,7 @@ export const passwordValidator = (
  * (000) 000 0000.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const phoneNumberValidator = (
@@ -222,7 +222,7 @@ export const phoneNumberValidator = (
  * character.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const singleSpaceValidator = (
@@ -236,7 +236,7 @@ export const singleSpaceValidator = (
  * space character.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const spaceRestrictionValidator = (
@@ -251,7 +251,7 @@ export const spaceRestrictionValidator = (
  * following formats: AAA-GGG-SSSS or AAAGGGSSSS.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const ssnValidator = (
@@ -265,7 +265,7 @@ export const ssnValidator = (
  * Time Format HH:MM 12-hour with optional leading 0.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const timeHH_MM_12Validator = (
@@ -279,7 +279,7 @@ export const timeHH_MM_12Validator = (
  * Time Format HH:MM 24-hour with optional leading 0.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const timeHH_MM_24Validator = (
@@ -293,7 +293,7 @@ export const timeHH_MM_24Validator = (
  * Time Format HH:MM:SS 24-hour.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const timeHH_MM_SS_24Validator = (
@@ -308,7 +308,7 @@ export const timeHH_MM_SS_24Validator = (
  * correct url format.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const urlValidator = (
@@ -322,7 +322,7 @@ export const urlValidator = (
  * following formats: 00000 or 00000-0000.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const zipCodeValidator = (

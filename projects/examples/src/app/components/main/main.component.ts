@@ -1,5 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+} from "@angular/forms";
 import {
   addressValidator,
   alphabetOnlyValidator,
@@ -33,7 +40,67 @@ import {
 } from "ngx-validator-pack";
 import { ShowValidationDirective } from "../../../../../ngx-validator-pack/src/public-api";
 import { SnippetsComponent } from "../snippets/snippets.component";
-import { addressHTMLSnippet, addressTSSnippet, alphabetHTMLSnippet, alphabetTSSnippet, compareDateHTMLSnippet, compareDateTSSnippet, dateDDMMYYYYHTMLSnippet, dateDDMMYYYYTSSnippet, dateYYYYMMDDHTMLSnippet, dateYYYYMMDDTSSnippet, earlierDateHTMLSnippet, earlierDateTSSnippet, emailHTMLSnippet, emailTSSnippet, ipAddressHTMLSnippet, ipAddressTSSnippet, ipv4HTMLSnippet, ipv4TSSnippet, ipv6HTMLSnippet, ipv6TSSnippet, laterDateHTMLSnippet, laterDateTSSnippet, linkedToHTMLSnippet, linkedToTSSnippet, linkToHTMLSnippet, linkToTSSnippet, noSpecialHTMLSnippet, noSpecialTSSnippet, numericHTMLSnippet, numericTSSnippet, passportHTMLSnippet, passportTSSnippet, passwordHTMLSnippet, passwordTSSnippet, phoneHTMLSnippet, phoneTSSnippet, regexpNotHTMLSnippet, regexpNotTSSnippet, regexpToHTMLSnippet, regexpTSSnippet, requiredWhenHTMLSnippet, requiredWhenTSSnippet, spaceHTMLSnippet, spaceResHTMLSnippet, spaceResTSSnippet, spaceTSSnippet, ssnHTMLSnippet, ssnTSSnippet, timeHHMM12HTMLSnippet, timeHHMM12TSSnippet, timeHHMM24HTMLSnippet, timeHHMM24TSSnippet, timeHHMMSS24HTMLSnippet, timeHHMMSS24TSSnippet, urlHTMLSnippet, urlTSSnippet, zipCodeHTMLSnippet, zipCodeTSSnippet } from '../../snippet-data';
+import {
+  addressHTMLSnippet,
+  addressTSSnippet,
+  alphabetHTMLSnippet,
+  alphabetTSSnippet,
+  compareDateHTMLSnippet,
+  compareDateTSSnippet,
+  dateDDMMYYYYHTMLSnippet,
+  dateDDMMYYYYTSSnippet,
+  dateYYYYMMDDHTMLSnippet,
+  dateYYYYMMDDTSSnippet,
+  earlierDateHTMLSnippet,
+  earlierDateTSSnippet,
+  emailHTMLSnippet,
+  emailTSSnippet,
+  ipAddressHTMLSnippet,
+  ipAddressTSSnippet,
+  ipv4HTMLSnippet,
+  ipv4TSSnippet,
+  ipv6HTMLSnippet,
+  ipv6TSSnippet,
+  laterDateHTMLSnippet,
+  laterDateTSSnippet,
+  linkedToHTMLSnippet,
+  linkedToTSSnippet,
+  linkToHTMLSnippet,
+  linkToTSSnippet,
+  noSpecialHTMLSnippet,
+  noSpecialTSSnippet,
+  numericHTMLSnippet,
+  numericTSSnippet,
+  passportHTMLSnippet,
+  passportTSSnippet,
+  passwordHTMLSnippet,
+  passwordTSSnippet,
+  phoneHTMLSnippet,
+  phoneTSSnippet,
+  regexpNotHTMLSnippet,
+  regexpNotTSSnippet,
+  regexpToHTMLSnippet,
+  regexpTSSnippet,
+  requiredWhenHTMLSnippet,
+  requiredWhenTSSnippet,
+  spaceHTMLSnippet,
+  spaceResHTMLSnippet,
+  spaceResTSSnippet,
+  spaceTSSnippet,
+  ssnHTMLSnippet,
+  ssnTSSnippet,
+  timeHHMM12HTMLSnippet,
+  timeHHMM12TSSnippet,
+  timeHHMM24HTMLSnippet,
+  timeHHMM24TSSnippet,
+  timeHHMMSS24HTMLSnippet,
+  timeHHMMSS24TSSnippet,
+  urlHTMLSnippet,
+  urlTSSnippet,
+  zipCodeHTMLSnippet,
+  zipCodeTSSnippet,
+} from "../../snippet-data";
+import { address } from "../../../../../ngx-validator-pack/src/lib/constant/regex";
 
 @Component({
   selector: "app-main",
@@ -53,15 +120,15 @@ export class MainComponent implements OnInit {
   alphabetHTMLSnippet: string = alphabetHTMLSnippet;
   dateDDMMYYYYTSSnippet: string = dateDDMMYYYYTSSnippet;
   dateDDMMYYYYHTMLSnippet: string = dateDDMMYYYYHTMLSnippet;
-  dateYYYYMMDDTSSnippet: string = dateYYYYMMDDTSSnippet; 
+  dateYYYYMMDDTSSnippet: string = dateYYYYMMDDTSSnippet;
   dateYYYYMMDDHTMLSnippet: string = dateYYYYMMDDHTMLSnippet;
   emailTSSnippet: string = emailTSSnippet;
   emailHTMLSnippet: string = emailHTMLSnippet;
   ipAddressTSSnippet: string = ipAddressTSSnippet;
   ipAddressHTMLSnippet: string = ipAddressHTMLSnippet;
   ipv4TSSnippet: string = ipv4TSSnippet;
-  ipv4HTMLSnippet: string = ipv4HTMLSnippet; 
-  ipv6TSSnippet: string = ipv6TSSnippet; 
+  ipv4HTMLSnippet: string = ipv4HTMLSnippet;
+  ipv6TSSnippet: string = ipv6TSSnippet;
   ipv6HTMLSnippet: string = ipv6HTMLSnippet;
   numericTSSnippet: string = numericTSSnippet;
   numericHTMLSnippet: string = numericHTMLSnippet;
@@ -69,7 +136,7 @@ export class MainComponent implements OnInit {
   noSpecialHTMLSnippet: string = noSpecialHTMLSnippet;
   passportTSSnippet: string = passportTSSnippet;
   passportHTMLSnippet: string = passportHTMLSnippet;
-  passwordTSSnippet: string = passwordTSSnippet; 
+  passwordTSSnippet: string = passwordTSSnippet;
   passwordHTMLSnippet: string = passwordHTMLSnippet;
   phoneTSSnippet: string = phoneTSSnippet;
   phoneHTMLSnippet: string = phoneHTMLSnippet;
@@ -77,8 +144,8 @@ export class MainComponent implements OnInit {
   spaceHTMLSnippet: string = spaceHTMLSnippet;
   spaceResTSSnippet: string = spaceResTSSnippet;
   spaceResHTMLSnippet: string = spaceResHTMLSnippet;
-  ssnTSSnippet: string = ssnTSSnippet; 
-  ssnHTMLSnippet: string = ssnHTMLSnippet; 
+  ssnTSSnippet: string = ssnTSSnippet;
+  ssnHTMLSnippet: string = ssnHTMLSnippet;
   timeHHMM12TSSnippet: string = timeHHMM12TSSnippet;
   timeHHMM12HTMLSnippet: string = timeHHMM12HTMLSnippet;
   timeHHMM24TSSnippet: string = timeHHMM24TSSnippet;
@@ -94,19 +161,27 @@ export class MainComponent implements OnInit {
   laterDateTSSnippet: string = laterDateTSSnippet;
   laterDateHTMLSnippet: string = laterDateHTMLSnippet;
   compareDateTSSnippet: string = compareDateTSSnippet;
-  compareDateHTMLSnippet: string = compareDateHTMLSnippet; 
-  requiredWhenTSSnippet: string = requiredWhenTSSnippet; 
+  compareDateHTMLSnippet: string = compareDateHTMLSnippet;
+  requiredWhenTSSnippet: string = requiredWhenTSSnippet;
   requiredWhenHTMLSnippet: string = requiredWhenHTMLSnippet;
   linkToTSSnippet: string = linkToTSSnippet;
   linkToHTMLSnippet: string = linkToHTMLSnippet;
   linkedToTSSnippet: string = linkedToTSSnippet;
   linkedToHTMLSnippet: string = linkedToHTMLSnippet;
   regexpTSSnippet: string = regexpTSSnippet;
-  regexpToHTMLSnippet: string = regexpToHTMLSnippet; 
+  regexpToHTMLSnippet: string = regexpToHTMLSnippet;
   regexpNotTSSnippet: string = regexpNotTSSnippet;
   regexpNotHTMLSnippet: string = regexpNotHTMLSnippet;
-  
+
   constructor(private readonly fb: FormBuilder) {}
+
+  sequentialValidator =
+    (config: { [key: string]: RegExp }): ValidatorFn =>
+    (control: AbstractControl): ValidationErrors | null => {
+      const checks = Object.entries(config);
+      let error: string | undefined = checks.find((check): boolean =>check[1].test(control.value))?.[0];
+      return error ? { ["sequentialValidator"]: error } : null;
+    };
 
   ngOnInit(): void {
     this.mainForm = this.fb.group({
@@ -139,6 +214,13 @@ export class MainComponent implements OnInit {
       linkedTo: [null, [linkedToValidator("linkTo")]],
       regexp: [null, regexpValidator(/(s|regexp)/)],
       regexpNot: [null, regexpNotValidator(/(s|regexp)/)],
+      sequential: [
+        null,
+        this.sequentialValidator({
+          "Your missing a street Number": /^(\d{1,})$/,
+          "Your missing a street Name": /^(\d{1,}) [a-zA-Z0-9\s]+(\,)?$/,
+        }),
+      ],
     });
 
     this.mainForm.valueChanges.subscribe(() => {

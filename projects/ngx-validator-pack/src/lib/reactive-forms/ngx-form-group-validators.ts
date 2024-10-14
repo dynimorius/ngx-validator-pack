@@ -7,7 +7,7 @@
  */
 
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import { removeErrors, setErrors } from "./helpers/errors";
+import { removeErrors, setErrors } from "../helpers/errors";
 
 /**
  * @description
@@ -17,7 +17,7 @@ import { removeErrors, setErrors } from "./helpers/errors";
  *
  * @param {string}                    - control name to receive the required error
  * @param {string}                    - control name who's value needs to be checked
- * @param {string}                    - error message - optional parameter 
+ * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredIf = (
@@ -34,7 +34,7 @@ export const requiredIf = (
     } else {
       const errorVal =
         error ??
-        `Required ${requiredControlName} when having ${controlToCheckName}.`;
+        `Required is ${requiredControlName} when having ${controlToCheckName}.`;
       setErrors(required, { required: errorVal });
       return { [errorVal]: true };
     }
@@ -49,7 +49,7 @@ export const requiredIf = (
  *
  * @param {string}                    - control name to receive the required error
  * @param {string}                    - control name who's value needs to be checked
- * @param {string}                    - error message - optional parameter 
+ * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredIfNot = (
@@ -66,7 +66,7 @@ export const requiredIfNot = (
     } else {
       const errorVal =
         error ??
-        `Required ${requiredControlName} when not having ${controlToCheckName}.`;
+        `Required is ${requiredControlName} when not having ${controlToCheckName}.`;
       setErrors(required, { required: errorVal });
       return { [errorVal]: true };
     }
@@ -80,7 +80,7 @@ export const requiredIfNot = (
  *
  * @param {string}                    - name of the first control
  * @param {string}                    - name of the second control
- * @param {string}                    - error message - optional parameter 
+ * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredEther = (
