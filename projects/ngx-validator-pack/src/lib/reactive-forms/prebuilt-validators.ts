@@ -30,7 +30,10 @@ import {
   url,
   zipCode,
 } from "../constant/regex";
-import { regexpNotValidator, regexpValidator } from "./ngx-validators";
+import {
+  regexpNotValidator,
+  regexpValidator,
+} from "./reactive-forms-validators";
 
 /**
  * @description

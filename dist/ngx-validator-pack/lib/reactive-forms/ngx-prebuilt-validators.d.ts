@@ -13,7 +13,7 @@ import { ValidationErrors } from "@angular/forms";
  * Example: 3344 W Alameda Avenue, Lakewood, CO 80222
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const addressValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -23,7 +23,7 @@ export declare const addressValidator: (errorName?: string, error?: string) => V
  * alphabetic characters.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const alphabetOnlyValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -33,7 +33,7 @@ export declare const alphabetOnlyValidator: (errorName?: string, error?: string)
  * following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param { string}                   - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const dateDD_MM_YYYYValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -43,7 +43,7 @@ export declare const dateDD_MM_YYYYValidator: (errorName?: string, error?: strin
  * YYYY-MM-dd.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const dateYYYY_MM_DDValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -53,7 +53,7 @@ export declare const dateYYYY_MM_DDValidator: (errorName?: string, error?: strin
  * local-part@domain.com.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const emailValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -63,7 +63,7 @@ export declare const emailValidator: (errorName?: string, error?: string) => Val
  * following formats: x.x.x.x or y:y:y:y:y:y:y:y.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const ipAddressValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -73,7 +73,7 @@ export declare const ipAddressValidator: (errorName?: string, error?: string) =>
  * x.x.x.x.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const iPv4Validator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -83,7 +83,7 @@ export declare const iPv4Validator: (errorName?: string, error?: string) => Vali
  * y:y:y:y:y:y:y:y.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const iPv6Validator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -93,7 +93,7 @@ export declare const iPv6Validator: (errorName?: string, error?: string) => Vali
  * numeric characters.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const numericsOnlyValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -102,7 +102,7 @@ export declare const numericsOnlyValidator: (errorName?: string, error?: string)
  * Checks if a value in the given FromControl / AbstractControl has any special characters.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const noSpecialsValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -111,7 +111,7 @@ export declare const noSpecialsValidator: (errorName?: string, error?: string) =
  * Checks if a value in the given FromControl / AbstractControl is in a proper passport format
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const passportValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -122,7 +122,7 @@ export declare const passportValidator: (errorName?: string, error?: string) => 
  * length of at least 8 characters).
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const passwordValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -132,7 +132,7 @@ export declare const passwordValidator: (errorName?: string, error?: string) => 
  * (000) 000 0000.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const phoneNumberValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -142,7 +142,7 @@ export declare const phoneNumberValidator: (errorName?: string, error?: string) 
  * character.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const singleSpaceValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -152,7 +152,7 @@ export declare const singleSpaceValidator: (errorName?: string, error?: string) 
  * space character.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const spaceRestrictionValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -162,7 +162,7 @@ export declare const spaceRestrictionValidator: (errorName?: string, error?: str
  * following formats: AAA-GGG-SSSS or AAAGGGSSSS.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const ssnValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -172,7 +172,7 @@ export declare const ssnValidator: (errorName?: string, error?: string) => Valid
  * Time Format HH:MM 12-hour with optional leading 0.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const timeHH_MM_12Validator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -182,7 +182,7 @@ export declare const timeHH_MM_12Validator: (errorName?: string, error?: string)
  * Time Format HH:MM 24-hour with optional leading 0.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const timeHH_MM_24Validator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -192,7 +192,7 @@ export declare const timeHH_MM_24Validator: (errorName?: string, error?: string)
  * Time Format HH:MM:SS 24-hour.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const timeHH_MM_SS_24Validator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -202,7 +202,7 @@ export declare const timeHH_MM_SS_24Validator: (errorName?: string, error?: stri
  * correct url format.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const urlValidator: (errorName?: string, error?: string) => ValidationErrors | null;
@@ -212,7 +212,7 @@ export declare const urlValidator: (errorName?: string, error?: string) => Valid
  * following formats: 00000 or 00000-0000.
  *
  * @param {string}                    - optional parameter representing error name
- * @param {ValidationErrors | string} - optional parameter representing error value
+ * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const zipCodeValidator: (errorName?: string, error?: string) => ValidationErrors | null;

@@ -14,11 +14,11 @@
 
 - [Ngx Validator Pack](#ngx-validator-pack) - [_A pack of validators for Angular Form Group and Form Controls_](#a-pack-of-validators-for-angular-form-group-and-form-controls)
   - [Installation](#install)
-  - [Ngx Validators](#ngx-validators)
+  - [Reactive Forms Validators](#reactive-forms-validators)
     - [RegExp Validators](#regexp-validators)
     - [Date Validators](#date-validators)
     - [Conditional Validators](#conditional-validators)
-  - [Ngx Prebuilt Validators](#ngx-prebuilt-validators)
+  - [Prebuilt Validators](#prebuilt-validators)
     - [Address](#address)
     - [Alphabet](#alphabet)
     - [Date](#date)
@@ -34,7 +34,7 @@
     - [Time](#time)
     - [URL](#url)
     - [Zip Code](#zip-code)
-  - [Ngx Form Group Validators](#ngx-form-group-validators)
+  - [Cross Field Validators](#cross-field-validators)
   - [Custom Messaging](#custom-messaging)
     - [Custom Messages for Ngx Validators](#ngx-custom-messages)
     - [Custom Messages for Ngx Prebuilt Validators](#ngx-custom-prebuilt-messages)
@@ -49,9 +49,9 @@
 npm install --save @dynamize/ngx-validator-pack
 ```
 
-## Ngx Validators
+## Reactive Forms Validators
 
-<a name="ngx-validators"></a>
+<a name="reactive-forms-validators"></a>
 
 ### RegExp Validators
 
@@ -282,9 +282,9 @@ Additionally we can supply two other optional parameters, first being the name o
 the second a string which will represent the error content / message.
 Please check the example here: [additional parameters example](#additional-params).
 
-## Ngx Prebuilt Validators
+## Prebuilt Validators
 
-<a name="ngx-prebuilt-validators"></a>
+<a name="prebuilt-validators"></a>
 
 There is a number of prebuilt validators for most common text input validations.
 
@@ -832,9 +832,9 @@ export class AppComponent implements OnInit{
 }
 ```
 
-## Ngx Form Group Validators
+## Cross Field Validators
 
-<a name="ngx-form-group-validators"></a>
+<a name="cross-field-validators"></a>
 
 The following validators preform validation on a Form Group rather the Form Control.
 They all take two parameters, first one being the name of the control which should be required
