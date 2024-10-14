@@ -117,7 +117,7 @@ export const emailValidator = (
  */
 export const ipAddressValidator = (
   errorName: string = "ipAddress",
-  error: string = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y"
+  error: string = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
 ): ValidationErrors | null =>
   regexpValidator(IPAddressV4AndV6, errorName, error);
 

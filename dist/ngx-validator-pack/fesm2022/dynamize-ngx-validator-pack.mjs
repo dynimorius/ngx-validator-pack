@@ -538,7 +538,7 @@ const emailValidator = (errorName = "email", error = "Please input a value in a 
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const ipAddressValidator = (errorName = "ipAddress", error = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y") => regexpValidator(IPAddressV4AndV6, errorName, error);
+const ipAddressValidator = (errorName = "ipAddress", error = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.") => regexpValidator(IPAddressV4AndV6, errorName, error);
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:

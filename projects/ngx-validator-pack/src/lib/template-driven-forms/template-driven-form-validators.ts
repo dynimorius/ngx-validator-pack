@@ -1,3 +1,9 @@
+import {
+  CompareValidationInput,
+  ConditionalValidationInput,
+  DateValidationInput,
+  LinkValidationInput,
+} from "./../interfaces/directive-input.interface";
 import { Directive, Input } from "@angular/core";
 import {
   AbstractControl,
@@ -5,11 +11,9 @@ import {
   ValidationErrors,
   Validator,
 } from "@angular/forms";
-import {
-  ComparisonOperations,
-  compareDates,
-  prepareToCompare,
-} from "../helpers/date";
+import { compareDates, prepareToCompare } from "../helpers/date";
+import { RegExpValidationInput } from "../interfaces/directive-input.interface";
+import { BaseValidator } from "./base-validator";
 
 @Directive({
   selector: "[regexpValidation]",
@@ -21,18 +25,23 @@ import {
     },
   ],
 })
-export class RegExpValidatorDirective implements Validator {
-  @Input("regexpValidation") regexp!: RegExp;
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class RegExpValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("regexpValidation") override value!: RegExpValidationInput;
+
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error =
-      this.error ?? "This control did not match a given regular expression.";
+    const error =
+      this.value.error ??
+      "This control did not match a given regular expression.";
     const errors: ValidationErrors = {
-      [this.errorName ?? "regexpValidation"]: this.error,
+      [this.value.errorName ?? "regexpValidation"]: error,
     };
 
-    return !this.regexp || !control.value || this.regexp.test(control.value)
+    return !this.value.regExp ||
+      !control.value ||
+      this.value.regExp.test(control.value)
       ? null
       : errors;
   }
@@ -48,19 +57,22 @@ export class RegExpValidatorDirective implements Validator {
     },
   ],
 })
-export class EarlierThenValidatorDirective implements Validator {
-  @Input("earlierThenValidation") date!: Date;
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class EarlierThenValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("earlierThenValidation") override value!: DateValidationInput;
+
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error =
-      this.error ?? `This control must have a value earlier then ${this.date}.`;
+    const error =
+      this.value.error ??
+      `This control must have a value earlier then ${this.value.date}.`;
     const errors: ValidationErrors = {
-      [this.errorName ?? "earlierThenValidation"]: this.error,
+      [this.value.errorName ?? "earlierThenValidation"]: error,
     };
 
-    return !this.date ||
-      prepareToCompare(control?.value) < prepareToCompare(this.date)
+    return !this.value.date ||
+      prepareToCompare(control?.value) < prepareToCompare(this.value.date)
       ? null
       : errors;
   }
@@ -76,19 +88,22 @@ export class EarlierThenValidatorDirective implements Validator {
     },
   ],
 })
-export class LaterThenValidatorDirective implements Validator {
-  @Input("laterThenValidation") date!: Date;
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class LaterThenValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("laterThenValidation") override value!: DateValidationInput;
+
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error =
-      this.error ?? `This control must have a value later then ${this.date}.`;
+    const error =
+      this.value.error ??
+      `This control must have a value later then ${this.value.date}.`;
     const errors: ValidationErrors = {
-      [this.errorName ?? "laterThenValidation"]: this.error,
+      [this.value.errorName ?? "laterThenValidation"]: error,
     };
 
-    return !this.date ||
-      prepareToCompare(control?.value) > prepareToCompare(this.date)
+    return !this.value.date ||
+      prepareToCompare(control?.value) > prepareToCompare(this.value.date)
       ? null
       : errors;
   }
@@ -104,19 +119,21 @@ export class LaterThenValidatorDirective implements Validator {
     },
   ],
 })
-export class CompareToValidatorDirective implements Validator {
-  @Input("compareToValidation") data!: [Date, ComparisonOperations];
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class CompareToValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("compareToValidation") override value!: CompareValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error = this.error ?? `Value comparison with ${this.data[0]} failed.`;
+    const error =
+      this.value.error ?? `Value comparison with ${this.value.date} failed.`;
     const errors: ValidationErrors = {
-      [this.errorName ?? "compareToValidation"]: this.error,
+      [this.value.errorName ?? "compareToValidation"]: error,
     };
 
-    return !this.data ||
+    return !this.value.date ||
       !control.value ||
-      compareDates(control.value, this.data[0], this.data[1])
+      compareDates(control.value, this.value.date, this.value.comparison)
       ? null
       : errors;
   }
@@ -132,20 +149,22 @@ export class CompareToValidatorDirective implements Validator {
     },
   ],
 })
-export class RequiredWhenValidatorDirective implements Validator {
-  @Input("requiredWhenValidation") conditional!: (() => boolean) | boolean;
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class RequiredWhenValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("requiredWhenValidation") override value!: ConditionalValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error = this.error ?? "This control has a conditional set on it.";
+    const error =
+      this.value.error ?? "This control has a conditional set on it.";
     const errors: ValidationErrors = {
-      [this.errorName ?? "requiredWhen"]: this.error,
+      [this.value.errorName ?? "requiredWhen"]: error,
     };
 
     const outcome =
-      typeof this.conditional === "function"
-        ? this.conditional()
-        : this.conditional;
+      typeof this.value.conditional === "function"
+        ? this.value.conditional()
+        : this.value.conditional;
     return !control.value && outcome ? errors : null;
   }
 }
@@ -160,17 +179,19 @@ export class RequiredWhenValidatorDirective implements Validator {
     },
   ],
 })
-export class LinkToValidatorDirective implements Validator {
-  @Input("linkToValidation") linkTo!: string;
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class LinkToValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("linkToValidation") override value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error = this.error ?? "This control has a conditional set on it.";
+    const error =
+      this.value.error ?? `This control has a link to ${this.value.link}.`;
     const errors: ValidationErrors = {
-      [this.errorName ?? "linkToValidation"]: this.error,
+      [this.value.errorName ?? "linkToValidation"]: error,
     };
 
-    const linkedTo = control.parent?.get(this.linkTo);
+    const linkedTo = control.parent?.get(this.value.link);
     return !control?.value && !!linkedTo?.value ? errors : null;
   }
 }
@@ -185,17 +206,19 @@ export class LinkToValidatorDirective implements Validator {
     },
   ],
 })
-export class LinkedToValidatorDirective implements Validator {
-  @Input("linkToValidation") linkedTo!: string;
-  @Input("errorName") errorName!: string;
-  @Input("error") error!: string;
+export class LinkedToValidatorDirective
+  extends BaseValidator
+  implements Validator
+{
+  @Input("linkToValidation") override value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
-    this.error = this.error ?? `This control is linked to ${this.linkedTo}.`;
+    const error =
+      this.value.error ?? `This control is linked to ${this.value.link}.`;
     const errors: ValidationErrors = {
-      [this.errorName ?? "linkedToValidation"]: this.error,
+      [this.value.errorName ?? "linkedToValidation"]: error,
     };
 
-    const link = control.parent?.get(this.linkedTo);
+    const link = control.parent?.get(this.value.link);
     return !!control?.value && !link?.value ? errors : null;
   }
 }

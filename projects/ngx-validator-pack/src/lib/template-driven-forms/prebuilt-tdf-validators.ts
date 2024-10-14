@@ -1,6 +1,14 @@
 import { Directive, Input } from "@angular/core";
-import { AbstractControl, NG_VALIDATORS, ValidationErrors } from "@angular/forms";
+import {
+  AbstractControl,
+  NG_VALIDATORS,
+  ValidationErrors,
+} from "@angular/forms";
 import { RegExpValidatorDirective } from "./template-driven-form-validators";
+import {
+  RegExpValidationInput,
+  regExpInputFactory,
+} from "../interfaces/directive-input.interface";
 
 @Directive({
   selector: "[addressValidation]",
@@ -13,9 +21,15 @@ import { RegExpValidatorDirective } from "./template-driven-form-validators";
   ],
 })
 export class AddressValidatorDirective extends RegExpValidatorDirective {
-  @Input("addressValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("addressValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "address",
+        "Please input a value in a format of: Street number Street Name, City, State ZIP code."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -32,9 +46,15 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
-  @Input("alphabetOnlyValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("alphabetOnlyValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "alphabetOnly",
+        "Only alphabetic characters are allowed."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -51,9 +71,15 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
-  @Input("dateDD_MM_YYYY") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("dateDD_MM_YYYY") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "dateDD_MM_YYYY",
+        "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -70,9 +96,15 @@ export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
-  @Input("dateYYYY_MM_DD") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("dateYYYY_MM_DD") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "dateYYYY_MM_DD",
+        "Please input a value in a format: YYYY-MM-dd."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -89,9 +121,15 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class EmailValidatorDirective extends RegExpValidatorDirective {
-  @Input("emailValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("emailValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "email",
+        "Please input a value in a format: local-part@domain.com."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -108,9 +146,15 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class IPAddressValidatorDirective extends RegExpValidatorDirective {
-  @Input("ipAddressValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("ipAddressValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "ipAddress",
+        "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -127,9 +171,15 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class IPv4ValidatorDirective extends RegExpValidatorDirective {
-  @Input("iPv4Validation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("iPv4Validation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "iPv4",
+        "Please input a value in a format: x.x.x.x."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -146,9 +196,15 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class IPv6ValidatorDirective extends RegExpValidatorDirective {
-  @Input("iPv6Validation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("iPv6Validation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "iPv6",
+        "Please input a value in a format: y:y:y:y:y:y:y:y."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -165,9 +221,15 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
-  @Input("numericsOnlyValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("numericsOnlyValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "numericsOnly",
+        "Only numeric characters are allowed."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -184,9 +246,15 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
-  @Input("noSpecialsValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("noSpecialsValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "noSpecials",
+        "No special characters are allowed."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -203,9 +271,11 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class PassportValidatorDirective extends RegExpValidatorDirective {
-  @Input("passportValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("passportValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(value, "passport", "Incorrect passport format.")
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -222,9 +292,15 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class PasswordValidatorDirective extends RegExpValidatorDirective {
-  @Input("passwordValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("passwordValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "password",
+        "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -241,9 +317,15 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
-  @Input("phoneNumberValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("phoneNumberValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "phoneNumber",
+        "Please input a value in a format: (000) 000 0000."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -260,9 +342,15 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class SingleSpaceValidatorDirective extends RegExpValidatorDirective {
-  @Input("singleSpaceValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("singleSpaceValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "singleSpace",
+        "A single space character is not allowed."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -279,9 +367,15 @@ export class SingleSpaceValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective {
-  @Input("spaceRestrictionValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("spaceRestrictionValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "spaceRestriction",
+        "Value can not start or end with a space character."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -298,9 +392,15 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
   ],
 })
 export class SSNValidatorDirective extends RegExpValidatorDirective {
-  @Input("ssnValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("ssnValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "ssn",
+        "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -317,9 +417,15 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
-  @Input("timeHH_MM_12") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("timeHH_MM_12") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "timeHH_MM_12",
+        "Please input a value in a HH:MM 12-hour format."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -336,9 +442,15 @@ export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
-  @Input("timeHH_MM_24") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("timeHH_MM_24") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "timeHH_MM_24",
+        "Please input a value in a HH:MM 24-hour format."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -355,9 +467,15 @@ export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective {
-  @Input("timeHH_MM_SS_24") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("timeHH_MM_SS_24") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(
+        value,
+        "timeHH_MM_SS_24",
+        "Please input a value in a HH:MM:SS 24-hour format."
+      )
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -374,9 +492,9 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
   ],
 })
 export class UrlValidatorDirective extends RegExpValidatorDirective {
-  @Input("urlValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("urlValidation") set input(value: RegExpValidationInput) {
+    super.setValue(regExpInputFactory(value, "url", "Improper URL format."));
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
@@ -393,9 +511,11 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class ZipCodeValidatorDirective extends RegExpValidatorDirective {
-  @Input("zipCodeValidation") override regexp!: RegExp;
-  @Input("errorName") override errorName!: string;
-  @Input("error") override error!: string;
+  @Input("zipCodeValidation") set input(value: RegExpValidationInput) {
+    super.setValue(
+      regExpInputFactory(value, "zipCode", "Improper zip code format.")
+    );
+  }
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
