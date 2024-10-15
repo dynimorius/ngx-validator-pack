@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+
 import {
   CompareValidationInput,
   ConditionalValidationInput,
@@ -13,8 +21,29 @@ import {
 } from "@angular/forms";
 import { compareDates, prepareToCompare } from "../helpers/date";
 import { RegExpValidationInput } from "../interfaces/directive-input.interface";
-import { BaseValidator } from "./base-validator";
 
+/**
+ * @description
+ * A Directive that preforms a RegEx check on value in the given 
+ * FromControl / AbstractControl
+ * 
+ * Has an input in which you specify the regular expression 
+ * and optionally you can give it a custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [regexpValidation]="{
+ *      regExp: /(s|regexp)/,
+ *      errorName: 'regexpCheck',
+ *      error: 'Failed regexp check.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[regexpValidation]",
   providers: [
@@ -24,12 +53,10 @@ import { BaseValidator } from "./base-validator";
       multi: true,
     },
   ],
+  standalone: true,
 })
-export class RegExpValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("regexpValidation") override value!: RegExpValidationInput;
+export class RegExpValidatorDirective implements Validator {
+  @Input("regexpValidation") value!: RegExpValidationInput;
 
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
@@ -47,6 +74,81 @@ export class RegExpValidatorDirective
   }
 }
 
+/**
+ * @description
+ * A Directive that preforms a RegEx check on value in the given 
+ * FromControl / AbstractControl and returns an error if regex
+ * found a match
+ * 
+ * Has an input in which you specify the regular expression 
+ * and optionally you can give it a custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [regexpNotValidation]="{
+ *      regExp: /(s|regexp)/,
+ *      errorName: 'regexpNotCheck',
+ *      error: 'Failed regexpNot check.'
+ *   }"
+ * />
+ */
+@Directive({
+  selector: "[regexpNotValidation]",
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: RegExpValidatorDirective,
+      multi: true,
+    },
+  ],
+  standalone: true,
+})
+export class RegExpNotValidatorDirective implements Validator {
+  @Input("regexpNotValidation") value!: RegExpValidationInput;
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    const error =
+      this.value.error ?? "This control matched a given regular expression.";
+    const errors: ValidationErrors = {
+      [this.value.errorName ?? "regexpNotValidation"]: error,
+    };
+
+    return !this.value.regExp ||
+      !control.value ||
+      !this.value.regExp.test(control.value)
+      ? null
+      : errors;
+  }
+}
+
+/**
+ * @description
+ * A Directive that preforms a date comparison between a specified date 
+ * and a date in the given input and returns an error if the date in
+ * the given input is later then the specified one.
+ * 
+ * Has an input in which you specify the date to compare to
+ * and optionally you can give it a custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [earlierThenValidation]="{
+ *      date: date,                              -- a variable of type Date
+ *      errorName: 'earlierThen',
+ *      error: 'The date is not earlier then the specified one.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[earlierThenValidation]",
   providers: [
@@ -57,11 +159,8 @@ export class RegExpValidatorDirective
     },
   ],
 })
-export class EarlierThenValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("earlierThenValidation") override value!: DateValidationInput;
+export class EarlierThenValidatorDirective implements Validator {
+  @Input("earlierThenValidation") value!: DateValidationInput;
 
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
@@ -78,6 +177,29 @@ export class EarlierThenValidatorDirective
   }
 }
 
+/**
+ * @description
+ * A Directive that preforms a date comparison between a specified date 
+ * and a date in the given input and returns an error if the date in
+ * the given input is earlier then the specified one.
+ * 
+ * Has an input in which you specify the date to compare to
+ * and optionally you can give it a custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [laterThenValidation]="{
+ *      date: date,                              -- a variable of type Date
+ *      errorName: 'laterThen',
+ *      error: 'The date is not later then the specified one.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[laterThenValidation]",
   providers: [
@@ -88,11 +210,8 @@ export class EarlierThenValidatorDirective
     },
   ],
 })
-export class LaterThenValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("laterThenValidation") override value!: DateValidationInput;
+export class LaterThenValidatorDirective implements Validator {
+  @Input("laterThenValidation") value!: DateValidationInput;
 
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
@@ -109,6 +228,32 @@ export class LaterThenValidatorDirective
   }
 }
 
+/**
+ * @description
+ * A Directive that preforms a date comparison between a specified date 
+ * and a date in the given input and returns an error if chosen comparison
+ * fails.
+ * 
+ * Has an input in which you specify the date to compare to,
+ * comparison to preform and optionally you can give it a custom name 
+ * and a custom error content / message. 
+ * 
+ * Available comparisons are: '<' , '>' , '==' , '===' , '<=' , '>='.
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [compareToValidation]="{
+ *      date: date,                              -- a variable of type Date
+ *      comparison: '==='
+ *      errorName: 'compareTo',
+ *      error: 'The dates are not the same.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[compareToValidation]",
   providers: [
@@ -119,11 +264,8 @@ export class LaterThenValidatorDirective
     },
   ],
 })
-export class CompareToValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("compareToValidation") override value!: CompareValidationInput;
+export class CompareToValidatorDirective implements Validator {
+  @Input("compareToValidation") value!: CompareValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `Value comparison with ${this.value.date} failed.`;
@@ -139,6 +281,31 @@ export class CompareToValidatorDirective
   }
 }
 
+/**
+ * @description
+ * A Directive that preforms a conditional check and if the condition
+ * passes it will return an error.
+ * 
+ * Has an input in which you specify the condition that is to be checked
+ * and optionally you can give it a custom name and a custom error 
+ * content / message. 
+ *  
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [requiredWhenValidation]="{
+ *      conditional: isTrue,                     - this can be ether a boolean
+ *      errorName: 'requiredWhen',                     or a function that returns a boolean
+ *      error: 'The condition is true.'
+ *   }"
+ * />
+ * 
+ * NOTE: It is not recommended to pass a function to be executed in the template,
+ * as this function will be executed every change detection cycle.
+ */
 @Directive({
   selector: "[requiredWhenValidation]",
   providers: [
@@ -149,11 +316,8 @@ export class CompareToValidatorDirective
     },
   ],
 })
-export class RequiredWhenValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("requiredWhenValidation") override value!: ConditionalValidationInput;
+export class RequiredWhenValidatorDirective implements Validator {
+  @Input("requiredWhenValidation") value!: ConditionalValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? "This control has a conditional set on it.";
@@ -169,6 +333,28 @@ export class RequiredWhenValidatorDirective
   }
 }
 
+/**
+ * @description
+ * A Directive that preforms a check if the specified FromControl / AbstractControl
+ * has a value and a given input does not.
+ * 
+ * Has an input in which you the name of the FromControl / AbstractControl to link
+ * to and optionally you can give it a custom name and a custom error 
+ * content / message. 
+ *  
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [linkToValidation]="{
+ *      link: 'linkedTo,                      - a name of a form control we want  
+ *      errorName: 'linkTo',                     to link the input to
+ *      error: 'The linked input has a value but this one does not'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[linkToValidation]",
   providers: [
@@ -179,11 +365,8 @@ export class RequiredWhenValidatorDirective
     },
   ],
 })
-export class LinkToValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("linkToValidation") override value!: LinkValidationInput;
+export class LinkToValidatorDirective implements Validator {
+  @Input("linkToValidation") value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `This control has a link to ${this.value.link}.`;
@@ -196,6 +379,28 @@ export class LinkToValidatorDirective
   }
 }
 
+/**
+ * @description
+ * A Directive that preforms a check if the specified FromControl / AbstractControl
+ * does not have a value and a given input does.
+ * 
+ * Has an input in which you the name of the FromControl / AbstractControl to link
+ * to and optionally you can give it a custom name and a custom error 
+ * content / message. 
+ *  
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [linkedToValidation]="{
+ *      link: 'linkTo,                      - a name of a form control we want  
+ *      errorName: 'linkedTo',                     to link the input to
+ *      error: 'The linked input does not have a value but this one does.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[linkedToValidation]",
   providers: [
@@ -206,11 +411,8 @@ export class LinkToValidatorDirective
     },
   ],
 })
-export class LinkedToValidatorDirective
-  extends BaseValidator
-  implements Validator
-{
-  @Input("linkToValidation") override value!: LinkValidationInput;
+export class LinkedToValidatorDirective implements Validator {
+  @Input("linkToValidation") value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `This control is linked to ${this.value.link}.`;

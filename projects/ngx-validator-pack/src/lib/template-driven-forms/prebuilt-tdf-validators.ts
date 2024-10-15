@@ -1,17 +1,67 @@
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+
 import { Directive, Input } from "@angular/core";
 import {
   AbstractControl,
   NG_VALIDATORS,
   ValidationErrors,
 } from "@angular/forms";
-import { RegExpValidatorDirective } from "./template-driven-form-validators";
+import { RegExpNotValidatorDirective, RegExpValidatorDirective } from "./template-driven-form-validators";
+import { RegExpValidatorInput } from "../decorators/validator-input";
 import {
-  RegExpValidationInput,
-  regExpInputFactory,
-} from "../interfaces/directive-input.interface";
+  IPAddressV4,
+  IPAddressV4AndV6,
+  IPAddressV6,
+  address,
+  dateDD_MM_YYYY,
+  dateYYYY_MM_DD,
+  email,
+  lettersOnly,
+  noSpecial,
+  numbersOnly,
+  passport,
+  passwordStrength,
+  phoneNumber,
+  singleSpace,
+  spaceRestriction,
+  ssn,
+  timeHH_MM_12,
+  timeHH_MM_24,
+  timeHH_MM_SS_24,
+  url,
+  zipCode,
+} from "../constant/regex";
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl is 
+ * in a proper address format (Street number Street Name, City, State ZIP code)
+ * Example: 3344 W Alameda Avenue, Lakewood, CO 80222
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [addressValidation]="{
+ *      errorName: 'address',
+ *      error: 'Wrong address format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[addressValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -21,20 +71,38 @@ import {
   ],
 })
 export class AddressValidatorDirective extends RegExpValidatorDirective {
-  @Input("addressValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "address",
-        "Please input a value in a format of: Street number Street Name, City, State ZIP code."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    address,
+    "address",
+    "Please input a value in a format of: Street number Street Name, City, State ZIP code."
+  )
+  @Input("addressValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that hecks if a value in the given FromControl / AbstractControl 
+ * consists of only alphabetic characters.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [alphabetOnlyValidation]="{
+ *      errorName: 'alphabet',
+ *      error: 'Only letters please.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[alphabetOnlyValidation]",
   providers: [
@@ -46,20 +114,38 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
-  @Input("alphabetOnlyValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "alphabetOnly",
-        "Only alphabetic characters are allowed."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    lettersOnly,
+    "alphabetOnly",
+    "Only alphabetic characters are allowed."
+  )
+  @Input("alphabetOnlyValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in one of the following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [dateDD_MM_YYYY]="{
+ *      errorName: 'dateDD_MM_YYYY',
+ *      error: 'Wrong date format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[dateDD_MM_YYYY]",
   providers: [
@@ -71,20 +157,38 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
-  @Input("dateDD_MM_YYYY") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "dateDD_MM_YYYY",
-        "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    dateDD_MM_YYYY,
+    "dateDD_MM_YYYY",
+    "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."
+  )
+  @Input("dateDD_MM_YYYY")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is a following format: YYYY-MM-dd.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [dateYYYY_MM_DD]="{
+ *      errorName: 'dateYYYY_MM_DD',
+ *      error: 'Wrong date format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[dateYYYY_MM_DD]",
   providers: [
@@ -96,20 +200,38 @@ export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
-  @Input("dateYYYY_MM_DD") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "dateYYYY_MM_DD",
-        "Please input a value in a format: YYYY-MM-dd."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    dateYYYY_MM_DD,
+    "dateYYYY_MM_DD",
+    "Please input a value in a format: YYYY-MM-dd."
+  )
+  @Input("dateYYYY_MM_DD")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is a following format: local-part@domain.com.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [emailValidation]="{
+ *      errorName: 'email',
+ *      error: 'Wrong email format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[emailValidation]",
   providers: [
@@ -121,20 +243,38 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class EmailValidatorDirective extends RegExpValidatorDirective {
-  @Input("emailValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "email",
-        "Please input a value in a format: local-part@domain.com."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    email,
+    "email",
+    "Please input a value in a format: local-part@domain.com."
+  )
+  @Input("emailValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [ipAddressValidation]="{
+ *      errorName: 'ipAddress',
+ *      error: 'Wrong ip address format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[ipAddressValidation]",
   providers: [
@@ -146,20 +286,38 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class IPAddressValidatorDirective extends RegExpValidatorDirective {
-  @Input("ipAddressValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "ipAddress",
-        "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    IPAddressV4AndV6,
+    "ipAddress",
+    "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
+  )
+  @Input("ipAddressValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a following format: x.x.x.x.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [iPv4Validation]="{
+ *      errorName: 'iPv4',
+ *      error: 'Wrong ip address format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[iPv4Validation]",
   providers: [
@@ -171,20 +329,38 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class IPv4ValidatorDirective extends RegExpValidatorDirective {
-  @Input("iPv4Validation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "iPv4",
-        "Please input a value in a format: x.x.x.x."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    IPAddressV4,
+    "iPv4",
+    "Please input a value in a format: x.x.x.x."
+  )
+  @Input("iPv4Validation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a following format:  y:y:y:y:y:y:y:y.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [iPv6Validation]="{
+ *      errorName: 'iPv6',
+ *      error: 'Wrong ip address format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[iPv6Validation]",
   providers: [
@@ -196,20 +372,38 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class IPv6ValidatorDirective extends RegExpValidatorDirective {
-  @Input("iPv6Validation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "iPv6",
-        "Please input a value in a format: y:y:y:y:y:y:y:y."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    IPAddressV6,
+    "iPv6",
+    "Please input a value in a format: y:y:y:y:y:y:y:y."
+  )
+  @Input("iPv6Validation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * consists of only numeric characters.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [numericsOnlyValidation]="{
+ *      errorName: 'numbers',
+ *      error: 'Numbers only please.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[numericsOnlyValidation]",
   providers: [
@@ -221,20 +415,38 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
-  @Input("numericsOnlyValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "numericsOnly",
-        "Only numeric characters are allowed."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    numbersOnly,
+    "numbersOnly",
+    "Only numeric characters are allowed."
+  )
+  @Input("numericsOnlyValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * has any special characters.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [noSpecialsValidation]="{
+ *      errorName: 'noSpecials',
+ *      error: 'Remove any special characters.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[noSpecialsValidation]",
   providers: [
@@ -246,20 +458,38 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
-  @Input("noSpecialsValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "noSpecials",
-        "No special characters are allowed."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    noSpecial,
+    "noSpecials",
+    "No special characters are allowed."
+  )
+  @Input("noSpecialsValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a proper passport format.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [passportValidation]="{
+ *      errorName: 'passport',
+ *      error: 'Wrong passport format'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[passportValidation]",
   providers: [
@@ -271,18 +501,37 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class PassportValidatorDirective extends RegExpValidatorDirective {
-  @Input("passportValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(value, "passport", "Incorrect passport format.")
-    );
-  }
+  @RegExpValidatorInput(passport, "passport", "Incorrect passport format.")
+  @Input("passportValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a strong password format (Has at least 1 lowercase letter, 1 uppercase letter, 
+ * 1 number, 1 special character and has length of at least 8 characters).
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [passwordValidation]="{
+ *      errorName: 'password',
+ *      error: 'Password is not strong enough.'
+ *   }"
+ * />
+ */
 @Directive({
-  selector: "[PasswordValidation]",
+  selector: "[passwordValidation]",
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -292,20 +541,38 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class PasswordValidatorDirective extends RegExpValidatorDirective {
-  @Input("passwordValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "password",
-        "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    passwordStrength,
+    "password",
+    "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."
+  )
+  @Input("passwordValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a following format: (000) 000 0000.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [phoneNumberValidation]="{
+ *      errorName: 'phoneNumber',
+ *      error: 'Wrong phone number format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[phoneNumberValidation]",
   providers: [
@@ -317,20 +584,38 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
-  @Input("phoneNumberValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "phoneNumber",
-        "Please input a value in a format: (000) 000 0000."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    phoneNumber,
+    "phoneNumber",
+    "Please input a value in a format: (000) 000 0000."
+  )
+  @Input("phoneNumberValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * consists of a single space character.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [singleSpaceValidation]="{
+ *      errorName: 'singleSpace',
+ *      error: 'Your input has only one space in it.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[singleSpaceValidation]",
   providers: [
@@ -341,21 +626,39 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
     },
   ],
 })
-export class SingleSpaceValidatorDirective extends RegExpValidatorDirective {
-  @Input("singleSpaceValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "singleSpace",
-        "A single space character is not allowed."
-      )
-    );
-  }
+export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
+  @RegExpValidatorInput(
+    singleSpace,
+    "singleSpace",
+    "A single space character is not allowed."
+  )
+  @Input("singleSpaceValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * starts or ends with a space character.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [spaceRestrictionValidation]="{
+ *      errorName: 'spaceRestriction',
+ *      error: 'No spaces on the start or the end of the value please.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[spaceRestrictionValidation]",
   providers: [
@@ -367,20 +670,38 @@ export class SingleSpaceValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective {
-  @Input("spaceRestrictionValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "spaceRestriction",
-        "Value can not start or end with a space character."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    spaceRestriction,
+    "spaceRestriction",
+    "Value can not start or end with a space character."
+  )
+  @Input("spaceRestrictionValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [ssnValidation]="{
+ *      errorName: 'ssn',
+ *      error: 'Wrong ssn format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[ssnValidation]",
   providers: [
@@ -392,20 +713,38 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
   ],
 })
 export class SSNValidatorDirective extends RegExpValidatorDirective {
-  @Input("ssnValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "ssn",
-        "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    ssn,
+    "ssn",
+    "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
+  )
+  @Input("ssnValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a Time Format HH:MM 12-hour with optional leading 0.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [timeHH_MM_12]="{
+ *      errorName: 'timeHH_MM_12',
+ *      error: 'Wrong time format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[timeHH_MM_12]",
   providers: [
@@ -417,20 +756,38 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
-  @Input("timeHH_MM_12") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "timeHH_MM_12",
-        "Please input a value in a HH:MM 12-hour format."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    timeHH_MM_12,
+    "timeHH_MM_12",
+    "Please input a value in a HH:MM 12-hour format."
+  )
+  @Input("timeHH_MM_12")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a Time Format HH:MM 24-hour with optional leading 0.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [timeHH_MM_24]="{
+ *      errorName: 'timeHH_MM_24',
+ *      error: 'Wrong time format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[timeHH_MM_24]",
   providers: [
@@ -442,20 +799,38 @@ export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
-  @Input("timeHH_MM_24") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "timeHH_MM_24",
-        "Please input a value in a HH:MM 24-hour format."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    timeHH_MM_24,
+    "timeHH_MM_24",
+    "Please input a value in a HH:MM 24-hour format."
+  )
+  @Input("timeHH_MM_24")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a Time Format HH:MM:SS 24-hour.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [timeHH_MM_SS_24]="{
+ *      errorName: 'timeHH_MM_SS_24',
+ *      error: 'Wrong time format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[timeHH_MM_SS_24]",
   providers: [
@@ -467,20 +842,38 @@ export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective {
-  @Input("timeHH_MM_SS_24") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(
-        value,
-        "timeHH_MM_SS_24",
-        "Please input a value in a HH:MM:SS 24-hour format."
-      )
-    );
-  }
+  @RegExpValidatorInput(
+    timeHH_MM_SS_24,
+    "timeHH_MM_SS_24",
+    "Please input a value in a HH:MM:SS 24-hour format."
+  )
+  @Input("timeHH_MM_SS_24")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in a correct url format.
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [urlValidation]="{
+ *      errorName: 'url',
+ *      error: 'Wrong url format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[urlValidation]",
   providers: [
@@ -492,14 +885,34 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
   ],
 })
 export class UrlValidatorDirective extends RegExpValidatorDirective {
-  @Input("urlValidation") set input(value: RegExpValidationInput) {
-    super.setValue(regExpInputFactory(value, "url", "Improper URL format."));
-  }
+  @RegExpValidatorInput(url, "url", "Improper URL format.")
+  @Input("urlValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }
 }
 
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl 
+ * is in one of the following formats: 00000 or 00000-0000..
+ * 
+ * Has an optional input in which you specify custom name and a custom 
+ * error content / message. 
+ * 
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [zipCodeValidation]="{
+ *      errorName: 'zipCode',
+ *      error: 'Wrong zip code format.'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[zipCodeValidation]",
   providers: [
@@ -511,11 +924,9 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
   ],
 })
 export class ZipCodeValidatorDirective extends RegExpValidatorDirective {
-  @Input("zipCodeValidation") set input(value: RegExpValidationInput) {
-    super.setValue(
-      regExpInputFactory(value, "zipCode", "Improper zip code format.")
-    );
-  }
+  @RegExpValidatorInput(zipCode, "zipCode", "Improper zip code format.")
+  @Input("zipCodeValidation")
+  override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
   }

@@ -2,6 +2,8 @@ import * as i0 from '@angular/core';
 import { Directive, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as i1 from '@angular/forms';
+import { NG_VALIDATORS } from '@angular/forms';
+import { __decorate } from 'tslib';
 
 /**
  * @license
@@ -690,6 +692,1624 @@ const urlValidator = (errorName = "url", error = "Improper URL format.") => rege
 const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code format.") => regexpValidator(zipCode, errorName, error);
 
 /**
+ * @description
+ * A Directive that preforms a RegEx check on value in the given
+ * FromControl / AbstractControl
+ *
+ * Has an input in which you specify the regular expression
+ * and optionally you can give it a custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [regexpValidation]="{
+ *      regExp: /(s|regexp)/,
+ *      errorName: 'regexpCheck',
+ *      error: 'Failed regexp check.'
+ *   }"
+ * />
+ */
+class RegExpValidatorDirective {
+    validate(control) {
+        const error = this.value.error ??
+            "This control did not match a given regular expression.";
+        const errors = {
+            [this.value.errorName ?? "regexpValidation"]: error,
+        };
+        return !this.value.regExp ||
+            !control.value ||
+            this.value.regExp.test(control.value)
+            ? null
+            : errors;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RegExpValidatorDirective, isStandalone: true, selector: "[regexpValidation]", inputs: { value: ["regexpValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: RegExpValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[regexpValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: RegExpValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                    standalone: true,
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["regexpValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a RegEx check on value in the given
+ * FromControl / AbstractControl and returns an error if regex
+ * found a match
+ *
+ * Has an input in which you specify the regular expression
+ * and optionally you can give it a custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [regexpNotValidation]="{
+ *      regExp: /(s|regexp)/,
+ *      errorName: 'regexpNotCheck',
+ *      error: 'Failed regexpNot check.'
+ *   }"
+ * />
+ */
+class RegExpNotValidatorDirective {
+    validate(control) {
+        const error = this.value.error ?? "This control matched a given regular expression.";
+        const errors = {
+            [this.value.errorName ?? "regexpNotValidation"]: error,
+        };
+        return !this.value.regExp ||
+            !control.value ||
+            !this.value.regExp.test(control.value)
+            ? null
+            : errors;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpNotValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RegExpNotValidatorDirective, isStandalone: true, selector: "[regexpNotValidation]", inputs: { value: ["regexpNotValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: RegExpValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpNotValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[regexpNotValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: RegExpValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                    standalone: true,
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["regexpNotValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a date comparison between a specified date
+ * and a date in the given input and returns an error if the date in
+ * the given input is later then the specified one.
+ *
+ * Has an input in which you specify the date to compare to
+ * and optionally you can give it a custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [earlierThenValidation]="{
+ *      date: date,                              -- a variable of type Date
+ *      errorName: 'earlierThen',
+ *      error: 'The date is not earlier then the specified one.'
+ *   }"
+ * />
+ */
+class EarlierThenValidatorDirective {
+    validate(control) {
+        const error = this.value.error ??
+            `This control must have a value earlier then ${this.value.date}.`;
+        const errors = {
+            [this.value.errorName ?? "earlierThenValidation"]: error,
+        };
+        return !this.value.date ||
+            prepareToCompare(control?.value) < prepareToCompare(this.value.date)
+            ? null
+            : errors;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EarlierThenValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: EarlierThenValidatorDirective, selector: "[earlierThenValidation]", inputs: { value: ["earlierThenValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: EarlierThenValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EarlierThenValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[earlierThenValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: EarlierThenValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["earlierThenValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a date comparison between a specified date
+ * and a date in the given input and returns an error if the date in
+ * the given input is earlier then the specified one.
+ *
+ * Has an input in which you specify the date to compare to
+ * and optionally you can give it a custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [laterThenValidation]="{
+ *      date: date,                              -- a variable of type Date
+ *      errorName: 'laterThen',
+ *      error: 'The date is not later then the specified one.'
+ *   }"
+ * />
+ */
+class LaterThenValidatorDirective {
+    validate(control) {
+        const error = this.value.error ??
+            `This control must have a value later then ${this.value.date}.`;
+        const errors = {
+            [this.value.errorName ?? "laterThenValidation"]: error,
+        };
+        return !this.value.date ||
+            prepareToCompare(control?.value) > prepareToCompare(this.value.date)
+            ? null
+            : errors;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LaterThenValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LaterThenValidatorDirective, selector: "[laterThenValidation]", inputs: { value: ["laterThenValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: EarlierThenValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LaterThenValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[laterThenValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: EarlierThenValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["laterThenValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a date comparison between a specified date
+ * and a date in the given input and returns an error if chosen comparison
+ * fails.
+ *
+ * Has an input in which you specify the date to compare to,
+ * comparison to preform and optionally you can give it a custom name
+ * and a custom error content / message.
+ *
+ * Available comparisons are: '<' , '>' , '==' , '===' , '<=' , '>='.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [compareToValidation]="{
+ *      date: date,                              -- a variable of type Date
+ *      comparison: '==='
+ *      errorName: 'compareTo',
+ *      error: 'The dates are not the same.'
+ *   }"
+ * />
+ */
+class CompareToValidatorDirective {
+    validate(control) {
+        const error = this.value.error ?? `Value comparison with ${this.value.date} failed.`;
+        const errors = {
+            [this.value.errorName ?? "compareToValidation"]: error,
+        };
+        return !this.value.date ||
+            !control.value ||
+            compareDates(control.value, this.value.date, this.value.comparison)
+            ? null
+            : errors;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CompareToValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: CompareToValidatorDirective, selector: "[compareToValidation]", inputs: { value: ["compareToValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: CompareToValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CompareToValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[compareToValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: CompareToValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["compareToValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a conditional check and if the condition
+ * passes it will return an error.
+ *
+ * Has an input in which you specify the condition that is to be checked
+ * and optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [requiredWhenValidation]="{
+ *      conditional: isTrue,                     - this can be ether a boolean
+ *      errorName: 'requiredWhen',                     or a function that returns a boolean
+ *      error: 'The condition is true.'
+ *   }"
+ * />
+ *
+ * NOTE: It is not recommended to pass a function to be executed in the template,
+ * as this function will be executed every change detection cycle.
+ */
+class RequiredWhenValidatorDirective {
+    validate(control) {
+        const error = this.value.error ?? "This control has a conditional set on it.";
+        const errors = {
+            [this.value.errorName ?? "requiredWhen"]: error,
+        };
+        const outcome = typeof this.value.conditional === "function"
+            ? this.value.conditional()
+            : this.value.conditional;
+        return !control.value && outcome ? errors : null;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredWhenValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredWhenValidatorDirective, selector: "[requiredWhenValidation]", inputs: { value: ["requiredWhenValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: CompareToValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredWhenValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[requiredWhenValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: CompareToValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["requiredWhenValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a check if the specified FromControl / AbstractControl
+ * has a value and a given input does not.
+ *
+ * Has an input in which you the name of the FromControl / AbstractControl to link
+ * to and optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [linkToValidation]="{
+ *      link: 'linkedTo,                      - a name of a form control we want
+ *      errorName: 'linkTo',                     to link the input to
+ *      error: 'The linked input has a value but this one does not'
+ *   }"
+ * />
+ */
+class LinkToValidatorDirective {
+    validate(control) {
+        const error = this.value.error ?? `This control has a link to ${this.value.link}.`;
+        const errors = {
+            [this.value.errorName ?? "linkToValidation"]: error,
+        };
+        const linkedTo = control.parent?.get(this.value.link);
+        return !control?.value && !!linkedTo?.value ? errors : null;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkToValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LinkToValidatorDirective, selector: "[linkToValidation]", inputs: { value: ["linkToValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: CompareToValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkToValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[linkToValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: CompareToValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["linkToValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that preforms a check if the specified FromControl / AbstractControl
+ * does not have a value and a given input does.
+ *
+ * Has an input in which you the name of the FromControl / AbstractControl to link
+ * to and optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexpNot"
+ *    id="regexpNot"
+ *    formControlName="regexpNot"
+ *   [linkedToValidation]="{
+ *      link: 'linkTo,                      - a name of a form control we want
+ *      errorName: 'linkedTo',                     to link the input to
+ *      error: 'The linked input does not have a value but this one does.'
+ *   }"
+ * />
+ */
+class LinkedToValidatorDirective {
+    validate(control) {
+        const error = this.value.error ?? `This control is linked to ${this.value.link}.`;
+        const errors = {
+            [this.value.errorName ?? "linkedToValidation"]: error,
+        };
+        const link = control.parent?.get(this.value.link);
+        return !!control?.value && !link?.value ? errors : null;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkedToValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LinkedToValidatorDirective, selector: "[linkedToValidation]", inputs: { value: ["linkToValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: CompareToValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkedToValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[linkedToValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: CompareToValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["linkToValidation"]
+            }] } });
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+/**
+ * @description
+ * An decorator which handles the input value in directives which extend the
+ * {@link RegExpValidatorDirective} and have an expected input in the form of
+ * {@link RegExpValidationInput}.
+ *
+ * It will populate the error and the errorName values passed to it if it doesn't find
+ * them in the input value.
+ * @param {RegExp}                    - Regular expression to check
+ * @param {string}                    - parameter representing error name
+ * @param {string}                    - parameter representing error value
+ */
+function RegExpValidatorInput(regexp, errorName, error) {
+    return function (target, propertyKey) {
+        let original = target[propertyKey];
+        let newData = {
+            ...original
+        };
+        const getter = function () {
+            newData = {
+                regExp: regexp,
+                errorName: newData.errorName ?? errorName,
+                error: newData.error ?? error
+            };
+            return newData;
+        };
+        const setter = function (val) {
+            newData = val;
+        };
+        Object.defineProperty(target, propertyKey, {
+            get: getter,
+            set: setter,
+        });
+    };
+}
+
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl is
+ * in a proper address format (Street number Street Name, City, State ZIP code)
+ * Example: 3344 W Alameda Avenue, Lakewood, CO 80222
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [addressValidation]="{
+ *      errorName: 'address',
+ *      error: 'Wrong address format.'
+ *   }"
+ * />
+ */
+class AddressValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AddressValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: AddressValidatorDirective, isStandalone: true, selector: "[addressValidation]", inputs: { value: ["addressValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(address, "address", "Please input a value in a format of: Street number Street Name, City, State ZIP code.")
+], AddressValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AddressValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[addressValidation]",
+                    standalone: true,
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["addressValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that hecks if a value in the given FromControl / AbstractControl
+ * consists of only alphabetic characters.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [alphabetOnlyValidation]="{
+ *      errorName: 'alphabet',
+ *      error: 'Only letters please.'
+ *   }"
+ * />
+ */
+class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AlphabetOnlyValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: AlphabetOnlyValidatorDirective, selector: "[alphabetOnlyValidation]", inputs: { value: ["alphabetOnlyValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(lettersOnly, "alphabetOnly", "Only alphabetic characters are allowed.")
+], AlphabetOnlyValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AlphabetOnlyValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[alphabetOnlyValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["alphabetOnlyValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in one of the following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [dateDD_MM_YYYY]="{
+ *      errorName: 'dateDD_MM_YYYY',
+ *      error: 'Wrong date format.'
+ *   }"
+ * />
+ */
+class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: DateDD_MM_YYYYValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: DateDD_MM_YYYYValidatorDirective, selector: "[dateDD_MM_YYYY]", inputs: { value: ["dateDD_MM_YYYY", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(dateDD_MM_YYYY, "dateDD_MM_YYYY", "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY.")
+], DateDD_MM_YYYYValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: DateDD_MM_YYYYValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[dateDD_MM_YYYY]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["dateDD_MM_YYYY"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is a following format: YYYY-MM-dd.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [dateYYYY_MM_DD]="{
+ *      errorName: 'dateYYYY_MM_DD',
+ *      error: 'Wrong date format.'
+ *   }"
+ * />
+ */
+class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: DateYYYY_MM_DDValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: DateYYYY_MM_DDValidatorDirective, selector: "[dateYYYY_MM_DD]", inputs: { value: ["dateYYYY_MM_DD", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(dateYYYY_MM_DD, "dateYYYY_MM_DD", "Please input a value in a format: YYYY-MM-dd.")
+], DateYYYY_MM_DDValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: DateYYYY_MM_DDValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[dateYYYY_MM_DD]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["dateYYYY_MM_DD"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is a following format: local-part@domain.com.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [emailValidation]="{
+ *      errorName: 'email',
+ *      error: 'Wrong email format.'
+ *   }"
+ * />
+ */
+class EmailValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EmailValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: EmailValidatorDirective, selector: "[emailValidation]", inputs: { value: ["emailValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(email, "email", "Please input a value in a format: local-part@domain.com.")
+], EmailValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EmailValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[emailValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["emailValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [ipAddressValidation]="{
+ *      errorName: 'ipAddress',
+ *      error: 'Wrong ip address format.'
+ *   }"
+ * />
+ */
+class IPAddressValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPAddressValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPAddressValidatorDirective, selector: "[ipAddressValidation]", inputs: { value: ["ipAddressValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(IPAddressV4AndV6, "ipAddress", "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.")
+], IPAddressValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPAddressValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[ipAddressValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["ipAddressValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a following format: x.x.x.x.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [iPv4Validation]="{
+ *      errorName: 'iPv4',
+ *      error: 'Wrong ip address format.'
+ *   }"
+ * />
+ */
+class IPv4ValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv4ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPv4ValidatorDirective, selector: "[iPv4Validation]", inputs: { value: ["iPv4Validation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(IPAddressV4, "iPv4", "Please input a value in a format: x.x.x.x.")
+], IPv4ValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv4ValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[iPv4Validation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["iPv4Validation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a following format:  y:y:y:y:y:y:y:y.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [iPv6Validation]="{
+ *      errorName: 'iPv6',
+ *      error: 'Wrong ip address format.'
+ *   }"
+ * />
+ */
+class IPv6ValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv6ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPv6ValidatorDirective, selector: "[iPv6Validation]", inputs: { value: ["iPv6Validation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(IPAddressV6, "iPv6", "Please input a value in a format: y:y:y:y:y:y:y:y.")
+], IPv6ValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv6ValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[iPv6Validation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["iPv6Validation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * consists of only numeric characters.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [numericsOnlyValidation]="{
+ *      errorName: 'numbers',
+ *      error: 'Numbers only please.'
+ *   }"
+ * />
+ */
+class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NumericsOnlyValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: NumericsOnlyValidatorDirective, selector: "[numericsOnlyValidation]", inputs: { value: ["numericsOnlyValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(numbersOnly, "numbersOnly", "Only numeric characters are allowed.")
+], NumericsOnlyValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NumericsOnlyValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[numericsOnlyValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["numericsOnlyValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * has any special characters.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [noSpecialsValidation]="{
+ *      errorName: 'noSpecials',
+ *      error: 'Remove any special characters.'
+ *   }"
+ * />
+ */
+class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NoSpecialsValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: NoSpecialsValidatorDirective, selector: "[noSpecialsValidation]", inputs: { value: ["noSpecialsValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(noSpecial, "noSpecials", "No special characters are allowed.")
+], NoSpecialsValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NoSpecialsValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[noSpecialsValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["noSpecialsValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a proper passport format.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [passportValidation]="{
+ *      errorName: 'passport',
+ *      error: 'Wrong passport format'
+ *   }"
+ * />
+ */
+class PassportValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PassportValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PassportValidatorDirective, selector: "[passportValidation]", inputs: { value: ["passportValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(passport, "passport", "Incorrect passport format.")
+], PassportValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PassportValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[passportValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["passportValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a strong password format (Has at least 1 lowercase letter, 1 uppercase letter,
+ * 1 number, 1 special character and has length of at least 8 characters).
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [passwordValidation]="{
+ *      errorName: 'password',
+ *      error: 'Password is not strong enough.'
+ *   }"
+ * />
+ */
+class PasswordValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PasswordValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PasswordValidatorDirective, selector: "[passwordValidation]", inputs: { value: ["passwordValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(passwordStrength, "password", "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8.")
+], PasswordValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PasswordValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[passwordValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["passwordValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a following format: (000) 000 0000.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [phoneNumberValidation]="{
+ *      errorName: 'phoneNumber',
+ *      error: 'Wrong phone number format.'
+ *   }"
+ * />
+ */
+class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PhoneNumberValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PhoneNumberValidatorDirective, selector: "[phoneNumberValidation]", inputs: { value: ["phoneNumberValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(phoneNumber, "phoneNumber", "Please input a value in a format: (000) 000 0000.")
+], PhoneNumberValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PhoneNumberValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[phoneNumberValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["phoneNumberValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * consists of a single space character.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [singleSpaceValidation]="{
+ *      errorName: 'singleSpace',
+ *      error: 'Your input has only one space in it.'
+ *   }"
+ * />
+ */
+class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SingleSpaceValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SingleSpaceValidatorDirective, selector: "[singleSpaceValidation]", inputs: { value: ["singleSpaceValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(singleSpace, "singleSpace", "A single space character is not allowed.")
+], SingleSpaceValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SingleSpaceValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[singleSpaceValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["singleSpaceValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * starts or ends with a space character.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [spaceRestrictionValidation]="{
+ *      errorName: 'spaceRestriction',
+ *      error: 'No spaces on the start or the end of the value please.'
+ *   }"
+ * />
+ */
+class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SpaceRestrictionValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SpaceRestrictionValidatorDirective, selector: "[spaceRestrictionValidation]", inputs: { value: ["spaceRestrictionValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(spaceRestriction, "spaceRestriction", "Value can not start or end with a space character.")
+], SpaceRestrictionValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SpaceRestrictionValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[spaceRestrictionValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["spaceRestrictionValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [ssnValidation]="{
+ *      errorName: 'ssn',
+ *      error: 'Wrong ssn format.'
+ *   }"
+ * />
+ */
+class SSNValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SSNValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SSNValidatorDirective, selector: "[ssnValidation]", inputs: { value: ["ssnValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(ssn, "ssn", "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.")
+], SSNValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SSNValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[ssnValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["ssnValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a Time Format HH:MM 12-hour with optional leading 0.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [timeHH_MM_12]="{
+ *      errorName: 'timeHH_MM_12',
+ *      error: 'Wrong time format.'
+ *   }"
+ * />
+ */
+class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TimeHH_MM_12ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: TimeHH_MM_12ValidatorDirective, selector: "[timeHH_MM_12]", inputs: { value: ["timeHH_MM_12", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(timeHH_MM_12, "timeHH_MM_12", "Please input a value in a HH:MM 12-hour format.")
+], TimeHH_MM_12ValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TimeHH_MM_12ValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[timeHH_MM_12]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["timeHH_MM_12"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a Time Format HH:MM 24-hour with optional leading 0.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [timeHH_MM_24]="{
+ *      errorName: 'timeHH_MM_24',
+ *      error: 'Wrong time format.'
+ *   }"
+ * />
+ */
+class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TimeHH_MM_24ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: TimeHH_MM_24ValidatorDirective, selector: "[timeHH_MM_24]", inputs: { value: ["timeHH_MM_24", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(timeHH_MM_24, "timeHH_MM_24", "Please input a value in a HH:MM 24-hour format.")
+], TimeHH_MM_24ValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TimeHH_MM_24ValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[timeHH_MM_24]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["timeHH_MM_24"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a Time Format HH:MM:SS 24-hour.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [timeHH_MM_SS_24]="{
+ *      errorName: 'timeHH_MM_SS_24',
+ *      error: 'Wrong time format.'
+ *   }"
+ * />
+ */
+class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TimeHH_MM_SS_24ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: TimeHH_MM_SS_24ValidatorDirective, selector: "[timeHH_MM_SS_24]", inputs: { value: ["timeHH_MM_SS_24", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(timeHH_MM_SS_24, "timeHH_MM_SS_24", "Please input a value in a HH:MM:SS 24-hour format.")
+], TimeHH_MM_SS_24ValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: TimeHH_MM_SS_24ValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[timeHH_MM_SS_24]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["timeHH_MM_SS_24"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in a correct url format.
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [urlValidation]="{
+ *      errorName: 'url',
+ *      error: 'Wrong url format.'
+ *   }"
+ * />
+ */
+class UrlValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: UrlValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: UrlValidatorDirective, selector: "[urlValidation]", inputs: { value: ["urlValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(url, "url", "Improper URL format.")
+], UrlValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: UrlValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[urlValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["urlValidation"]
+            }] } });
+/**
+ * @description
+ * A Directive that checks if a value in the given FromControl / AbstractControl
+ * is in one of the following formats: 00000 or 00000-0000..
+ *
+ * Has an optional input in which you specify custom name and a custom
+ * error content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="regexp"
+ *    id="regexp"
+ *    formControlName="regexp"
+ *   [zipCodeValidation]="{
+ *      errorName: 'zipCode',
+ *      error: 'Wrong zip code format.'
+ *   }"
+ * />
+ */
+class ZipCodeValidatorDirective extends RegExpValidatorDirective {
+    validate(control) {
+        return super.validate(control);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ZipCodeValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: ZipCodeValidatorDirective, selector: "[zipCodeValidation]", inputs: { value: ["zipCodeValidation", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: AddressValidatorDirective,
+                multi: true,
+            },
+        ], usesInheritance: true, ngImport: i0 }); }
+}
+__decorate([
+    RegExpValidatorInput(zipCode, "zipCode", "Improper zip code format.")
+], ZipCodeValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ZipCodeValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[zipCodeValidation]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: AddressValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["zipCodeValidation"]
+            }] } });
+
+/**
  * @license
  * Copyright Slavko Mihajlovic All Rights Reserved.
  *
@@ -703,5 +2323,5 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
  * Generated bundle index. Do not edit.
  */
 
-export { ShowValidationDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpNotValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
+export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SingleSpaceValidatorDirective, SpaceRestrictionValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpNotValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map
