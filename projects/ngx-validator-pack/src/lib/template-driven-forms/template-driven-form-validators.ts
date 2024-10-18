@@ -46,6 +46,7 @@ import { RegExpValidationInput } from "../interfaces/directive-input.interface";
  */
 @Directive({
   selector: "[regexpValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -53,7 +54,6 @@ import { RegExpValidationInput } from "../interfaces/directive-input.interface";
       multi: true,
     },
   ],
-  standalone: true,
 })
 export class RegExpValidatorDirective implements Validator {
   @Input("regexpValidation") value!: RegExpValidationInput;
@@ -99,14 +99,14 @@ export class RegExpValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[regexpNotValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: RegExpValidatorDirective,
+      useExisting: RegExpNotValidatorDirective,
       multi: true,
     },
   ],
-  standalone: true,
 })
 export class RegExpNotValidatorDirective implements Validator {
   @Input("regexpNotValidation") value!: RegExpValidationInput;
@@ -139,9 +139,9 @@ export class RegExpNotValidatorDirective implements Validator {
  * @example
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
- *    formControlName="regexpNot"
+ *    name="earlierThen"
+ *    id="earlierThen"
+ *    formControlName="earlierThen"
  *   [earlierThenValidation]="{
  *      date: date,                              -- a variable of type Date
  *      errorName: 'earlierThen',
@@ -151,6 +151,7 @@ export class RegExpNotValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[earlierThenValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -190,9 +191,9 @@ export class EarlierThenValidatorDirective implements Validator {
  * @example
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
- *    formControlName="regexpNot"
+ *    name="laterThen"
+ *    id="laterThen"
+ *    formControlName="laterThen"
  *   [laterThenValidation]="{
  *      date: date,                              -- a variable of type Date
  *      errorName: 'laterThen',
@@ -202,10 +203,11 @@ export class EarlierThenValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[laterThenValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: EarlierThenValidatorDirective,
+      useExisting: LaterThenValidatorDirective,
       multi: true,
     },
   ],
@@ -243,9 +245,9 @@ export class LaterThenValidatorDirective implements Validator {
  * @example
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
- *    formControlName="regexpNot"
+ *    name="compareTo"
+ *    id="compareTo"
+ *    formControlName="compareTo"
  *   [compareToValidation]="{
  *      date: date,                              -- a variable of type Date
  *      comparison: '==='
@@ -256,6 +258,7 @@ export class LaterThenValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[compareToValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -293,9 +296,9 @@ export class CompareToValidatorDirective implements Validator {
  * @example
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
- *    formControlName="regexpNot"
+ *    name="requiredWhen"
+ *    id="requiredWhen"
+ *    formControlName="requiredWhen"
  *   [requiredWhenValidation]="{
  *      conditional: isTrue,                     - this can be ether a boolean
  *      errorName: 'requiredWhen',                     or a function that returns a boolean
@@ -308,10 +311,11 @@ export class CompareToValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[requiredWhenValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: CompareToValidatorDirective,
+      useExisting: RequiredWhenValidatorDirective,
       multi: true,
     },
   ],
@@ -345,9 +349,9 @@ export class RequiredWhenValidatorDirective implements Validator {
  * @example
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
- *    formControlName="regexpNot"
+ *    name="linkTo"
+ *    id="linkTo"
+ *    formControlName="linkTo"
  *   [linkToValidation]="{
  *      link: 'linkedTo,                      - a name of a form control we want  
  *      errorName: 'linkTo',                     to link the input to
@@ -357,10 +361,11 @@ export class RequiredWhenValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[linkToValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: CompareToValidatorDirective,
+      useExisting: LinkToValidatorDirective,
       multi: true,
     },
   ],
@@ -391,9 +396,9 @@ export class LinkToValidatorDirective implements Validator {
  * @example
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
- *    formControlName="regexpNot"
+ *    name="linkedTo"
+ *    id="linkedTo"
+ *    formControlName="linkedTo"
  *   [linkedToValidation]="{
  *      link: 'linkTo,                      - a name of a form control we want  
  *      errorName: 'linkedTo',                     to link the input to
@@ -403,16 +408,17 @@ export class LinkToValidatorDirective implements Validator {
  */
 @Directive({
   selector: "[linkedToValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: CompareToValidatorDirective,
+      useExisting: LinkedToValidatorDirective,
       multi: true,
     },
   ],
 })
 export class LinkedToValidatorDirective implements Validator {
-  @Input("linkToValidation") value!: LinkValidationInput;
+  @Input("linkedToValidation") value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `This control is linked to ${this.value.link}.`;

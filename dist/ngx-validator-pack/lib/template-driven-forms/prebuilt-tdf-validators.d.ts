@@ -13,9 +13,9 @@ import * as i0 from "@angular/core";
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="address"
+ *    id="address"
+ *    formControlName="address"
  *   [addressValidation]="{
  *      errorName: 'address',
  *      error: 'Wrong address format.'
@@ -39,9 +39,9 @@ export declare class AddressValidatorDirective extends RegExpValidatorDirective 
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="alphabet"
+ *    id="alphabet"
+ *    formControlName="alphabet"
  *   [alphabetOnlyValidation]="{
  *      errorName: 'alphabet',
  *      error: 'Only letters please.'
@@ -52,7 +52,7 @@ export declare class AlphabetOnlyValidatorDirective extends RegExpValidatorDirec
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<AlphabetOnlyValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<AlphabetOnlyValidatorDirective, "[alphabetOnlyValidation]", never, { "value": { "alias": "alphabetOnlyValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<AlphabetOnlyValidatorDirective, "[alphabetOnlyValidation]", never, { "value": { "alias": "alphabetOnlyValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -65,9 +65,9 @@ export declare class AlphabetOnlyValidatorDirective extends RegExpValidatorDirec
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="dateDD_MM_YYYY"
+ *    id="dateDD_MM_YYYY"
+ *    formControlName="dateDD_MM_YYYY"
  *   [dateDD_MM_YYYY]="{
  *      errorName: 'dateDD_MM_YYYY',
  *      error: 'Wrong date format.'
@@ -78,7 +78,7 @@ export declare class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDir
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<DateDD_MM_YYYYValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<DateDD_MM_YYYYValidatorDirective, "[dateDD_MM_YYYY]", never, { "value": { "alias": "dateDD_MM_YYYY"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<DateDD_MM_YYYYValidatorDirective, "[dateDD_MM_YYYY]", never, { "value": { "alias": "dateDD_MM_YYYY"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -91,9 +91,9 @@ export declare class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDir
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="dateYYYY_MM_DD"
+ *    id="dateYYYY_MM_DD"
+ *    formControlName="dateYYYY_MM_DD"
  *   [dateYYYY_MM_DD]="{
  *      errorName: 'dateYYYY_MM_DD',
  *      error: 'Wrong date format.'
@@ -104,7 +104,7 @@ export declare class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDir
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<DateYYYY_MM_DDValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<DateYYYY_MM_DDValidatorDirective, "[dateYYYY_MM_DD]", never, { "value": { "alias": "dateYYYY_MM_DD"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<DateYYYY_MM_DDValidatorDirective, "[dateYYYY_MM_DD]", never, { "value": { "alias": "dateYYYY_MM_DD"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -117,9 +117,9 @@ export declare class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDir
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="email"
+ *    id="email"
+ *    formControlName="email"
  *   [emailValidation]="{
  *      errorName: 'email',
  *      error: 'Wrong email format.'
@@ -130,7 +130,7 @@ export declare class EmailValidatorDirective extends RegExpValidatorDirective {
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<EmailValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<EmailValidatorDirective, "[emailValidation]", never, { "value": { "alias": "emailValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<EmailValidatorDirective, "[emailValidation]", never, { "value": { "alias": "emailValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -143,9 +143,9 @@ export declare class EmailValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="ipAddress"
+ *    id="ipAddress"
+ *    formControlName="ipAddress"
  *   [ipAddressValidation]="{
  *      errorName: 'ipAddress',
  *      error: 'Wrong ip address format.'
@@ -156,7 +156,7 @@ export declare class IPAddressValidatorDirective extends RegExpValidatorDirectiv
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<IPAddressValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<IPAddressValidatorDirective, "[ipAddressValidation]", never, { "value": { "alias": "ipAddressValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<IPAddressValidatorDirective, "[ipAddressValidation]", never, { "value": { "alias": "ipAddressValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -169,9 +169,9 @@ export declare class IPAddressValidatorDirective extends RegExpValidatorDirectiv
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="iPv4"
+ *    id="iPv4"
+ *    formControlName="iPv4"
  *   [iPv4Validation]="{
  *      errorName: 'iPv4',
  *      error: 'Wrong ip address format.'
@@ -182,7 +182,7 @@ export declare class IPv4ValidatorDirective extends RegExpValidatorDirective {
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<IPv4ValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<IPv4ValidatorDirective, "[iPv4Validation]", never, { "value": { "alias": "iPv4Validation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<IPv4ValidatorDirective, "[iPv4Validation]", never, { "value": { "alias": "iPv4Validation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -195,9 +195,9 @@ export declare class IPv4ValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="iPv6"
+ *    id="iPv6"
+ *    formControlName="iPv6"
  *   [iPv6Validation]="{
  *      errorName: 'iPv6',
  *      error: 'Wrong ip address format.'
@@ -208,7 +208,7 @@ export declare class IPv6ValidatorDirective extends RegExpValidatorDirective {
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<IPv6ValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<IPv6ValidatorDirective, "[iPv6Validation]", never, { "value": { "alias": "iPv6Validation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<IPv6ValidatorDirective, "[iPv6Validation]", never, { "value": { "alias": "iPv6Validation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -221,9 +221,9 @@ export declare class IPv6ValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="numbers"
+ *    id="numbers"
+ *    formControlName="numbers"
  *   [numericsOnlyValidation]="{
  *      errorName: 'numbers',
  *      error: 'Numbers only please.'
@@ -234,7 +234,7 @@ export declare class NumericsOnlyValidatorDirective extends RegExpValidatorDirec
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<NumericsOnlyValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NumericsOnlyValidatorDirective, "[numericsOnlyValidation]", never, { "value": { "alias": "numericsOnlyValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NumericsOnlyValidatorDirective, "[numericsOnlyValidation]", never, { "value": { "alias": "numericsOnlyValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -247,9 +247,9 @@ export declare class NumericsOnlyValidatorDirective extends RegExpValidatorDirec
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="noSpecials"
+ *    id="noSpecials"
+ *    formControlName="noSpecials"
  *   [noSpecialsValidation]="{
  *      errorName: 'noSpecials',
  *      error: 'Remove any special characters.'
@@ -260,7 +260,7 @@ export declare class NoSpecialsValidatorDirective extends RegExpValidatorDirecti
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<NoSpecialsValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NoSpecialsValidatorDirective, "[noSpecialsValidation]", never, { "value": { "alias": "noSpecialsValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NoSpecialsValidatorDirective, "[noSpecialsValidation]", never, { "value": { "alias": "noSpecialsValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -273,9 +273,9 @@ export declare class NoSpecialsValidatorDirective extends RegExpValidatorDirecti
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="passport"
+ *    id="passport"
+ *    formControlName="passport"
  *   [passportValidation]="{
  *      errorName: 'passport',
  *      error: 'Wrong passport format'
@@ -286,7 +286,7 @@ export declare class PassportValidatorDirective extends RegExpValidatorDirective
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<PassportValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PassportValidatorDirective, "[passportValidation]", never, { "value": { "alias": "passportValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PassportValidatorDirective, "[passportValidation]", never, { "value": { "alias": "passportValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -300,9 +300,9 @@ export declare class PassportValidatorDirective extends RegExpValidatorDirective
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="password"
+ *    id="password"
+ *    formControlName="password"
  *   [passwordValidation]="{
  *      errorName: 'password',
  *      error: 'Password is not strong enough.'
@@ -313,7 +313,7 @@ export declare class PasswordValidatorDirective extends RegExpValidatorDirective
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<PasswordValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PasswordValidatorDirective, "[passwordValidation]", never, { "value": { "alias": "passwordValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PasswordValidatorDirective, "[passwordValidation]", never, { "value": { "alias": "passwordValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -326,9 +326,9 @@ export declare class PasswordValidatorDirective extends RegExpValidatorDirective
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="phoneNumber"
+ *    id="phoneNumber"
+ *    formControlName="phoneNumber"
  *   [phoneNumberValidation]="{
  *      errorName: 'phoneNumber',
  *      error: 'Wrong phone number format.'
@@ -339,7 +339,7 @@ export declare class PhoneNumberValidatorDirective extends RegExpValidatorDirect
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<PhoneNumberValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PhoneNumberValidatorDirective, "[phoneNumberValidation]", never, { "value": { "alias": "phoneNumberValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PhoneNumberValidatorDirective, "[phoneNumberValidation]", never, { "value": { "alias": "phoneNumberValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -352,9 +352,9 @@ export declare class PhoneNumberValidatorDirective extends RegExpValidatorDirect
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="singleSpace"
+ *    id="singleSpace"
+ *    formControlName="singleSpace"
  *   [singleSpaceValidation]="{
  *      errorName: 'singleSpace',
  *      error: 'Your input has only one space in it.'
@@ -365,7 +365,7 @@ export declare class SingleSpaceValidatorDirective extends RegExpNotValidatorDir
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<SingleSpaceValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<SingleSpaceValidatorDirective, "[singleSpaceValidation]", never, { "value": { "alias": "singleSpaceValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<SingleSpaceValidatorDirective, "[singleSpaceValidation]", never, { "value": { "alias": "singleSpaceValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -378,9 +378,9 @@ export declare class SingleSpaceValidatorDirective extends RegExpNotValidatorDir
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="spaceRestriction"
+ *    id="spaceRestriction"
+ *    formControlName="spaceRestriction"
  *   [spaceRestrictionValidation]="{
  *      errorName: 'spaceRestriction',
  *      error: 'No spaces on the start or the end of the value please.'
@@ -391,7 +391,7 @@ export declare class SpaceRestrictionValidatorDirective extends RegExpValidatorD
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<SpaceRestrictionValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<SpaceRestrictionValidatorDirective, "[spaceRestrictionValidation]", never, { "value": { "alias": "spaceRestrictionValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<SpaceRestrictionValidatorDirective, "[spaceRestrictionValidation]", never, { "value": { "alias": "spaceRestrictionValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -404,9 +404,9 @@ export declare class SpaceRestrictionValidatorDirective extends RegExpValidatorD
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="ssn"
+ *    id="ssn"
+ *    formControlName="ssn"
  *   [ssnValidation]="{
  *      errorName: 'ssn',
  *      error: 'Wrong ssn format.'
@@ -417,7 +417,7 @@ export declare class SSNValidatorDirective extends RegExpValidatorDirective {
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<SSNValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<SSNValidatorDirective, "[ssnValidation]", never, { "value": { "alias": "ssnValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<SSNValidatorDirective, "[ssnValidation]", never, { "value": { "alias": "ssnValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -430,9 +430,9 @@ export declare class SSNValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="timeHH_MM_12"
+ *    id="timeHH_MM_12"
+ *    formControlName="timeHH_MM_12"
  *   [timeHH_MM_12]="{
  *      errorName: 'timeHH_MM_12',
  *      error: 'Wrong time format.'
@@ -443,7 +443,7 @@ export declare class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirec
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeHH_MM_12ValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<TimeHH_MM_12ValidatorDirective, "[timeHH_MM_12]", never, { "value": { "alias": "timeHH_MM_12"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<TimeHH_MM_12ValidatorDirective, "[timeHH_MM_12]", never, { "value": { "alias": "timeHH_MM_12"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -456,9 +456,9 @@ export declare class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirec
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="timeHH_MM_24"
+ *    id="timeHH_MM_24"
+ *    formControlName="timeHH_MM_24"
  *   [timeHH_MM_24]="{
  *      errorName: 'timeHH_MM_24',
  *      error: 'Wrong time format.'
@@ -469,7 +469,7 @@ export declare class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirec
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeHH_MM_24ValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<TimeHH_MM_24ValidatorDirective, "[timeHH_MM_24]", never, { "value": { "alias": "timeHH_MM_24"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<TimeHH_MM_24ValidatorDirective, "[timeHH_MM_24]", never, { "value": { "alias": "timeHH_MM_24"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -482,9 +482,9 @@ export declare class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirec
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="timeHH_MM_SS_24"
+ *    id="timeHH_MM_SS_24"
+ *    formControlName="timeHH_MM_SS_24"
  *   [timeHH_MM_SS_24]="{
  *      errorName: 'timeHH_MM_SS_24',
  *      error: 'Wrong time format.'
@@ -495,7 +495,7 @@ export declare class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDi
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<TimeHH_MM_SS_24ValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<TimeHH_MM_SS_24ValidatorDirective, "[timeHH_MM_SS_24]", never, { "value": { "alias": "timeHH_MM_SS_24"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<TimeHH_MM_SS_24ValidatorDirective, "[timeHH_MM_SS_24]", never, { "value": { "alias": "timeHH_MM_SS_24"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -508,9 +508,9 @@ export declare class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDi
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="url"
+ *    id="url"
+ *    formControlName="url"
  *   [urlValidation]="{
  *      errorName: 'url',
  *      error: 'Wrong url format.'
@@ -521,7 +521,7 @@ export declare class UrlValidatorDirective extends RegExpValidatorDirective {
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<UrlValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<UrlValidatorDirective, "[urlValidation]", never, { "value": { "alias": "urlValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<UrlValidatorDirective, "[urlValidation]", never, { "value": { "alias": "urlValidation"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -534,9 +534,9 @@ export declare class UrlValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="zipCode"
+ *    id="zipCode"
+ *    formControlName="zipCode"
  *   [zipCodeValidation]="{
  *      errorName: 'zipCode',
  *      error: 'Wrong zip code format.'
@@ -547,5 +547,5 @@ export declare class ZipCodeValidatorDirective extends RegExpValidatorDirective 
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<ZipCodeValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ZipCodeValidatorDirective, "[zipCodeValidation]", never, { "value": { "alias": "zipCodeValidation"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ZipCodeValidatorDirective, "[zipCodeValidation]", never, { "value": { "alias": "zipCodeValidation"; "required": false; }; }, {}, never, never, true, never>;
 }

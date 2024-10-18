@@ -93,9 +93,6 @@ import {
   zipCodeHTMLSnippet,
   zipCodeTSSnippet,
 } from "../../snippet-data";
-import { AddressValidatorDirective } from "../../../../../ngx-validator-pack/src/lib/template-driven-forms/prebuilt-tdf-validators";
-
-
 
 @Component({
   selector: "app-main",
@@ -104,7 +101,6 @@ import { AddressValidatorDirective } from "../../../../../ngx-validator-pack/src
     ReactiveFormsModule,
     ShowValidationDirective,
     SnippetsComponent,
-    AddressValidatorDirective,
   ],
   templateUrl: "./main.component.html",
   styleUrls: ["../../app.component.scss", "./main.component.scss"],
@@ -177,7 +173,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainForm = this.fb.group({
-      address: [null, []],
+      address: [null, [addressValidator()]],
       alphabet: [null, [alphabetOnlyValidator()]],
       dateDDMMYYYY: [null, [dateDD_MM_YYYYValidator()]],
       dateYYYYMMDD: [null, [dateYYYY_MM_DDValidator()]],

@@ -50,9 +50,9 @@ import {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="address"
+ *    id="address"
+ *    formControlName="address"
  *   [addressValidation]="{
  *      errorName: 'address',
  *      error: 'Wrong address format.'
@@ -94,9 +94,9 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="alphabet"
+ *    id="alphabet"
+ *    formControlName="alphabet"
  *   [alphabetOnlyValidation]="{
  *      errorName: 'alphabet',
  *      error: 'Only letters please.'
@@ -105,10 +105,11 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[alphabetOnlyValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: AlphabetOnlyValidatorDirective,
       multi: true,
     },
   ],
@@ -137,9 +138,9 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="dateDD_MM_YYYY"
+ *    id="dateDD_MM_YYYY"
+ *    formControlName="dateDD_MM_YYYY"
  *   [dateDD_MM_YYYY]="{
  *      errorName: 'dateDD_MM_YYYY',
  *      error: 'Wrong date format.'
@@ -148,10 +149,11 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[dateDD_MM_YYYY]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: DateDD_MM_YYYYValidatorDirective,
       multi: true,
     },
   ],
@@ -180,9 +182,9 @@ export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="dateYYYY_MM_DD"
+ *    id="dateYYYY_MM_DD"
+ *    formControlName="dateYYYY_MM_DD"
  *   [dateYYYY_MM_DD]="{
  *      errorName: 'dateYYYY_MM_DD',
  *      error: 'Wrong date format.'
@@ -191,10 +193,11 @@ export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[dateYYYY_MM_DD]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: DateYYYY_MM_DDValidatorDirective,
       multi: true,
     },
   ],
@@ -223,9 +226,9 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="email"
+ *    id="email"
+ *    formControlName="email"
  *   [emailValidation]="{
  *      errorName: 'email',
  *      error: 'Wrong email format.'
@@ -234,10 +237,11 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[emailValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: EmailValidatorDirective,
       multi: true,
     },
   ],
@@ -266,9 +270,9 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="ipAddress"
+ *    id="ipAddress"
+ *    formControlName="ipAddress"
  *   [ipAddressValidation]="{
  *      errorName: 'ipAddress',
  *      error: 'Wrong ip address format.'
@@ -277,10 +281,11 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[ipAddressValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: IPAddressValidatorDirective,
       multi: true,
     },
   ],
@@ -309,9 +314,9 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="iPv4"
+ *    id="iPv4"
+ *    formControlName="iPv4"
  *   [iPv4Validation]="{
  *      errorName: 'iPv4',
  *      error: 'Wrong ip address format.'
@@ -320,10 +325,11 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[iPv4Validation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: IPv4ValidatorDirective,
       multi: true,
     },
   ],
@@ -352,9 +358,9 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="iPv6"
+ *    id="iPv6"
+ *    formControlName="iPv6"
  *   [iPv6Validation]="{
  *      errorName: 'iPv6',
  *      error: 'Wrong ip address format.'
@@ -363,10 +369,11 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[iPv6Validation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: IPv6ValidatorDirective,
       multi: true,
     },
   ],
@@ -395,9 +402,9 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="numbers"
+ *    id="numbers"
+ *    formControlName="numbers"
  *   [numericsOnlyValidation]="{
  *      errorName: 'numbers',
  *      error: 'Numbers only please.'
@@ -406,10 +413,11 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[numericsOnlyValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: NumericsOnlyValidatorDirective,
       multi: true,
     },
   ],
@@ -438,9 +446,9 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="noSpecials"
+ *    id="noSpecials"
+ *    formControlName="noSpecials"
  *   [noSpecialsValidation]="{
  *      errorName: 'noSpecials',
  *      error: 'Remove any special characters.'
@@ -449,10 +457,11 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[noSpecialsValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: NoSpecialsValidatorDirective,
       multi: true,
     },
   ],
@@ -481,9 +490,9 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="passport"
+ *    id="passport"
+ *    formControlName="passport"
  *   [passportValidation]="{
  *      errorName: 'passport',
  *      error: 'Wrong passport format'
@@ -492,10 +501,11 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[passportValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: PassportValidatorDirective,
       multi: true,
     },
   ],
@@ -521,9 +531,9 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="password"
+ *    id="password"
+ *    formControlName="password"
  *   [passwordValidation]="{
  *      errorName: 'password',
  *      error: 'Password is not strong enough.'
@@ -532,10 +542,11 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[passwordValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: PasswordValidatorDirective,
       multi: true,
     },
   ],
@@ -564,9 +575,9 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="phoneNumber"
+ *    id="phoneNumber"
+ *    formControlName="phoneNumber"
  *   [phoneNumberValidation]="{
  *      errorName: 'phoneNumber',
  *      error: 'Wrong phone number format.'
@@ -575,10 +586,11 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[phoneNumberValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: PhoneNumberValidatorDirective,
       multi: true,
     },
   ],
@@ -607,9 +619,9 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="singleSpace"
+ *    id="singleSpace"
+ *    formControlName="singleSpace"
  *   [singleSpaceValidation]="{
  *      errorName: 'singleSpace',
  *      error: 'Your input has only one space in it.'
@@ -618,10 +630,11 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[singleSpaceValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: SingleSpaceValidatorDirective,
       multi: true,
     },
   ],
@@ -650,9 +663,9 @@ export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="spaceRestriction"
+ *    id="spaceRestriction"
+ *    formControlName="spaceRestriction"
  *   [spaceRestrictionValidation]="{
  *      errorName: 'spaceRestriction',
  *      error: 'No spaces on the start or the end of the value please.'
@@ -661,10 +674,11 @@ export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
  */
 @Directive({
   selector: "[spaceRestrictionValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: SpaceRestrictionValidatorDirective,
       multi: true,
     },
   ],
@@ -693,9 +707,9 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="ssn"
+ *    id="ssn"
+ *    formControlName="ssn"
  *   [ssnValidation]="{
  *      errorName: 'ssn',
  *      error: 'Wrong ssn format.'
@@ -704,10 +718,11 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
  */
 @Directive({
   selector: "[ssnValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: SSNValidatorDirective,
       multi: true,
     },
   ],
@@ -736,9 +751,9 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="timeHH_MM_12"
+ *    id="timeHH_MM_12"
+ *    formControlName="timeHH_MM_12"
  *   [timeHH_MM_12]="{
  *      errorName: 'timeHH_MM_12',
  *      error: 'Wrong time format.'
@@ -747,10 +762,11 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[timeHH_MM_12]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: TimeHH_MM_12ValidatorDirective,
       multi: true,
     },
   ],
@@ -779,9 +795,9 @@ export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="timeHH_MM_24"
+ *    id="timeHH_MM_24"
+ *    formControlName="timeHH_MM_24"
  *   [timeHH_MM_24]="{
  *      errorName: 'timeHH_MM_24',
  *      error: 'Wrong time format.'
@@ -790,10 +806,11 @@ export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[timeHH_MM_24]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: TimeHH_MM_24ValidatorDirective,
       multi: true,
     },
   ],
@@ -822,9 +839,9 @@ export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="timeHH_MM_SS_24"
+ *    id="timeHH_MM_SS_24"
+ *    formControlName="timeHH_MM_SS_24"
  *   [timeHH_MM_SS_24]="{
  *      errorName: 'timeHH_MM_SS_24',
  *      error: 'Wrong time format.'
@@ -833,10 +850,11 @@ export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[timeHH_MM_SS_24]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: TimeHH_MM_SS_24ValidatorDirective,
       multi: true,
     },
   ],
@@ -865,9 +883,9 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="url"
+ *    id="url"
+ *    formControlName="url"
  *   [urlValidation]="{
  *      errorName: 'url',
  *      error: 'Wrong url format.'
@@ -876,10 +894,11 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
  */
 @Directive({
   selector: "[urlValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: UrlValidatorDirective,
       multi: true,
     },
   ],
@@ -904,9 +923,9 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
  * @example
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
- *    formControlName="regexp"
+ *    name="zipCode"
+ *    id="zipCode"
+ *    formControlName="zipCode"
  *   [zipCodeValidation]="{
  *      errorName: 'zipCode',
  *      error: 'Wrong zip code format.'
@@ -915,10 +934,11 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
  */
 @Directive({
   selector: "[zipCodeValidation]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressValidatorDirective,
+      useExisting: ZipCodeValidatorDirective,
       multi: true,
     },
   ],

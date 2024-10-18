@@ -1,7 +1,29 @@
 <div id="header-content">
-    <img src="../../../assets/dynamize-angular-icon.png" alt="ngx-validator-pack-icon">
-    <div id="header-tabs">
-        <div class="header-tab" [ngClass]="{ selected: selectedTabIndex === 1}" (click)="selectTab(1)">Form Validators</div>
-        <div class="header-tab" [ngClass]="{ selected: selectedTabIndex === 0}" (click)="selectTab(0)">Input Validators</div>
+  <img
+    src="../../../assets/dynamize-angular-icon.png"
+    alt="ngx-validator-pack-icon"
+  />
+  <div id="header-tabs">
+    <div
+      class="header-tab"
+      [ngClass]="{ selected: selectedTabIndex === 0 }"
+      (click)="selectTab(0)"
+    >
+      Cross Field Validators
     </div>
+    <div
+      class="header-tab"
+      [ngClass]="{ selected: selectedTabIndex === 1 }"
+      (click)="selectTab(1)"
+    >
+      Template Driven Forms Validators
+    </div>
+    <div
+      class="header-tab"
+      [ngClass]="{ selected: selectedTabIndex === 2 }"
+      (click)="selectTab(2)"
+    >
+      Reactive Forms Validators
+    </div>
+  </div>
 </div>
