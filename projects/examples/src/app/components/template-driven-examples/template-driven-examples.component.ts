@@ -78,7 +78,7 @@ export class TemplateDrivenExamplesComponent implements OnInit {
   templateForm!: FormGroup;
   required: boolean = false;
   today: Date = new Date();
-  regexp: RegExp = /(s|regexp)/;
+  regexp: RegExp = /^(s|regexp)$/;
 
   constructor(private readonly fb: FormBuilder) {}
   ngOnInit(): void {
