@@ -21,28 +21,20 @@ import {
 
 /**
  * @description
- * A Directive that preforms a conditional check and if the condition
- * passes it will return an error.
+ * A Directive that assigns a required error to the controls with a name was specified in the
+ * first parameter if the control with a name specified in the second parameter
+ * has no value.
  *
- * Has an input in which you specify the condition that is to be checked
- * and optionally you can give it a custom name and a custom error
- * content / message.
+ * Has an input in which you specify the control which needs to receive the required error,
+ * and the control which needs to be checked.
  *
  * @example
- *  <input
- *    type="text"
- *    name="requiredWhen"
- *    id="requiredWhen"
- *    formControlName="requiredWhen"
- *   [requiredWhenValidation]="{
- *      conditional: isTrue,                     - this can be ether a boolean
- *      errorName: 'requiredWhen',                     or a function that returns a boolean
- *      error: 'The condition is true.'
+ * <form #exampleForm="ngForm"
+ *   [requiredIf]="{
+ *      required: 'field_name',
+ *      check: 'field_name'
  *   }"
  * />
- *
- * NOTE: It is not recommended to pass a function to be executed in the template,
- * as this function will be executed every change detection cycle.
  */
 @Directive({
   selector: "[requiredIf]",
@@ -68,6 +60,23 @@ export class RequiredIfValidatorDirective implements Validator {
   }
 }
 
+/**
+ * @description
+ * A Directive that assigns a required error to the controls with a name was specified in the
+ * first parameter if the control with a name specified in the second parameter
+ * has a value.
+ *
+ * Has an input in which you specify the control which needs to receive the required error,
+ * and the control which needs to be checked.
+ *
+ * @example
+ * <form #exampleForm="ngForm"
+ *   [requiredIfNot]="{
+ *      required: 'field_name',
+ *      check: 'field_name'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[requiredIfNot]",
   providers: [
@@ -92,6 +101,22 @@ export class RequiredIfNotValidatorDirective implements Validator {
   }
 }
 
+/**
+ * @description
+ * A Directive that assigns a required error to both controls who's names are specified if nether one
+ * has a value.
+ *
+ * Has an input in which you specify the control which needs to receive the required error,
+ * and the control which needs to be checked.
+ *
+ * @example
+ * <form #exampleForm="ngForm"
+ *   [requiredIfNot]="{
+ *      required: 'field_name',
+ *      check: 'field_name'
+ *   }"
+ * />
+ */
 @Directive({
   selector: "[requiredEther]",
   providers: [

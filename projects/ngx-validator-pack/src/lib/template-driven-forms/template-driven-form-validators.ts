@@ -300,7 +300,7 @@ export class RequiredWhenValidatorDirective implements Validator {
  *    name="linkTo"
  *    id="linkTo"
  *    formControlName="linkTo"
- *   [linkToValidation]="{
+ *   [linkTo]="{
  *      link: 'linkedTo,                      - a name of a form control we want
  *      errorName: 'linkTo',                     to link the input to
  *      error: 'The linked input has a value but this one does not'
@@ -340,7 +340,7 @@ export class LinkToValidatorDirective implements Validator {
  *    name="linkedTo"
  *    id="linkedTo"
  *    formControlName="linkedTo"
- *   [linkedToValidation]="{
+ *   [linkedTo]="{
  *      link: 'linkTo,                      - a name of a form control we want
  *      errorName: 'linkedTo',                     to link the input to
  *      error: 'The linked input does not have a value but this one does.'

@@ -156,6 +156,20 @@ const removeErrors = (control, keys) => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @description
+ * A validation function which assigns a required error to the controls with a name that
+ * was specified in the requiredControlName filed of the config parameter if the control
+ * with a name specified in the controlToCheckName parameter has no value.
+ *
+ * @param {AbstractControl}                    - form group
+ * @param {
+ *         requiredControlName: string,
+ *         controlToCheckName: string,
+ *         error?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 const requiredIfValidation = (control, config) => {
     const required = control?.get(config.requiredControlName);
     const toCheck = control?.get(config.controlToCheckName);
@@ -170,6 +184,20 @@ const requiredIfValidation = (control, config) => {
         return { [errorVal]: true };
     }
 };
+/**
+ * @description
+ * A validation function which assigns a required error to the controls with a name that
+ * was specified in the requiredControlName field of the config parameter if the control
+ * with a name specified in the controlToCheckName parameter has a value.
+ *
+ * @param {AbstractControl}                    - form group
+ * @param {
+ *         requiredControlName: string,
+ *         controlToCheckName: string,
+ *         error?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 const requiredIfNotValidation = (control, config) => {
     const required = control?.get(config.requiredControlName);
     const toCheck = control?.get(config.controlToCheckName);
@@ -184,6 +212,20 @@ const requiredIfNotValidation = (control, config) => {
         return { [errorVal]: true };
     }
 };
+/**
+ * @description
+ * A validation function which assigns a required error to the controls with a name that
+ * was specified in the requiredControlName field of the config parameter nether that control
+ * or the control with a name specified in the controlToCheckName parameter has a value.
+ *
+ * @param {AbstractControl}                    - form group
+ * @param {
+ *         requiredControlName: string,
+ *         controlToCheckName: string,
+ *         error?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 const requiredEtherValidation = (control, config) => {
     const required = control?.get(config.requiredControlName);
     const toCheck = control?.get(config.controlToCheckName);
@@ -363,6 +405,19 @@ const compare = (date1, date2, comparison) => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @description
+ * A validation function which preforms a RegEx check on value in the
+ * given FromControl / AbstractControl.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+ *         regExp: RegExp,
+ *         error?: string,
+ *         errorName?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 const regexpValidation = (control, config) => {
     const error = config.error ?? "This control did not match a given regular expression.";
     const errors = {
@@ -370,6 +425,19 @@ const regexpValidation = (control, config) => {
     };
     return !control.value || config.regExp.test(control.value) ? null : errors;
 };
+/**
+ * @description
+ * A validation function which preforms a RegEx check on value in the
+ * given FromControl / AbstractControl.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         regExp: RegExp,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const regexpNotValidation = (control, config) => {
     const error = config.error ?? "This control matched a given regular expression.";
     const errors = {
@@ -377,6 +445,20 @@ const regexpNotValidation = (control, config) => {
     };
     return !control.value || !config.regExp.test(control.value) ? null : errors;
 };
+/**
+ * @description
+ * A validation function which checks if the date in the given
+ * FromControl / AbstractControl is earlier then the value in the specified
+ * FromControl / AbstractControl.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         regExp: RegExp,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const earlierThenValidation = (control, config) => {
     const error = config.error ??
         `This control must have a value earlier then ${config.date}.`;
@@ -387,6 +469,20 @@ const earlierThenValidation = (control, config) => {
         ? null
         : errors;
 };
+/**
+ * @description
+ * A validation function which checks if the date in the given
+ * FromControl / AbstractControl is greater then the value in the specified
+ * FromControl / AbstractControl.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         regExp: RegExp,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const laterThenValidation = (control, config) => {
     const error = config.error ?? `This control must have a value later then ${config.date}.`;
     const errors = { [config.errorName ?? "laterThen"]: error };
@@ -394,6 +490,19 @@ const laterThenValidation = (control, config) => {
         ? null
         : errors;
 };
+/**
+ * @description
+ * A validation function which compares the date values of the given
+ * FromControl / AbstractControl and specified FromControl / AbstractControl.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         fieldName: string,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const compareToValidation = (control, config) => {
     const date = control.parent?.get(config.fieldName)?.value;
     if (date) {
@@ -407,6 +516,18 @@ const compareToValidation = (control, config) => {
     }
     return null;
 };
+/**
+ * @description
+ * A validation function which returns a validation error if a condition is met.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         conditional: (() => boolean) | boolean,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const requiredWhenValidation = (control, config) => {
     const error = config.error ?? "This control has a conditional set on it.";
     const errors = {
@@ -417,12 +538,40 @@ const requiredWhenValidation = (control, config) => {
         : config.conditional;
     return !control.value && outcome ? errors : null;
 };
+/**
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has no value and specified
+ * FromControl / AbstractControl has it.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         link: string,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const linkToValidation = (control, config) => {
     const error = config.error ?? `This control has a link to ${config.link}.`;
     const errors = { [config.errorName ?? "linkTo"]: error };
     const linkedTo = control.parent?.get(config.link);
     return !control?.value && !!linkedTo?.value ? errors : null;
 };
+/**
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value and specified
+ * FromControl / AbstractControl does not.
+ *
+ * @param {AbstractControl}                    - form control
+ * @param {
+*         link: string,
+*         error?: string,
+*         errorName?: string
+*        }                                    - config parameter
+* @returns {ValidationErrors | null}          - Validation error
+*/
 const linkedToValidation = (control, config) => {
     const error = config.error ?? `This control is linked to ${config.link}.`;
     const errors = { [config.errorName ?? "linkTo"]: error };
@@ -731,7 +880,7 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
  */
 /**
  * @description
- * Preforms a RegEx check on value in the given FromControl / AbstractControl
+ * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
  * @param {RegExp}                    - Regular expression to check
  * @param {string}                    - optional parameter representing error name
@@ -743,7 +892,7 @@ const regexpValidator = (regExp, errorName, error) => (control) => {
 };
 /**
  * @description
- * Preforms a RegEx check on value in the given FromControl / AbstractControl
+ * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
  * @param {RegExp}                    - Regular expression to check
  * @param {string}                    - optional parameter representing error name
@@ -756,7 +905,7 @@ const regexpNotValidator = (regExp, errorName, error) => (control) => {
 /**
  * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
- * the value in the specified FromControl / AbstractControl
+ * the value in the specified FromControl / AbstractControl.
  *
  * @param {AbstractControl}           - AbstractControl to preform the check against
  * @param {string}                    - optional parameter representing error name
@@ -769,7 +918,7 @@ const earlierThenValidator = (date, errorName, error) => (control) => {
 /**
  * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
- * the value in the specified FromControl / AbstractControl
+ * the value in the specified FromControl / AbstractControl.
  *
  * @param {AbstractControl}           - AbstractControl to preform the check against
  * @param {string}                    - optional parameter representing error name
@@ -782,7 +931,7 @@ const laterThenValidator = (date, errorName, error) => (control) => {
 /**
  * @description
  * Compares the date values of the given FromControl / AbstractControl and
- * specified FromControl / AbstractControl
+ * specified FromControl / AbstractControl.
  *
  * @param {string}                    - name of the filed to compare against
  * @param {ComparisonOperations}      - comparison to preform
@@ -800,7 +949,7 @@ const compareToValidator = (fieldName, comparison, errorName, error) => (control
 };
 /**
  * @description
- * Returns a validation error if a condition is met
+ * Returns a validation error if a condition is met.
  *
  * @param {Function | boolean}        - conditional function or a boolean value
  * @param {string}                    - optional parameter representing error name
@@ -813,7 +962,7 @@ const requiredWhenValidator = (conditional, errorName, error) => (control) => {
 /**
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
- * and specified FromControl / AbstractControl has it
+ * and specified FromControl / AbstractControl has it.
  *
  * @param {string}                    - name of the FromControl / AbstractControl to link to
  * @param {string}                    - optional parameter representing error name
@@ -826,7 +975,7 @@ const linkToValidator = (link, errorName, error) => (control) => {
 /**
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
- * and specified FromControl / AbstractControl does not
+ * and specified FromControl / AbstractControl does not.
  *
  * @param {string}                    - name of the FromControl / AbstractControl
  *                                      which a given FromControl / AbstractControl is linked to
@@ -1175,7 +1324,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="linkTo"
  *    id="linkTo"
  *    formControlName="linkTo"
- *   [linkToValidation]="{
+ *   [linkTo]="{
  *      link: 'linkedTo,                      - a name of a form control we want
  *      errorName: 'linkTo',                     to link the input to
  *      error: 'The linked input has a value but this one does not'
@@ -1227,7 +1376,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="linkedTo"
  *    id="linkedTo"
  *    formControlName="linkedTo"
- *   [linkedToValidation]="{
+ *   [linkedTo]="{
  *      link: 'linkTo,                      - a name of a form control we want
  *      errorName: 'linkedTo',                     to link the input to
  *      error: 'The linked input does not have a value but this one does.'

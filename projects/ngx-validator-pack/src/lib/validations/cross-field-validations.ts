@@ -9,6 +9,20 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { removeErrors, setErrors } from "../helpers/errors";
 
+/**
+ * @description
+ * A validation function which assigns a required error to the controls with a name that 
+ * was specified in the requiredControlName filed of the config parameter if the control 
+ * with a name specified in the controlToCheckName parameter has no value.
+ *
+ * @param {AbstractControl}                    - form group
+ * @param {
+ *         requiredControlName: string, 
+ *         controlToCheckName: string,
+ *         error?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 export const requiredIfValidation = (
   control: AbstractControl,
   config: {
@@ -31,6 +45,20 @@ export const requiredIfValidation = (
   }
 };
 
+/**
+ * @description
+ * A validation function which assigns a required error to the controls with a name that 
+ * was specified in the requiredControlName field of the config parameter if the control 
+ * with a name specified in the controlToCheckName parameter has a value.
+ *
+ * @param {AbstractControl}                    - form group
+ * @param {
+ *         requiredControlName: string, 
+ *         controlToCheckName: string,
+ *         error?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 export const requiredIfNotValidation = (
   control: AbstractControl,
   config: {
@@ -53,6 +81,20 @@ export const requiredIfNotValidation = (
   }
 };
 
+/**
+ * @description
+ * A validation function which assigns a required error to the controls with a name that 
+ * was specified in the requiredControlName field of the config parameter nether that control
+ * or the control with a name specified in the controlToCheckName parameter has a value.
+ *
+ * @param {AbstractControl}                    - form group
+ * @param {
+ *         requiredControlName: string, 
+ *         controlToCheckName: string,
+ *         error?: string
+ *        }                                    - config parameter
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 export const requiredEtherValidation = (
   control: AbstractControl,
   config: {
