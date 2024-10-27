@@ -25,7 +25,7 @@ export function RegExpValidatorInput(
   errorName: string,
   error: string
 ): (target: any, propertyKey: string) => void {
-  return function (target: any, propertyKey: string) {
+  return function (target: any, propertyKey: string): void {
     type ObjectKey = keyof typeof target;
     let original: BaseValidationInput = target[propertyKey as ObjectKey];
     
