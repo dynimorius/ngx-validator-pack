@@ -41,7 +41,7 @@ export interface DateValidationInput extends BaseValidationInput {
  * {@link compareToValidation}
  */
 export interface CompareValidationInput extends BaseValidationInput {
-    date: Date;
+    fieldName: string;
     comparison: ComparisonOperations;
 }
 /**

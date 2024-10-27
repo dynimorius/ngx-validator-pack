@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { ValidationErrors } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import {
   IPAddressV4,
   IPAddressV4AndV6,
@@ -30,10 +30,7 @@ import {
   url,
   zipCode,
 } from "../constant/regex";
-import {
-  regexpNotValidator,
-  regexpValidator,
-} from "./reactive-forms-validators";
+import { regexpValidation } from "../validations/validations";
 
 /**
  * @description
@@ -45,10 +42,14 @@ import {
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const addressValidator = (
-  errorName: string = "address",
-  error: string = "Please input a value in a format of: Street number Street Name, City, State ZIP code."
-): ValidationErrors | null => regexpValidator(address, errorName, error);
+export const addressValidator =
+  (
+    errorName: string = "address",
+    error: string = "Please input a value in a format of: Street number Street Name, City, State ZIP code."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: address, error, errorName });
+  };
 
 /**
  * @description
@@ -59,10 +60,14 @@ export const addressValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const alphabetOnlyValidator = (
-  errorName: string = "alphabetOnly",
-  error: string = "Only alphabetic characters are allowed."
-): ValidationErrors | null => regexpValidator(lettersOnly, errorName, error);
+export const alphabetOnlyValidator =
+  (
+    errorName: string = "alphabetOnly",
+    error: string = "Only alphabetic characters are allowed."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: lettersOnly, error, errorName });
+  };
 
 /**
  * @description
@@ -73,10 +78,18 @@ export const alphabetOnlyValidator = (
  * @param { string}                   - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const dateDD_MM_YYYYValidator = (
-  errorName: string = "dateDD_MM_YYYY",
-  error: string = "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."
-): ValidationErrors | null => regexpValidator(dateDD_MM_YYYY, errorName, error);
+export const dateDD_MM_YYYYValidator =
+  (
+    errorName: string = "dateDD_MM_YYYY",
+    error: string = "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: dateDD_MM_YYYY,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -87,10 +100,18 @@ export const dateDD_MM_YYYYValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const dateYYYY_MM_DDValidator = (
-  errorName: string = "dateYYYY_MM_DD",
-  error: string = "Please input a value in a format: YYYY-MM-dd."
-): ValidationErrors | null => regexpValidator(dateYYYY_MM_DD, errorName, error);
+export const dateYYYY_MM_DDValidator =
+  (
+    errorName: string = "dateYYYY_MM_DD",
+    error: string = "Please input a value in a format: YYYY-MM-dd."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: dateYYYY_MM_DD,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -101,10 +122,14 @@ export const dateYYYY_MM_DDValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const emailValidator = (
-  errorName: string = "email",
-  error: string = "Please input a value in a format: local-part@domain.com."
-): ValidationErrors | null => regexpValidator(email, errorName, error);
+export const emailValidator =
+  (
+    errorName: string = "email",
+    error: string = "Please input a value in a format: local-part@domain.com."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: email, error, errorName });
+  };
 
 /**
  * @description
@@ -115,11 +140,18 @@ export const emailValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const ipAddressValidator = (
-  errorName: string = "ipAddress",
-  error: string = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
-): ValidationErrors | null =>
-  regexpValidator(IPAddressV4AndV6, errorName, error);
+export const ipAddressValidator =
+  (
+    errorName: string = "ipAddress",
+    error: string = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: IPAddressV4AndV6,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -130,10 +162,14 @@ export const ipAddressValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const iPv4Validator = (
-  errorName: string = "iPv4",
-  error: string = "Please input a value in a format: x.x.x.x."
-): ValidationErrors | null => regexpValidator(IPAddressV4, errorName, error);
+export const iPv4Validator =
+  (
+    errorName: string = "iPv4",
+    error: string = "Please input a value in a format: x.x.x.x."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: IPAddressV4, error, errorName });
+  };
 
 /**
  * @description
@@ -144,10 +180,14 @@ export const iPv4Validator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const iPv6Validator = (
-  errorName: string = "iPv6",
-  error: string = "Please input a value in a format: y:y:y:y:y:y:y:y."
-): ValidationErrors | null => regexpValidator(IPAddressV6, errorName, error);
+export const iPv6Validator =
+  (
+    errorName: string = "iPv6",
+    error: string = "Please input a value in a format: y:y:y:y:y:y:y:y."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: IPAddressV6, error, errorName });
+  };
 
 /**
  * @description
@@ -158,10 +198,14 @@ export const iPv6Validator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const numericsOnlyValidator = (
-  errorName: string = "numericsOnly",
-  error: string = "Only numeric characters are allowed."
-): ValidationErrors | null => regexpValidator(numbersOnly, errorName, error);
+export const numericsOnlyValidator =
+  (
+    errorName: string = "numericsOnly",
+    error: string = "Only numeric characters are allowed."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: numbersOnly, error, errorName });
+  };
 
 /**
  * @description
@@ -171,10 +215,14 @@ export const numericsOnlyValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const noSpecialsValidator = (
-  errorName: string = "noSpecials",
-  error: string = "No special characters are allowed."
-): ValidationErrors | null => regexpValidator(noSpecial, errorName, error);
+export const noSpecialsValidator =
+  (
+    errorName: string = "noSpecials",
+    error: string = "No special characters are allowed."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: noSpecial, error, errorName });
+  };
 
 /**
  * @description
@@ -184,10 +232,14 @@ export const noSpecialsValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const passportValidator = (
-  errorName: string = "passport",
-  error: string = "Incorrect passport format."
-): ValidationErrors | null => regexpValidator(passport, errorName, error);
+export const passportValidator =
+  (
+    errorName: string = "passport",
+    error: string = "Incorrect passport format."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: passport, error, errorName });
+  };
 
 /**
  * @description
@@ -199,11 +251,18 @@ export const passportValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const passwordValidator = (
-  errorName: string = "password",
-  error: string = "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."
-): ValidationErrors | null =>
-  regexpValidator(passwordStrength, errorName, error);
+export const passwordValidator =
+  (
+    errorName: string = "password",
+    error: string = "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: passwordStrength,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -214,10 +273,14 @@ export const passwordValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const phoneNumberValidator = (
-  errorName: string = "phoneNumber",
-  error: string = "Please input a value in a format: (000) 000 0000."
-): ValidationErrors | null => regexpValidator(phoneNumber, errorName, error);
+export const phoneNumberValidator =
+  (
+    errorName: string = "phoneNumber",
+    error: string = "Please input a value in a format: (000) 000 0000."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: phoneNumber, error, errorName });
+  };
 
 /**
  * @description
@@ -228,10 +291,14 @@ export const phoneNumberValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const singleSpaceValidator = (
-  errorName: string = "singleSpace",
-  error: string = "A single space character is not allowed."
-): ValidationErrors | null => regexpNotValidator(singleSpace, errorName, error);
+export const singleSpaceValidator =
+  (
+    errorName: string = "singleSpace",
+    error: string = "A single space character is not allowed."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: singleSpace, error, errorName });
+  };
 
 /**
  * @description
@@ -242,11 +309,18 @@ export const singleSpaceValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const spaceRestrictionValidator = (
-  errorName: string = "spaceRestriction",
-  error: string = "Value can not start or end with a space character."
-): ValidationErrors | null =>
-  regexpValidator(spaceRestriction, errorName, error);
+export const spaceRestrictionValidator =
+  (
+    errorName: string = "spaceRestriction",
+    error: string = "Value can not start or end with a space character."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: spaceRestriction,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -257,10 +331,14 @@ export const spaceRestrictionValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const ssnValidator = (
-  errorName: string = "ssn",
-  error: string = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
-): ValidationErrors | null => regexpValidator(ssn, errorName, error);
+export const ssnValidator =
+  (
+    errorName: string = "ssn",
+    error: string = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: ssn, error, errorName });
+  };
 
 /**
  * @description
@@ -271,11 +349,18 @@ export const ssnValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const timeHH_MM_12Validator = (
-  errorName: string = "timeHH_MM_12",
-  error: string = "Please input a value in a HH:MM 12-hour format."
-): ValidationErrors | null => regexpValidator(timeHH_MM_12, errorName, error);
-
+export const timeHH_MM_12Validator =
+  (
+    errorName: string = "timeHH_MM_12",
+    error: string = "Please input a value in a HH:MM 12-hour format."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: timeHH_MM_12,
+      error,
+      errorName,
+    });
+  };
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
@@ -285,10 +370,18 @@ export const timeHH_MM_12Validator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const timeHH_MM_24Validator = (
-  errorName: string = "timeHH_MM_24",
-  error: string = "Please input a value in a HH:MM 24-hour format."
-): ValidationErrors | null => regexpValidator(timeHH_MM_24, errorName, error);
+export const timeHH_MM_24Validator =
+  (
+    errorName: string = "timeHH_MM_24",
+    error: string = "Please input a value in a HH:MM 24-hour format."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: timeHH_MM_24,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -299,11 +392,18 @@ export const timeHH_MM_24Validator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const timeHH_MM_SS_24Validator = (
-  errorName: string = "timeHH_MM_SS_24",
-  error: string = "Please input a value in a HH:MM:SS 24-hour format."
-): ValidationErrors | null =>
-  regexpValidator(timeHH_MM_SS_24, errorName, error);
+export const timeHH_MM_SS_24Validator =
+  (
+    errorName: string = "timeHH_MM_SS_24",
+    error: string = "Please input a value in a HH:MM:SS 24-hour format."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, {
+      regExp: timeHH_MM_SS_24,
+      error,
+      errorName,
+    });
+  };
 
 /**
  * @description
@@ -314,10 +414,14 @@ export const timeHH_MM_SS_24Validator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const urlValidator = (
-  errorName: string = "url",
-  error: string = "Improper URL format."
-): ValidationErrors | null => regexpValidator(url, errorName, error);
+export const urlValidator =
+  (
+    errorName: string = "url",
+    error: string = "Improper URL format."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: url, error, errorName });
+  };
 
 /**
  * @description
@@ -328,7 +432,11 @@ export const urlValidator = (
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const zipCodeValidator = (
-  errorName: string = "zipCode",
-  error: string = "Improper zip code format."
-): ValidationErrors | null => regexpValidator(zipCode, errorName, error);
+export const zipCodeValidator =
+  (
+    errorName: string = "zipCode",
+    error: string = "Improper zip code format."
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return regexpValidation(control, { regExp: zipCode, error, errorName });
+  };

@@ -16,7 +16,7 @@ import { ComparisonOperations } from "../helpers/date";
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const regexpValidator: (regexp: RegExp, errorName?: string, error?: string) => ValidatorFn;
+export declare const regexpValidator: (regExp: RegExp, errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl
@@ -26,7 +26,7 @@ export declare const regexpValidator: (regexp: RegExp, errorName?: string, error
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const regexpNotValidator: (regexp: RegExp, errorName?: string, error?: string) => ValidatorFn;
+export declare const regexpNotValidator: (regExp: RegExp, errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
@@ -60,7 +60,7 @@ export declare const laterThenValidator: (date: Date, errorName?: string, error?
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const compareToValidator: (filedName: string, comparison: ComparisonOperations, errorName?: string, error?: string) => ValidatorFn;
+export declare const compareToValidator: (fieldName: string, comparison: ComparisonOperations, errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Returns a validation error if a condition is met
@@ -81,7 +81,7 @@ export declare const requiredWhenValidator: (conditional: (() => boolean) | bool
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const linkToValidator: (linkTo: string, errorName?: string, error?: string) => ValidatorFn;
+export declare const linkToValidator: (link: string, errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
@@ -93,4 +93,4 @@ export declare const linkToValidator: (linkTo: string, errorName?: string, error
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const linkedToValidator: (linkedTo: string, errorName?: string, error?: string) => ValidatorFn;
+export declare const linkedToValidator: (link: string, errorName?: string, error?: string) => ValidatorFn;

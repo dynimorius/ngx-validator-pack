@@ -7,11 +7,17 @@
  */
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { ComparisonOperations } from "../helpers/date";
 import {
-  ComparisonOperations,
-  compareDates,
-  prepareToCompare,
-} from "../helpers/date";
+  compareToValidation,
+  earlierThenValidation,
+  laterThenValidation,
+  linkToValidation,
+  linkedToValidation,
+  regexpNotValidation,
+  regexpValidation,
+  requiredWhenValidation,
+} from "../validations/validations";
 
 /**
  * @description
@@ -23,14 +29,9 @@ import {
  * @returns {ValidationErrors | null} - Validation error
  */
 export const regexpValidator =
-  (regexp: RegExp, errorName?: string, error?: string): ValidatorFn =>
+  (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? "This control did not match a given regular expression.";
-    const errors: ValidationErrors = {
-      [errorName ?? "regexpValidator"]: error,
-    };
-
-    return !control.value || regexp.test(control.value) ? null : errors;
+    return regexpValidation(control, { regExp, error, errorName });
   };
 
 /**
@@ -43,14 +44,9 @@ export const regexpValidator =
  * @returns {ValidationErrors | null} - Validation error
  */
 export const regexpNotValidator =
-  (regexp: RegExp, errorName?: string, error?: string): ValidatorFn =>
+  (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? "This control matched a given regular expression.";
-    const errors: ValidationErrors = {
-      [errorName ?? "regexpNotValidator"]: error,
-    };
-
-    return !control.value || !regexp.test(control.value) ? null : errors;
+    return regexpNotValidation(control, { regExp, error, errorName });
   };
 
 /**
@@ -66,12 +62,7 @@ export const regexpNotValidator =
 export const earlierThenValidator =
   (date: Date, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? `This control must have a value earlier then ${date}.`;
-    const errors: ValidationErrors = { [errorName ?? "earlierThen"]: error };
-
-    return prepareToCompare(control?.value) < prepareToCompare(date)
-      ? null
-      : errors;
+    return earlierThenValidation(control, { date, error, errorName });
   };
 
 /**
@@ -87,12 +78,7 @@ export const earlierThenValidator =
 export const laterThenValidator =
   (date: Date, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? `This control must have a value later then ${date}.`;
-    const errors: ValidationErrors = { [errorName ?? "laterThen"]: error };
-
-    return prepareToCompare(control?.value) > prepareToCompare(date)
-      ? null
-      : errors;
+    return laterThenValidation(control, { date, error, errorName });
   };
 
 /**
@@ -108,23 +94,18 @@ export const laterThenValidator =
  */
 export const compareToValidator =
   (
-    filedName: string,
+    fieldName: string,
     comparison: ComparisonOperations,
     errorName?: string,
     error?: string
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    const date = control.parent?.get(filedName)?.value;
-    if (date) {
-      error = error ?? `Value comparison with ${date} failed.`;
-      const errors: ValidationErrors = {
-        [errorName ?? "dateComparison"]: error,
-      };
-      return control.value && compareDates(control.value, date, comparison)
-        ? null
-        : errors;
-    }
-    return null;
+    return compareToValidation(control, {
+      fieldName,
+      comparison,
+      error,
+      errorName,
+    });
   };
 
 /**
@@ -143,12 +124,7 @@ export const requiredWhenValidator =
     error?: string
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? "This control has a conditional set on it.";
-    const errors: ValidationErrors = { [errorName ?? "requiredWhen"]: error };
-
-    const outcome =
-      typeof conditional === "function" ? conditional() : conditional;
-    return !control.value && outcome ? errors : null;
+    return requiredWhenValidation(control, { conditional, error, errorName });
   };
 
 /**
@@ -162,13 +138,9 @@ export const requiredWhenValidator =
  * @returns {ValidationErrors | null} - Validation error
  */
 export const linkToValidator =
-  (linkTo: string, errorName?: string, error?: string): ValidatorFn =>
+  (link: string, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? `This control has a link to ${linkTo}.`;
-    const errors: ValidationErrors = { [errorName ?? "linkTo"]: error };
-
-    const linkedTo = control.parent?.get(linkTo);
-    return !control?.value && !!linkedTo?.value ? errors : null;
+    return linkToValidation(control, { link, error, errorName });
   };
 
 /**
@@ -183,11 +155,7 @@ export const linkToValidator =
  * @returns {ValidationErrors | null} - Validation error
  */
 export const linkedToValidator =
-  (linkedTo: string, errorName?: string, error?: string): ValidatorFn =>
+  (link: string, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    error = error ?? `This control is linked to ${linkedTo}.`;
-    const errors: ValidationErrors = { [errorName ?? "linkTo"]: error };
-
-    const link = control.parent?.get(linkedTo);
-    return !!control?.value && !link?.value ? errors : null;
+    return linkedToValidation(control, { link, error, errorName });
   };

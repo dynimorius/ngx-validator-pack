@@ -5,7 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { ValidationErrors } from "@angular/forms";
+import { ValidatorFn } from "@angular/forms";
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper address format
@@ -16,7 +16,7 @@ import { ValidationErrors } from "@angular/forms";
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const addressValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const addressValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl consists of only
@@ -26,7 +26,7 @@ export declare const addressValidator: (errorName?: string, error?: string) => V
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const alphabetOnlyValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const alphabetOnlyValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
@@ -36,7 +36,7 @@ export declare const alphabetOnlyValidator: (errorName?: string, error?: string)
  * @param { string}                   - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const dateDD_MM_YYYYValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const dateDD_MM_YYYYValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -46,7 +46,7 @@ export declare const dateDD_MM_YYYYValidator: (errorName?: string, error?: strin
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const dateYYYY_MM_DDValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const dateYYYY_MM_DDValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -56,7 +56,7 @@ export declare const dateYYYY_MM_DDValidator: (errorName?: string, error?: strin
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const emailValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const emailValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
@@ -66,7 +66,7 @@ export declare const emailValidator: (errorName?: string, error?: string) => Val
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const ipAddressValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const ipAddressValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -76,7 +76,7 @@ export declare const ipAddressValidator: (errorName?: string, error?: string) =>
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const iPv4Validator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const iPv4Validator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -86,7 +86,7 @@ export declare const iPv4Validator: (errorName?: string, error?: string) => Vali
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const iPv6Validator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const iPv6Validator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl consists of only
@@ -96,7 +96,7 @@ export declare const iPv6Validator: (errorName?: string, error?: string) => Vali
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const numericsOnlyValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const numericsOnlyValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl has any special characters.
@@ -105,7 +105,7 @@ export declare const numericsOnlyValidator: (errorName?: string, error?: string)
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const noSpecialsValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const noSpecialsValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper passport format
@@ -114,7 +114,7 @@ export declare const noSpecialsValidator: (errorName?: string, error?: string) =
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const passportValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const passportValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a strong password format
@@ -125,7 +125,7 @@ export declare const passportValidator: (errorName?: string, error?: string) => 
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const passwordValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const passwordValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
@@ -135,7 +135,7 @@ export declare const passwordValidator: (errorName?: string, error?: string) => 
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const phoneNumberValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const phoneNumberValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl consists of a single space
@@ -145,7 +145,7 @@ export declare const phoneNumberValidator: (errorName?: string, error?: string) 
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const singleSpaceValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const singleSpaceValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl starts or ends with a
@@ -155,7 +155,7 @@ export declare const singleSpaceValidator: (errorName?: string, error?: string) 
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const spaceRestrictionValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const spaceRestrictionValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
@@ -165,7 +165,7 @@ export declare const spaceRestrictionValidator: (errorName?: string, error?: str
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const ssnValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const ssnValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
@@ -175,7 +175,7 @@ export declare const ssnValidator: (errorName?: string, error?: string) => Valid
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const timeHH_MM_12Validator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const timeHH_MM_12Validator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
@@ -185,7 +185,7 @@ export declare const timeHH_MM_12Validator: (errorName?: string, error?: string)
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const timeHH_MM_24Validator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const timeHH_MM_24Validator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
@@ -195,7 +195,7 @@ export declare const timeHH_MM_24Validator: (errorName?: string, error?: string)
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const timeHH_MM_SS_24Validator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const timeHH_MM_SS_24Validator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
@@ -205,7 +205,7 @@ export declare const timeHH_MM_SS_24Validator: (errorName?: string, error?: stri
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const urlValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const urlValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
@@ -215,4 +215,4 @@ export declare const urlValidator: (errorName?: string, error?: string) => Valid
  * @param {string}                    - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const zipCodeValidator: (errorName?: string, error?: string) => ValidationErrors | null;
+export declare const zipCodeValidator: (errorName?: string, error?: string) => ValidatorFn;

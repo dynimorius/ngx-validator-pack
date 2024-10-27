@@ -24,7 +24,7 @@ import * as i0 from "@angular/core";
  *    name="regexp"
  *    id="regexp"
  *    formControlName="regexp"
- *   [regexpValidation]="{
+ *   [regExp]="{
  *      regExp: /(s|regexp)/,
  *      errorName: 'regexpCheck',
  *      error: 'Failed regexp check.'
@@ -35,7 +35,7 @@ export declare class RegExpValidatorDirective implements Validator {
     value: RegExpValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RegExpValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpValidatorDirective, "[regexpValidation]", never, { "value": { "alias": "regexpValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpValidatorDirective, "[regExp]", never, { "value": { "alias": "regExp"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -53,7 +53,7 @@ export declare class RegExpValidatorDirective implements Validator {
  *    name="regexpNot"
  *    id="regexpNot"
  *    formControlName="regexpNot"
- *   [regexpNotValidation]="{
+ *   [regExpNot]="{
  *      regExp: /(s|regexp)/,
  *      errorName: 'regexpNotCheck',
  *      error: 'Failed regexpNot check.'
@@ -64,7 +64,7 @@ export declare class RegExpNotValidatorDirective implements Validator {
     value: RegExpValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RegExpNotValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpNotValidatorDirective, "[regexpNotValidation]", never, { "value": { "alias": "regexpNotValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpNotValidatorDirective, "[regExpNot]", never, { "value": { "alias": "regExpNot"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -82,7 +82,7 @@ export declare class RegExpNotValidatorDirective implements Validator {
  *    name="earlierThen"
  *    id="earlierThen"
  *    formControlName="earlierThen"
- *   [earlierThenValidation]="{
+ *   [earlierThen]="{
  *      date: date,                              -- a variable of type Date
  *      errorName: 'earlierThen',
  *      error: 'The date is not earlier then the specified one.'
@@ -93,7 +93,7 @@ export declare class EarlierThenValidatorDirective implements Validator {
     value: DateValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<EarlierThenValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<EarlierThenValidatorDirective, "[earlierThenValidation]", never, { "value": { "alias": "earlierThenValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<EarlierThenValidatorDirective, "[earlierThen]", never, { "value": { "alias": "earlierThen"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -111,7 +111,7 @@ export declare class EarlierThenValidatorDirective implements Validator {
  *    name="laterThen"
  *    id="laterThen"
  *    formControlName="laterThen"
- *   [laterThenValidation]="{
+ *   [laterThen]="{
  *      date: date,                              -- a variable of type Date
  *      errorName: 'laterThen',
  *      error: 'The date is not later then the specified one.'
@@ -122,7 +122,7 @@ export declare class LaterThenValidatorDirective implements Validator {
     value: DateValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LaterThenValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<LaterThenValidatorDirective, "[laterThenValidation]", never, { "value": { "alias": "laterThenValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LaterThenValidatorDirective, "[laterThen]", never, { "value": { "alias": "laterThen"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -142,7 +142,7 @@ export declare class LaterThenValidatorDirective implements Validator {
  *    name="compareTo"
  *    id="compareTo"
  *    formControlName="compareTo"
- *   [compareToValidation]="{
+ *   [compareTo]="{
  *      date: date,                              -- a variable of type Date
  *      comparison: '==='
  *      errorName: 'compareTo',
@@ -154,7 +154,7 @@ export declare class CompareToValidatorDirective implements Validator {
     value: CompareValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<CompareToValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<CompareToValidatorDirective, "[compareToValidation]", never, { "value": { "alias": "compareToValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<CompareToValidatorDirective, "[compareTo]", never, { "value": { "alias": "compareTo"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description

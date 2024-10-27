@@ -382,8 +382,8 @@
           name="compareDate"
           id="compareDate"
           formControlName="compareDate"
-          [compareToValidation]="{
-            date: today,
+          [compareTo]="{
+            fieldName: 'laterDate',
             comparison: '>='
           }"
           showValidation
@@ -404,7 +404,7 @@
           name="laterDate"
           id="earlierDate"
           formControlName="earlierDate"
-          [earlierThenValidation]="{
+          [earlierThen]="{
             date: today
           }"
           showValidation
@@ -426,7 +426,7 @@
           name="laterDate"
           id="laterDate"
           formControlName="laterDate"
-          [laterThenValidation]="{
+          [laterThen]="{
             date: today
           }"
           showValidation
@@ -513,7 +513,7 @@
           name="regexp"
           id="regexp"
           formControlName="regexp"
-          [regexpValidation]="{
+          [regExp]="{
             regExp: regexp
           }"
           showValidation
@@ -532,7 +532,7 @@
           name="regexpNot"
           id="regexpNot"
           formControlName="regexpNot"
-          [regexpNotValidation]="{
+          [regExpNot]="{
             regExp: regexp
           }"
           showValidation
