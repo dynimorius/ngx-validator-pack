@@ -105,7 +105,7 @@ export class RequiredIfNotValidatorDirective implements Validator {
  *
  * @example
  * <form #exampleForm="ngForm"
- *   [requiredIfNot]="{
+ *   [requiredEther]="{
  *      required: 'field_name',
  *      check: 'field_name'
  *   }"
