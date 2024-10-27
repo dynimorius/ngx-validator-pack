@@ -257,7 +257,7 @@ export class CompareToValidatorDirective implements Validator {
  *    name="requiredWhen"
  *    id="requiredWhen"
  *    formControlName="requiredWhen"
- *   [requiredWhenValidation]="{
+ *   [requiredWhen]="{
  *      conditional: isTrue,                     - this can be ether a boolean
  *      errorName: 'requiredWhen',                     or a function that returns a boolean
  *      error: 'The condition is true.'
@@ -268,7 +268,7 @@ export class CompareToValidatorDirective implements Validator {
  * as this function will be executed every change detection cycle.
  */
 @Directive({
-  selector: "[requiredWhenValidation]",
+  selector: "[requiredWhen]",
   standalone: true,
   providers: [
     {
@@ -279,7 +279,7 @@ export class CompareToValidatorDirective implements Validator {
   ],
 })
 export class RequiredWhenValidatorDirective implements Validator {
-  @Input("requiredWhenValidation") value!: ConditionalValidationInput;
+  @Input("requiredWhen") value!: ConditionalValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     return requiredWhenValidation(control, { ...this.value });
   }
@@ -308,7 +308,7 @@ export class RequiredWhenValidatorDirective implements Validator {
  * />
  */
 @Directive({
-  selector: "[linkToValidation]",
+  selector: "[linkTo]",
   standalone: true,
   providers: [
     {
@@ -319,7 +319,7 @@ export class RequiredWhenValidatorDirective implements Validator {
   ],
 })
 export class LinkToValidatorDirective implements Validator {
-  @Input("linkToValidation") value!: LinkValidationInput;
+  @Input("linkTo") value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     return linkToValidation(control, { ...this.value });
   }
@@ -348,7 +348,7 @@ export class LinkToValidatorDirective implements Validator {
  * />
  */
 @Directive({
-  selector: "[linkedToValidation]",
+  selector: "[linkedTo]",
   standalone: true,
   providers: [
     {
@@ -359,7 +359,7 @@ export class LinkToValidatorDirective implements Validator {
   ],
 })
 export class LinkedToValidatorDirective implements Validator {
-  @Input("linkedToValidation") value!: LinkValidationInput;
+  @Input("linkedTo") value!: LinkValidationInput;
   validate(control: AbstractControl): ValidationErrors | null {
     return linkedToValidation(control, { ...this.value });
   }

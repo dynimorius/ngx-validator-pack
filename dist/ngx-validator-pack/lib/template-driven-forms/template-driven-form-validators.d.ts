@@ -171,7 +171,7 @@ export declare class CompareToValidatorDirective implements Validator {
  *    name="requiredWhen"
  *    id="requiredWhen"
  *    formControlName="requiredWhen"
- *   [requiredWhenValidation]="{
+ *   [requiredWhen]="{
  *      conditional: isTrue,                     - this can be ether a boolean
  *      errorName: 'requiredWhen',                     or a function that returns a boolean
  *      error: 'The condition is true.'
@@ -185,7 +185,7 @@ export declare class RequiredWhenValidatorDirective implements Validator {
     value: ConditionalValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RequiredWhenValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredWhenValidatorDirective, "[requiredWhenValidation]", never, { "value": { "alias": "requiredWhenValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredWhenValidatorDirective, "[requiredWhen]", never, { "value": { "alias": "requiredWhen"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -213,7 +213,7 @@ export declare class LinkToValidatorDirective implements Validator {
     value: LinkValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LinkToValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<LinkToValidatorDirective, "[linkToValidation]", never, { "value": { "alias": "linkToValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LinkToValidatorDirective, "[linkTo]", never, { "value": { "alias": "linkTo"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @description
@@ -241,5 +241,5 @@ export declare class LinkedToValidatorDirective implements Validator {
     value: LinkValidationInput;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LinkedToValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<LinkedToValidatorDirective, "[linkedToValidation]", never, { "value": { "alias": "linkedToValidation"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LinkedToValidatorDirective, "[linkedTo]", never, { "value": { "alias": "linkedTo"; "required": false; }; }, {}, never, never, true, never>;
 }

@@ -9,7 +9,7 @@
           name="address"
           id="address"
           formControlName="address"
-          addressValidation
+          address
           showValidation
         />
       </div>
@@ -26,7 +26,7 @@
           name="alphabet"
           id="alphabet"
           formControlName="alphabet"
-          alphabetOnlyValidation
+          alphabetOnly
           showValidation
         />
       </div>
@@ -81,7 +81,7 @@
           name="email"
           id="email"
           formControlName="email"
-          emailValidation
+          email
           showValidation
         />
       </div>
@@ -98,7 +98,7 @@
           name="ipAddress"
           id="ipAddress"
           formControlName="ipAddress"
-          ipAddressValidation
+          ipAddress
           showValidation
         />
       </div>
@@ -114,7 +114,7 @@
           name="ipv4"
           id="ipv4"
           formControlName="ipv4"
-          iPv4Validation
+          iPv4
           showValidation
         />
       </div>
@@ -131,7 +131,7 @@
           name="ipv6"
           id="ipv"
           formControlName="ipv6"
-          iPv6Validation
+          iPv6
           showValidation
         />
       </div>
@@ -148,7 +148,7 @@
           name="numeric"
           id="numeric"
           formControlName="numeric"
-          numericsOnlyValidation
+          numericsOnly
           showValidation
         />
       </div>
@@ -167,7 +167,7 @@
           name="noSpecial"
           id="noSpecial"
           formControlName="noSpecial"
-          noSpecialsValidation
+          noSpecials
           showValidation
         />
       </div>
@@ -184,7 +184,7 @@
           name="passport"
           id="passport"
           formControlName="passport"
-          passportValidation
+          passport
           showValidation
         />
       </div>
@@ -201,7 +201,7 @@
           name="password"
           id="password"
           formControlName="password"
-          passwordValidation
+          password
           showValidation
         />
       </div>
@@ -218,7 +218,7 @@
           name="phone"
           id="phone"
           formControlName="phone"
-          phoneNumberValidation
+          phoneNumber
           showValidation
         />
       </div>
@@ -235,7 +235,7 @@
           name="space"
           id="space"
           formControlName="space"
-          singleSpaceValidation
+          singleSpace
           showValidation
         />
       </div>
@@ -254,7 +254,7 @@
           name="spaceRes"
           id="spaceRes"
           formControlName="spaceRes"
-          spaceRestrictionValidation
+          spaceRestriction
           showValidation
         />
       </div>
@@ -271,7 +271,7 @@
           name="ssn"
           id="ssn"
           formControlName="ssn"
-          ssnValidation
+          ssn
           showValidation
         />
       </div>
@@ -345,7 +345,7 @@
           name="url"
           id="url"
           formControlName="url"
-          urlValidation
+          url
           showValidation
         />
       </div>
@@ -362,7 +362,7 @@
           name="zipCode"
           id="zipCode"
           formControlName="zipCode"
-          zipCodeValidation
+          zipCode
           showValidation
         />
       </div>
@@ -454,7 +454,7 @@
           name="requiredWhen"
           id="requiredWhen"
           formControlName="requiredWhen"
-          [requiredWhenValidation]="{
+          [requiredWhen]="{
             conditional: required
           }"
           showValidation
@@ -473,7 +473,7 @@
           name="linkTo"
           id="linkTo"
           formControlName="linkTo"
-          [linkToValidation]="{
+          [linkTo]="{
             link: 'linkedTo'
           }"
           showValidation
@@ -494,7 +494,7 @@
           name="linkedTo"
           id="linkedTo"
           formControlName="linkedTo"
-          [linkedToValidation]="{
+          [linkedTo]="{
             link: 'linkTo'
           }"
           showValidation

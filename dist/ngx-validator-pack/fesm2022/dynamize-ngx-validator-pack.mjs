@@ -149,6 +149,13 @@ const removeErrors = (control, keys) => {
     control.setErrors(Object.keys(remainingErrors).length > 0 ? remainingErrors : null);
 };
 
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
 const requiredIfValidation = (control, config) => {
     const required = control?.get(config.requiredControlName);
     const toCheck = control?.get(config.controlToCheckName);
@@ -349,6 +356,13 @@ const compare = (date1, date2, comparison) => {
     return operations[comparison](date1, date2);
 };
 
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
 const regexpValidation = (control, config) => {
     const error = config.error ?? "This control did not match a given regular expression.";
     const errors = {
@@ -1106,7 +1120,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="requiredWhen"
  *    id="requiredWhen"
  *    formControlName="requiredWhen"
- *   [requiredWhenValidation]="{
+ *   [requiredWhen]="{
  *      conditional: isTrue,                     - this can be ether a boolean
  *      errorName: 'requiredWhen',                     or a function that returns a boolean
  *      error: 'The condition is true.'
@@ -1121,7 +1135,7 @@ class RequiredWhenValidatorDirective {
         return requiredWhenValidation(control, { ...this.value });
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredWhenValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredWhenValidatorDirective, isStandalone: true, selector: "[requiredWhenValidation]", inputs: { value: ["requiredWhenValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredWhenValidatorDirective, isStandalone: true, selector: "[requiredWhen]", inputs: { value: ["requiredWhen", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: RequiredWhenValidatorDirective,
@@ -1132,7 +1146,7 @@ class RequiredWhenValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredWhenValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[requiredWhenValidation]",
+                    selector: "[requiredWhen]",
                     standalone: true,
                     providers: [
                         {
@@ -1144,7 +1158,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["requiredWhenValidation"]
+                args: ["requiredWhen"]
             }] } });
 /**
  * @description
@@ -1173,7 +1187,7 @@ class LinkToValidatorDirective {
         return linkToValidation(control, { ...this.value });
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkToValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LinkToValidatorDirective, isStandalone: true, selector: "[linkToValidation]", inputs: { value: ["linkToValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LinkToValidatorDirective, isStandalone: true, selector: "[linkTo]", inputs: { value: ["linkTo", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: LinkToValidatorDirective,
@@ -1184,7 +1198,7 @@ class LinkToValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkToValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[linkToValidation]",
+                    selector: "[linkTo]",
                     standalone: true,
                     providers: [
                         {
@@ -1196,7 +1210,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["linkToValidation"]
+                args: ["linkTo"]
             }] } });
 /**
  * @description
@@ -1225,7 +1239,7 @@ class LinkedToValidatorDirective {
         return linkedToValidation(control, { ...this.value });
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkedToValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LinkedToValidatorDirective, isStandalone: true, selector: "[linkedToValidation]", inputs: { value: ["linkedToValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LinkedToValidatorDirective, isStandalone: true, selector: "[linkedTo]", inputs: { value: ["linkedTo", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: LinkedToValidatorDirective,
@@ -1236,7 +1250,7 @@ class LinkedToValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkedToValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[linkedToValidation]",
+                    selector: "[linkedTo]",
                     standalone: true,
                     providers: [
                         {
@@ -1248,7 +1262,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["linkedToValidation"]
+                args: ["linkedTo"]
             }] } });
 
 /**
@@ -1309,7 +1323,7 @@ function RegExpValidatorInput(regexp, errorName, error) {
  *    name="address"
  *    id="address"
  *    formControlName="address"
- *   [addressValidation]="{
+ *   [address]="{
  *      errorName: 'address',
  *      error: 'Wrong address format.'
  *   }"
@@ -1320,7 +1334,7 @@ class AddressValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AddressValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: AddressValidatorDirective, isStandalone: true, selector: "[addressValidation]", inputs: { value: ["addressValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: AddressValidatorDirective, isStandalone: true, selector: "[address]", inputs: { value: ["address", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: AddressValidatorDirective,
@@ -1334,7 +1348,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AddressValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[addressValidation]",
+                    selector: "[address]",
                     standalone: true,
                     providers: [
                         {
@@ -1346,7 +1360,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["addressValidation"]
+                args: ["address"]
             }] } });
 /**
  * @description
@@ -1362,7 +1376,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="alphabet"
  *    id="alphabet"
  *    formControlName="alphabet"
- *   [alphabetOnlyValidation]="{
+ *   [alphabetOnly]="{
  *      errorName: 'alphabet',
  *      error: 'Only letters please.'
  *   }"
@@ -1373,7 +1387,7 @@ class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AlphabetOnlyValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: AlphabetOnlyValidatorDirective, isStandalone: true, selector: "[alphabetOnlyValidation]", inputs: { value: ["alphabetOnlyValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: AlphabetOnlyValidatorDirective, isStandalone: true, selector: "[alphabetOnly]", inputs: { value: ["alphabetOnly", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: AlphabetOnlyValidatorDirective,
@@ -1387,7 +1401,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: AlphabetOnlyValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[alphabetOnlyValidation]",
+                    selector: "[alphabetOnly]",
                     standalone: true,
                     providers: [
                         {
@@ -1399,7 +1413,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["alphabetOnlyValidation"]
+                args: ["alphabetOnly"]
             }] } });
 /**
  * @description
@@ -1521,7 +1535,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="email"
  *    id="email"
  *    formControlName="email"
- *   [emailValidation]="{
+ *   [email]="{
  *      errorName: 'email',
  *      error: 'Wrong email format.'
  *   }"
@@ -1532,7 +1546,7 @@ class EmailValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EmailValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: EmailValidatorDirective, isStandalone: true, selector: "[emailValidation]", inputs: { value: ["emailValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: EmailValidatorDirective, isStandalone: true, selector: "[email]", inputs: { value: ["email", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: EmailValidatorDirective,
@@ -1546,7 +1560,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EmailValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[emailValidation]",
+                    selector: "[email]",
                     standalone: true,
                     providers: [
                         {
@@ -1558,7 +1572,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["emailValidation"]
+                args: ["email"]
             }] } });
 /**
  * @description
@@ -1574,7 +1588,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="ipAddress"
  *    id="ipAddress"
  *    formControlName="ipAddress"
- *   [ipAddressValidation]="{
+ *   [ipAddress]="{
  *      errorName: 'ipAddress',
  *      error: 'Wrong ip address format.'
  *   }"
@@ -1585,7 +1599,7 @@ class IPAddressValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPAddressValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPAddressValidatorDirective, isStandalone: true, selector: "[ipAddressValidation]", inputs: { value: ["ipAddressValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPAddressValidatorDirective, isStandalone: true, selector: "[ipAddress]", inputs: { value: ["ipAddress", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: IPAddressValidatorDirective,
@@ -1599,7 +1613,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPAddressValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[ipAddressValidation]",
+                    selector: "[ipAddress]",
                     standalone: true,
                     providers: [
                         {
@@ -1611,7 +1625,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["ipAddressValidation"]
+                args: ["ipAddress"]
             }] } });
 /**
  * @description
@@ -1627,7 +1641,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="iPv4"
  *    id="iPv4"
  *    formControlName="iPv4"
- *   [iPv4Validation]="{
+ *   [iPv4]="{
  *      errorName: 'iPv4',
  *      error: 'Wrong ip address format.'
  *   }"
@@ -1638,7 +1652,7 @@ class IPv4ValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv4ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPv4ValidatorDirective, isStandalone: true, selector: "[iPv4Validation]", inputs: { value: ["iPv4Validation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPv4ValidatorDirective, isStandalone: true, selector: "[iPv4]", inputs: { value: ["iPv4", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: IPv4ValidatorDirective,
@@ -1652,7 +1666,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv4ValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[iPv4Validation]",
+                    selector: "[iPv4]",
                     standalone: true,
                     providers: [
                         {
@@ -1664,7 +1678,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["iPv4Validation"]
+                args: ["iPv4"]
             }] } });
 /**
  * @description
@@ -1680,7 +1694,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="iPv6"
  *    id="iPv6"
  *    formControlName="iPv6"
- *   [iPv6Validation]="{
+ *   [iPv6]="{
  *      errorName: 'iPv6',
  *      error: 'Wrong ip address format.'
  *   }"
@@ -1691,7 +1705,7 @@ class IPv6ValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv6ValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPv6ValidatorDirective, isStandalone: true, selector: "[iPv6Validation]", inputs: { value: ["iPv6Validation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: IPv6ValidatorDirective, isStandalone: true, selector: "[iPv6]", inputs: { value: ["iPv6", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: IPv6ValidatorDirective,
@@ -1705,7 +1719,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: IPv6ValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[iPv6Validation]",
+                    selector: "[iPv6]",
                     standalone: true,
                     providers: [
                         {
@@ -1717,7 +1731,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["iPv6Validation"]
+                args: ["iPv6"]
             }] } });
 /**
  * @description
@@ -1733,7 +1747,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="numbers"
  *    id="numbers"
  *    formControlName="numbers"
- *   [numericsOnlyValidation]="{
+ *   [numericsOnly]="{
  *      errorName: 'numbers',
  *      error: 'Numbers only please.'
  *   }"
@@ -1744,7 +1758,7 @@ class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NumericsOnlyValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: NumericsOnlyValidatorDirective, isStandalone: true, selector: "[numericsOnlyValidation]", inputs: { value: ["numericsOnlyValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: NumericsOnlyValidatorDirective, isStandalone: true, selector: "[numericsOnly]", inputs: { value: ["numericsOnly", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: NumericsOnlyValidatorDirective,
@@ -1758,7 +1772,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NumericsOnlyValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[numericsOnlyValidation]",
+                    selector: "[numericsOnly]",
                     standalone: true,
                     providers: [
                         {
@@ -1770,7 +1784,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["numericsOnlyValidation"]
+                args: ["numericsOnly"]
             }] } });
 /**
  * @description
@@ -1786,7 +1800,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="noSpecials"
  *    id="noSpecials"
  *    formControlName="noSpecials"
- *   [noSpecialsValidation]="{
+ *   [noSpecials]="{
  *      errorName: 'noSpecials',
  *      error: 'Remove any special characters.'
  *   }"
@@ -1797,7 +1811,7 @@ class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NoSpecialsValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: NoSpecialsValidatorDirective, isStandalone: true, selector: "[noSpecialsValidation]", inputs: { value: ["noSpecialsValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: NoSpecialsValidatorDirective, isStandalone: true, selector: "[noSpecials]", inputs: { value: ["noSpecials", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: NoSpecialsValidatorDirective,
@@ -1811,7 +1825,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: NoSpecialsValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[noSpecialsValidation]",
+                    selector: "[noSpecials]",
                     standalone: true,
                     providers: [
                         {
@@ -1823,7 +1837,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["noSpecialsValidation"]
+                args: ["noSpecials"]
             }] } });
 /**
  * @description
@@ -1839,7 +1853,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="passport"
  *    id="passport"
  *    formControlName="passport"
- *   [passportValidation]="{
+ *   [passport]="{
  *      errorName: 'passport',
  *      error: 'Wrong passport format'
  *   }"
@@ -1850,7 +1864,7 @@ class PassportValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PassportValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PassportValidatorDirective, isStandalone: true, selector: "[passportValidation]", inputs: { value: ["passportValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PassportValidatorDirective, isStandalone: true, selector: "[passport]", inputs: { value: ["passport", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: PassportValidatorDirective,
@@ -1864,7 +1878,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PassportValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[passportValidation]",
+                    selector: "[passport]",
                     standalone: true,
                     providers: [
                         {
@@ -1876,7 +1890,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["passportValidation"]
+                args: ["passport"]
             }] } });
 /**
  * @description
@@ -1893,7 +1907,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="password"
  *    id="password"
  *    formControlName="password"
- *   [passwordValidation]="{
+ *   [password]="{
  *      errorName: 'password',
  *      error: 'Password is not strong enough.'
  *   }"
@@ -1904,7 +1918,7 @@ class PasswordValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PasswordValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PasswordValidatorDirective, isStandalone: true, selector: "[passwordValidation]", inputs: { value: ["passwordValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PasswordValidatorDirective, isStandalone: true, selector: "[password]", inputs: { value: ["password", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: PasswordValidatorDirective,
@@ -1918,7 +1932,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PasswordValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[passwordValidation]",
+                    selector: "[password]",
                     standalone: true,
                     providers: [
                         {
@@ -1930,7 +1944,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["passwordValidation"]
+                args: ["password"]
             }] } });
 /**
  * @description
@@ -1946,7 +1960,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="phoneNumber"
  *    id="phoneNumber"
  *    formControlName="phoneNumber"
- *   [phoneNumberValidation]="{
+ *   [phoneNumber]="{
  *      errorName: 'phoneNumber',
  *      error: 'Wrong phone number format.'
  *   }"
@@ -1957,7 +1971,7 @@ class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PhoneNumberValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PhoneNumberValidatorDirective, isStandalone: true, selector: "[phoneNumberValidation]", inputs: { value: ["phoneNumberValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: PhoneNumberValidatorDirective, isStandalone: true, selector: "[phoneNumber]", inputs: { value: ["phoneNumber", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: PhoneNumberValidatorDirective,
@@ -1971,7 +1985,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: PhoneNumberValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[phoneNumberValidation]",
+                    selector: "[phoneNumber]",
                     standalone: true,
                     providers: [
                         {
@@ -1983,7 +1997,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["phoneNumberValidation"]
+                args: ["phoneNumber"]
             }] } });
 /**
  * @description
@@ -1999,7 +2013,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="singleSpace"
  *    id="singleSpace"
  *    formControlName="singleSpace"
- *   [singleSpaceValidation]="{
+ *   [singleSpace]="{
  *      errorName: 'singleSpace',
  *      error: 'Your input has only one space in it.'
  *   }"
@@ -2010,7 +2024,7 @@ class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SingleSpaceValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SingleSpaceValidatorDirective, isStandalone: true, selector: "[singleSpaceValidation]", inputs: { value: ["singleSpaceValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SingleSpaceValidatorDirective, isStandalone: true, selector: "[singleSpace]", inputs: { value: ["singleSpace", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: SingleSpaceValidatorDirective,
@@ -2024,7 +2038,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SingleSpaceValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[singleSpaceValidation]",
+                    selector: "[singleSpace]",
                     standalone: true,
                     providers: [
                         {
@@ -2036,7 +2050,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["singleSpaceValidation"]
+                args: ["singleSpace"]
             }] } });
 /**
  * @description
@@ -2052,7 +2066,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="spaceRestriction"
  *    id="spaceRestriction"
  *    formControlName="spaceRestriction"
- *   [spaceRestrictionValidation]="{
+ *   [spaceRestriction]="{
  *      errorName: 'spaceRestriction',
  *      error: 'No spaces on the start or the end of the value please.'
  *   }"
@@ -2063,7 +2077,7 @@ class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SpaceRestrictionValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SpaceRestrictionValidatorDirective, isStandalone: true, selector: "[spaceRestrictionValidation]", inputs: { value: ["spaceRestrictionValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SpaceRestrictionValidatorDirective, isStandalone: true, selector: "[spaceRestriction]", inputs: { value: ["spaceRestrictionValidation", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: SpaceRestrictionValidatorDirective,
@@ -2077,7 +2091,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SpaceRestrictionValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[spaceRestrictionValidation]",
+                    selector: "[spaceRestriction]",
                     standalone: true,
                     providers: [
                         {
@@ -2105,7 +2119,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="ssn"
  *    id="ssn"
  *    formControlName="ssn"
- *   [ssnValidation]="{
+ *   [ssn]="{
  *      errorName: 'ssn',
  *      error: 'Wrong ssn format.'
  *   }"
@@ -2116,7 +2130,7 @@ class SSNValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SSNValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SSNValidatorDirective, isStandalone: true, selector: "[ssnValidation]", inputs: { value: ["ssnValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SSNValidatorDirective, isStandalone: true, selector: "[ssn]", inputs: { value: ["ssn", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: SSNValidatorDirective,
@@ -2130,7 +2144,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SSNValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[ssnValidation]",
+                    selector: "[ssn]",
                     standalone: true,
                     providers: [
                         {
@@ -2142,7 +2156,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["ssnValidation"]
+                args: ["ssn"]
             }] } });
 /**
  * @description
@@ -2317,7 +2331,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="url"
  *    id="url"
  *    formControlName="url"
- *   [urlValidation]="{
+ *   [url]="{
  *      errorName: 'url',
  *      error: 'Wrong url format.'
  *   }"
@@ -2328,7 +2342,7 @@ class UrlValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: UrlValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: UrlValidatorDirective, isStandalone: true, selector: "[urlValidation]", inputs: { value: ["urlValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: UrlValidatorDirective, isStandalone: true, selector: "[url]", inputs: { value: ["url", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: UrlValidatorDirective,
@@ -2342,7 +2356,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: UrlValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[urlValidation]",
+                    selector: "[url]",
                     standalone: true,
                     providers: [
                         {
@@ -2354,7 +2368,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["urlValidation"]
+                args: ["url"]
             }] } });
 /**
  * @description
@@ -2370,7 +2384,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *    name="zipCode"
  *    id="zipCode"
  *    formControlName="zipCode"
- *   [zipCodeValidation]="{
+ *   [zipCode]="{
  *      errorName: 'zipCode',
  *      error: 'Wrong zip code format.'
  *   }"
@@ -2381,7 +2395,7 @@ class ZipCodeValidatorDirective extends RegExpValidatorDirective {
         return super.validate(control);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ZipCodeValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: ZipCodeValidatorDirective, isStandalone: true, selector: "[zipCodeValidation]", inputs: { value: ["zipCodeValidation", "value"] }, providers: [
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: ZipCodeValidatorDirective, isStandalone: true, selector: "[zipCode]", inputs: { value: ["zipCode", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: ZipCodeValidatorDirective,
@@ -2395,7 +2409,7 @@ __decorate([
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ZipCodeValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[zipCodeValidation]",
+                    selector: "[zipCode]",
                     standalone: true,
                     providers: [
                         {
@@ -2407,7 +2421,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["zipCodeValidation"]
+                args: ["zipCode"]
             }] } });
 
 /**

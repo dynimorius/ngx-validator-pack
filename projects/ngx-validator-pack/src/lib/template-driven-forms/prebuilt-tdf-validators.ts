@@ -53,14 +53,14 @@ import {
  *    name="address"
  *    id="address"
  *    formControlName="address"
- *   [addressValidation]="{
+ *   [address]="{
  *      errorName: 'address',
  *      error: 'Wrong address format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[addressValidation]",
+  selector: "[address]",
   standalone: true,
   providers: [
     {
@@ -76,7 +76,7 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
     "address",
     "Please input a value in a format of: Street number Street Name, City, State ZIP code."
   )
-  @Input("addressValidation")
+  @Input("address")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -97,14 +97,14 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
  *    name="alphabet"
  *    id="alphabet"
  *    formControlName="alphabet"
- *   [alphabetOnlyValidation]="{
+ *   [alphabetOnly]="{
  *      errorName: 'alphabet',
  *      error: 'Only letters please.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[alphabetOnlyValidation]",
+  selector: "[alphabetOnly]",
   standalone: true,
   providers: [
     {
@@ -120,7 +120,7 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
     "alphabetOnly",
     "Only alphabetic characters are allowed."
   )
-  @Input("alphabetOnlyValidation")
+  @Input("alphabetOnly")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -229,14 +229,14 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
  *    name="email"
  *    id="email"
  *    formControlName="email"
- *   [emailValidation]="{
+ *   [email]="{
  *      errorName: 'email',
  *      error: 'Wrong email format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[emailValidation]",
+  selector: "[email]",
   standalone: true,
   providers: [
     {
@@ -252,7 +252,7 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
     "email",
     "Please input a value in a format: local-part@domain.com."
   )
-  @Input("emailValidation")
+  @Input("email")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -273,14 +273,14 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
  *    name="ipAddress"
  *    id="ipAddress"
  *    formControlName="ipAddress"
- *   [ipAddressValidation]="{
+ *   [ipAddress]="{
  *      errorName: 'ipAddress',
  *      error: 'Wrong ip address format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[ipAddressValidation]",
+  selector: "[ipAddress]",
   standalone: true,
   providers: [
     {
@@ -296,7 +296,7 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
     "ipAddress",
     "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y."
   )
-  @Input("ipAddressValidation")
+  @Input("ipAddress")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -317,14 +317,14 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
  *    name="iPv4"
  *    id="iPv4"
  *    formControlName="iPv4"
- *   [iPv4Validation]="{
+ *   [iPv4]="{
  *      errorName: 'iPv4',
  *      error: 'Wrong ip address format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[iPv4Validation]",
+  selector: "[iPv4]",
   standalone: true,
   providers: [
     {
@@ -340,7 +340,7 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
     "iPv4",
     "Please input a value in a format: x.x.x.x."
   )
-  @Input("iPv4Validation")
+  @Input("iPv4")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -361,14 +361,14 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
  *    name="iPv6"
  *    id="iPv6"
  *    formControlName="iPv6"
- *   [iPv6Validation]="{
+ *   [iPv6]="{
  *      errorName: 'iPv6',
  *      error: 'Wrong ip address format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[iPv6Validation]",
+  selector: "[iPv6]",
   standalone: true,
   providers: [
     {
@@ -384,7 +384,7 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
     "iPv6",
     "Please input a value in a format: y:y:y:y:y:y:y:y."
   )
-  @Input("iPv6Validation")
+  @Input("iPv6")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -405,14 +405,14 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
  *    name="numbers"
  *    id="numbers"
  *    formControlName="numbers"
- *   [numericsOnlyValidation]="{
+ *   [numericsOnly]="{
  *      errorName: 'numbers',
  *      error: 'Numbers only please.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[numericsOnlyValidation]",
+  selector: "[numericsOnly]",
   standalone: true,
   providers: [
     {
@@ -428,7 +428,7 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
     "numbersOnly",
     "Only numeric characters are allowed."
   )
-  @Input("numericsOnlyValidation")
+  @Input("numericsOnly")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -449,14 +449,14 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
  *    name="noSpecials"
  *    id="noSpecials"
  *    formControlName="noSpecials"
- *   [noSpecialsValidation]="{
+ *   [noSpecials]="{
  *      errorName: 'noSpecials',
  *      error: 'Remove any special characters.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[noSpecialsValidation]",
+  selector: "[noSpecials]",
   standalone: true,
   providers: [
     {
@@ -472,7 +472,7 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
     "noSpecials",
     "No special characters are allowed."
   )
-  @Input("noSpecialsValidation")
+  @Input("noSpecials")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -493,14 +493,14 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
  *    name="passport"
  *    id="passport"
  *    formControlName="passport"
- *   [passportValidation]="{
+ *   [passport]="{
  *      errorName: 'passport',
  *      error: 'Wrong passport format'
  *   }"
  * />
  */
 @Directive({
-  selector: "[passportValidation]",
+  selector: "[passport]",
   standalone: true,
   providers: [
     {
@@ -512,7 +512,7 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
 })
 export class PassportValidatorDirective extends RegExpValidatorDirective {
   @RegExpValidatorInput(passport, "passport", "Incorrect passport format.")
-  @Input("passportValidation")
+  @Input("passport")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -534,14 +534,14 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
  *    name="password"
  *    id="password"
  *    formControlName="password"
- *   [passwordValidation]="{
+ *   [password]="{
  *      errorName: 'password',
  *      error: 'Password is not strong enough.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[passwordValidation]",
+  selector: "[password]",
   standalone: true,
   providers: [
     {
@@ -557,7 +557,7 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
     "password",
     "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8."
   )
-  @Input("passwordValidation")
+  @Input("password")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -578,14 +578,14 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
  *    name="phoneNumber"
  *    id="phoneNumber"
  *    formControlName="phoneNumber"
- *   [phoneNumberValidation]="{
+ *   [phoneNumber]="{
  *      errorName: 'phoneNumber',
  *      error: 'Wrong phone number format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[phoneNumberValidation]",
+  selector: "[phoneNumber]",
   standalone: true,
   providers: [
     {
@@ -601,7 +601,7 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
     "phoneNumber",
     "Please input a value in a format: (000) 000 0000."
   )
-  @Input("phoneNumberValidation")
+  @Input("phoneNumber")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -622,14 +622,14 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
  *    name="singleSpace"
  *    id="singleSpace"
  *    formControlName="singleSpace"
- *   [singleSpaceValidation]="{
+ *   [singleSpace]="{
  *      errorName: 'singleSpace',
  *      error: 'Your input has only one space in it.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[singleSpaceValidation]",
+  selector: "[singleSpace]",
   standalone: true,
   providers: [
     {
@@ -645,7 +645,7 @@ export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
     "singleSpace",
     "A single space character is not allowed."
   )
-  @Input("singleSpaceValidation")
+  @Input("singleSpace")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -666,14 +666,14 @@ export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
  *    name="spaceRestriction"
  *    id="spaceRestriction"
  *    formControlName="spaceRestriction"
- *   [spaceRestrictionValidation]="{
+ *   [spaceRestriction]="{
  *      errorName: 'spaceRestriction',
  *      error: 'No spaces on the start or the end of the value please.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[spaceRestrictionValidation]",
+  selector: "[spaceRestriction]",
   standalone: true,
   providers: [
     {
@@ -710,14 +710,14 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
  *    name="ssn"
  *    id="ssn"
  *    formControlName="ssn"
- *   [ssnValidation]="{
+ *   [ssn]="{
  *      errorName: 'ssn',
  *      error: 'Wrong ssn format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[ssnValidation]",
+  selector: "[ssn]",
   standalone: true,
   providers: [
     {
@@ -733,7 +733,7 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
     "ssn",
     "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
   )
-  @Input("ssnValidation")
+  @Input("ssn")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -886,14 +886,14 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
  *    name="url"
  *    id="url"
  *    formControlName="url"
- *   [urlValidation]="{
+ *   [url]="{
  *      errorName: 'url',
  *      error: 'Wrong url format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[urlValidation]",
+  selector: "[url]",
   standalone: true,
   providers: [
     {
@@ -905,7 +905,7 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
 })
 export class UrlValidatorDirective extends RegExpValidatorDirective {
   @RegExpValidatorInput(url, "url", "Improper URL format.")
-  @Input("urlValidation")
+  @Input("url")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);
@@ -926,14 +926,14 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
  *    name="zipCode"
  *    id="zipCode"
  *    formControlName="zipCode"
- *   [zipCodeValidation]="{
+ *   [zipCode]="{
  *      errorName: 'zipCode',
  *      error: 'Wrong zip code format.'
  *   }"
  * />
  */
 @Directive({
-  selector: "[zipCodeValidation]",
+  selector: "[zipCode]",
   standalone: true,
   providers: [
     {
@@ -945,7 +945,7 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
 })
 export class ZipCodeValidatorDirective extends RegExpValidatorDirective {
   @RegExpValidatorInput(zipCode, "zipCode", "Improper zip code format.")
-  @Input("zipCodeValidation")
+  @Input("zipCode")
   override value!: any;
   override validate(control: AbstractControl): ValidationErrors | null {
     return super.validate(control);

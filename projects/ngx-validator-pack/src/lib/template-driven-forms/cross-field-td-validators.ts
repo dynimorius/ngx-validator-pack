@@ -19,6 +19,31 @@ import {
   requiredIfValidation,
 } from "../validations/cross-field-validations";
 
+/**
+ * @description
+ * A Directive that preforms a conditional check and if the condition
+ * passes it will return an error.
+ *
+ * Has an input in which you specify the condition that is to be checked
+ * and optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @example
+ *  <input
+ *    type="text"
+ *    name="requiredWhen"
+ *    id="requiredWhen"
+ *    formControlName="requiredWhen"
+ *   [requiredWhenValidation]="{
+ *      conditional: isTrue,                     - this can be ether a boolean
+ *      errorName: 'requiredWhen',                     or a function that returns a boolean
+ *      error: 'The condition is true.'
+ *   }"
+ * />
+ *
+ * NOTE: It is not recommended to pass a function to be executed in the template,
+ * as this function will be executed every change detection cycle.
+ */
 @Directive({
   selector: "[requiredIf]",
   providers: [
