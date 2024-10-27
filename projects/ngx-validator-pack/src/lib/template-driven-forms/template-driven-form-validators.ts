@@ -62,6 +62,7 @@ export class RegExpValidatorDirective implements Validator {
     const error =
       this.value.error ??
       "This control did not match a given regular expression.";
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "regexpValidation"]: error,
     };
@@ -114,6 +115,7 @@ export class RegExpNotValidatorDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? "This control matched a given regular expression.";
+      
     const errors: ValidationErrors = {
       [this.value.errorName ?? "regexpNotValidation"]: error,
     };
@@ -167,6 +169,7 @@ export class EarlierThenValidatorDirective implements Validator {
     const error =
       this.value.error ??
       `This control must have a value earlier then ${this.value.date}.`;
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "earlierThenValidation"]: error,
     };
@@ -219,6 +222,7 @@ export class LaterThenValidatorDirective implements Validator {
     const error =
       this.value.error ??
       `This control must have a value later then ${this.value.date}.`;
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "laterThenValidation"]: error,
     };
@@ -272,6 +276,7 @@ export class CompareToValidatorDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `Value comparison with ${this.value.date} failed.`;
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "compareToValidation"]: error,
     };
@@ -325,6 +330,7 @@ export class RequiredWhenValidatorDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? "This control has a conditional set on it.";
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "requiredWhen"]: error,
     };
@@ -375,6 +381,7 @@ export class LinkToValidatorDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `This control has a link to ${this.value.link}.`;
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "linkToValidation"]: error,
     };
@@ -422,6 +429,7 @@ export class LinkedToValidatorDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const error =
       this.value.error ?? `This control is linked to ${this.value.link}.`;
+
     const errors: ValidationErrors = {
       [this.value.errorName ?? "linkedToValidation"]: error,
     };
