@@ -17,7 +17,7 @@ import { ValidatorFn } from "@angular/forms";
  * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const requiredIf: (requiredControlName: string, controlToCheckName: string, error?: string) => ValidatorFn;
+export declare const requiredIf: (required: string, check: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Assigns a required error to the controls with a name was specified in the
@@ -29,7 +29,7 @@ export declare const requiredIf: (requiredControlName: string, controlToCheckNam
  * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const requiredIfNot: (requiredControlName: string, controlToCheckName: string, error?: string) => ValidatorFn;
+export declare const requiredIfNot: (required: string, check: string, error?: string) => ValidatorFn;
 /**
  * @description
  * Assigns a required error to both controls who's names are specified if nether one
@@ -40,4 +40,4 @@ export declare const requiredIfNot: (requiredControlName: string, controlToCheck
  * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const requiredEther: (requiredControlName: string, controlToCheckName: string, error?: string) => ValidatorFn;
+export declare const requiredEther: (required: string, check: string, error?: string) => ValidatorFn;

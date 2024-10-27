@@ -25,16 +25,12 @@ import {
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredIf = (
-  requiredControlName: string,
-  controlToCheckName: string,
+  required: string,
+  check: string,
   error?: string
 ): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
-    return requiredIfValidation(control, {
-      requiredControlName,
-      controlToCheckName,
-      error,
-    });
+    return requiredIfValidation(control, { required, check, error });
   };
 };
 
@@ -50,16 +46,12 @@ export const requiredIf = (
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredIfNot = (
-  requiredControlName: string,
-  controlToCheckName: string,
+  required: string,
+  check: string,
   error?: string
 ): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
-    return requiredIfNotValidation(control, {
-      requiredControlName,
-      controlToCheckName,
-      error,
-    });
+    return requiredIfNotValidation(control, { required, check, error });
   };
 };
 
@@ -74,15 +66,11 @@ export const requiredIfNot = (
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredEther = (
-  requiredControlName: string,
-  controlToCheckName: string,
+  required: string,
+  check: string,
   error?: string
 ): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
-    return requiredEtherValidation(control, {
-      requiredControlName,
-      controlToCheckName,
-      error,
-    });
+    return requiredEtherValidation(control, { required, check, error });
   };
 };

@@ -26,20 +26,20 @@ import { removeErrors, setErrors } from "../helpers/errors";
 export const requiredIfValidation = (
   control: AbstractControl,
   config: {
-    requiredControlName: string;
-    controlToCheckName: string;
+    required: string;
+    check: string;
     error?: string;
   }
 ): ValidationErrors | null => {
-  const required = control?.get(config.requiredControlName) as AbstractControl;
-  const toCheck = control?.get(config.controlToCheckName) as AbstractControl;
+  const required = control?.get(config.required) as AbstractControl;
+  const toCheck = control?.get(config.check) as AbstractControl;
   if (required?.value || !toCheck?.value) {
     removeErrors(required, ["required"]);
     return null;
   } else {
     const errorVal =
       config.error ??
-      `Required is ${config.requiredControlName} when having ${config.controlToCheckName}.`;
+      `Required is ${config.required} when having ${config.check}.`;
     setErrors(required, { required: errorVal });
     return { [errorVal]: true };
   }
@@ -62,20 +62,20 @@ export const requiredIfValidation = (
 export const requiredIfNotValidation = (
   control: AbstractControl,
   config: {
-    requiredControlName: string;
-    controlToCheckName: string;
+    required: string;
+    check: string;
     error?: string;
   }
 ): ValidationErrors | null => {
-  const required = control?.get(config.requiredControlName) as AbstractControl;
-  const toCheck = control?.get(config.controlToCheckName) as AbstractControl;
+  const required = control?.get(config.required) as AbstractControl;
+  const toCheck = control?.get(config.check) as AbstractControl;
   if (required?.value || toCheck?.value) {
     removeErrors(required, ["required"]);
     return null;
   } else {
     const errorVal =
       config.error ??
-      `Required is ${config.requiredControlName} when not having ${config.controlToCheckName}.`;
+      `Required is ${config.required} when not having ${config.check}.`;
     setErrors(required, { required: errorVal });
     return { [errorVal]: true };
   }
@@ -98,13 +98,13 @@ export const requiredIfNotValidation = (
 export const requiredEtherValidation = (
   control: AbstractControl,
   config: {
-    requiredControlName: string;
-    controlToCheckName: string;
+    required: string;
+    check: string;
     error?: string;
   }
 ): ValidationErrors | null => {
-  const required = control?.get(config.requiredControlName) as AbstractControl;
-  const toCheck = control?.get(config.controlToCheckName) as AbstractControl;
+  const required = control?.get(config.required) as AbstractControl;
+  const toCheck = control?.get(config.check) as AbstractControl;
   if (required?.value || toCheck?.value) {
     removeErrors(required, ["required"]);
     removeErrors(toCheck, ["required"]);
@@ -112,7 +112,7 @@ export const requiredEtherValidation = (
   } else {
     const errorVal =
       config.error ??
-      `Required either ${config.requiredControlName} or ${config.controlToCheckName}.`;
+      `Required either ${config.required} or ${config.check}.`;
     setErrors(required, { required: errorVal });
     setErrors(toCheck, { required: errorVal });
     return { [errorVal]: true };

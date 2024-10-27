@@ -53,10 +53,7 @@ export class RequiredIfValidatorDirective implements Validator {
     check: string;
   };
   validate(control: AbstractControl): ValidationErrors | null {
-    return requiredIfValidation(control, {
-      requiredControlName: this.controls.required,
-      controlToCheckName: this.controls.check,
-    });
+    return requiredIfValidation(control, { ...this.controls });
   }
 }
 
@@ -94,10 +91,7 @@ export class RequiredIfNotValidatorDirective implements Validator {
     check: string;
   };
   validate(control: AbstractControl): ValidationErrors | null {
-    return requiredIfNotValidation(control, {
-      requiredControlName: this.controls.required,
-      controlToCheckName: this.controls.check,
-    });
+    return requiredIfNotValidation(control, { ...this.controls });
   }
 }
 
@@ -134,9 +128,6 @@ export class RequiredEtherValidatorDirective implements Validator {
     check: string;
   };
   validate(control: AbstractControl): ValidationErrors | null {
-    return requiredEtherValidation(control, {
-      requiredControlName: this.controls.required,
-      controlToCheckName: this.controls.check,
-    });
+    return requiredEtherValidation(control, { ...this.controls });
   }
 }

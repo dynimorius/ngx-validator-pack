@@ -21,8 +21,8 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
  * @returns {ValidationErrors | null}          - Validation error
  */
 export declare const requiredIfValidation: (control: AbstractControl, config: {
-    requiredControlName: string;
-    controlToCheckName: string;
+    required: string;
+    check: string;
     error?: string;
 }) => ValidationErrors | null;
 /**
@@ -40,8 +40,8 @@ export declare const requiredIfValidation: (control: AbstractControl, config: {
  * @returns {ValidationErrors | null}          - Validation error
  */
 export declare const requiredIfNotValidation: (control: AbstractControl, config: {
-    requiredControlName: string;
-    controlToCheckName: string;
+    required: string;
+    check: string;
     error?: string;
 }) => ValidationErrors | null;
 /**
@@ -59,7 +59,7 @@ export declare const requiredIfNotValidation: (control: AbstractControl, config:
  * @returns {ValidationErrors | null}          - Validation error
  */
 export declare const requiredEtherValidation: (control: AbstractControl, config: {
-    requiredControlName: string;
-    controlToCheckName: string;
+    required: string;
+    check: string;
     error?: string;
 }) => ValidationErrors | null;

@@ -171,15 +171,15 @@ const removeErrors = (control, keys) => {
  * @returns {ValidationErrors | null}          - Validation error
  */
 const requiredIfValidation = (control, config) => {
-    const required = control?.get(config.requiredControlName);
-    const toCheck = control?.get(config.controlToCheckName);
+    const required = control?.get(config.required);
+    const toCheck = control?.get(config.check);
     if (required?.value || !toCheck?.value) {
         removeErrors(required, ["required"]);
         return null;
     }
     else {
         const errorVal = config.error ??
-            `Required is ${config.requiredControlName} when having ${config.controlToCheckName}.`;
+            `Required is ${config.required} when having ${config.check}.`;
         setErrors(required, { required: errorVal });
         return { [errorVal]: true };
     }
@@ -199,15 +199,15 @@ const requiredIfValidation = (control, config) => {
  * @returns {ValidationErrors | null}          - Validation error
  */
 const requiredIfNotValidation = (control, config) => {
-    const required = control?.get(config.requiredControlName);
-    const toCheck = control?.get(config.controlToCheckName);
+    const required = control?.get(config.required);
+    const toCheck = control?.get(config.check);
     if (required?.value || toCheck?.value) {
         removeErrors(required, ["required"]);
         return null;
     }
     else {
         const errorVal = config.error ??
-            `Required is ${config.requiredControlName} when not having ${config.controlToCheckName}.`;
+            `Required is ${config.required} when not having ${config.check}.`;
         setErrors(required, { required: errorVal });
         return { [errorVal]: true };
     }
@@ -227,8 +227,8 @@ const requiredIfNotValidation = (control, config) => {
  * @returns {ValidationErrors | null}          - Validation error
  */
 const requiredEtherValidation = (control, config) => {
-    const required = control?.get(config.requiredControlName);
-    const toCheck = control?.get(config.controlToCheckName);
+    const required = control?.get(config.required);
+    const toCheck = control?.get(config.check);
     if (required?.value || toCheck?.value) {
         removeErrors(required, ["required"]);
         removeErrors(toCheck, ["required"]);
@@ -236,7 +236,7 @@ const requiredEtherValidation = (control, config) => {
     }
     else {
         const errorVal = config.error ??
-            `Required either ${config.requiredControlName} or ${config.controlToCheckName}.`;
+            `Required either ${config.required} or ${config.check}.`;
         setErrors(required, { required: errorVal });
         setErrors(toCheck, { required: errorVal });
         return { [errorVal]: true };
@@ -261,13 +261,9 @@ const requiredEtherValidation = (control, config) => {
  * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-const requiredIf = (requiredControlName, controlToCheckName, error) => {
+const requiredIf = (required, check, error) => {
     return (control) => {
-        return requiredIfValidation(control, {
-            requiredControlName,
-            controlToCheckName,
-            error,
-        });
+        return requiredIfValidation(control, { required, check, error });
     };
 };
 /**
@@ -281,13 +277,9 @@ const requiredIf = (requiredControlName, controlToCheckName, error) => {
  * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-const requiredIfNot = (requiredControlName, controlToCheckName, error) => {
+const requiredIfNot = (required, check, error) => {
     return (control) => {
-        return requiredIfNotValidation(control, {
-            requiredControlName,
-            controlToCheckName,
-            error,
-        });
+        return requiredIfNotValidation(control, { required, check, error });
     };
 };
 /**
@@ -300,13 +292,9 @@ const requiredIfNot = (requiredControlName, controlToCheckName, error) => {
  * @param {string}                    - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
-const requiredEther = (requiredControlName, controlToCheckName, error) => {
+const requiredEther = (required, check, error) => {
     return (control) => {
-        return requiredEtherValidation(control, {
-            requiredControlName,
-            controlToCheckName,
-            error,
-        });
+        return requiredEtherValidation(control, { required, check, error });
     };
 };
 
