@@ -1,36 +1,6 @@
-/**
- * @license
- * Copyright Slavko Mihajlovic All Rights Reserved.
- *
- * Use of this source code is governed by an ISC-style license that can be
- * found at https://www.isc.org/licenses/
- */
-
-import {
-  CompareValidationInput,
-  ConditionalValidationInput,
-  DateValidationInput,
-  LinkValidationInput,
-} from "./../interfaces/directive-input.interface";
-import { Directive, Input } from "@angular/core";
-import {
-  AbstractControl,
-  NG_VALIDATORS,
-  ValidationErrors,
-  Validator,
-} from "@angular/forms";
-import { RegExpValidationInput } from "../interfaces/directive-input.interface";
-import {
-  compareToValidation,
-  earlierThenValidation,
-  laterThenValidation,
-  linkToValidation,
-  linkedToValidation,
-  regexpTestValidation,
-  requiredWhenValidation,
-  regexpTestNotValidation,
-} from "../validations/validations";
-
+import { AbstractControl, ValidationErrors, Validator } from "@angular/forms";
+import { CompareValidationInput, ConditionalValidationInput, DateValidationInput, LinkValidationInput, RegExpValidationInput } from "../../interfaces/directive-input.interface";
+import * as i0 from "@angular/core";
 /**
  * @publicApi
  * @description
@@ -52,25 +22,12 @@ import {
  *   }"
  * />
  */
-@Directive({
-  selector: "[regExp]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: RegExpValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class RegExpValidatorDirective implements Validator {
-  @Input("regExp") value!: RegExpValidationInput;
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return regexpTestValidation(control, { ...this.value });
-  }
+export declare class RegExpValidatorDirective implements Validator {
+    value: RegExpValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RegExpValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpValidatorDirective, "[regExp]", never, { "value": { "alias": "regExp"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -93,25 +50,12 @@ export class RegExpValidatorDirective implements Validator {
  *   }"
  * />
  */
-@Directive({
-  selector: "[regExpNot]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: RegExpNotValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class RegExpNotValidatorDirective implements Validator {
-  @Input("regExpNot") value!: RegExpValidationInput;
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return regexpTestNotValidation(control, { ...this.value });
-  }
+export declare class RegExpNotValidatorDirective implements Validator {
+    value: RegExpValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RegExpNotValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpNotValidatorDirective, "[regExpNot]", never, { "value": { "alias": "regExpNot"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -134,25 +78,12 @@ export class RegExpNotValidatorDirective implements Validator {
  *   }"
  * />
  */
-@Directive({
-  selector: "[earlierThen]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: EarlierThenValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class EarlierThenValidatorDirective implements Validator {
-  @Input("earlierThen") value!: DateValidationInput;
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return earlierThenValidation(control, { ...this.value });
-  }
+export declare class EarlierThenValidatorDirective implements Validator {
+    value: DateValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<EarlierThenValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<EarlierThenValidatorDirective, "[earlierThen]", never, { "value": { "alias": "earlierThen"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -175,25 +106,12 @@ export class EarlierThenValidatorDirective implements Validator {
  *   }"
  * />
  */
-@Directive({
-  selector: "[laterThen]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: LaterThenValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class LaterThenValidatorDirective implements Validator {
-  @Input("laterThen") value!: DateValidationInput;
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return laterThenValidation(control, { ...this.value });
-  }
+export declare class LaterThenValidatorDirective implements Validator {
+    value: DateValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LaterThenValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LaterThenValidatorDirective, "[laterThen]", never, { "value": { "alias": "laterThen"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -219,24 +137,12 @@ export class LaterThenValidatorDirective implements Validator {
  *   }"
  * />
  */
-@Directive({
-  selector: "[compareTo]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: CompareToValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class CompareToValidatorDirective implements Validator {
-  @Input("compareTo") value!: CompareValidationInput;
-  validate(control: AbstractControl): ValidationErrors | null {
-    return compareToValidation(control, { ...this.value });
-  }
+export declare class CompareToValidatorDirective implements Validator {
+    value: CompareValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CompareToValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<CompareToValidatorDirective, "[compareTo]", never, { "value": { "alias": "compareTo"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -261,24 +167,12 @@ export class CompareToValidatorDirective implements Validator {
  * NOTE: It is not recommended to pass a function to be executed in the template,
  * as this function will be executed every change detection cycle.
  */
-@Directive({
-  selector: "[requiredWhen]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: RequiredWhenValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class RequiredWhenValidatorDirective implements Validator {
-  @Input("requiredWhen") value!: ConditionalValidationInput;
-  validate(control: AbstractControl): ValidationErrors | null {
-    return requiredWhenValidation(control, { ...this.value });
-  }
+export declare class RequiredWhenValidatorDirective implements Validator {
+    value: ConditionalValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RequiredWhenValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredWhenValidatorDirective, "[requiredWhen]", never, { "value": { "alias": "requiredWhen"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -300,24 +194,12 @@ export class RequiredWhenValidatorDirective implements Validator {
  *   }"
  * />
  */
-@Directive({
-  selector: "[linkTo]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: LinkToValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class LinkToValidatorDirective implements Validator {
-  @Input("linkTo") value!: LinkValidationInput;
-  validate(control: AbstractControl): ValidationErrors | null {
-    return linkToValidation(control, { ...this.value });
-  }
+export declare class LinkToValidatorDirective implements Validator {
+    value: LinkValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LinkToValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LinkToValidatorDirective, "[linkTo]", never, { "value": { "alias": "linkTo"; "required": false; }; }, {}, never, never, true, never>;
 }
-
 /**
  * @publicApi
  * @description
@@ -339,20 +221,9 @@ export class LinkToValidatorDirective implements Validator {
  *   }"
  * />
  */
-@Directive({
-  selector: "[linkedTo]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: LinkedToValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class LinkedToValidatorDirective implements Validator {
-  @Input("linkedTo") value!: LinkValidationInput;
-  validate(control: AbstractControl): ValidationErrors | null {
-    return linkedToValidation(control, { ...this.value });
-  }
+export declare class LinkedToValidatorDirective implements Validator {
+    value: LinkValidationInput;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LinkedToValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LinkedToValidatorDirective, "[linkedTo]", never, { "value": { "alias": "linkedTo"; "required": false; }; }, {}, never, never, true, never>;
 }

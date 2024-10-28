@@ -13,7 +13,7 @@ import {
   ValidationErrors,
 } from "@angular/forms";
 import { RegExpNotValidatorDirective, RegExpValidatorDirective } from "./template-driven-form-validators";
-import { RegExpValidatorInput } from "../decorators/validator-input";
+import { RegExpValidatorInput } from "../../decorators/validator-input";
 import {
   IPAddressV4,
   IPAddressV4AndV6,
@@ -36,7 +36,7 @@ import {
   timeHH_MM_SS_24,
   url,
   zipCode,
-} from "../constant/regex";
+} from "../../constant/regex";
 
 /**
  * @publicApi

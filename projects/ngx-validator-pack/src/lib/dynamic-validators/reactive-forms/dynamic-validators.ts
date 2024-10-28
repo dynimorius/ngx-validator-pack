@@ -7,11 +7,11 @@
  */
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { SequenceConfig } from "../interfaces/sequence-config.interface";
-import { sequentialValidation } from "../validations/validations";
-import { PasswordConfigMap } from "./sequence-maps";
-import { SequenceConfigFactory } from "./sequence-config-factory";
-import { PasswordValidations } from "../types";
+import { SequenceConfig } from "../../interfaces/sequence-config.interface";
+import { PasswordValidations } from "../../types";
+import { sequentialValidation } from "../../validations/validations";
+import { SequenceConfigFactory } from "../sequence-config-factory";
+import { PasswordConfigMap } from "../sequence-maps";
 
 export const sequentialValidator =
   (sequence: SequenceConfig[]): ValidatorFn =>

@@ -29,8 +29,8 @@ import {
   timeHH_MM_SS_24,
   url,
   zipCode,
-} from "../constant/regex";
-import { regexpTestValidation } from "../validations/validations";
+} from "../../constant/regex";
+import { regexpTestValidation } from "../../validations/validations";
 
 /**
  * @publicApi

@@ -8,19 +8,19 @@ import {
   dateYYYY_MM_DDValidator,
   earlierThenValidator,
   emailValidator,
-  ipAddressValidator,
   iPv4Validator,
   iPv6Validator,
+  ipAddressValidator,
   laterThenValidator,
-  linkedToValidator,
   linkToValidator,
+  linkedToValidator,
   noSpecialsValidator,
   numericsOnlyValidator,
   passportValidator,
   passwordValidator,
   phoneNumberValidator,
-  regexpValidator,
   regexpNotValidator,
+  regexpValidator,
   requiredWhenValidator,
   singleSpaceValidator,
   spaceRestrictionValidator,
@@ -31,8 +31,8 @@ import {
   urlValidator,
   zipCodeValidator,
 } from "ngx-validator-pack";
+import { dynamicPasswordValidator } from "../../../../../ngx-validator-pack/src/lib/dynamic-validators/reactive-forms/dynamic-validators";
 import { ShowValidationDirective } from "../../../../../ngx-validator-pack/src/public-api";
-import { SnippetsComponent } from "../snippets/snippets.component";
 import {
   addressHTMLSnippet,
   addressTSSnippet,
@@ -56,10 +56,10 @@ import {
   ipv6TSSnippet,
   laterDateHTMLSnippet,
   laterDateTSSnippet,
-  linkedToHTMLSnippet,
-  linkedToTSSnippet,
   linkToHTMLSnippet,
   linkToTSSnippet,
+  linkedToHTMLSnippet,
+  linkedToTSSnippet,
   noSpecialHTMLSnippet,
   noSpecialTSSnippet,
   numericHTMLSnippet,
@@ -72,8 +72,8 @@ import {
   phoneTSSnippet,
   regexpNotHTMLSnippet,
   regexpNotTSSnippet,
-  regexpToHTMLSnippet,
   regexpTSSnippet,
+  regexpToHTMLSnippet,
   requiredWhenHTMLSnippet,
   requiredWhenTSSnippet,
   spaceHTMLSnippet,
@@ -93,16 +93,12 @@ import {
   zipCodeHTMLSnippet,
   zipCodeTSSnippet,
 } from "../../snippet-data";
-import { dynamicPasswordValidator } from "../../../../../ngx-validator-pack/src/lib/dynamic-validators/dynamic-validators";
+import { SnippetsComponent } from "../snippets/snippets.component";
 
 @Component({
   selector: "app-main",
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    ShowValidationDirective,
-    SnippetsComponent,
-  ],
+  imports: [ReactiveFormsModule, ShowValidationDirective, SnippetsComponent],
   templateUrl: "./main.component.html",
   styleUrls: ["../../app.component.scss", "./main.component.scss"],
 })
@@ -203,7 +199,7 @@ export class MainComponent implements OnInit {
       linkedTo: [null, [linkedToValidator("linkTo")]],
       regexp: [null, regexpValidator(/(s|regexp)/)],
       regexpNot: [null, regexpNotValidator(/(s|regexp)/)],
-      dynamicPassword: [null, dynamicPasswordValidator()]
+      dynamicPassword: [null, dynamicPasswordValidator()],
     });
 
     this.mainForm.valueChanges.subscribe(() => {

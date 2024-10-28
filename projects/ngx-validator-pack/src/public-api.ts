@@ -9,11 +9,11 @@
  */
 
 export * from "./lib/directives/show-validation.directive";
-export * from "./lib/reactive-forms/cross-field-validators";
-export * from "./lib/reactive-forms/prebuilt-validators";
-export * from "./lib/reactive-forms/reactive-forms-validators";
-export * from "./lib/template-driven-forms/template-driven-form-validators";
-export * from "./lib/template-driven-forms/prebuilt-tdf-validators";
-export * from "./lib/template-driven-forms/cross-field-td-validators";
 export * from "./lib/interfaces/directive-input.interface";
 export * from "./lib/interfaces/show-validation-styles";
+export * from "./lib/validators/template-driven-forms/cross-field-td-validators";
+export * from "./lib/validators/template-driven-forms/prebuilt-tdf-validators";
+export * from "./lib/validators/template-driven-forms/template-driven-form-validators";
+export * from "./lib/validators/reactive-forms/cross-field-validators";
+export * from "./lib/validators/reactive-forms/prebuilt-validators";
+export * from "./lib/validators/reactive-forms/reactive-forms-validators";

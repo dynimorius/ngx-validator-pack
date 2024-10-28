@@ -11,7 +11,7 @@ import {
   requiredEtherValidation,
   requiredIfNotValidation,
   requiredIfValidation,
-} from "../validations/cross-field-validations";
+} from "../../validations/cross-field-validations";
 
 /**
  * @publicApi
