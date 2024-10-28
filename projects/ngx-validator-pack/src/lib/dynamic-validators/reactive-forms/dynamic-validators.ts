@@ -11,7 +11,7 @@ import { SequenceConfig } from "../../interfaces/sequence-config.interface";
 import { PasswordValidations } from "../../types";
 import { sequentialValidation } from "../../validations/validations";
 import { SequenceConfigFactory } from "../sequence-config-factory";
-import { PasswordConfigMap } from "../sequence-maps";
+import { PasswordConfigMap } from "../sequence-maps/sequence-maps";
 
 export const sequentialValidator =
   (sequence: SequenceConfig[]): ValidatorFn =>

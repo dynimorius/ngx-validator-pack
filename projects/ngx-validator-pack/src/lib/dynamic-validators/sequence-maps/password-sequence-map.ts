@@ -5,13 +5,13 @@ import {
   hasNumbers,
   hasUppercase,
   noSpecial,
-} from "../constant/regex";
-import { SequenceConfig } from "../interfaces/sequence-config.interface";
+} from "../../constant/regex";
+import { SequenceConfig } from "../../interfaces/sequence-config.interface";
 import {
   lengthValidation,
   regexpNotValidation,
   regexpValidation,
-} from "../validations/validations";
+} from "../../validations/validations";
 
 export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
   noAlpha: {
