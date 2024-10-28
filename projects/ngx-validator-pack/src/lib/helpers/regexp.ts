@@ -6,7 +6,9 @@
  * found at https://www.isc.org/licenses/
  */
 
-
+/**
+ * @internal
+ */
 export const test = (regexp: RegExp, value: string, logic: '!' | "!!"): boolean => {
   const operations = {
     '!': (): boolean => !regexp.test(value),

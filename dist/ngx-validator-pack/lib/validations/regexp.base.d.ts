@@ -6,8 +6,5 @@
  * found at https://www.isc.org/licenses/
  */
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-export declare function regExpBase(control: AbstractControl, config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-}, logic: "!" | "!!"): ValidationErrors | null;
+import { RegExpValidationConfig } from "../interfaces/validation-config.interface";
+export declare function regExpBase(control: AbstractControl, config: RegExpValidationConfig, logic: "!" | "!!"): ValidationErrors | null;

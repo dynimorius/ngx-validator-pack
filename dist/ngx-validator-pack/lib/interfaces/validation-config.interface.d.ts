@@ -69,3 +69,7 @@ export interface ConditionalValidationConfig extends BaseValidationConfig {
 export interface LinkValidationConfig extends BaseValidationConfig {
     link: string;
 }
+export interface LengthValidationConfig extends BaseValidationConfig {
+    length: number;
+    comparison: ComparisonOperations;
+}

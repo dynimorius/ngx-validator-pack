@@ -8,14 +8,11 @@
 
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { test } from "../helpers/regexp";
+import { RegExpValidationConfig } from "../interfaces/validation-config.interface";
 
 export function regExpBase(
   control: AbstractControl,
-  config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-  },
+  config: RegExpValidationConfig,
   logic: "!" | "!!"
 ): ValidationErrors | null {
   const errors: ValidationErrors = {

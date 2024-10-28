@@ -10,8 +10,8 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { compareDates } from "../helpers/date";
 import { compare } from "../helpers/numbers";
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
-import { ComparisonOperations } from "../types";
 import { regExpBase } from "./regexp.base";
+import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
 
 /**
  * @internal
@@ -27,11 +27,7 @@ import { regExpBase } from "./regexp.base";
  */
 export const regexpValidation = (
   control: AbstractControl,
-  config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-  }
+  config: RegExpValidationConfig
 ): ValidationErrors | null => {
   const error =
     config.error ?? "This control did not match a given regular expression.";
@@ -53,11 +49,7 @@ export const regexpValidation = (
  */
 export const regexpNotValidation = (
   control: AbstractControl,
-  config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-  }
+  config: RegExpValidationConfig
 ): ValidationErrors | null => {
   const error =
     config.error ?? "This control matched a given regular expression.";
@@ -81,11 +73,7 @@ export const regexpNotValidation = (
  */
 export const earlierThenValidation = (
   control: AbstractControl,
-  config: {
-    date: Date;
-    error?: string;
-    errorName?: string;
-  }
+  config: DateValidationConfig
 ): ValidationErrors | null => {
   const error =
     config.error ??
@@ -112,11 +100,7 @@ export const earlierThenValidation = (
  */
 export const laterThenValidation = (
   control: AbstractControl,
-  config: {
-    date: Date;
-    error?: string;
-    errorName?: string;
-  }
+  config: DateValidationConfig
 ): ValidationErrors | null => {
   const error =
     config.error ?? `This control must have a value later then ${config.date}.`;
@@ -139,12 +123,7 @@ export const laterThenValidation = (
  */
 export const compareToValidation = (
   control: AbstractControl,
-  config: {
-    fieldName: string;
-    comparison: ComparisonOperations;
-    error?: string;
-    errorName?: string;
-  }
+  config: CompareValidationConfig
 ): ValidationErrors | null => {
   const date = control.parent?.get(config.fieldName)?.value;
   if (date) {
@@ -172,11 +151,7 @@ export const compareToValidation = (
  */
 export const requiredWhenValidation = (
   control: AbstractControl,
-  config: {
-    conditional: (() => boolean) | boolean;
-    error?: string;
-    errorName?: string;
-  }
+  config: ConditionalValidationConfig
 ): ValidationErrors | null => {
   const error = config.error ?? "This control has a conditional set on it.";
   const errors: ValidationErrors = {
@@ -205,11 +180,7 @@ export const requiredWhenValidation = (
  */
 export const linkToValidation = (
   control: AbstractControl,
-  config: {
-    link: string;
-    error?: string;
-    errorName?: string;
-  }
+  config: LinkValidationConfig
 ): ValidationErrors | null => {
   const error = config.error ?? `This control has a link to ${config.link}.`;
   const errors: ValidationErrors = { [config.errorName ?? "linkTo"]: error };
@@ -233,11 +204,7 @@ export const linkToValidation = (
  */
 export const linkedToValidation = (
   control: AbstractControl,
-  config: {
-    link: string;
-    error?: string;
-    errorName?: string;
-  }
+  config: LinkValidationConfig
 ): ValidationErrors | null => {
   const error = config.error ?? `This control is linked to ${config.link}.`;
   const errors: ValidationErrors = { [config.errorName ?? "linkTo"]: error };
@@ -248,12 +215,7 @@ export const linkedToValidation = (
 
 export const lengthValidation = (
   control: AbstractControl,
-  config: {
-    length: number;
-    comparison: ComparisonOperations;
-    error?: string;
-    errorName?: string;
-  }
+  config: LengthValidationConfig
 ): ValidationErrors | null => {
   const error =
     config.error ?? `The minimum required length is ${config.length}.`;

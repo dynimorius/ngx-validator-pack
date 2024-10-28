@@ -7,11 +7,14 @@
  */
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { SequenceConfig } from "../../interfaces/sequence-config.interface";
+import {
+  PasswordConfigs,
+  SequenceConfig,
+} from "../../interfaces/sequence-config.interface";
 import { PasswordValidations } from "../../types";
 import { sequentialValidation } from "../../validations/validations";
 import { SequenceConfigFactory } from "../sequence-config-factory";
-import { PasswordConfigMap } from "../sequence-maps/sequence-maps";
+import { PasswordConfigMap } from "../sequence-maps/password-sequence-map";
 
 export const sequentialValidator =
   (sequence: SequenceConfig[]): ValidatorFn =>
@@ -20,7 +23,7 @@ export const sequentialValidator =
   };
 
 export const dynamicPasswordValidator = (
-  passwordSequence: (PasswordValidations | { [key: string]: any })[] = [
+  passwordSequence: (PasswordValidations | PasswordConfigs)[] = [
     "noAlpha",
     "noNumeric",
     "noLowercase",

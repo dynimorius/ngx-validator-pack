@@ -430,6 +430,9 @@ const compareDates = (date1, date2, operation = '===') => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @internal
+ */
 const test = (regexp, value, logic) => {
     const operations = {
         '!': () => !regexp.test(value),

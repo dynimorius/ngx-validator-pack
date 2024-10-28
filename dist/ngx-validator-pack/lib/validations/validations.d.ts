@@ -7,7 +7,7 @@
  */
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
-import { ComparisonOperations } from "../types";
+import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
 /**
  * @internal
  * @description
@@ -20,11 +20,7 @@ import { ComparisonOperations } from "../types";
  *                                       error name string
  * @returns {ValidationErrors | null}  - Validation error
  */
-export declare const regexpValidation: (control: AbstractControl, config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const regexpValidation: (control: AbstractControl, config: RegExpValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -37,11 +33,7 @@ export declare const regexpValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}          - Validation error
  */
-export declare const regexpNotValidation: (control: AbstractControl, config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const regexpNotValidation: (control: AbstractControl, config: RegExpValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -56,11 +48,7 @@ export declare const regexpNotValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
-export declare const earlierThenValidation: (control: AbstractControl, config: {
-    date: Date;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const earlierThenValidation: (control: AbstractControl, config: DateValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -74,11 +62,7 @@ export declare const earlierThenValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}     - Validation error
  */
-export declare const laterThenValidation: (control: AbstractControl, config: {
-    date: Date;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const laterThenValidation: (control: AbstractControl, config: DateValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -91,12 +75,7 @@ export declare const laterThenValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
-export declare const compareToValidation: (control: AbstractControl, config: {
-    fieldName: string;
-    comparison: ComparisonOperations;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const compareToValidation: (control: AbstractControl, config: CompareValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -108,11 +87,7 @@ export declare const compareToValidation: (control: AbstractControl, config: {
  *                                       and optional error and error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
-export declare const requiredWhenValidation: (control: AbstractControl, config: {
-    conditional: (() => boolean) | boolean;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const requiredWhenValidation: (control: AbstractControl, config: ConditionalValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -126,11 +101,7 @@ export declare const requiredWhenValidation: (control: AbstractControl, config: 
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
-export declare const linkToValidation: (control: AbstractControl, config: {
-    link: string;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const linkToValidation: (control: AbstractControl, config: LinkValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description
@@ -144,15 +115,6 @@ export declare const linkToValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
-export declare const linkedToValidation: (control: AbstractControl, config: {
-    link: string;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
-export declare const lengthValidation: (control: AbstractControl, config: {
-    length: number;
-    comparison: ComparisonOperations;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
+export declare const linkedToValidation: (control: AbstractControl, config: LinkValidationConfig) => ValidationErrors | null;
+export declare const lengthValidation: (control: AbstractControl, config: LengthValidationConfig) => ValidationErrors | null;
 export declare const sequentialValidation: (control: AbstractControl, sequence: SequenceConfig[]) => ValidationErrors | null;
