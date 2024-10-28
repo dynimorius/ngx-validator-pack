@@ -66,7 +66,7 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     validationFun: lengthValidation,
     validationFunConfig: {
       length: 8,
-      error: `A password must be at least 8 characters long.`,
+      error: `A password is not long enough.`,
       errorName: "minLength",
     },
   },

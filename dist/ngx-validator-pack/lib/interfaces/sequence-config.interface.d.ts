@@ -8,7 +8,7 @@
 import { ValidationErrors } from "@angular/forms";
 export interface SequenceConfig {
     validationFun: (...args: any[]) => ValidationErrors | null;
-    validationFunConfig: {
+    validationFunConfig?: {
         [key: string]: any;
     };
 }
