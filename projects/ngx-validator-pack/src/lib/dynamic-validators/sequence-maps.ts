@@ -9,13 +9,13 @@ import {
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
 import {
   lengthValidation,
-  regexpTestNotValidation,
-  regexpTestValidation,
+  regexpNotValidation,
+  regexpValidation,
 } from "../validations/validations";
 
 export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
   noAlpha: {
-    validationFun: regexpTestValidation,
+    validationFun: regexpValidation,
     validationFunConfig: {
       regExp: hasLetters,
       error: "A password must contain letters.",
@@ -23,7 +23,7 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     },
   },
   noNumeric: {
-    validationFun: regexpTestValidation,
+    validationFun: regexpValidation,
     validationFunConfig: {
       regExp: hasNumbers,
       error: "A password must contain numbers.",
@@ -31,7 +31,7 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     },
   },
   noLowercase: {
-    validationFun: regexpTestValidation,
+    validationFun: regexpValidation,
     validationFunConfig: {
       regExp: hasLowercase,
       error: "A password must contain lowercase letters.",
@@ -39,7 +39,7 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     },
   },
   noUppercase: {
-    validationFun: regexpTestValidation,
+    validationFun: regexpValidation,
     validationFunConfig: {
       regExp: hasUppercase,
       error: "A password must contain uppercase letters.",
@@ -47,7 +47,7 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     },
   },
   noSpecial: {
-    validationFun: regexpTestNotValidation,
+    validationFun: regexpNotValidation,
     validationFunConfig: {
       regExp: noSpecial,
       error: "A password must contain special characters.",
@@ -55,7 +55,7 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     },
   },
   greaterOrLessThen: {
-    validationFun: regexpTestNotValidation,
+    validationFun: regexpNotValidation,
     validationFunConfig: {
       regExp: greaterOrLessThen,
       error: "A password must not contain < or > characters.",

@@ -6,7 +6,6 @@
  * found at https://www.isc.org/licenses/
  */
 
-
 import { Directive, Input } from "@angular/core";
 import {
   AbstractControl,
@@ -14,9 +13,23 @@ import {
   ValidationErrors,
   Validator,
 } from "@angular/forms";
-import { CompareValidationInput, ConditionalValidationInput, DateValidationInput, LinkValidationInput, RegExpValidationInput } from "../../interfaces/directive-input.interface";
-import { compareToValidation, earlierThenValidation, laterThenValidation, linkToValidation, linkedToValidation, regexpTestNotValidation, regexpTestValidation, requiredWhenValidation } from "../../validations/validations";
-
+import {
+  CompareValidationConfig,
+  ConditionalValidationConfig,
+  DateValidationConfig,
+  LinkValidationConfig,
+  RegExpValidationConfig,
+} from "../../interfaces/validation-config.interface";
+import {
+  compareToValidation,
+  earlierThenValidation,
+  laterThenValidation,
+  linkToValidation,
+  linkedToValidation,
+  regexpNotValidation,
+  regexpValidation,
+  requiredWhenValidation,
+} from "../../validations/validations";
 
 /**
  * @publicApi
@@ -51,10 +64,10 @@ import { compareToValidation, earlierThenValidation, laterThenValidation, linkTo
   ],
 })
 export class RegExpValidatorDirective implements Validator {
-  @Input("regExp") value!: RegExpValidationInput;
+  @Input("regExp") value!: RegExpValidationConfig;
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return regexpTestValidation(control, { ...this.value });
+    return regexpValidation(control, { ...this.value });
   }
 }
 
@@ -92,10 +105,10 @@ export class RegExpValidatorDirective implements Validator {
   ],
 })
 export class RegExpNotValidatorDirective implements Validator {
-  @Input("regExpNot") value!: RegExpValidationInput;
+  @Input("regExpNot") value!: RegExpValidationConfig;
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return regexpTestNotValidation(control, { ...this.value });
+    return regexpNotValidation(control, { ...this.value });
   }
 }
 
@@ -133,7 +146,7 @@ export class RegExpNotValidatorDirective implements Validator {
   ],
 })
 export class EarlierThenValidatorDirective implements Validator {
-  @Input("earlierThen") value!: DateValidationInput;
+  @Input("earlierThen") value!: DateValidationConfig;
 
   validate(control: AbstractControl): ValidationErrors | null {
     return earlierThenValidation(control, { ...this.value });
@@ -174,7 +187,7 @@ export class EarlierThenValidatorDirective implements Validator {
   ],
 })
 export class LaterThenValidatorDirective implements Validator {
-  @Input("laterThen") value!: DateValidationInput;
+  @Input("laterThen") value!: DateValidationConfig;
 
   validate(control: AbstractControl): ValidationErrors | null {
     return laterThenValidation(control, { ...this.value });
@@ -218,7 +231,7 @@ export class LaterThenValidatorDirective implements Validator {
   ],
 })
 export class CompareToValidatorDirective implements Validator {
-  @Input("compareTo") value!: CompareValidationInput;
+  @Input("compareTo") value!: CompareValidationConfig;
   validate(control: AbstractControl): ValidationErrors | null {
     return compareToValidation(control, { ...this.value });
   }
@@ -260,7 +273,7 @@ export class CompareToValidatorDirective implements Validator {
   ],
 })
 export class RequiredWhenValidatorDirective implements Validator {
-  @Input("requiredWhen") value!: ConditionalValidationInput;
+  @Input("requiredWhen") value!: ConditionalValidationConfig;
   validate(control: AbstractControl): ValidationErrors | null {
     return requiredWhenValidation(control, { ...this.value });
   }
@@ -299,7 +312,7 @@ export class RequiredWhenValidatorDirective implements Validator {
   ],
 })
 export class LinkToValidatorDirective implements Validator {
-  @Input("linkTo") value!: LinkValidationInput;
+  @Input("linkTo") value!: LinkValidationConfig;
   validate(control: AbstractControl): ValidationErrors | null {
     return linkToValidation(control, { ...this.value });
   }
@@ -338,7 +351,7 @@ export class LinkToValidatorDirective implements Validator {
   ],
 })
 export class LinkedToValidatorDirective implements Validator {
-  @Input("linkedTo") value!: LinkValidationInput;
+  @Input("linkedTo") value!: LinkValidationConfig;
   validate(control: AbstractControl): ValidationErrors | null {
     return linkedToValidation(control, { ...this.value });
   }

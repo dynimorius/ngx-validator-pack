@@ -1,0 +1,16 @@
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+export const test = (regexp, value, logic) => {
+    const operations = {
+        '!': () => !regexp.test(value),
+        '!!': () => regexp.test(value),
+        'match': () => !!regexp.exec(value)
+    };
+    return operations[logic]();
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnZXhwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvbmd4LXZhbGlkYXRvci1wYWNrL3NyYy9saWIvaGVscGVycy9yZWdleHAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7OztHQU1HO0FBR0gsTUFBTSxDQUFDLE1BQU0sSUFBSSxHQUFHLENBQUMsTUFBYyxFQUFFLEtBQWEsRUFBRSxLQUFpQixFQUFXLEVBQUU7SUFDaEYsTUFBTSxVQUFVLEdBQUc7UUFDakIsR0FBRyxFQUFFLEdBQVksRUFBRSxDQUFDLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUM7UUFDdkMsSUFBSSxFQUFFLEdBQVksRUFBRSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDO1FBQ3ZDLE9BQU8sRUFBRSxHQUFZLEVBQUUsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUM7S0FDN0MsQ0FBQztJQUVGLE9BQU8sVUFBVSxDQUFDLEtBQUssQ0FBQyxFQUFFLENBQUM7QUFDN0IsQ0FBQyxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIEBsaWNlbnNlXHJcbiAqIENvcHlyaWdodCBTbGF2a28gTWloYWpsb3ZpYyBBbGwgUmlnaHRzIFJlc2VydmVkLlxyXG4gKlxyXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBJU0Mtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxyXG4gKiBmb3VuZCBhdCBodHRwczovL3d3dy5pc2Mub3JnL2xpY2Vuc2VzL1xyXG4gKi9cclxuXHJcblxyXG5leHBvcnQgY29uc3QgdGVzdCA9IChyZWdleHA6IFJlZ0V4cCwgdmFsdWU6IHN0cmluZywgbG9naWM6ICchJyB8IFwiISFcIik6IGJvb2xlYW4gPT4ge1xyXG4gIGNvbnN0IG9wZXJhdGlvbnMgPSB7XHJcbiAgICAnISc6ICgpOiBib29sZWFuID0+ICFyZWdleHAudGVzdCh2YWx1ZSksXHJcbiAgICAnISEnOiAoKTogYm9vbGVhbiA9PiByZWdleHAudGVzdCh2YWx1ZSksXHJcbiAgICAnbWF0Y2gnOiAoKTogYm9vbGVhbiA9PiAhIXJlZ2V4cC5leGVjKHZhbHVlKVxyXG4gIH07XHJcblxyXG4gIHJldHVybiBvcGVyYXRpb25zW2xvZ2ljXSgpO1xyXG59Il19

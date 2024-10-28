@@ -10,7 +10,7 @@
  * @description
  * An decorator which handles the input value in directives which extend the
  * {@link RegExpValidatorDirective} and have an expected input in the form of
- * {@link RegExpValidationInput}.
+ * {@link RegExpValidationConfig}.
  *
  * It will populate the error and the errorName values passed to it if it doesn't find
  * them in the input value.

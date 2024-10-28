@@ -8,9 +8,10 @@
 
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { compareDates } from "../helpers/date";
+import { compare } from "../helpers/numbers";
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
 import { ComparisonOperations } from "../types";
-import { compare } from "../helpers/numbers";
+import { regExpBase } from "./regexp.base";
 
 /**
  * @internal
@@ -24,7 +25,7 @@ import { compare } from "../helpers/numbers";
  *                                       error name string
  * @returns {ValidationErrors | null}  - Validation error
  */
-export const regexpTestValidation = (
+export const regexpValidation = (
   control: AbstractControl,
   config: {
     regExp: RegExp;
@@ -34,11 +35,8 @@ export const regexpTestValidation = (
 ): ValidationErrors | null => {
   const error =
     config.error ?? "This control did not match a given regular expression.";
-  const errors: ValidationErrors = {
-    [config.errorName ?? "regexpValidator"]: error,
-  };
 
-  return !control.value || config.regExp.test(control.value) ? null : errors;
+  return regExpBase(control, { ...config, error }, "!!");
 };
 
 /**
@@ -53,7 +51,7 @@ export const regexpTestValidation = (
  *                                       error name string
  * @returns {ValidationErrors | null}          - Validation error
  */
-export const regexpTestNotValidation = (
+export const regexpNotValidation = (
   control: AbstractControl,
   config: {
     regExp: RegExp;
@@ -63,28 +61,8 @@ export const regexpTestNotValidation = (
 ): ValidationErrors | null => {
   const error =
     config.error ?? "This control matched a given regular expression.";
-  const errors: ValidationErrors = {
-    [config.errorName ?? "regexpNotValidator"]: error,
-  };
 
-  return !control.value || !config.regExp.test(control.value) ? null : errors;
-};
-
-export const regexpMatchValidation = (
-  control: AbstractControl,
-  config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-  }
-): ValidationErrors | null => {
-  const error =
-    config.error ?? "This control matched a given regular expression.";
-  const errors: ValidationErrors = {
-    [config.errorName ?? "regexpNotValidator"]: error,
-  };
-
-  return !control.value || !control.value.match(config.regExp) ? null : errors;
+  return regExpBase(control, { ...config, error }, "!");
 };
 
 /**

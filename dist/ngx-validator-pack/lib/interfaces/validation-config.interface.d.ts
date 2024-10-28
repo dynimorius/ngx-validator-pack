@@ -5,20 +5,17 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-
 import { ComparisonOperations } from "../types";
-
 /**
  * @internal
  * @description
- * An interface representing the base of the value which can be 
- * passed to Template Form Validator Directives. 
+ * An interface representing the base of the value which can be
+ * passed to Template Form Validator Directives.
  */
-export interface BaseValidationInput {
-  error?: string;
-  errorName?: string;
+export interface BaseValidationConfig {
+    error?: string;
+    errorName?: string;
 }
-
 /**
  * @publicApi
  * @description
@@ -26,10 +23,9 @@ export interface BaseValidationInput {
  * regexpValidation Directive
  * {@link RegExpValidatorDirective}
  */
-export interface RegExpValidationInput extends BaseValidationInput {
-  regExp: RegExp;
+export interface RegExpValidationConfig extends BaseValidationConfig {
+    regExp: RegExp;
 }
-
 /**
  * @publicApi
  * @description
@@ -38,10 +34,9 @@ export interface RegExpValidationInput extends BaseValidationInput {
  * {@link EarlierThenValidatorDirective}
  * {@link LaterThenValidatorDirective}
  */
-export interface DateValidationInput extends BaseValidationInput {
-  date: Date;
+export interface DateValidationConfig extends BaseValidationConfig {
+    date: Date;
 }
-
 /**
  * @publicApi
  * @description
@@ -49,11 +44,10 @@ export interface DateValidationInput extends BaseValidationInput {
  * compareToValidation Directive
  * {@link compareToValidation}
  */
-export interface CompareValidationInput extends BaseValidationInput {
-  fieldName: string;
-  comparison: ComparisonOperations;
+export interface CompareValidationConfig extends BaseValidationConfig {
+    fieldName: string;
+    comparison: ComparisonOperations;
 }
-
 /**
  * @publicApi
  * @description
@@ -61,10 +55,9 @@ export interface CompareValidationInput extends BaseValidationInput {
  * requiredWhenValidation Directive
  * {@link  RequiredWhenValidatorDirective}
  */
-export interface ConditionalValidationInput extends BaseValidationInput {
-  conditional: (() => boolean) | boolean;
+export interface ConditionalValidationConfig extends BaseValidationConfig {
+    conditional: (() => boolean) | boolean;
 }
-
 /**
  * @publicApi
  * @description
@@ -73,6 +66,6 @@ export interface ConditionalValidationInput extends BaseValidationInput {
  * {@link LinkToValidatorDirective}
  * {@link LinkedToValidatorDirective}
  */
-export interface LinkValidationInput extends BaseValidationInput {
-  link: string;
+export interface LinkValidationConfig extends BaseValidationConfig {
+    link: string;
 }

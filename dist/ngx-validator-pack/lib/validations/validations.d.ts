@@ -20,7 +20,7 @@ import { ComparisonOperations } from "../types";
  *                                       error name string
  * @returns {ValidationErrors | null}  - Validation error
  */
-export declare const regexpTestValidation: (control: AbstractControl, config: {
+export declare const regexpValidation: (control: AbstractControl, config: {
     regExp: RegExp;
     error?: string;
     errorName?: string;
@@ -37,12 +37,7 @@ export declare const regexpTestValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}          - Validation error
  */
-export declare const regexpTestNotValidation: (control: AbstractControl, config: {
-    regExp: RegExp;
-    error?: string;
-    errorName?: string;
-}) => ValidationErrors | null;
-export declare const regexpMatchValidation: (control: AbstractControl, config: {
+export declare const regexpNotValidation: (control: AbstractControl, config: {
     regExp: RegExp;
     error?: string;
     errorName?: string;

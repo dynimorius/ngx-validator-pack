@@ -14,8 +14,8 @@ import {
   laterThenValidation,
   linkToValidation,
   linkedToValidation,
-  regexpTestNotValidation,
-  regexpTestValidation,
+  regexpNotValidation,
+  regexpValidation,
   requiredWhenValidation,
 } from "../../validations/validations";
 
@@ -32,7 +32,7 @@ import {
 export const regexpValidator =
   (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpTestValidation(control, { regExp, error, errorName });
+    return regexpValidation(control, { regExp, error, errorName });
   };
 
 /**
@@ -48,7 +48,7 @@ export const regexpValidator =
 export const regexpNotValidator =
   (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpTestNotValidation(control, { regExp, error, errorName });
+    return regexpNotValidation(control, { regExp, error, errorName });
   };
 
 /**

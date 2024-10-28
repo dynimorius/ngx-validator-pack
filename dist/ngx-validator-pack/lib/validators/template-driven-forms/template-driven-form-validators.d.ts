@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, Validator } from "@angular/forms";
-import { CompareValidationInput, ConditionalValidationInput, DateValidationInput, LinkValidationInput, RegExpValidationInput } from "../../interfaces/directive-input.interface";
+import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LinkValidationConfig, RegExpValidationConfig } from "../../interfaces/validation-config.interface";
 import * as i0 from "@angular/core";
 /**
  * @publicApi
@@ -23,7 +23,7 @@ import * as i0 from "@angular/core";
  * />
  */
 export declare class RegExpValidatorDirective implements Validator {
-    value: RegExpValidationInput;
+    value: RegExpValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RegExpValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpValidatorDirective, "[regExp]", never, { "value": { "alias": "regExp"; "required": false; }; }, {}, never, never, true, never>;
@@ -51,7 +51,7 @@ export declare class RegExpValidatorDirective implements Validator {
  * />
  */
 export declare class RegExpNotValidatorDirective implements Validator {
-    value: RegExpValidationInput;
+    value: RegExpValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RegExpNotValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpNotValidatorDirective, "[regExpNot]", never, { "value": { "alias": "regExpNot"; "required": false; }; }, {}, never, never, true, never>;
@@ -79,7 +79,7 @@ export declare class RegExpNotValidatorDirective implements Validator {
  * />
  */
 export declare class EarlierThenValidatorDirective implements Validator {
-    value: DateValidationInput;
+    value: DateValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<EarlierThenValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<EarlierThenValidatorDirective, "[earlierThen]", never, { "value": { "alias": "earlierThen"; "required": false; }; }, {}, never, never, true, never>;
@@ -107,7 +107,7 @@ export declare class EarlierThenValidatorDirective implements Validator {
  * />
  */
 export declare class LaterThenValidatorDirective implements Validator {
-    value: DateValidationInput;
+    value: DateValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LaterThenValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LaterThenValidatorDirective, "[laterThen]", never, { "value": { "alias": "laterThen"; "required": false; }; }, {}, never, never, true, never>;
@@ -138,7 +138,7 @@ export declare class LaterThenValidatorDirective implements Validator {
  * />
  */
 export declare class CompareToValidatorDirective implements Validator {
-    value: CompareValidationInput;
+    value: CompareValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<CompareToValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<CompareToValidatorDirective, "[compareTo]", never, { "value": { "alias": "compareTo"; "required": false; }; }, {}, never, never, true, never>;
@@ -168,7 +168,7 @@ export declare class CompareToValidatorDirective implements Validator {
  * as this function will be executed every change detection cycle.
  */
 export declare class RequiredWhenValidatorDirective implements Validator {
-    value: ConditionalValidationInput;
+    value: ConditionalValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RequiredWhenValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredWhenValidatorDirective, "[requiredWhen]", never, { "value": { "alias": "requiredWhen"; "required": false; }; }, {}, never, never, true, never>;
@@ -195,7 +195,7 @@ export declare class RequiredWhenValidatorDirective implements Validator {
  * />
  */
 export declare class LinkToValidatorDirective implements Validator {
-    value: LinkValidationInput;
+    value: LinkValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LinkToValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LinkToValidatorDirective, "[linkTo]", never, { "value": { "alias": "linkTo"; "required": false; }; }, {}, never, never, true, never>;
@@ -222,7 +222,7 @@ export declare class LinkToValidatorDirective implements Validator {
  * />
  */
 export declare class LinkedToValidatorDirective implements Validator {
-    value: LinkValidationInput;
+    value: LinkValidationConfig;
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LinkedToValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LinkedToValidatorDirective, "[linkedTo]", never, { "value": { "alias": "linkedTo"; "required": false; }; }, {}, never, never, true, never>;
