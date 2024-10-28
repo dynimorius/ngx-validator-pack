@@ -7,21 +7,23 @@
  */
 import { AbstractControl } from "@angular/forms";
 /**
+ * @internal
  * @description
  * Sets an error on a given control
  *
- * @param {AbstractControl}           - FromControl / AbstractControl to set the error to
- * @param {{ [key: string]: unknown }}- error content
+ * @param control                     - FromControl / AbstractControl to set the error to
+ * @param error                       - error content { [key: string]: unknown }
  */
 export declare const setErrors: (control: AbstractControl, error: {
     [key: string]: unknown;
 }) => void;
 /**
+ * @internal
  * @description
  * Removes errors on a given control
  *
- * @param {AbstractControl}           - FromControl / AbstractControl from which
+ * @param control                     - FromControl / AbstractControl from which
  *                                      to remove error
- * @param {string[]}                  - list of error names
+ * @param keys                        - array of error names
  */
 export declare const removeErrors: (control: AbstractControl, keys: string[]) => void;

@@ -7,6 +7,7 @@
  */
 import { ShowValidationStyle } from "../interfaces/show-validation-styles";
 /**
+ * @publicApi
  * @description
  * Default styles for the showValidation Directive
  * {@link ShowValidationDirective}

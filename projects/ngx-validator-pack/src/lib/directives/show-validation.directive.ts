@@ -20,6 +20,7 @@ import { ShowValidationStyle } from '../interfaces/show-validation-styles';
 import { DefaultStyle } from "../constant/default-show-validation-style";
 
 /**
+ * @publicApi
  * @description
  * A directive which will show a validation error message to the
  * user.

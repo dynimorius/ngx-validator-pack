@@ -10,6 +10,7 @@ import { AbstractControl, ValidationErrors, Validator } from "@angular/forms";
 import { RegExpValidationInput } from "../interfaces/directive-input.interface";
 import * as i0 from "@angular/core";
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a RegEx check on value in the given
  * FromControl / AbstractControl
@@ -18,11 +19,9 @@ import * as i0 from "@angular/core";
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
  *    formControlName="regexp"
  *   [regExp]="{
  *      regExp: /(s|regexp)/,
@@ -38,6 +37,7 @@ export declare class RegExpValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpValidatorDirective, "[regExp]", never, { "value": { "alias": "regExp"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a RegEx check on value in the given
  * FromControl / AbstractControl and returns an error if regex
@@ -47,11 +47,9 @@ export declare class RegExpValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
  *    formControlName="regexpNot"
  *   [regExpNot]="{
  *      regExp: /(s|regexp)/,
@@ -67,6 +65,7 @@ export declare class RegExpNotValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpNotValidatorDirective, "[regExpNot]", never, { "value": { "alias": "regExpNot"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
@@ -76,11 +75,9 @@ export declare class RegExpNotValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="earlierThen"
- *    id="earlierThen"
  *    formControlName="earlierThen"
  *   [earlierThen]="{
  *      date: date,                              -- a variable of type Date
@@ -96,6 +93,7 @@ export declare class EarlierThenValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<EarlierThenValidatorDirective, "[earlierThen]", never, { "value": { "alias": "earlierThen"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
@@ -105,11 +103,9 @@ export declare class EarlierThenValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="laterThen"
- *    id="laterThen"
  *    formControlName="laterThen"
  *   [laterThen]="{
  *      date: date,                              -- a variable of type Date
@@ -125,6 +121,7 @@ export declare class LaterThenValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<LaterThenValidatorDirective, "[laterThen]", never, { "value": { "alias": "laterThen"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if chosen comparison
@@ -136,11 +133,9 @@ export declare class LaterThenValidatorDirective implements Validator {
  *
  * Available comparisons are: '<' , '>' , '==' , '===' , '<=' , '>='.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="compareTo"
- *    id="compareTo"
  *    formControlName="compareTo"
  *   [compareTo]="{
  *      date: date,                              -- a variable of type Date
@@ -157,6 +152,7 @@ export declare class CompareToValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<CompareToValidatorDirective, "[compareTo]", never, { "value": { "alias": "compareTo"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a conditional check and if the condition
  * passes it will return an error.
@@ -165,11 +161,9 @@ export declare class CompareToValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="requiredWhen"
- *    id="requiredWhen"
  *    formControlName="requiredWhen"
  *   [requiredWhen]="{
  *      conditional: isTrue,                     - this can be ether a boolean
@@ -188,6 +182,7 @@ export declare class RequiredWhenValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<RequiredWhenValidatorDirective, "[requiredWhen]", never, { "value": { "alias": "requiredWhen"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a check if the specified FromControl / AbstractControl
  * has a value and a given input does not.
@@ -196,11 +191,9 @@ export declare class RequiredWhenValidatorDirective implements Validator {
  * to and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="linkTo"
- *    id="linkTo"
  *    formControlName="linkTo"
  *   [linkTo]="{
  *      link: 'linkedTo,                      - a name of a form control we want
@@ -216,6 +209,7 @@ export declare class LinkToValidatorDirective implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<LinkToValidatorDirective, "[linkTo]", never, { "value": { "alias": "linkTo"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a check if the specified FromControl / AbstractControl
  * does not have a value and a given input does.
@@ -224,11 +218,9 @@ export declare class LinkToValidatorDirective implements Validator {
  * to and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="linkedTo"
- *    id="linkedTo"
  *    formControlName="linkedTo"
  *   [linkedTo]="{
  *      link: 'linkTo,                      - a name of a form control we want

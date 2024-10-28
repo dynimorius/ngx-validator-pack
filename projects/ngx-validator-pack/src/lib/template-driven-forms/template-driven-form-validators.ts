@@ -32,6 +32,7 @@ import {
 } from "../validations/validations";
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a RegEx check on value in the given
  * FromControl / AbstractControl
@@ -40,11 +41,9 @@ import {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
  *    formControlName="regexp"
  *   [regExp]="{
  *      regExp: /(s|regexp)/,
@@ -73,6 +72,7 @@ export class RegExpValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a RegEx check on value in the given
  * FromControl / AbstractControl and returns an error if regex
@@ -82,11 +82,9 @@ export class RegExpValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
  *    formControlName="regexpNot"
  *   [regExpNot]="{
  *      regExp: /(s|regexp)/,
@@ -115,6 +113,7 @@ export class RegExpNotValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
@@ -124,11 +123,9 @@ export class RegExpNotValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="earlierThen"
- *    id="earlierThen"
  *    formControlName="earlierThen"
  *   [earlierThen]="{
  *      date: date,                              -- a variable of type Date
@@ -157,6 +154,7 @@ export class EarlierThenValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
@@ -166,11 +164,9 @@ export class EarlierThenValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="laterThen"
- *    id="laterThen"
  *    formControlName="laterThen"
  *   [laterThen]="{
  *      date: date,                              -- a variable of type Date
@@ -199,6 +195,7 @@ export class LaterThenValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if chosen comparison
@@ -210,11 +207,9 @@ export class LaterThenValidatorDirective implements Validator {
  *
  * Available comparisons are: '<' , '>' , '==' , '===' , '<=' , '>='.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="compareTo"
- *    id="compareTo"
  *    formControlName="compareTo"
  *   [compareTo]="{
  *      date: date,                              -- a variable of type Date
@@ -243,6 +238,7 @@ export class CompareToValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a conditional check and if the condition
  * passes it will return an error.
@@ -251,11 +247,9 @@ export class CompareToValidatorDirective implements Validator {
  * and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="requiredWhen"
- *    id="requiredWhen"
  *    formControlName="requiredWhen"
  *   [requiredWhen]="{
  *      conditional: isTrue,                     - this can be ether a boolean
@@ -286,6 +280,7 @@ export class RequiredWhenValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a check if the specified FromControl / AbstractControl
  * has a value and a given input does not.
@@ -294,11 +289,9 @@ export class RequiredWhenValidatorDirective implements Validator {
  * to and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="linkTo"
- *    id="linkTo"
  *    formControlName="linkTo"
  *   [linkTo]="{
  *      link: 'linkedTo,                      - a name of a form control we want
@@ -326,6 +319,7 @@ export class LinkToValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a check if the specified FromControl / AbstractControl
  * does not have a value and a given input does.
@@ -334,11 +328,9 @@ export class LinkToValidatorDirective implements Validator {
  * to and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="linkedTo"
- *    id="linkedTo"
  *    formControlName="linkedTo"
  *   [linkedTo]="{
  *      link: 'linkTo,                      - a name of a form control we want

@@ -10,21 +10,19 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 import {
   ComparisonOperations,
   compareDates,
-  prepareToCompare,
 } from "../helpers/date";
 
 /**
+ * @internal
  * @description
  * A validation function which preforms a RegEx check on value in the 
  * given FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
- *         regExp: RegExp, 
- *         error?: string,
- *         errorName?: string
- *        }                                    - config parameter
- * @returns {ValidationErrors | null}          - Validation error
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       regexp to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}  - Validation error
  */
 export const regexpValidation = (
   control: AbstractControl,
@@ -44,18 +42,17 @@ export const regexpValidation = (
 };
 
 /**
+ * @internal
  * @description
  * A validation function which preforms a RegEx check on value in the 
  * given FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         regExp: RegExp, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       regexp to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 export const regexpNotValidation = (
   control: AbstractControl,
   config: {
@@ -74,19 +71,19 @@ export const regexpNotValidation = (
 };
 
 /**
+ * @internal
  * @description
  * A validation function which checks if the date in the given 
  * FromControl / AbstractControl is earlier then the value in the specified 
  * FromControl / AbstractControl.
  *
  * @param {AbstractControl}                    - form control
- * @param {
-*         regExp: RegExp, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       date to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 export const earlierThenValidation = (
   control: AbstractControl,
   config: {
@@ -102,25 +99,24 @@ export const earlierThenValidation = (
     [config.errorName ?? "earlierThen"]: error,
   };
 
-  return prepareToCompare(control?.value) < prepareToCompare(config.date)
+  return compareDates(control.value, config.date, "<")
     ? null
     : errors;
 };
 
 /**
+ * @internal
  * @description
  * A validation function which checks if the date in the given 
  * FromControl / AbstractControl is greater then the value in the specified 
  * FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         regExp: RegExp, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       date to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}     - Validation error
+ */
 export const laterThenValidation = (
   control: AbstractControl,
   config: {
@@ -133,24 +129,23 @@ export const laterThenValidation = (
     config.error ?? `This control must have a value later then ${config.date}.`;
   const errors: ValidationErrors = { [config.errorName ?? "laterThen"]: error };
 
-  return prepareToCompare(control?.value) > prepareToCompare(config.date)
+  return compareDates(control.value, config.date, ">")
     ? null
     : errors;
 };
 
 /**
+ * @internal
  * @description
  * A validation function which compares the date values of the given 
  * FromControl / AbstractControl and specified FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         fieldName: string, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       field name to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 export const compareToValidation = (
   control: AbstractControl,
   config: {
@@ -174,17 +169,16 @@ export const compareToValidation = (
 };
 
 /**
+ * @internal
  * @description
  * A validation function which returns a validation error if a condition is met.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         conditional: (() => boolean) | boolean, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       conditional function or boolean to check 
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 export const requiredWhenValidation = (
   control: AbstractControl,
   config: {
@@ -206,19 +200,18 @@ export const requiredWhenValidation = (
 };
 
 /**
+ * @internal
  * @description
  * A validation function which returns a validation error if a given 
  * FromControl / AbstractControl has no value and specified 
  * FromControl / AbstractControl has it.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         link: string, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       field name to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 export const linkToValidation = (
   control: AbstractControl,
   config: {
@@ -235,19 +228,18 @@ export const linkToValidation = (
 };
 
 /**
+ * @internal
  * @description
  * A validation function which returns a validation error if a given 
  * FromControl / AbstractControl has a value and specified 
  * FromControl / AbstractControl does not.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         link: string, 
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       field name to check and optional error and 
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 export const linkedToValidation = (
   control: AbstractControl,
   config: {

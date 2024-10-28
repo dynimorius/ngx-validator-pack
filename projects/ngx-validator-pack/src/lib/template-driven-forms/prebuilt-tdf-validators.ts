@@ -39,6 +39,7 @@ import {
 } from "../constant/regex";
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl is 
  * in a proper address format (Street number Street Name, City, State ZIP code)
@@ -47,11 +48,9 @@ import {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="address"
- *    id="address"
  *    formControlName="address"
  *   [address]="{
  *      errorName: 'address',
@@ -84,6 +83,7 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that hecks if a value in the given FromControl / AbstractControl 
  * consists of only alphabetic characters.
@@ -91,11 +91,9 @@ export class AddressValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="alphabet"
- *    id="alphabet"
  *    formControlName="alphabet"
  *   [alphabetOnly]="{
  *      errorName: 'alphabet',
@@ -128,6 +126,7 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in one of the following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
@@ -135,11 +134,9 @@ export class AlphabetOnlyValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="dateDD_MM_YYYY"
- *    id="dateDD_MM_YYYY"
  *    formControlName="dateDD_MM_YYYY"
  *   [dateDD_MM_YYYY]="{
  *      errorName: 'dateDD_MM_YYYY',
@@ -172,6 +169,7 @@ export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is a following format: YYYY-MM-dd.
@@ -179,11 +177,9 @@ export class DateDD_MM_YYYYValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="dateYYYY_MM_DD"
- *    id="dateYYYY_MM_DD"
  *    formControlName="dateYYYY_MM_DD"
  *   [dateYYYY_MM_DD]="{
  *      errorName: 'dateYYYY_MM_DD',
@@ -216,6 +212,7 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is a following format: local-part@domain.com.
@@ -223,11 +220,9 @@ export class DateYYYY_MM_DDValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="email"
- *    id="email"
  *    formControlName="email"
  *   [email]="{
  *      errorName: 'email',
@@ -260,6 +255,7 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.
@@ -267,11 +263,9 @@ export class EmailValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="ipAddress"
- *    id="ipAddress"
  *    formControlName="ipAddress"
  *   [ipAddress]="{
  *      errorName: 'ipAddress',
@@ -304,6 +298,7 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a following format: x.x.x.x.
@@ -311,11 +306,9 @@ export class IPAddressValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="iPv4"
- *    id="iPv4"
  *    formControlName="iPv4"
  *   [iPv4]="{
  *      errorName: 'iPv4',
@@ -348,6 +341,7 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a following format:  y:y:y:y:y:y:y:y.
@@ -355,11 +349,9 @@ export class IPv4ValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="iPv6"
- *    id="iPv6"
  *    formControlName="iPv6"
  *   [iPv6]="{
  *      errorName: 'iPv6',
@@ -392,6 +384,7 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * consists of only numeric characters.
@@ -399,11 +392,9 @@ export class IPv6ValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="numbers"
- *    id="numbers"
  *    formControlName="numbers"
  *   [numericsOnly]="{
  *      errorName: 'numbers',
@@ -436,6 +427,7 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * has any special characters.
@@ -443,11 +435,9 @@ export class NumericsOnlyValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="noSpecials"
- *    id="noSpecials"
  *    formControlName="noSpecials"
  *   [noSpecials]="{
  *      errorName: 'noSpecials',
@@ -480,6 +470,7 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a proper passport format.
@@ -487,11 +478,9 @@ export class NoSpecialsValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="passport"
- *    id="passport"
  *    formControlName="passport"
  *   [passport]="{
  *      errorName: 'passport',
@@ -520,6 +509,7 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a strong password format (Has at least 1 lowercase letter, 1 uppercase letter, 
@@ -528,11 +518,9 @@ export class PassportValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="password"
- *    id="password"
  *    formControlName="password"
  *   [password]="{
  *      errorName: 'password',
@@ -565,6 +553,7 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a following format: (000) 000 0000.
@@ -572,11 +561,9 @@ export class PasswordValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="phoneNumber"
- *    id="phoneNumber"
  *    formControlName="phoneNumber"
  *   [phoneNumber]="{
  *      errorName: 'phoneNumber',
@@ -609,6 +596,7 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * consists of a single space character.
@@ -616,11 +604,9 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="singleSpace"
- *    id="singleSpace"
  *    formControlName="singleSpace"
  *   [singleSpace]="{
  *      errorName: 'singleSpace',
@@ -653,6 +639,7 @@ export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * starts or ends with a space character.
@@ -660,11 +647,9 @@ export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="spaceRestriction"
- *    id="spaceRestriction"
  *    formControlName="spaceRestriction"
  *   [spaceRestriction]="{
  *      errorName: 'spaceRestriction',
@@ -697,6 +682,7 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.
@@ -704,11 +690,9 @@ export class SpaceRestrictionValidatorDirective extends RegExpValidatorDirective
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="ssn"
- *    id="ssn"
  *    formControlName="ssn"
  *   [ssn]="{
  *      errorName: 'ssn',
@@ -741,6 +725,7 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a Time Format HH:MM 12-hour with optional leading 0.
@@ -748,11 +733,9 @@ export class SSNValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="timeHH_MM_12"
- *    id="timeHH_MM_12"
  *    formControlName="timeHH_MM_12"
  *   [timeHH_MM_12]="{
  *      errorName: 'timeHH_MM_12',
@@ -785,6 +768,7 @@ export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a Time Format HH:MM 24-hour with optional leading 0.
@@ -792,11 +776,9 @@ export class TimeHH_MM_12ValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="timeHH_MM_24"
- *    id="timeHH_MM_24"
  *    formControlName="timeHH_MM_24"
  *   [timeHH_MM_24]="{
  *      errorName: 'timeHH_MM_24',
@@ -829,6 +811,7 @@ export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a Time Format HH:MM:SS 24-hour.
@@ -836,11 +819,9 @@ export class TimeHH_MM_24ValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="timeHH_MM_SS_24"
- *    id="timeHH_MM_SS_24"
  *    formControlName="timeHH_MM_SS_24"
  *   [timeHH_MM_SS_24]="{
  *      errorName: 'timeHH_MM_SS_24',
@@ -873,6 +854,7 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in a correct url format.
@@ -880,11 +862,9 @@ export class TimeHH_MM_SS_24ValidatorDirective extends RegExpValidatorDirective 
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="url"
- *    id="url"
  *    formControlName="url"
  *   [url]="{
  *      errorName: 'url',
@@ -913,6 +893,7 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl 
  * is in one of the following formats: 00000 or 00000-0000..
@@ -920,11 +901,9 @@ export class UrlValidatorDirective extends RegExpValidatorDirective {
  * Has an optional input in which you specify custom name and a custom 
  * error content / message. 
  * 
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="zipCode"
- *    id="zipCode"
  *    formControlName="zipCode"
  *   [zipCode]="{
  *      errorName: 'zipCode',

@@ -20,6 +20,7 @@ import {
 } from "../validations/cross-field-validations";
 
 /**
+ * @publicApi
  * @description
  * A Directive that assigns a required error to the controls with a name was specified in the
  * first parameter if the control with a name specified in the second parameter
@@ -28,7 +29,7 @@ import {
  * Has an input in which you specify the control which needs to receive the required error,
  * and the control which needs to be checked.
  *
- * @example
+ * @usageNotes
  * <form #exampleForm="ngForm"
  *   [requiredIf]="{
  *      required: 'field_name',
@@ -58,6 +59,7 @@ export class RequiredIfValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that assigns a required error to the controls with a name was specified in the
  * first parameter if the control with a name specified in the second parameter
@@ -66,7 +68,7 @@ export class RequiredIfValidatorDirective implements Validator {
  * Has an input in which you specify the control which needs to receive the required error,
  * and the control which needs to be checked.
  *
- * @example
+ * @usageNotes
  * <form #exampleForm="ngForm"
  *   [requiredIfNot]="{
  *      required: 'field_name',
@@ -96,6 +98,7 @@ export class RequiredIfNotValidatorDirective implements Validator {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that assigns a required error to both controls who's names are specified if nether one
  * has a value.
@@ -103,7 +106,7 @@ export class RequiredIfNotValidatorDirective implements Validator {
  * Has an input in which you specify the control which needs to receive the required error,
  * and the control which needs to be checked.
  *
- * @example
+ * @usageNotes
  * <form #exampleForm="ngForm"
  *   [requiredEther]="{
  *      required: 'field_name',

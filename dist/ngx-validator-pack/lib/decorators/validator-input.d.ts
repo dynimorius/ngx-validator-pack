@@ -6,6 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @internal
  * @description
  * An decorator which handles the input value in directives which extend the
  * {@link RegExpValidatorDirective} and have an expected input in the form of
@@ -13,8 +14,8 @@
  *
  * It will populate the error and the errorName values passed to it if it doesn't find
  * them in the input value.
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - parameter representing error name
- * @param {string}                    - parameter representing error value
+ * @param regexp                      - Regular expression to check
+ * @param errorName                   - parameter representing error name
+ * @param error                       - parameter representing error value
  */
 export declare function RegExpValidatorInput(regexp: RegExp, errorName: string, error: string): (target: any, propertyKey: string) => void;

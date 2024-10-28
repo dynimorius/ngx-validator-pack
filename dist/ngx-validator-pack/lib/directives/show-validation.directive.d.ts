@@ -11,6 +11,7 @@ import { Subscription } from "rxjs";
 import { ShowValidationStyle } from '../interfaces/show-validation-styles';
 import * as i0 from "@angular/core";
 /**
+ * @publicApi
  * @description
  * A directive which will show a validation error message to the
  * user.

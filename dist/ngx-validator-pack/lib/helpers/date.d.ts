@@ -5,6 +5,11 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+/**
+ * @publicApi
+ */
 export type ComparisonOperations = '<' | '>' | '==' | '===' | '<=' | '>=';
-export declare const prepareToCompare: (date: Date | string | undefined | null, bufferYears?: number) => number;
+/**
+ * @publicApi
+ */
 export declare const compareDates: (date1: Date, date2: Date, operation?: ComparisonOperations) => boolean;

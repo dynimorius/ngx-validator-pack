@@ -6,9 +6,15 @@
  * found at https://www.isc.org/licenses/
  */
 
+/**
+ * @publicApi
+ */
 export type ComparisonOperations = '<' | '>' | '==' | '===' | '<=' | '>=';
 
-export const prepareToCompare = (
+/**
+ * @internal
+ */
+const prepareToCompare = (
     date: Date | string | undefined | null,
     bufferYears?: number
 ): number => {
@@ -26,10 +32,9 @@ export const prepareToCompare = (
     }
 } 
 
-export const compareDates = (date1: Date, date2: Date, operation: ComparisonOperations = '==='): boolean => {
-    return compare(date1, date2, operation);
-}
-
+/**
+ * @internal
+ */
 const compare = (date1: Date, date2: Date, comparison: ComparisonOperations): boolean => {
     const operations = {
         '<': (a: Date, b: Date) => prepareToCompare(a) < prepareToCompare(b),
@@ -41,3 +46,11 @@ const compare = (date1: Date, date2: Date, comparison: ComparisonOperations): bo
     }
     return operations[comparison](date1, date2);
 }
+
+/**
+ * @publicApi
+ */
+export const compareDates = (date1: Date, date2: Date, operation: ComparisonOperations = '==='): boolean => {
+    return compare(date1, date2, operation);
+}
+

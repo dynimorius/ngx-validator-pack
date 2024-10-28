@@ -7,6 +7,7 @@
  */
 import { ComparisonOperations } from '../helpers/date';
 /**
+ * @internal
  * @description
  * An interface representing the base of the value which can be
  * passed to Template Form Validator Directives.
@@ -16,6 +17,7 @@ export interface BaseValidationInput {
     errorName?: string;
 }
 /**
+ * @publicApi
  * @description
  * An interface representing the value which can be passed to
  * regexpValidation Directive
@@ -25,6 +27,7 @@ export interface RegExpValidationInput extends BaseValidationInput {
     regExp: RegExp;
 }
 /**
+ * @publicApi
  * @description
  * An interface representing the value which can be passed to
  * date comparison directives.
@@ -35,6 +38,7 @@ export interface DateValidationInput extends BaseValidationInput {
     date: Date;
 }
 /**
+ * @publicApi
  * @description
  * An interface representing the value which can be passed to
  * compareToValidation Directive
@@ -45,6 +49,7 @@ export interface CompareValidationInput extends BaseValidationInput {
     comparison: ComparisonOperations;
 }
 /**
+ * @publicApi
  * @description
  * An interface representing the value which can be passed to
  * requiredWhenValidation Directive
@@ -54,6 +59,7 @@ export interface ConditionalValidationInput extends BaseValidationInput {
     conditional: (() => boolean) | boolean;
 }
 /**
+ * @publicApi
  * @description
  * An interface representing the value which can be passed to
  * date link directives.

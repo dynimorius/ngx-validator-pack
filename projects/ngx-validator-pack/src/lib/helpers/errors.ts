@@ -9,11 +9,12 @@
 import { AbstractControl } from "@angular/forms";
 
 /**
+ * @internal
  * @description
  * Sets an error on a given control
  *
- * @param {AbstractControl}           - FromControl / AbstractControl to set the error to 
- * @param {{ [key: string]: unknown }}- error content
+ * @param control                     - FromControl / AbstractControl to set the error to 
+ * @param error                       - error content { [key: string]: unknown }
  */
 export const setErrors = (
     control: AbstractControl,
@@ -23,12 +24,13 @@ export const setErrors = (
 }
   
 /**
+ * @internal
  * @description
  * Removes errors on a given control
  *
- * @param {AbstractControl}           - FromControl / AbstractControl from which
+ * @param control                     - FromControl / AbstractControl from which
  *                                      to remove error
- * @param {string[]}                  - list of error names
+ * @param keys                        - array of error names
  */
 export const removeErrors = (control: AbstractControl, keys: string[]): void => {
     const remainingErrors = keys.reduce(

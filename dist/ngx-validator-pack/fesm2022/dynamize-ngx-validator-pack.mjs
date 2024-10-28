@@ -13,6 +13,7 @@ import { __decorate } from 'tslib';
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @publicApi
  * @description
  * Default styles for the showValidation Directive
  * {@link ShowValidationDirective}
@@ -34,6 +35,7 @@ const DefaultStyle = {
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @publicApi
  * @description
  * A directive which will show a validation error message to the
  * user.
@@ -122,22 +124,24 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @internal
  * @description
  * Sets an error on a given control
  *
- * @param {AbstractControl}           - FromControl / AbstractControl to set the error to
- * @param {{ [key: string]: unknown }}- error content
+ * @param control                     - FromControl / AbstractControl to set the error to
+ * @param error                       - error content { [key: string]: unknown }
  */
 const setErrors = (control, error) => {
     control.setErrors({ ...control.errors, ...error });
 };
 /**
+ * @internal
  * @description
  * Removes errors on a given control
  *
- * @param {AbstractControl}           - FromControl / AbstractControl from which
+ * @param control                     - FromControl / AbstractControl from which
  *                                      to remove error
- * @param {string[]}                  - list of error names
+ * @param keys                        - array of error names
  */
 const removeErrors = (control, keys) => {
     const remainingErrors = keys.reduce((errors, key) => {
@@ -157,18 +161,17 @@ const removeErrors = (control, keys) => {
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @internal
  * @description
  * A validation function which assigns a required error to the controls with a name that
  * was specified in the requiredControlName filed of the config parameter if the control
  * with a name specified in the controlToCheckName parameter has no value.
  *
- * @param {AbstractControl}                    - form group
- * @param {
- *         requiredControlName: string,
- *         controlToCheckName: string,
- *         error?: string
- *        }                                    - config parameter
- * @returns {ValidationErrors | null}          - Validation error
+ * @param control                      - form group
+ * @param config                       - config parameter, consists of a
+ *                                       required field name, a field name to check and optional
+ *                                       error string
+ * @returns {ValidationErrors | null}   - Validation error
  */
 const requiredIfValidation = (control, config) => {
     const required = control?.get(config.required);
@@ -185,18 +188,17 @@ const requiredIfValidation = (control, config) => {
     }
 };
 /**
+ * @internal
  * @description
  * A validation function which assigns a required error to the controls with a name that
  * was specified in the requiredControlName field of the config parameter if the control
  * with a name specified in the controlToCheckName parameter has a value.
  *
- * @param {AbstractControl}                    - form group
- * @param {
- *         requiredControlName: string,
- *         controlToCheckName: string,
- *         error?: string
- *        }                                    - config parameter
- * @returns {ValidationErrors | null}          - Validation error
+ * @param control                      - form group
+ * @param config                       - config parameter, consists of a
+ *                                       required field name, a field name to check and optional
+ *                                       error string
+ * @returns {ValidationErrors | null}   - Validation error
  */
 const requiredIfNotValidation = (control, config) => {
     const required = control?.get(config.required);
@@ -213,18 +215,17 @@ const requiredIfNotValidation = (control, config) => {
     }
 };
 /**
+ * @internal
  * @description
  * A validation function which assigns a required error to the controls with a name that
  * was specified in the requiredControlName field of the config parameter nether that control
  * or the control with a name specified in the controlToCheckName parameter has a value.
  *
- * @param {AbstractControl}                    - form group
- * @param {
- *         requiredControlName: string,
- *         controlToCheckName: string,
- *         error?: string
- *        }                                    - config parameter
- * @returns {ValidationErrors | null}          - Validation error
+ * @param control                      - form group
+ * @param config                       - config parameter, consists of a
+ *                                       required field name, a field name to check and optional
+ *                                       error string
+ * @returns {ValidationErrors | null}   - Validation error
  */
 const requiredEtherValidation = (control, config) => {
     const required = control?.get(config.required);
@@ -251,14 +252,15 @@ const requiredEtherValidation = (control, config) => {
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @publicApi
  * @description
  * Assigns a required error to the controls with a name was specified in the
  * first parameter if the control with a name specified in the second parameter
  * has no value.
  *
- * @param {string}                    - control name to receive the required error
- * @param {string}                    - control name who's value needs to be checked
- * @param {string}                    - error message - optional parameter
+ * @param required                    - control name to receive the required error
+ * @param check                       - control name who's value needs to be checked
+ * @param error                       - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
 const requiredIf = (required, check, error) => {
@@ -267,14 +269,15 @@ const requiredIf = (required, check, error) => {
     };
 };
 /**
+ * @publicApi
  * @description
  * Assigns a required error to the controls with a name was specified in the
  * first parameter if the control with a name specified in the second parameter
  * has a value.
  *
- * @param {string}                    - control name to receive the required error
- * @param {string}                    - control name who's value needs to be checked
- * @param {string}                    - error message - optional parameter
+ * @param required                    - control name to receive the required error
+ * @param check                       - control name who's value needs to be checked
+ * @param error                       - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
 const requiredIfNot = (required, check, error) => {
@@ -283,13 +286,14 @@ const requiredIfNot = (required, check, error) => {
     };
 };
 /**
+ * @publicApi
  * @description
  * Assigns a required error to both controls who's names are specified if nether one
  * has a value.
  *
- * @param {string}                    - name of the first control
- * @param {string}                    - name of the second control
- * @param {string}                    - error message - optional parameter
+ * @param required                    - name of the first control
+ * @param check                       - name of the second control
+ * @param error                       - error message - optional parameter
  * @returns {ValidationErrors | null} - Validation error
  */
 const requiredEther = (required, check, error) => {
@@ -305,51 +309,51 @@ const requiredEther = (required, check, error) => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-// Checks id an input in a format of Street number Street Name, City, State ZIP code
+// @internal Checks id an input in a format of Street number Street Name, City, State ZIP code
 const address = /^(\d{1,}) [a-zA-Z0-9\s]+(\,)? [a-zA-Z]+(\,)? [A-Z]{2} [0-9]{5,6}$/;
-// Checks for date format YYYY-MM-dd
+// @internal Checks for date format YYYY-MM-dd
 const dateYYYY_MM_DD = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 // Checks for date format  dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY
-// with check for leap year
+// @internal with check for leap year
 const dateDD_MM_YYYY = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-// Checks if input is an email
+// @internal Checks if input is an email
 const email = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-// Checks if input is in a IPv4 format
+// @internal Checks if input is in a IPv4 format
 const IPAddressV4 = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
-// Checks if input is in a IPv6 format
+// @internal Checks if input is in a IPv6 format
 const IPAddressV6 = /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/;
-// Checks if input is in a IPv4 or IPv6 format
+// @internal Checks if input is in a IPv4 or IPv6 format
 const IPAddressV4AndV6 = /((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))/;
-// Checks if an input consists of letters only
+// @internal Checks if an input consists of letters only
 const lettersOnly = /^[A-Za-z]+$/;
-// Checks if the input consists of letters, periods, hyphens and spaces
+// @internal Checks if the input consists of letters, periods, hyphens and spaces
 const lettersPeriodsHyphensAndSpaces = /^[a-zA-Z\s.-]+$/;
-// Checks if input contains any special characters
+// @internal Checks if input contains any special characters
 const noSpecial = /^[A-Za-z0-9 ]+$/;
-// Checks if an input consists of numbers only
+// @internal Checks if an input consists of numbers only
 const numbersOnly = /^\d+$/;
-// Checks if input is in passport format
+// @internal Checks if input is in passport format
 const passport = /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/;
 // Checks if input consist of at least 1 lowercase letter, 1 uppercase letter,
-// 1 number, 1 special character and has length of at least 8 characters
+// @internal 1 number, 1 special character and has length of at least 8 characters
 const passwordStrength = /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/;
-// Checks for a (000) 000 0000 phone format
+// @internal Checks for a (000) 000 0000 phone format
 const phoneNumber = /^(\()?[2-9]{1}\d{2}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
-// Checks for a single space character
+// @internal Checks for a single space character
 const singleSpace = /[\s]/;
-// Restrict only spaces, spaces at the beginning and end of the field
+// @internal Restrict only spaces, spaces at the beginning and end of the field
 const spaceRestriction = /^\S$|^\S[\s\S]*\S$/;
-// Checks if input is in an Social Security Number format
+// @internal Checks if input is in an Social Security Number format
 const ssn = /^((?!219-09-9999|078-05-1120)(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4})|((?!219 09 9999|078 05 1120)(?!666|000|9\d{2})\d{3} (?!00)\d{2} (?!0{4})\d{4})|((?!219099999|078051120)(?!666|000|9\d{2})\d{3}(?!00)\d{2}(?!0{4})\d{4})$/;
-// Checks for Time Format HH:MM 12-hour with optional leading 0
+// @internal Checks for Time Format HH:MM 12-hour with optional leading 0
 const timeHH_MM_12 = /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))/;
-// Checks for Time Format HH:MM 24-hour with optional leading 0
+// @internal Checks for Time Format HH:MM 24-hour with optional leading 0
 const timeHH_MM_24 = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-// Checks for Time Format HH:MM:SS 24-hour
+// @internal Checks for Time Format HH:MM:SS 24-hour
 const timeHH_MM_SS_24 = /(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/;
-// Checks if input is a url
+// @internal Checks if input is a url
 const url = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
-// Checks of a zip code in formats 00000 or 00000-0000
+// @internal Checks of a zip code in formats 00000 or 00000-0000
 const zipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
 
 /**
@@ -358,6 +362,9 @@ const zipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
+ */
+/**
+ * @internal
  */
 const prepareToCompare = (date, bufferYears) => {
     if (date) {
@@ -371,9 +378,9 @@ const prepareToCompare = (date, bufferYears) => {
         return 0;
     }
 };
-const compareDates = (date1, date2, operation = '===') => {
-    return compare(date1, date2, operation);
-};
+/**
+ * @internal
+ */
 const compare = (date1, date2, comparison) => {
     const operations = {
         '<': (a, b) => prepareToCompare(a) < prepareToCompare(b),
@@ -385,6 +392,12 @@ const compare = (date1, date2, comparison) => {
     };
     return operations[comparison](date1, date2);
 };
+/**
+ * @publicApi
+ */
+const compareDates = (date1, date2, operation = '===') => {
+    return compare(date1, date2, operation);
+};
 
 /**
  * @license
@@ -394,17 +407,16 @@ const compare = (date1, date2, comparison) => {
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @internal
  * @description
  * A validation function which preforms a RegEx check on value in the
  * given FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
- *         regExp: RegExp,
- *         error?: string,
- *         errorName?: string
- *        }                                    - config parameter
- * @returns {ValidationErrors | null}          - Validation error
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       regexp to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}  - Validation error
  */
 const regexpValidation = (control, config) => {
     const error = config.error ?? "This control did not match a given regular expression.";
@@ -414,18 +426,17 @@ const regexpValidation = (control, config) => {
     return !control.value || config.regExp.test(control.value) ? null : errors;
 };
 /**
+ * @internal
  * @description
  * A validation function which preforms a RegEx check on value in the
  * given FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         regExp: RegExp,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       regexp to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}          - Validation error
+ */
 const regexpNotValidation = (control, config) => {
     const error = config.error ?? "This control matched a given regular expression.";
     const errors = {
@@ -434,63 +445,61 @@ const regexpNotValidation = (control, config) => {
     return !control.value || !config.regExp.test(control.value) ? null : errors;
 };
 /**
+ * @internal
  * @description
  * A validation function which checks if the date in the given
  * FromControl / AbstractControl is earlier then the value in the specified
  * FromControl / AbstractControl.
  *
  * @param {AbstractControl}                    - form control
- * @param {
-*         regExp: RegExp,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       date to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 const earlierThenValidation = (control, config) => {
     const error = config.error ??
         `This control must have a value earlier then ${config.date}.`;
     const errors = {
         [config.errorName ?? "earlierThen"]: error,
     };
-    return prepareToCompare(control?.value) < prepareToCompare(config.date)
+    return compareDates(control.value, config.date, "<")
         ? null
         : errors;
 };
 /**
+ * @internal
  * @description
  * A validation function which checks if the date in the given
  * FromControl / AbstractControl is greater then the value in the specified
  * FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         regExp: RegExp,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       date to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}     - Validation error
+ */
 const laterThenValidation = (control, config) => {
     const error = config.error ?? `This control must have a value later then ${config.date}.`;
     const errors = { [config.errorName ?? "laterThen"]: error };
-    return prepareToCompare(control?.value) > prepareToCompare(config.date)
+    return compareDates(control.value, config.date, ">")
         ? null
         : errors;
 };
 /**
+ * @internal
  * @description
  * A validation function which compares the date values of the given
  * FromControl / AbstractControl and specified FromControl / AbstractControl.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         fieldName: string,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       field name to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 const compareToValidation = (control, config) => {
     const date = control.parent?.get(config.fieldName)?.value;
     if (date) {
@@ -505,17 +514,16 @@ const compareToValidation = (control, config) => {
     return null;
 };
 /**
+ * @internal
  * @description
  * A validation function which returns a validation error if a condition is met.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         conditional: (() => boolean) | boolean,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       conditional function or boolean to check
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 const requiredWhenValidation = (control, config) => {
     const error = config.error ?? "This control has a conditional set on it.";
     const errors = {
@@ -527,19 +535,18 @@ const requiredWhenValidation = (control, config) => {
     return !control.value && outcome ? errors : null;
 };
 /**
+ * @internal
  * @description
  * A validation function which returns a validation error if a given
  * FromControl / AbstractControl has no value and specified
  * FromControl / AbstractControl has it.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         link: string,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       field name to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 const linkToValidation = (control, config) => {
     const error = config.error ?? `This control has a link to ${config.link}.`;
     const errors = { [config.errorName ?? "linkTo"]: error };
@@ -547,19 +554,18 @@ const linkToValidation = (control, config) => {
     return !control?.value && !!linkedTo?.value ? errors : null;
 };
 /**
+ * @internal
  * @description
  * A validation function which returns a validation error if a given
  * FromControl / AbstractControl has a value and specified
  * FromControl / AbstractControl does not.
  *
- * @param {AbstractControl}                    - form control
- * @param {
-*         link: string,
-*         error?: string,
-*         errorName?: string
-*        }                                    - config parameter
-* @returns {ValidationErrors | null}          - Validation error
-*/
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       field name to check and optional error and
+ *                                       error name string
+ * @returns {ValidationErrors | null}   - Validation error
+ */
 const linkedToValidation = (control, config) => {
     const error = config.error ?? `This control is linked to ${config.link}.`;
     const errors = { [config.errorName ?? "linkTo"]: error };
@@ -575,37 +581,40 @@ const linkedToValidation = (control, config) => {
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper address format
  * (Street number Street Name, City, State ZIP code)
  * Example: 3344 W Alameda Avenue, Lakewood, CO 80222
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const addressValidator = (errorName = "address", error = "Please input a value in a format of: Street number Street Name, City, State ZIP code.") => (control) => {
     return regexpValidation(control, { regExp: address, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl consists of only
  * alphabetic characters.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const alphabetOnlyValidator = (errorName = "alphabetOnly", error = "Only alphabetic characters are allowed.") => (control) => {
     return regexpValidation(control, { regExp: lettersOnly, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
  *
- * @param {string}                    - optional parameter representing error name
- * @param { string}                   - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const dateDD_MM_YYYYValidator = (errorName = "dateDD_MM_YYYY", error = "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY.") => (control) => {
@@ -616,12 +625,13 @@ const dateDD_MM_YYYYValidator = (errorName = "dateDD_MM_YYYY", error = "Please i
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * YYYY-MM-dd.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please input a value in a format: YYYY-MM-dd.") => (control) => {
@@ -632,24 +642,26 @@ const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please i
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * local-part@domain.com.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const emailValidator = (errorName = "email", error = "Please input a value in a format: local-part@domain.com.") => (control) => {
     return regexpValidation(control, { regExp: email, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: x.x.x.x or y:y:y:y:y:y:y:y.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const ipAddressValidator = (errorName = "ipAddress", error = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.") => (control) => {
@@ -660,71 +672,77 @@ const ipAddressValidator = (errorName = "ipAddress", error = "Please input a val
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * x.x.x.x.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const iPv4Validator = (errorName = "iPv4", error = "Please input a value in a format: x.x.x.x.") => (control) => {
     return regexpValidation(control, { regExp: IPAddressV4, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * y:y:y:y:y:y:y:y.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const iPv6Validator = (errorName = "iPv6", error = "Please input a value in a format: y:y:y:y:y:y:y:y.") => (control) => {
     return regexpValidation(control, { regExp: IPAddressV6, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl consists of only
  * numeric characters.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const numericsOnlyValidator = (errorName = "numericsOnly", error = "Only numeric characters are allowed.") => (control) => {
     return regexpValidation(control, { regExp: numbersOnly, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl has any special characters.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const noSpecialsValidator = (errorName = "noSpecials", error = "No special characters are allowed.") => (control) => {
     return regexpValidation(control, { regExp: noSpecial, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a proper passport format
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const passportValidator = (errorName = "passport", error = "Incorrect passport format.") => (control) => {
     return regexpValidation(control, { regExp: passport, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a strong password format
  * (Has at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and has
  * length of at least 8 characters).
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const passwordValidator = (errorName = "password", error = "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8.") => (control) => {
@@ -735,36 +753,39 @@ const passwordValidator = (errorName = "password", error = "The value has to con
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a following format:
  * (000) 000 0000.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const phoneNumberValidator = (errorName = "phoneNumber", error = "Please input a value in a format: (000) 000 0000.") => (control) => {
     return regexpValidation(control, { regExp: phoneNumber, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl consists of a single space
  * character.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const singleSpaceValidator = (errorName = "singleSpace", error = "A single space character is not allowed.") => (control) => {
     return regexpValidation(control, { regExp: singleSpace, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl starts or ends with a
  * space character.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Value can not start or end with a space character.") => (control) => {
@@ -775,24 +796,26 @@ const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Valu
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: AAA-GGG-SSSS or AAAGGGSSSS.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const ssnValidator = (errorName = "ssn", error = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.") => (control) => {
     return regexpValidation(control, { regExp: ssn, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM 12-hour with optional leading 0.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const timeHH_MM_12Validator = (errorName = "timeHH_MM_12", error = "Please input a value in a HH:MM 12-hour format.") => (control) => {
@@ -803,12 +826,13 @@ const timeHH_MM_12Validator = (errorName = "timeHH_MM_12", error = "Please input
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM 24-hour with optional leading 0.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const timeHH_MM_24Validator = (errorName = "timeHH_MM_24", error = "Please input a value in a HH:MM 24-hour format.") => (control) => {
@@ -819,12 +843,13 @@ const timeHH_MM_24Validator = (errorName = "timeHH_MM_24", error = "Please input
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * Time Format HH:MM:SS 24-hour.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please input a value in a HH:MM:SS 24-hour format.") => (control) => {
@@ -835,24 +860,26 @@ const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please
     });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in a
  * correct url format.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const urlValidator = (errorName = "url", error = "Improper URL format.") => (control) => {
     return regexpValidation(control, { regExp: url, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if a value in the given FromControl / AbstractControl is in one of the
  * following formats: 00000 or 00000-0000.
  *
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code format.") => (control) => {
@@ -867,37 +894,40 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param regExp                      - Regular expression to check
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const regexpValidator = (regExp, errorName, error) => (control) => {
     return regexpValidation(control, { regExp, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param regExp                      - Regular expression to check
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const regexpNotValidator = (regExp, errorName, error) => (control) => {
     return regexpNotValidation(control, { regExp, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
  * the value in the specified FromControl / AbstractControl.
  *
- * @param {AbstractControl}           - AbstractControl to preform the check against
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param date                        - Date to preform the check against
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const earlierThenValidator = (date, errorName, error) => (control) => {
@@ -908,9 +938,9 @@ const earlierThenValidator = (date, errorName, error) => (control) => {
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl.
  *
- * @param {AbstractControl}           - AbstractControl to preform the check against
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param date                        - Date to preform the check against
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const laterThenValidator = (date, errorName, error) => (control) => {
@@ -921,10 +951,10 @@ const laterThenValidator = (date, errorName, error) => (control) => {
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl.
  *
- * @param {string}                    - name of the filed to compare against
- * @param {ComparisonOperations}      - comparison to preform
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param fieldName                   - name of the filed to compare against
+ * @param comparison                  - comparison to preform
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const compareToValidator = (fieldName, comparison, errorName, error) => (control) => {
@@ -939,9 +969,9 @@ const compareToValidator = (fieldName, comparison, errorName, error) => (control
  * @description
  * Returns a validation error if a condition is met.
  *
- * @param {Function | boolean}        - conditional function or a boolean value
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param conditional                 - conditional function or a boolean value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const requiredWhenValidator = (conditional, errorName, error) => (control) => {
@@ -952,9 +982,9 @@ const requiredWhenValidator = (conditional, errorName, error) => (control) => {
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it.
  *
- * @param {string}                    - name of the FromControl / AbstractControl to link to
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param link                        - name of the FromControl / AbstractControl to link to
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const linkToValidator = (link, errorName, error) => (control) => {
@@ -965,10 +995,10 @@ const linkToValidator = (link, errorName, error) => (control) => {
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not.
  *
- * @param {string}                    - name of the FromControl / AbstractControl
+ * @param link                        - name of the FromControl / AbstractControl
  *                                      which a given FromControl / AbstractControl is linked to
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 const linkedToValidator = (link, errorName, error) => (control) => {
@@ -976,6 +1006,7 @@ const linkedToValidator = (link, errorName, error) => (control) => {
 };
 
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a RegEx check on value in the given
  * FromControl / AbstractControl
@@ -984,11 +1015,9 @@ const linkedToValidator = (link, errorName, error) => (control) => {
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="regexp"
- *    id="regexp"
  *    formControlName="regexp"
  *   [regExp]="{
  *      regExp: /(s|regexp)/,
@@ -1028,6 +1057,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["regExp"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a RegEx check on value in the given
  * FromControl / AbstractControl and returns an error if regex
@@ -1037,11 +1067,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="regexpNot"
- *    id="regexpNot"
  *    formControlName="regexpNot"
  *   [regExpNot]="{
  *      regExp: /(s|regexp)/,
@@ -1081,6 +1109,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["regExpNot"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
@@ -1090,11 +1119,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="earlierThen"
- *    id="earlierThen"
  *    formControlName="earlierThen"
  *   [earlierThen]="{
  *      date: date,                              -- a variable of type Date
@@ -1134,6 +1161,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["earlierThen"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
@@ -1143,11 +1171,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * and optionally you can give it a custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="laterThen"
- *    id="laterThen"
  *    formControlName="laterThen"
  *   [laterThen]="{
  *      date: date,                              -- a variable of type Date
@@ -1187,6 +1213,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["laterThen"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if chosen comparison
@@ -1198,11 +1225,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *
  * Available comparisons are: '<' , '>' , '==' , '===' , '<=' , '>='.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="compareTo"
- *    id="compareTo"
  *    formControlName="compareTo"
  *   [compareTo]="{
  *      date: date,                              -- a variable of type Date
@@ -1243,6 +1268,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["compareTo"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a conditional check and if the condition
  * passes it will return an error.
@@ -1251,11 +1277,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="requiredWhen"
- *    id="requiredWhen"
  *    formControlName="requiredWhen"
  *   [requiredWhen]="{
  *      conditional: isTrue,                     - this can be ether a boolean
@@ -1298,6 +1322,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["requiredWhen"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a check if the specified FromControl / AbstractControl
  * has a value and a given input does not.
@@ -1306,11 +1331,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * to and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="linkTo"
- *    id="linkTo"
  *    formControlName="linkTo"
  *   [linkTo]="{
  *      link: 'linkedTo,                      - a name of a form control we want
@@ -1350,6 +1373,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["linkTo"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that preforms a check if the specified FromControl / AbstractControl
  * does not have a value and a given input does.
@@ -1358,11 +1382,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * to and optionally you can give it a custom name and a custom error
  * content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="linkedTo"
- *    id="linkedTo"
  *    formControlName="linkedTo"
  *   [linkedTo]="{
  *      link: 'linkTo,                      - a name of a form control we want
@@ -1410,6 +1432,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * found at https://www.isc.org/licenses/
  */
 /**
+ * @internal
  * @description
  * An decorator which handles the input value in directives which extend the
  * {@link RegExpValidatorDirective} and have an expected input in the form of
@@ -1417,9 +1440,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *
  * It will populate the error and the errorName values passed to it if it doesn't find
  * them in the input value.
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - parameter representing error name
- * @param {string}                    - parameter representing error value
+ * @param regexp                      - Regular expression to check
+ * @param errorName                   - parameter representing error name
+ * @param error                       - parameter representing error value
  */
 function RegExpValidatorInput(regexp, errorName, error) {
     return function (target, propertyKey) {
@@ -1446,6 +1469,7 @@ function RegExpValidatorInput(regexp, errorName, error) {
 }
 
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl is
  * in a proper address format (Street number Street Name, City, State ZIP code)
@@ -1454,11 +1478,9 @@ function RegExpValidatorInput(regexp, errorName, error) {
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="address"
- *    id="address"
  *    formControlName="address"
  *   [address]="{
  *      errorName: 'address',
@@ -1500,6 +1522,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["address"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that hecks if a value in the given FromControl / AbstractControl
  * consists of only alphabetic characters.
@@ -1507,11 +1530,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="alphabet"
- *    id="alphabet"
  *    formControlName="alphabet"
  *   [alphabetOnly]="{
  *      errorName: 'alphabet',
@@ -1553,6 +1574,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["alphabetOnly"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in one of the following formats: dd-MM-YYYY, dd.MM.YYYY or dd/MM/YYYY.
@@ -1560,11 +1582,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="dateDD_MM_YYYY"
- *    id="dateDD_MM_YYYY"
  *    formControlName="dateDD_MM_YYYY"
  *   [dateDD_MM_YYYY]="{
  *      errorName: 'dateDD_MM_YYYY',
@@ -1606,6 +1626,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["dateDD_MM_YYYY"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is a following format: YYYY-MM-dd.
@@ -1613,11 +1634,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="dateYYYY_MM_DD"
- *    id="dateYYYY_MM_DD"
  *    formControlName="dateYYYY_MM_DD"
  *   [dateYYYY_MM_DD]="{
  *      errorName: 'dateYYYY_MM_DD',
@@ -1659,6 +1678,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["dateYYYY_MM_DD"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is a following format: local-part@domain.com.
@@ -1666,11 +1686,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="email"
- *    id="email"
  *    formControlName="email"
  *   [email]="{
  *      errorName: 'email',
@@ -1712,6 +1730,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["email"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.
@@ -1719,11 +1738,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="ipAddress"
- *    id="ipAddress"
  *    formControlName="ipAddress"
  *   [ipAddress]="{
  *      errorName: 'ipAddress',
@@ -1765,6 +1782,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["ipAddress"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a following format: x.x.x.x.
@@ -1772,11 +1790,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="iPv4"
- *    id="iPv4"
  *    formControlName="iPv4"
  *   [iPv4]="{
  *      errorName: 'iPv4',
@@ -1818,6 +1834,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["iPv4"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a following format:  y:y:y:y:y:y:y:y.
@@ -1825,11 +1842,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="iPv6"
- *    id="iPv6"
  *    formControlName="iPv6"
  *   [iPv6]="{
  *      errorName: 'iPv6',
@@ -1871,6 +1886,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["iPv6"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * consists of only numeric characters.
@@ -1878,11 +1894,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="numbers"
- *    id="numbers"
  *    formControlName="numbers"
  *   [numericsOnly]="{
  *      errorName: 'numbers',
@@ -1924,6 +1938,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["numericsOnly"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * has any special characters.
@@ -1931,11 +1946,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="noSpecials"
- *    id="noSpecials"
  *    formControlName="noSpecials"
  *   [noSpecials]="{
  *      errorName: 'noSpecials',
@@ -1977,6 +1990,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["noSpecials"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a proper passport format.
@@ -1984,11 +1998,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="passport"
- *    id="passport"
  *    formControlName="passport"
  *   [passport]="{
  *      errorName: 'passport',
@@ -2030,6 +2042,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["passport"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a strong password format (Has at least 1 lowercase letter, 1 uppercase letter,
@@ -2038,11 +2051,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="password"
- *    id="password"
  *    formControlName="password"
  *   [password]="{
  *      errorName: 'password',
@@ -2084,6 +2095,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["password"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a following format: (000) 000 0000.
@@ -2091,11 +2103,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="phoneNumber"
- *    id="phoneNumber"
  *    formControlName="phoneNumber"
  *   [phoneNumber]="{
  *      errorName: 'phoneNumber',
@@ -2137,6 +2147,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["phoneNumber"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * consists of a single space character.
@@ -2144,11 +2155,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="singleSpace"
- *    id="singleSpace"
  *    formControlName="singleSpace"
  *   [singleSpace]="{
  *      errorName: 'singleSpace',
@@ -2190,6 +2199,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["singleSpace"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * starts or ends with a space character.
@@ -2197,11 +2207,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="spaceRestriction"
- *    id="spaceRestriction"
  *    formControlName="spaceRestriction"
  *   [spaceRestriction]="{
  *      errorName: 'spaceRestriction',
@@ -2243,6 +2251,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["spaceRestrictionValidation"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.
@@ -2250,11 +2259,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="ssn"
- *    id="ssn"
  *    formControlName="ssn"
  *   [ssn]="{
  *      errorName: 'ssn',
@@ -2296,6 +2303,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["ssn"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a Time Format HH:MM 12-hour with optional leading 0.
@@ -2303,11 +2311,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="timeHH_MM_12"
- *    id="timeHH_MM_12"
  *    formControlName="timeHH_MM_12"
  *   [timeHH_MM_12]="{
  *      errorName: 'timeHH_MM_12',
@@ -2349,6 +2355,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["timeHH_MM_12"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a Time Format HH:MM 24-hour with optional leading 0.
@@ -2356,11 +2363,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="timeHH_MM_24"
- *    id="timeHH_MM_24"
  *    formControlName="timeHH_MM_24"
  *   [timeHH_MM_24]="{
  *      errorName: 'timeHH_MM_24',
@@ -2402,6 +2407,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["timeHH_MM_24"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a Time Format HH:MM:SS 24-hour.
@@ -2409,11 +2415,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="timeHH_MM_SS_24"
- *    id="timeHH_MM_SS_24"
  *    formControlName="timeHH_MM_SS_24"
  *   [timeHH_MM_SS_24]="{
  *      errorName: 'timeHH_MM_SS_24',
@@ -2455,6 +2459,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["timeHH_MM_SS_24"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in a correct url format.
@@ -2462,11 +2467,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="url"
- *    id="url"
  *    formControlName="url"
  *   [url]="{
  *      errorName: 'url',
@@ -2508,6 +2511,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 args: ["url"]
             }] } });
 /**
+ * @publicApi
  * @description
  * A Directive that checks if a value in the given FromControl / AbstractControl
  * is in one of the following formats: 00000 or 00000-0000..
@@ -2515,11 +2519,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an optional input in which you specify custom name and a custom
  * error content / message.
  *
- * @example
+ * @usageNotes
  *  <input
  *    type="text"
- *    name="zipCode"
- *    id="zipCode"
  *    formControlName="zipCode"
  *   [zipCode]="{
  *      errorName: 'zipCode',

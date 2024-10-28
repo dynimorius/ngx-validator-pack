@@ -9,6 +9,7 @@
 import { BaseValidationInput, RegExpValidationInput } from "../interfaces/directive-input.interface";
 
 /**
+ * @internal
  * @description
  * An decorator which handles the input value in directives which extend the 
  * {@link RegExpValidatorDirective} and have an expected input in the form of 
@@ -16,9 +17,9 @@ import { BaseValidationInput, RegExpValidationInput } from "../interfaces/direct
  * 
  * It will populate the error and the errorName values passed to it if it doesn't find 
  * them in the input value.
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - parameter representing error name
- * @param {string}                    - parameter representing error value
+ * @param regexp                      - Regular expression to check
+ * @param errorName                   - parameter representing error name
+ * @param error                       - parameter representing error value
  */
 export function RegExpValidatorInput(
   regexp: RegExp,

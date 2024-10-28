@@ -20,12 +20,13 @@ import {
 } from "../validations/validations";
 
 /**
+ * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param regExp                      - Regular expression to check
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const regexpValidator =
@@ -35,12 +36,13 @@ export const regexpValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
- * @param {RegExp}                    - Regular expression to check
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param regExp                      - Regular expression to check
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const regexpNotValidator =
@@ -50,13 +52,14 @@ export const regexpNotValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Checks if the date in the given FromControl / AbstractControl is earlier then
  * the value in the specified FromControl / AbstractControl.
  *
- * @param {AbstractControl}           - AbstractControl to preform the check against
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param date                        - Date to preform the check against
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const earlierThenValidator =
@@ -70,9 +73,9 @@ export const earlierThenValidator =
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl.
  *
- * @param {AbstractControl}           - AbstractControl to preform the check against
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param date                        - Date to preform the check against
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const laterThenValidator =
@@ -86,10 +89,10 @@ export const laterThenValidator =
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl.
  *
- * @param {string}                    - name of the filed to compare against
- * @param {ComparisonOperations}      - comparison to preform
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param fieldName                   - name of the filed to compare against
+ * @param comparison                  - comparison to preform
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const compareToValidator =
@@ -112,9 +115,9 @@ export const compareToValidator =
  * @description
  * Returns a validation error if a condition is met.
  *
- * @param {Function | boolean}        - conditional function or a boolean value
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param conditional                 - conditional function or a boolean value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const requiredWhenValidator =
@@ -132,9 +135,9 @@ export const requiredWhenValidator =
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it.
  *
- * @param {string}                    - name of the FromControl / AbstractControl to link to
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param link                        - name of the FromControl / AbstractControl to link to
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const linkToValidator =
@@ -148,10 +151,10 @@ export const linkToValidator =
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not.
  *
- * @param {string}                    - name of the FromControl / AbstractControl
+ * @param link                        - name of the FromControl / AbstractControl
  *                                      which a given FromControl / AbstractControl is linked to
- * @param {string}                    - optional parameter representing error name
- * @param {string}                    - optional parameter representing error value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const linkedToValidator =
