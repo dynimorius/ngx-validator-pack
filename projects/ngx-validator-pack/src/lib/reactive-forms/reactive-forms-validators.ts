@@ -7,17 +7,17 @@
  */
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { ComparisonOperations } from "../helpers/date";
 import {
   compareToValidation,
   earlierThenValidation,
   laterThenValidation,
   linkToValidation,
   linkedToValidation,
-  regexpNotValidation,
-  regexpValidation,
+  regexpTestNotValidation,
+  regexpTestValidation,
   requiredWhenValidation,
 } from "../validations/validations";
+import { ComparisonOperations } from "../types";
 
 /**
  * @publicApi
@@ -32,7 +32,7 @@ import {
 export const regexpValidator =
   (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp, error, errorName });
+    return regexpTestValidation(control, { regExp, error, errorName });
   };
 
 /**
@@ -48,7 +48,7 @@ export const regexpValidator =
 export const regexpNotValidator =
   (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpNotValidation(control, { regExp, error, errorName });
+    return regexpTestNotValidation(control, { regExp, error, errorName });
   };
 
 /**
@@ -162,3 +162,4 @@ export const linkedToValidator =
   (control: AbstractControl): ValidationErrors | null => {
     return linkedToValidation(control, { link, error, errorName });
   };
+

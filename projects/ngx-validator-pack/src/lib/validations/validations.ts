@@ -7,24 +7,24 @@
  */
 
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import {
-  ComparisonOperations,
-  compareDates,
-} from "../helpers/date";
+import { compareDates } from "../helpers/date";
+import { SequenceConfig } from "../interfaces/sequence-config.interface";
+import { ComparisonOperations } from "../types";
+import { compare } from "../helpers/numbers";
 
 /**
  * @internal
  * @description
- * A validation function which preforms a RegEx check on value in the 
+ * A validation function which preforms a RegEx check on value in the
  * given FromControl / AbstractControl.
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       regexp to check and optional error and 
+ *                                       regexp to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}  - Validation error
  */
-export const regexpValidation = (
+export const regexpTestValidation = (
   control: AbstractControl,
   config: {
     regExp: RegExp;
@@ -44,16 +44,16 @@ export const regexpValidation = (
 /**
  * @internal
  * @description
- * A validation function which preforms a RegEx check on value in the 
+ * A validation function which preforms a RegEx check on value in the
  * given FromControl / AbstractControl.
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       regexp to check and optional error and 
+ *                                       regexp to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}          - Validation error
  */
-export const regexpNotValidation = (
+export const regexpTestNotValidation = (
   control: AbstractControl,
   config: {
     regExp: RegExp;
@@ -70,17 +70,34 @@ export const regexpNotValidation = (
   return !control.value || !config.regExp.test(control.value) ? null : errors;
 };
 
+export const regexpMatchValidation = (
+  control: AbstractControl,
+  config: {
+    regExp: RegExp;
+    error?: string;
+    errorName?: string;
+  }
+): ValidationErrors | null => {
+  const error =
+    config.error ?? "This control matched a given regular expression.";
+  const errors: ValidationErrors = {
+    [config.errorName ?? "regexpNotValidator"]: error,
+  };
+
+  return !control.value || !control.value.match(config.regExp) ? null : errors;
+};
+
 /**
  * @internal
  * @description
- * A validation function which checks if the date in the given 
- * FromControl / AbstractControl is earlier then the value in the specified 
+ * A validation function which checks if the date in the given
+ * FromControl / AbstractControl is earlier then the value in the specified
  * FromControl / AbstractControl.
  *
  * @param {AbstractControl}                    - form control
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       date to check and optional error and 
+ *                                       date to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
@@ -99,21 +116,19 @@ export const earlierThenValidation = (
     [config.errorName ?? "earlierThen"]: error,
   };
 
-  return compareDates(control.value, config.date, "<")
-    ? null
-    : errors;
+  return compareDates(control.value, config.date, "<") ? null : errors;
 };
 
 /**
  * @internal
  * @description
- * A validation function which checks if the date in the given 
- * FromControl / AbstractControl is greater then the value in the specified 
+ * A validation function which checks if the date in the given
+ * FromControl / AbstractControl is greater then the value in the specified
  * FromControl / AbstractControl.
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       date to check and optional error and 
+ *                                       date to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}     - Validation error
  */
@@ -129,20 +144,18 @@ export const laterThenValidation = (
     config.error ?? `This control must have a value later then ${config.date}.`;
   const errors: ValidationErrors = { [config.errorName ?? "laterThen"]: error };
 
-  return compareDates(control.value, config.date, ">")
-    ? null
-    : errors;
+  return compareDates(control.value, config.date, ">") ? null : errors;
 };
 
 /**
  * @internal
  * @description
- * A validation function which compares the date values of the given 
+ * A validation function which compares the date values of the given
  * FromControl / AbstractControl and specified FromControl / AbstractControl.
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       field name to check and optional error and 
+ *                                       field name to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
@@ -175,7 +188,7 @@ export const compareToValidation = (
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       conditional function or boolean to check 
+ *                                       conditional function or boolean to check
  *                                       and optional error and error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
@@ -202,13 +215,13 @@ export const requiredWhenValidation = (
 /**
  * @internal
  * @description
- * A validation function which returns a validation error if a given 
- * FromControl / AbstractControl has no value and specified 
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has no value and specified
  * FromControl / AbstractControl has it.
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       field name to check and optional error and 
+ *                                       field name to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
@@ -230,13 +243,13 @@ export const linkToValidation = (
 /**
  * @internal
  * @description
- * A validation function which returns a validation error if a given 
- * FromControl / AbstractControl has a value and specified 
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value and specified
  * FromControl / AbstractControl does not.
  *
  * @param control                      - form control
  * @param config                       - config parameter, consists of a
- *                                       field name to check and optional error and 
+ *                                       field name to check and optional error and
  *                                       error name string
  * @returns {ValidationErrors | null}   - Validation error
  */
@@ -253,4 +266,41 @@ export const linkedToValidation = (
   const link = control.parent?.get(config.link);
 
   return !!control?.value && !link?.value ? errors : null;
+};
+
+export const lengthValidation = (
+  control: AbstractControl,
+  config: {
+    length: number;
+    comparison: ComparisonOperations;
+    error?: string;
+    errorName?: string;
+  }
+): ValidationErrors | null => {
+  const error =
+    config.error ?? `The minimum required length is ${config.length}.`;
+  const errors: ValidationErrors = { [config.errorName ?? "length"]: error };
+
+  return !!control?.value &&
+    compare(control?.value?.length, config.length, config.comparison ?? "<")
+    ? errors
+    : null;
+};
+
+export const sequentialValidation = (
+  control: AbstractControl,
+  sequence: SequenceConfig[]
+): ValidationErrors | null => {
+  let validationError!: ValidationErrors;
+  const hasError = sequence.some((validation): boolean => {
+    const error = validation.validationFun(control, {
+      ...validation.validationFunConfig,
+    });
+    if (error) {
+      validationError = error;
+      return true;
+    }
+    return false;
+  });
+  return hasError ? validationError : null;
 };

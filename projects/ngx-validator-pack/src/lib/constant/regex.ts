@@ -29,12 +29,22 @@ export const IPAddressV4AndV6 =
   /((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))/;
 // @internal Checks if an input consists of letters only
 export const lettersOnly = /^[A-Za-z]+$/;
+// @internal Checks if an input has letters 
+export const hasLetters = /[a-zA-Z]/;
+// @internal Checks if an input has lowercase letters 
+export const hasLowercase = /[a-z]/;
+// @internal Checks if an input has uppercase letters 
+export const hasUppercase = /[A-Z]/;
 // @internal Checks if the input consists of letters, periods, hyphens and spaces
 export const lettersPeriodsHyphensAndSpaces = /^[a-zA-Z\s.-]+$/;
+// @internal Checks if input contains < or >;
+export const greaterOrLessThen = /(?=.*[<>])/;
 // @internal Checks if input contains any special characters
 export const noSpecial = /^[A-Za-z0-9 ]+$/;
 // @internal Checks if an input consists of numbers only
 export const numbersOnly = /^\d+$/;
+// @internal Checks if an input has numbers
+export const hasNumbers = /\d/;
 // @internal Checks if input is in passport format
 export const passport = /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/;
 // Checks if input consist of at least 1 lowercase letter, 1 uppercase letter,
@@ -62,3 +72,4 @@ export const url =
   /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
 // @internal Checks of a zip code in formats 00000 or 00000-0000
 export const zipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+

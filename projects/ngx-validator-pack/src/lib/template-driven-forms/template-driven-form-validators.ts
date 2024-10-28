@@ -26,9 +26,9 @@ import {
   laterThenValidation,
   linkToValidation,
   linkedToValidation,
-  regexpNotValidation,
-  regexpValidation,
+  regexpTestValidation,
   requiredWhenValidation,
+  regexpTestNotValidation,
 } from "../validations/validations";
 
 /**
@@ -67,7 +67,7 @@ export class RegExpValidatorDirective implements Validator {
   @Input("regExp") value!: RegExpValidationInput;
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return regexpValidation(control, { ...this.value });
+    return regexpTestValidation(control, { ...this.value });
   }
 }
 
@@ -108,7 +108,7 @@ export class RegExpNotValidatorDirective implements Validator {
   @Input("regExpNot") value!: RegExpValidationInput;
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return regexpNotValidation(control, { ...this.value });
+    return regexpTestNotValidation(control, { ...this.value });
   }
 }
 

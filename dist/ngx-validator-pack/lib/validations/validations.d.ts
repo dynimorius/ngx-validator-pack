@@ -6,7 +6,8 @@
  * found at https://www.isc.org/licenses/
  */
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import { ComparisonOperations } from "../helpers/date";
+import { SequenceConfig } from "../interfaces/sequence-config.interface";
+import { ComparisonOperations } from "../types";
 /**
  * @internal
  * @description
@@ -19,7 +20,7 @@ import { ComparisonOperations } from "../helpers/date";
  *                                       error name string
  * @returns {ValidationErrors | null}  - Validation error
  */
-export declare const regexpValidation: (control: AbstractControl, config: {
+export declare const regexpTestValidation: (control: AbstractControl, config: {
     regExp: RegExp;
     error?: string;
     errorName?: string;
@@ -36,7 +37,12 @@ export declare const regexpValidation: (control: AbstractControl, config: {
  *                                       error name string
  * @returns {ValidationErrors | null}          - Validation error
  */
-export declare const regexpNotValidation: (control: AbstractControl, config: {
+export declare const regexpTestNotValidation: (control: AbstractControl, config: {
+    regExp: RegExp;
+    error?: string;
+    errorName?: string;
+}) => ValidationErrors | null;
+export declare const regexpMatchValidation: (control: AbstractControl, config: {
     regExp: RegExp;
     error?: string;
     errorName?: string;
@@ -148,3 +154,10 @@ export declare const linkedToValidation: (control: AbstractControl, config: {
     error?: string;
     errorName?: string;
 }) => ValidationErrors | null;
+export declare const lengthValidation: (control: AbstractControl, config: {
+    length: number;
+    comparison: ComparisonOperations;
+    error?: string;
+    errorName?: string;
+}) => ValidationErrors | null;
+export declare const sequentialValidation: (control: AbstractControl, sequence: SequenceConfig[]) => ValidationErrors | null;

@@ -7,6 +7,6 @@
  */
 import { ComparisonOperations } from "../types";
 /**
- * @publicApi
+ * @internal
  */
-export declare const compareDates: (date1: Date, date2: Date, operation?: ComparisonOperations) => boolean;
+export declare const compare: (num1: number, num2: number, comparison: ComparisonOperations) => boolean;

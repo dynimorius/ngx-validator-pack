@@ -65,12 +65,11 @@ export class ShowValidationDirective implements OnInit, OnDestroy {
 
     this.controlSub.add(
       formControl.statusChanges.subscribe((status) => {
+        this.hideError();
         if (status === "INVALID") {
           if (!this.span) {
             this.showError(formControl.errors);
           }
-        } else {
-          this.hideError();
         }
       })
     );

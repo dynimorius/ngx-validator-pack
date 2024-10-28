@@ -6,10 +6,8 @@
  * found at https://www.isc.org/licenses/
  */
 
-/**
- * @publicApi
- */
-export type ComparisonOperations = '<' | '>' | '==' | '===' | '<=' | '>=';
+import { ComparisonOperations } from "../types";
+import { compare } from "./numbers";
 
 /**
  * @internal
@@ -33,24 +31,9 @@ const prepareToCompare = (
 } 
 
 /**
- * @internal
- */
-const compare = (date1: Date, date2: Date, comparison: ComparisonOperations): boolean => {
-    const operations = {
-        '<': (a: Date, b: Date) => prepareToCompare(a) < prepareToCompare(b),
-        '>': (a: Date, b: Date) => prepareToCompare(a) > prepareToCompare(b),
-        '==': (a: Date, b: Date) => prepareToCompare(a) == prepareToCompare(b),
-        '===': (a: Date, b: Date) => prepareToCompare(a) === prepareToCompare(b),
-        '<=': (a: Date, b: Date) => prepareToCompare(a) <= prepareToCompare(b),
-        '>=': (a: Date, b: Date) => prepareToCompare(a) >= prepareToCompare(b),
-    }
-    return operations[comparison](date1, date2);
-}
-
-/**
  * @publicApi
  */
 export const compareDates = (date1: Date, date2: Date, operation: ComparisonOperations = '==='): boolean => {
-    return compare(date1, date2, operation);
+    return compare(prepareToCompare(date1), prepareToCompare(date2), operation);
 }
 

@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { ComparisonOperations } from '../helpers/date';
+import { ComparisonOperations } from "../types";
 
 /**
  * @internal

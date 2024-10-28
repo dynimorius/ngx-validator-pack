@@ -67,13 +67,11 @@ class ShowValidationDirective {
         this.renderer.appendChild(this.parent, this.container);
         this.setStyles();
         this.controlSub.add(formControl.statusChanges.subscribe((status) => {
+            this.hideError();
             if (status === "INVALID") {
                 if (!this.span) {
                     this.showError(formControl.errors);
                 }
-            }
-            else {
-                this.hideError();
             }
         }));
     }
@@ -326,12 +324,22 @@ const IPAddressV6 = /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}
 const IPAddressV4AndV6 = /((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))/;
 // @internal Checks if an input consists of letters only
 const lettersOnly = /^[A-Za-z]+$/;
+// @internal Checks if an input has letters 
+const hasLetters = /[a-zA-Z]/;
+// @internal Checks if an input has lowercase letters 
+const hasLowercase = /[a-z]/;
+// @internal Checks if an input has uppercase letters 
+const hasUppercase = /[A-Z]/;
 // @internal Checks if the input consists of letters, periods, hyphens and spaces
 const lettersPeriodsHyphensAndSpaces = /^[a-zA-Z\s.-]+$/;
+// @internal Checks if input contains < or >;
+const greaterOrLessThen = /(?=.*[<>])/;
 // @internal Checks if input contains any special characters
 const noSpecial = /^[A-Za-z0-9 ]+$/;
 // @internal Checks if an input consists of numbers only
 const numbersOnly = /^\d+$/;
+// @internal Checks if an input has numbers
+const hasNumbers = /\d/;
 // @internal Checks if input is in passport format
 const passport = /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/;
 // Checks if input consist of at least 1 lowercase letter, 1 uppercase letter,
@@ -366,6 +374,28 @@ const zipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
 /**
  * @internal
  */
+const compare = (num1, num2, comparison) => {
+    const operations = {
+        '<': (a, b) => a < b,
+        '>': (a, b) => a > b,
+        '==': (a, b) => a == b,
+        '===': (a, b) => a === b,
+        '<=': (a, b) => a <= b,
+        '>=': (a, b) => a >= b,
+    };
+    return operations[comparison](num1, num2);
+};
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+/**
+ * @internal
+ */
 const prepareToCompare = (date, bufferYears) => {
     if (date) {
         const p_Date = new Date(date);
@@ -379,24 +409,10 @@ const prepareToCompare = (date, bufferYears) => {
     }
 };
 /**
- * @internal
- */
-const compare = (date1, date2, comparison) => {
-    const operations = {
-        '<': (a, b) => prepareToCompare(a) < prepareToCompare(b),
-        '>': (a, b) => prepareToCompare(a) > prepareToCompare(b),
-        '==': (a, b) => prepareToCompare(a) == prepareToCompare(b),
-        '===': (a, b) => prepareToCompare(a) === prepareToCompare(b),
-        '<=': (a, b) => prepareToCompare(a) <= prepareToCompare(b),
-        '>=': (a, b) => prepareToCompare(a) >= prepareToCompare(b),
-    };
-    return operations[comparison](date1, date2);
-};
-/**
  * @publicApi
  */
 const compareDates = (date1, date2, operation = '===') => {
-    return compare(date1, date2, operation);
+    return compare(prepareToCompare(date1), prepareToCompare(date2), operation);
 };
 
 /**
@@ -418,7 +434,7 @@ const compareDates = (date1, date2, operation = '===') => {
  *                                       error name string
  * @returns {ValidationErrors | null}  - Validation error
  */
-const regexpValidation = (control, config) => {
+const regexpTestValidation = (control, config) => {
     const error = config.error ?? "This control did not match a given regular expression.";
     const errors = {
         [config.errorName ?? "regexpValidator"]: error,
@@ -437,12 +453,19 @@ const regexpValidation = (control, config) => {
  *                                       error name string
  * @returns {ValidationErrors | null}          - Validation error
  */
-const regexpNotValidation = (control, config) => {
+const regexpTestNotValidation = (control, config) => {
     const error = config.error ?? "This control matched a given regular expression.";
     const errors = {
         [config.errorName ?? "regexpNotValidator"]: error,
     };
     return !control.value || !config.regExp.test(control.value) ? null : errors;
+};
+const regexpMatchValidation = (control, config) => {
+    const error = config.error ?? "This control matched a given regular expression.";
+    const errors = {
+        [config.errorName ?? "regexpNotValidator"]: error,
+    };
+    return !control.value || !control.value.match(config.regExp) ? null : errors;
 };
 /**
  * @internal
@@ -464,9 +487,7 @@ const earlierThenValidation = (control, config) => {
     const errors = {
         [config.errorName ?? "earlierThen"]: error,
     };
-    return compareDates(control.value, config.date, "<")
-        ? null
-        : errors;
+    return compareDates(control.value, config.date, "<") ? null : errors;
 };
 /**
  * @internal
@@ -484,9 +505,7 @@ const earlierThenValidation = (control, config) => {
 const laterThenValidation = (control, config) => {
     const error = config.error ?? `This control must have a value later then ${config.date}.`;
     const errors = { [config.errorName ?? "laterThen"]: error };
-    return compareDates(control.value, config.date, ">")
-        ? null
-        : errors;
+    return compareDates(control.value, config.date, ">") ? null : errors;
 };
 /**
  * @internal
@@ -572,6 +591,28 @@ const linkedToValidation = (control, config) => {
     const link = control.parent?.get(config.link);
     return !!control?.value && !link?.value ? errors : null;
 };
+const lengthValidation = (control, config) => {
+    const error = config.error ?? `The minimum required length is ${config.length}.`;
+    const errors = { [config.errorName ?? "length"]: error };
+    return !!control?.value &&
+        compare(control?.value?.length, config.length, config.comparison ?? "<")
+        ? errors
+        : null;
+};
+const sequentialValidation = (control, sequence) => {
+    let validationError;
+    const hasError = sequence.some((validation) => {
+        const error = validation.validationFun(control, {
+            ...validation.validationFunConfig,
+        });
+        if (error) {
+            validationError = error;
+            return true;
+        }
+        return false;
+    });
+    return hasError ? validationError : null;
+};
 
 /**
  * @license
@@ -592,7 +633,7 @@ const linkedToValidation = (control, config) => {
  * @returns {ValidationErrors | null} - Validation error
  */
 const addressValidator = (errorName = "address", error = "Please input a value in a format of: Street number Street Name, City, State ZIP code.") => (control) => {
-    return regexpValidation(control, { regExp: address, error, errorName });
+    return regexpTestValidation(control, { regExp: address, error, errorName });
 };
 /**
  * @publicApi
@@ -605,7 +646,11 @@ const addressValidator = (errorName = "address", error = "Please input a value i
  * @returns {ValidationErrors | null} - Validation error
  */
 const alphabetOnlyValidator = (errorName = "alphabetOnly", error = "Only alphabetic characters are allowed.") => (control) => {
-    return regexpValidation(control, { regExp: lettersOnly, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: lettersOnly,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -618,7 +663,7 @@ const alphabetOnlyValidator = (errorName = "alphabetOnly", error = "Only alphabe
  * @returns {ValidationErrors | null} - Validation error
  */
 const dateDD_MM_YYYYValidator = (errorName = "dateDD_MM_YYYY", error = "Please input a value one of the following formats: dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: dateDD_MM_YYYY,
         error,
         errorName,
@@ -635,7 +680,7 @@ const dateDD_MM_YYYYValidator = (errorName = "dateDD_MM_YYYY", error = "Please i
  * @returns {ValidationErrors | null} - Validation error
  */
 const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please input a value in a format: YYYY-MM-dd.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: dateYYYY_MM_DD,
         error,
         errorName,
@@ -652,7 +697,7 @@ const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please i
  * @returns {ValidationErrors | null} - Validation error
  */
 const emailValidator = (errorName = "email", error = "Please input a value in a format: local-part@domain.com.") => (control) => {
-    return regexpValidation(control, { regExp: email, error, errorName });
+    return regexpTestValidation(control, { regExp: email, error, errorName });
 };
 /**
  * @publicApi
@@ -665,7 +710,7 @@ const emailValidator = (errorName = "email", error = "Please input a value in a 
  * @returns {ValidationErrors | null} - Validation error
  */
 const ipAddressValidator = (errorName = "ipAddress", error = "Please input a value one of the following formats: x.x.x.x or y:y:y:y:y:y:y:y.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: IPAddressV4AndV6,
         error,
         errorName,
@@ -682,7 +727,11 @@ const ipAddressValidator = (errorName = "ipAddress", error = "Please input a val
  * @returns {ValidationErrors | null} - Validation error
  */
 const iPv4Validator = (errorName = "iPv4", error = "Please input a value in a format: x.x.x.x.") => (control) => {
-    return regexpValidation(control, { regExp: IPAddressV4, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: IPAddressV4,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -695,7 +744,11 @@ const iPv4Validator = (errorName = "iPv4", error = "Please input a value in a fo
  * @returns {ValidationErrors | null} - Validation error
  */
 const iPv6Validator = (errorName = "iPv6", error = "Please input a value in a format: y:y:y:y:y:y:y:y.") => (control) => {
-    return regexpValidation(control, { regExp: IPAddressV6, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: IPAddressV6,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -708,7 +761,11 @@ const iPv6Validator = (errorName = "iPv6", error = "Please input a value in a fo
  * @returns {ValidationErrors | null} - Validation error
  */
 const numericsOnlyValidator = (errorName = "numericsOnly", error = "Only numeric characters are allowed.") => (control) => {
-    return regexpValidation(control, { regExp: numbersOnly, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: numbersOnly,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -720,7 +777,11 @@ const numericsOnlyValidator = (errorName = "numericsOnly", error = "Only numeric
  * @returns {ValidationErrors | null} - Validation error
  */
 const noSpecialsValidator = (errorName = "noSpecials", error = "No special characters are allowed.") => (control) => {
-    return regexpValidation(control, { regExp: noSpecial, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: noSpecial,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -732,7 +793,11 @@ const noSpecialsValidator = (errorName = "noSpecials", error = "No special chara
  * @returns {ValidationErrors | null} - Validation error
  */
 const passportValidator = (errorName = "passport", error = "Incorrect passport format.") => (control) => {
-    return regexpValidation(control, { regExp: passport, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: passport,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -746,7 +811,7 @@ const passportValidator = (errorName = "passport", error = "Incorrect passport f
  * @returns {ValidationErrors | null} - Validation error
  */
 const passwordValidator = (errorName = "password", error = "The value has to contain at least 1 lowercase letter, 1 uppercase letter, 1 special character and has a length of 8.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: passwordStrength,
         error,
         errorName,
@@ -763,7 +828,11 @@ const passwordValidator = (errorName = "password", error = "The value has to con
  * @returns {ValidationErrors | null} - Validation error
  */
 const phoneNumberValidator = (errorName = "phoneNumber", error = "Please input a value in a format: (000) 000 0000.") => (control) => {
-    return regexpValidation(control, { regExp: phoneNumber, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: phoneNumber,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -776,7 +845,11 @@ const phoneNumberValidator = (errorName = "phoneNumber", error = "Please input a
  * @returns {ValidationErrors | null} - Validation error
  */
 const singleSpaceValidator = (errorName = "singleSpace", error = "A single space character is not allowed.") => (control) => {
-    return regexpValidation(control, { regExp: singleSpace, error, errorName });
+    return regexpTestValidation(control, {
+        regExp: singleSpace,
+        error,
+        errorName,
+    });
 };
 /**
  * @publicApi
@@ -789,7 +862,7 @@ const singleSpaceValidator = (errorName = "singleSpace", error = "A single space
  * @returns {ValidationErrors | null} - Validation error
  */
 const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Value can not start or end with a space character.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: spaceRestriction,
         error,
         errorName,
@@ -806,7 +879,7 @@ const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Valu
  * @returns {ValidationErrors | null} - Validation error
  */
 const ssnValidator = (errorName = "ssn", error = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.") => (control) => {
-    return regexpValidation(control, { regExp: ssn, error, errorName });
+    return regexpTestValidation(control, { regExp: ssn, error, errorName });
 };
 /**
  * @publicApi
@@ -819,7 +892,7 @@ const ssnValidator = (errorName = "ssn", error = "Please input a value one of th
  * @returns {ValidationErrors | null} - Validation error
  */
 const timeHH_MM_12Validator = (errorName = "timeHH_MM_12", error = "Please input a value in a HH:MM 12-hour format.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: timeHH_MM_12,
         error,
         errorName,
@@ -836,7 +909,7 @@ const timeHH_MM_12Validator = (errorName = "timeHH_MM_12", error = "Please input
  * @returns {ValidationErrors | null} - Validation error
  */
 const timeHH_MM_24Validator = (errorName = "timeHH_MM_24", error = "Please input a value in a HH:MM 24-hour format.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: timeHH_MM_24,
         error,
         errorName,
@@ -853,7 +926,7 @@ const timeHH_MM_24Validator = (errorName = "timeHH_MM_24", error = "Please input
  * @returns {ValidationErrors | null} - Validation error
  */
 const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please input a value in a HH:MM:SS 24-hour format.") => (control) => {
-    return regexpValidation(control, {
+    return regexpTestValidation(control, {
         regExp: timeHH_MM_SS_24,
         error,
         errorName,
@@ -870,7 +943,7 @@ const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please
  * @returns {ValidationErrors | null} - Validation error
  */
 const urlValidator = (errorName = "url", error = "Improper URL format.") => (control) => {
-    return regexpValidation(control, { regExp: url, error, errorName });
+    return regexpTestValidation(control, { regExp: url, error, errorName });
 };
 /**
  * @publicApi
@@ -883,7 +956,7 @@ const urlValidator = (errorName = "url", error = "Improper URL format.") => (con
  * @returns {ValidationErrors | null} - Validation error
  */
 const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code format.") => (control) => {
-    return regexpValidation(control, { regExp: zipCode, error, errorName });
+    return regexpTestValidation(control, { regExp: zipCode, error, errorName });
 };
 
 /**
@@ -904,7 +977,7 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
  * @returns {ValidationErrors | null} - Validation error
  */
 const regexpValidator = (regExp, errorName, error) => (control) => {
-    return regexpValidation(control, { regExp, error, errorName });
+    return regexpTestValidation(control, { regExp, error, errorName });
 };
 /**
  * @publicApi
@@ -917,7 +990,7 @@ const regexpValidator = (regExp, errorName, error) => (control) => {
  * @returns {ValidationErrors | null} - Validation error
  */
 const regexpNotValidator = (regExp, errorName, error) => (control) => {
-    return regexpNotValidation(control, { regExp, error, errorName });
+    return regexpTestNotValidation(control, { regExp, error, errorName });
 };
 /**
  * @publicApi
@@ -1028,7 +1101,7 @@ const linkedToValidator = (link, errorName, error) => (control) => {
  */
 class RegExpValidatorDirective {
     validate(control) {
-        return regexpValidation(control, { ...this.value });
+        return regexpTestValidation(control, { ...this.value });
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RegExpValidatorDirective, isStandalone: true, selector: "[regExp]", inputs: { value: ["regExp", "value"] }, providers: [
@@ -1080,7 +1153,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  */
 class RegExpNotValidatorDirective {
     validate(control) {
-        return regexpNotValidation(control, { ...this.value });
+        return regexpTestNotValidation(control, { ...this.value });
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpNotValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RegExpNotValidatorDirective, isStandalone: true, selector: "[regExpNot]", inputs: { value: ["regExpNot", "value"] }, providers: [

@@ -93,6 +93,7 @@ import {
   zipCodeHTMLSnippet,
   zipCodeTSSnippet,
 } from "../../snippet-data";
+import { dynamicPasswordValidator } from "../../../../../ngx-validator-pack/src/lib/dynamic-validators/dynamic-validators";
 
 @Component({
   selector: "app-main",
@@ -202,6 +203,7 @@ export class MainComponent implements OnInit {
       linkedTo: [null, [linkedToValidator("linkTo")]],
       regexp: [null, regexpValidator(/(s|regexp)/)],
       regexpNot: [null, regexpNotValidator(/(s|regexp)/)],
+      dynamicPassword: [null, dynamicPasswordValidator()]
     });
 
     this.mainForm.valueChanges.subscribe(() => {

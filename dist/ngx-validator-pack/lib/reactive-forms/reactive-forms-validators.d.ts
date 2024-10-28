@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 import { ValidatorFn } from "@angular/forms";
-import { ComparisonOperations } from "../helpers/date";
+import { ComparisonOperations } from "../types";
 /**
  * @publicApi
  * @description
