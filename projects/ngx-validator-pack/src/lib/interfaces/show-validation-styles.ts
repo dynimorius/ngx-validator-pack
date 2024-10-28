@@ -8,6 +8,7 @@ import { ShowValidationDirective } from './../directives/show-validation.directi
  */
 
 /**
+ * @publicApi
  * @description
  * An interface representing available style options for the 
  * showValidation Directive

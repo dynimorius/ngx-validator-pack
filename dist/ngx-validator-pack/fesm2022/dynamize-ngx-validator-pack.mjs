@@ -2569,6 +2569,165 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
+ */
+/**
+ * @publicApi
+ * @description
+ * A Directive that assigns a required error to the controls with a name was specified in the
+ * first parameter if the control with a name specified in the second parameter
+ * has no value.
+ *
+ * Has an input in which you specify the control which needs to receive the required error,
+ * and the control which needs to be checked.
+ *
+ * @usageNotes
+ * <form #exampleForm="ngForm"
+ *   [requiredIf]="{
+ *      required: 'field_name',
+ *      check: 'field_name'
+ *   }"
+ * />
+ */
+class RequiredIfValidatorDirective {
+    validate(control) {
+        return requiredIfValidation(control, { ...this.controls });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredIfValidatorDirective, isStandalone: true, selector: "[requiredIf]", inputs: { controls: ["requiredIf", "controls"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: RequiredIfValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[requiredIf]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: RequiredIfValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                    standalone: true,
+                }]
+        }], propDecorators: { controls: [{
+                type: Input,
+                args: ["requiredIf"]
+            }] } });
+/**
+ * @publicApi
+ * @description
+ * A Directive that assigns a required error to the controls with a name was specified in the
+ * first parameter if the control with a name specified in the second parameter
+ * has a value.
+ *
+ * Has an input in which you specify the control which needs to receive the required error,
+ * and the control which needs to be checked.
+ *
+ * @usageNotes
+ * <form #exampleForm="ngForm"
+ *   [requiredIfNot]="{
+ *      required: 'field_name',
+ *      check: 'field_name'
+ *   }"
+ * />
+ */
+class RequiredIfNotValidatorDirective {
+    validate(control) {
+        return requiredIfNotValidation(control, { ...this.controls });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfNotValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredIfNotValidatorDirective, isStandalone: true, selector: "[requiredIfNot]", inputs: { controls: ["requiredIfNot", "controls"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: RequiredIfNotValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfNotValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[requiredIfNot]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: RequiredIfNotValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                    standalone: true,
+                }]
+        }], propDecorators: { controls: [{
+                type: Input,
+                args: ["requiredIfNot"]
+            }] } });
+/**
+ * @publicApi
+ * @description
+ * A Directive that assigns a required error to both controls who's names are specified if nether one
+ * has a value.
+ *
+ * Has an input in which you specify the control which needs to receive the required error,
+ * and the control which needs to be checked.
+ *
+ * @usageNotes
+ * <form #exampleForm="ngForm"
+ *   [requiredEther]="{
+ *      required: 'field_name',
+ *      check: 'field_name'
+ *   }"
+ * />
+ */
+class RequiredEtherValidatorDirective {
+    validate(control) {
+        return requiredEtherValidation(control, { ...this.controls });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredEtherValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredEtherValidatorDirective, isStandalone: true, selector: "[requiredEther]", inputs: { controls: ["requiredEther", "controls"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: RequiredIfNotValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredEtherValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[requiredEther]",
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: RequiredIfNotValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                    standalone: true,
+                }]
+        }], propDecorators: { controls: [{
+                type: Input,
+                args: ["requiredEther"]
+            }] } });
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
  *
  * Public API Surface of ngx-validator-pack
  */
@@ -2577,5 +2736,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RegExpNotValidatorDirective, RegExpValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SingleSpaceValidatorDirective, SpaceRestrictionValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpNotValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
+export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RegExpNotValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SingleSpaceValidatorDirective, SpaceRestrictionValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpNotValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map
