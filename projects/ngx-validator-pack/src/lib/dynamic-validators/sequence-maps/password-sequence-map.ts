@@ -21,14 +21,6 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
       errorName: "noAlpha",
     },
   },
-  noNumeric: {
-    validationFun: regexpValidation,
-    validationFunConfig: {
-      regExp: hasNumbers,
-      error: "A password must contain numbers.",
-      errorName: "noNumeric",
-    },
-  },
   noLowercase: {
     validationFun: regexpValidation,
     validationFunConfig: {
@@ -43,6 +35,14 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
       regExp: hasUppercase,
       error: "A password must contain uppercase letters.",
       errorName: "noUppercase",
+    },
+  },
+  noNumeric: {
+    validationFun: regexpValidation,
+    validationFunConfig: {
+      regExp: hasNumbers,
+      error: "A password must contain numbers.",
+      errorName: "noNumeric",
     },
   },
   noSpecial: {

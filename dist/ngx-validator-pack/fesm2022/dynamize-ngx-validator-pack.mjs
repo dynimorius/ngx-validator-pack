@@ -474,9 +474,7 @@ const test = (regexp, value, logic) => {
  */
 const regexpValidation = (control, config) => {
     const error = config.error ?? "This control did not match a given regular expression.";
-    const errors = {
-        [config.errorName ?? "regexp"]: error,
-    };
+    const errors = { [config.errorName ?? "regexp"]: error };
     return !control.value ||
         test(config.regExp, control.value, config?.logic ?? "!!")
         ? null

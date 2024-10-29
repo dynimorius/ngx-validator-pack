@@ -38,9 +38,7 @@ export const regexpValidation = (
 ): ValidationErrors | null => {
   const error =
     config.error ?? "This control did not match a given regular expression.";
-  const errors: ValidationErrors = {
-    [config.errorName ?? "regexp"]: error,
-  };
+  const errors: ValidationErrors = { [config.errorName ?? "regexp"]: error };
 
   return !control.value ||
     test(config.regExp, control.value, config?.logic ?? "!!")
@@ -122,6 +120,7 @@ export const compareToValidation = (
     const errors: ValidationErrors = {
       [config.errorName ?? "dateComparison"]: error,
     };
+    
     return control.value && compareDates(control.value, date, config.comparison)
       ? null
       : errors;
