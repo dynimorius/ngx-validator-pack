@@ -6,29 +6,19 @@
  * found at https://www.isc.org/licenses/
  */
 import { ValidatorFn } from "@angular/forms";
-import { ComparisonOperations } from "../../types";
+import { ComparisonOperations, RegExpLogicalOperations } from "../../types";
 /**
  * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
  * @param regExp                      - Regular expression to check
+ * @param logic                       - what kind of logic to preform !! = match, ! = not a match
  * @param errorName                   - optional parameter representing error name
  * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const regexpValidator: (regExp: RegExp, errorName?: string, error?: string) => ValidatorFn;
-/**
- * @publicApi
- * @description
- * Preforms a RegEx check on value in the given FromControl / AbstractControl.
- *
- * @param regExp                      - Regular expression to check
- * @param errorName                   - optional parameter representing error name
- * @param error                       - optional parameter representing error value
- * @returns {ValidationErrors | null} - Validation error
- */
-export declare const regexpNotValidator: (regExp: RegExp, errorName?: string, error?: string) => ValidatorFn;
+export declare const regexpValidator: (regExp: RegExp, logic: RegExpLogicalOperations, errorName?: string, error?: string) => ValidatorFn;
 /**
  * @publicApi
  * @description

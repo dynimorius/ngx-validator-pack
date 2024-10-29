@@ -21,7 +21,7 @@ import {
   passport,
   passwordStrength,
   phoneNumber,
-  singleSpace,
+  space,
   spaceRestriction,
   ssn,
   timeHH_MM_12,
@@ -49,7 +49,12 @@ export const addressValidator =
     error: string = "Please input a value in a format of: Street number Street Name, City, State ZIP code."
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp: address, error, errorName });
+    return regexpValidation(control, {
+      regExp: address,
+      error,
+      errorName,
+      logic: "!!",
+    });
   };
 
 /**
@@ -72,6 +77,7 @@ export const alphabetOnlyValidator =
       regExp: lettersOnly,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -95,6 +101,7 @@ export const dateDD_MM_YYYYValidator =
       regExp: dateDD_MM_YYYY,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -118,6 +125,7 @@ export const dateYYYY_MM_DDValidator =
       regExp: dateYYYY_MM_DD,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -137,7 +145,12 @@ export const emailValidator =
     error: string = "Please input a value in a format: local-part@domain.com."
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp: email, error, errorName });
+    return regexpValidation(control, {
+      regExp: email,
+      error,
+      errorName,
+      logic: "!!",
+    });
   };
 
 /**
@@ -160,6 +173,7 @@ export const ipAddressValidator =
       regExp: IPAddressV4AndV6,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -183,6 +197,7 @@ export const iPv4Validator =
       regExp: IPAddressV4,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -206,6 +221,7 @@ export const iPv6Validator =
       regExp: IPAddressV6,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -229,6 +245,7 @@ export const numericsOnlyValidator =
       regExp: numbersOnly,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -251,6 +268,7 @@ export const noSpecialsValidator =
       regExp: noSpecial,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -273,6 +291,7 @@ export const passportValidator =
       regExp: passport,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -297,6 +316,7 @@ export const passwordValidator =
       regExp: passwordStrength,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -320,6 +340,7 @@ export const phoneNumberValidator =
       regExp: phoneNumber,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -333,16 +354,17 @@ export const phoneNumberValidator =
  * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export const singleSpaceValidator =
+export const spaceValidator =
   (
-    errorName: string = "singleSpace",
-    error: string = "A single space character is not allowed."
+    errorName: string = "space",
+    error: string = "Space character is not allowed."
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
     return regexpValidation(control, {
-      regExp: singleSpace,
+      regExp: space,
       error,
       errorName,
+      logic: "!",
     });
   };
 
@@ -366,6 +388,7 @@ export const spaceRestrictionValidator =
       regExp: spaceRestriction,
       error,
       errorName,
+      logic: "!!",
     });
   };
 
@@ -385,7 +408,12 @@ export const ssnValidator =
     error: string = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS."
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp: ssn, error, errorName });
+    return regexpValidation(control, {
+      regExp: ssn,
+      error,
+      errorName,
+      logic: "!!",
+    });
   };
 
 /**
@@ -408,6 +436,7 @@ export const timeHH_MM_12Validator =
       regExp: timeHH_MM_12,
       error,
       errorName,
+      logic: "!",
     });
   };
 
@@ -431,6 +460,7 @@ export const timeHH_MM_24Validator =
       regExp: timeHH_MM_24,
       error,
       errorName,
+      logic: "!",
     });
   };
 
@@ -454,6 +484,7 @@ export const timeHH_MM_SS_24Validator =
       regExp: timeHH_MM_SS_24,
       error,
       errorName,
+      logic: "!",
     });
   };
 
@@ -473,7 +504,12 @@ export const urlValidator =
     error: string = "Improper URL format."
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp: url, error, errorName });
+    return regexpValidation(control, {
+      regExp: url,
+      error,
+      errorName,
+      logic: "!",
+    });
   };
 
 /**
@@ -492,5 +528,10 @@ export const zipCodeValidator =
     error: string = "Improper zip code format."
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp: zipCode, error, errorName });
+    return regexpValidation(control, {
+      regExp: zipCode,
+      error,
+      errorName,
+      logic: "!",
+    });
   };

@@ -54,7 +54,7 @@ export const passwordStrength =
 // @internal Checks for a (000) 000 0000 phone format
 export const phoneNumber = /^(\()?[2-9]{1}\d{2}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
 // @internal Checks for a single space character
-export const singleSpace = /[\s]/;
+export const space = /[\s]/;
 // @internal Restrict only spaces, spaces at the beginning and end of the field
 export const spaceRestriction = /^\S$|^\S[\s\S]*\S$/;
 // @internal Checks if input is in an Social Security Number format

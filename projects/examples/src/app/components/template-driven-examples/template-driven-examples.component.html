@@ -228,14 +228,14 @@
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
-        <h3>singleSpaceValidation Example:</h3>
-        <label for="space">Single Space Input Validation: </label>
+        <h3>SpaceValidation Example:</h3>
+        <label for="space">Space Input Validation: </label>
         <input
           type="text"
           name="space"
           id="space"
           formControlName="space"
-          singleSpace
+          space
           showValidation
         />
       </div>
@@ -514,25 +514,6 @@
           id="regexp"
           formControlName="regexp"
           [regExp]="{
-            regExp: regexp
-          }"
-          showValidation
-        />
-      </div>
-      <app-snippets
-
-      ></app-snippets>
-    </div>
-    <div class="snippet-example-pair">
-      <div class="input-wrapper">
-        <h3>regexpNotValidation Example:</h3>
-        <label for="regexpNot">RegExp exclude Validation: </label>
-        <input
-          type="text"
-          name="regexpNot"
-          id="regexpNot"
-          formControlName="regexpNot"
-          [regExpNot]="{
             regExp: regexp
           }"
           showValidation

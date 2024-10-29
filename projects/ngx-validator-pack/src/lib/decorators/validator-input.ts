@@ -10,6 +10,7 @@ import {
   BaseValidationConfig,
   RegExpValidationConfig,
 } from "../interfaces/validation-config.interface";
+import { RegExpLogicalOperations } from "../types";
 
 /**
  * @internal
@@ -27,7 +28,8 @@ import {
 export function RegExpValidatorInput(
   regexp: RegExp,
   errorName: string,
-  error: string
+  error: string,
+  logic?: RegExpLogicalOperations,
 ): (target: any, propertyKey: string) => void {
   return function (target: any, propertyKey: string): void {
     type ObjectKey = keyof typeof target;
@@ -40,6 +42,7 @@ export function RegExpValidatorInput(
     const getter = function (): RegExpValidationConfig {
       (newData as RegExpValidationConfig) = {
         regExp: regexp,
+        logic: logic ?? '!!',
         errorName: newData.errorName ?? errorName,
         error: newData.error ?? error,
       };

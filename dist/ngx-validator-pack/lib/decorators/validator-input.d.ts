@@ -5,6 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+import { RegExpLogicalOperations } from "../types";
 /**
  * @internal
  * @description
@@ -18,4 +19,4 @@
  * @param errorName                   - parameter representing error name
  * @param error                       - parameter representing error value
  */
-export declare function RegExpValidatorInput(regexp: RegExp, errorName: string, error: string): (target: any, propertyKey: string) => void;
+export declare function RegExpValidatorInput(regexp: RegExp, errorName: string, error: string, logic?: RegExpLogicalOperations): (target: any, propertyKey: string) => void;

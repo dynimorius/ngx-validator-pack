@@ -6,7 +6,7 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { ComparisonOperations } from "../types";
+import { ComparisonOperations, RegExpLogicalOperations } from "../types";
 
 /**
  * @internal
@@ -28,6 +28,7 @@ export interface BaseValidationConfig {
  */
 export interface RegExpValidationConfig extends BaseValidationConfig {
   regExp: RegExp;
+  logic?: RegExpLogicalOperations;
 }
 
 /**

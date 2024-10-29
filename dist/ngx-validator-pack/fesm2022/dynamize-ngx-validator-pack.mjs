@@ -367,7 +367,7 @@ const passwordStrength = /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./
 // @internal Checks for a (000) 000 0000 phone format
 const phoneNumber = /^(\()?[2-9]{1}\d{2}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
 // @internal Checks for a single space character
-const singleSpace = /[\s]/;
+const space = /[\s]/;
 // @internal Restrict only spaces, spaces at the beginning and end of the field
 const spaceRestriction = /^\S$|^\S[\s\S]*\S$/;
 // @internal Checks if input is in an Social Security Number format
@@ -460,22 +460,6 @@ const test = (regexp, value, logic) => {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-function regExpBase(control, config, logic) {
-    const errors = {
-        [config.errorName ?? "regexp"]: config.error,
-    };
-    return !control.value || test(config.regExp, control.value, logic)
-        ? null
-        : errors;
-}
-
-/**
- * @license
- * Copyright Slavko Mihajlovic All Rights Reserved.
- *
- * Use of this source code is governed by an ISC-style license that can be
- * found at https://www.isc.org/licenses/
- */
 /**
  * @internal
  * @description
@@ -490,23 +474,13 @@ function regExpBase(control, config, logic) {
  */
 const regexpValidation = (control, config) => {
     const error = config.error ?? "This control did not match a given regular expression.";
-    return regExpBase(control, { ...config, error }, "!!");
-};
-/**
- * @internal
- * @description
- * A validation function which preforms a RegEx check on value in the
- * given FromControl / AbstractControl.
- *
- * @param control                      - form control
- * @param config                       - config parameter, consists of a
- *                                       regexp to check and optional error and
- *                                       error name string
- * @returns {ValidationErrors | null}          - Validation error
- */
-const regexpNotValidation = (control, config) => {
-    const error = config.error ?? "This control matched a given regular expression.";
-    return regExpBase(control, { ...config, error }, "!");
+    const errors = {
+        [config.errorName ?? "regexp"]: error,
+    };
+    return !control.value ||
+        test(config.regExp, control.value, config?.logic ?? "!!")
+        ? null
+        : errors;
 };
 /**
  * @internal
@@ -674,7 +648,12 @@ const sequentialValidation = (control, sequence) => {
  * @returns {ValidationErrors | null} - Validation error
  */
 const addressValidator = (errorName = "address", error = "Please input a value in a format of: Street number Street Name, City, State ZIP code.") => (control) => {
-    return regexpValidation(control, { regExp: address, error, errorName });
+    return regexpValidation(control, {
+        regExp: address,
+        error,
+        errorName,
+        logic: "!!",
+    });
 };
 /**
  * @publicApi
@@ -691,6 +670,7 @@ const alphabetOnlyValidator = (errorName = "alphabetOnly", error = "Only alphabe
         regExp: lettersOnly,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -708,6 +688,7 @@ const dateDD_MM_YYYYValidator = (errorName = "dateDD_MM_YYYY", error = "Please i
         regExp: dateDD_MM_YYYY,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -725,6 +706,7 @@ const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please i
         regExp: dateYYYY_MM_DD,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -738,7 +720,12 @@ const dateYYYY_MM_DDValidator = (errorName = "dateYYYY_MM_DD", error = "Please i
  * @returns {ValidationErrors | null} - Validation error
  */
 const emailValidator = (errorName = "email", error = "Please input a value in a format: local-part@domain.com.") => (control) => {
-    return regexpValidation(control, { regExp: email, error, errorName });
+    return regexpValidation(control, {
+        regExp: email,
+        error,
+        errorName,
+        logic: "!!",
+    });
 };
 /**
  * @publicApi
@@ -755,6 +742,7 @@ const ipAddressValidator = (errorName = "ipAddress", error = "Please input a val
         regExp: IPAddressV4AndV6,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -772,6 +760,7 @@ const iPv4Validator = (errorName = "iPv4", error = "Please input a value in a fo
         regExp: IPAddressV4,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -789,6 +778,7 @@ const iPv6Validator = (errorName = "iPv6", error = "Please input a value in a fo
         regExp: IPAddressV6,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -806,6 +796,7 @@ const numericsOnlyValidator = (errorName = "numericsOnly", error = "Only numeric
         regExp: numbersOnly,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -822,6 +813,7 @@ const noSpecialsValidator = (errorName = "noSpecials", error = "No special chara
         regExp: noSpecial,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -838,6 +830,7 @@ const passportValidator = (errorName = "passport", error = "Incorrect passport f
         regExp: passport,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -856,6 +849,7 @@ const passwordValidator = (errorName = "password", error = "The value has to con
         regExp: passwordStrength,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -873,6 +867,7 @@ const phoneNumberValidator = (errorName = "phoneNumber", error = "Please input a
         regExp: phoneNumber,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -885,11 +880,12 @@ const phoneNumberValidator = (errorName = "phoneNumber", error = "Please input a
  * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const singleSpaceValidator = (errorName = "singleSpace", error = "A single space character is not allowed.") => (control) => {
+const spaceValidator = (errorName = "space", error = "Space character is not allowed.") => (control) => {
     return regexpValidation(control, {
-        regExp: singleSpace,
+        regExp: space,
         error,
         errorName,
+        logic: "!",
     });
 };
 /**
@@ -907,6 +903,7 @@ const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Valu
         regExp: spaceRestriction,
         error,
         errorName,
+        logic: "!!",
     });
 };
 /**
@@ -920,7 +917,12 @@ const spaceRestrictionValidator = (errorName = "spaceRestriction", error = "Valu
  * @returns {ValidationErrors | null} - Validation error
  */
 const ssnValidator = (errorName = "ssn", error = "Please input a value one of the following formats: AAA-GGG-SSSS or AAAGGGSSSS.") => (control) => {
-    return regexpValidation(control, { regExp: ssn, error, errorName });
+    return regexpValidation(control, {
+        regExp: ssn,
+        error,
+        errorName,
+        logic: "!!",
+    });
 };
 /**
  * @publicApi
@@ -937,6 +939,7 @@ const timeHH_MM_12Validator = (errorName = "timeHH_MM_12", error = "Please input
         regExp: timeHH_MM_12,
         error,
         errorName,
+        logic: "!",
     });
 };
 /**
@@ -954,6 +957,7 @@ const timeHH_MM_24Validator = (errorName = "timeHH_MM_24", error = "Please input
         regExp: timeHH_MM_24,
         error,
         errorName,
+        logic: "!",
     });
 };
 /**
@@ -971,6 +975,7 @@ const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please
         regExp: timeHH_MM_SS_24,
         error,
         errorName,
+        logic: "!",
     });
 };
 /**
@@ -984,7 +989,12 @@ const timeHH_MM_SS_24Validator = (errorName = "timeHH_MM_SS_24", error = "Please
  * @returns {ValidationErrors | null} - Validation error
  */
 const urlValidator = (errorName = "url", error = "Improper URL format.") => (control) => {
-    return regexpValidation(control, { regExp: url, error, errorName });
+    return regexpValidation(control, {
+        regExp: url,
+        error,
+        errorName,
+        logic: "!",
+    });
 };
 /**
  * @publicApi
@@ -997,7 +1007,12 @@ const urlValidator = (errorName = "url", error = "Improper URL format.") => (con
  * @returns {ValidationErrors | null} - Validation error
  */
 const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code format.") => (control) => {
-    return regexpValidation(control, { regExp: zipCode, error, errorName });
+    return regexpValidation(control, {
+        regExp: zipCode,
+        error,
+        errorName,
+        logic: "!",
+    });
 };
 
 /**
@@ -1013,25 +1028,13 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
  * @param regExp                      - Regular expression to check
+ * @param logic                       - what kind of logic to preform !! = match, ! = not a match
  * @param errorName                   - optional parameter representing error name
  * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-const regexpValidator = (regExp, errorName, error) => (control) => {
-    return regexpValidation(control, { regExp, error, errorName });
-};
-/**
- * @publicApi
- * @description
- * Preforms a RegEx check on value in the given FromControl / AbstractControl.
- *
- * @param regExp                      - Regular expression to check
- * @param errorName                   - optional parameter representing error name
- * @param error                       - optional parameter representing error value
- * @returns {ValidationErrors | null} - Validation error
- */
-const regexpNotValidator = (regExp, errorName, error) => (control) => {
-    return regexpNotValidation(control, { regExp, error, errorName });
+const regexpValidator = (regExp, logic, errorName, error) => (control) => {
+    return regexpValidation(control, { regExp, error, errorName, logic });
 };
 /**
  * @publicApi
@@ -1327,58 +1330,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
         }], propDecorators: { value: [{
                 type: Input,
                 args: ["regExp"]
-            }] } });
-/**
- * @publicApi
- * @description
- * A Directive that preforms a RegEx check on value in the given
- * FromControl / AbstractControl and returns an error if regex
- * found a match
- *
- * Has an input in which you specify the regular expression
- * and optionally you can give it a custom name and a custom
- * error content / message.
- *
- * @usageNotes
- *  <input
- *    type="text"
- *    formControlName="regexpNot"
- *   [regExpNot]="{
- *      regExp: /(s|regexp)/,
- *      errorName: 'regexpNotCheck',
- *      error: 'Failed regexpNot check.'
- *   }"
- * />
- */
-class RegExpNotValidatorDirective {
-    validate(control) {
-        return regexpNotValidation(control, { ...this.value });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpNotValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RegExpNotValidatorDirective, isStandalone: true, selector: "[regExpNot]", inputs: { value: ["regExpNot", "value"] }, providers: [
-            {
-                provide: NG_VALIDATORS,
-                useExisting: RegExpNotValidatorDirective,
-                multi: true,
-            },
-        ], ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpNotValidatorDirective, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: "[regExpNot]",
-                    standalone: true,
-                    providers: [
-                        {
-                            provide: NG_VALIDATORS,
-                            useExisting: RegExpNotValidatorDirective,
-                            multi: true,
-                        },
-                    ],
-                }]
-        }], propDecorators: { value: [{
-                type: Input,
-                args: ["regExpNot"]
             }] } });
 /**
  * @publicApi
@@ -1716,7 +1667,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * @param errorName                   - parameter representing error name
  * @param error                       - parameter representing error value
  */
-function RegExpValidatorInput(regexp, errorName, error) {
+function RegExpValidatorInput(regexp, errorName, error, logic) {
     return function (target, propertyKey) {
         let original = target[propertyKey];
         let newData = {
@@ -1725,6 +1676,7 @@ function RegExpValidatorInput(regexp, errorName, error) {
         const getter = function () {
             newData = {
                 regExp: regexp,
+                logic: logic ?? '!!',
                 errorName: newData.errorName ?? errorName,
                 error: newData.error ?? error,
             };
@@ -2437,31 +2389,31 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *   }"
  * />
  */
-class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
+class SpaceValidatorDirective extends RegExpValidatorDirective {
     validate(control) {
         return super.validate(control);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SingleSpaceValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SingleSpaceValidatorDirective, isStandalone: true, selector: "[singleSpace]", inputs: { value: ["singleSpace", "value"] }, providers: [
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SpaceValidatorDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: SpaceValidatorDirective, isStandalone: true, selector: "[space]", inputs: { value: ["singleSpace", "value"] }, providers: [
             {
                 provide: NG_VALIDATORS,
-                useExisting: SingleSpaceValidatorDirective,
+                useExisting: SpaceValidatorDirective,
                 multi: true,
             },
         ], usesInheritance: true, ngImport: i0 }); }
 }
 __decorate([
-    RegExpValidatorInput(singleSpace, "singleSpace", "A single space character is not allowed.")
-], SingleSpaceValidatorDirective.prototype, "value", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SingleSpaceValidatorDirective, decorators: [{
+    RegExpValidatorInput(space, "space", "A single space character is not allowed.", '!')
+], SpaceValidatorDirective.prototype, "value", void 0);
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: SpaceValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[singleSpace]",
+                    selector: "[space]",
                     standalone: true,
                     providers: [
                         {
                             provide: NG_VALIDATORS,
-                            useExisting: SingleSpaceValidatorDirective,
+                            useExisting: SpaceValidatorDirective,
                             multi: true,
                         },
                     ],
@@ -2849,5 +2801,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RegExpNotValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SingleSpaceValidatorDirective, SpaceRestrictionValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpNotValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, singleSpaceValidator, spaceRestrictionValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
+export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map

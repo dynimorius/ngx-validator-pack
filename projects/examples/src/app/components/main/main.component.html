@@ -230,8 +230,8 @@
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
-        <h3>singleSpaceValidator Example:</h3>
-        <label for="space">Single Space Input Validation: </label>
+        <h3>spaceValidator Example:</h3>
+        <label for="space">Space Input Validation: </label>
         <input
           type="text"
           name="space"
@@ -495,7 +495,7 @@
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
-        <h3>regexpMatchValidator Example:</h3>
+        <h3>regexpValidator Example:</h3>
         <label for="regexp">RegExp Validation: </label>
         <input
           type="text"
@@ -508,23 +508,6 @@
       <app-snippets
         [tsSnippet]="regexpTSSnippet"
         [htmlSnippet]="regexpToHTMLSnippet"
-      ></app-snippets>
-    </div>
-    <div class="snippet-example-pair">
-      <div class="input-wrapper">
-        <h3>regexpNotAMatchValidator Example:</h3>
-        <label for="regexpNot">RegExp exclude Validation: </label>
-        <input
-          type="text"
-          name="regexpNot"
-          id="regexpNot"
-          formControlName="regexpNot"
-          showValidation
-        />
-      </div>
-      <app-snippets
-        [tsSnippet]="regexpNotTSSnippet"
-        [htmlSnippet]="regexpNotHTMLSnippet"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">

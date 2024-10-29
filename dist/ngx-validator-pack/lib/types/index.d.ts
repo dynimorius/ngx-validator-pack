@@ -12,4 +12,8 @@ export type ComparisonOperations = "<" | ">" | "==" | "===" | "<=" | ">=";
 /**
  * @publicApi
  */
+export type RegExpLogicalOperations = "!" | "!!" | "match";
+/**
+ * @publicApi
+ */
 export type PasswordValidations = "noAlpha" | "noNumeric" | "noLowercase" | "noUppercase" | "noSpecial" | "greaterOrLessThen" | "minLength";

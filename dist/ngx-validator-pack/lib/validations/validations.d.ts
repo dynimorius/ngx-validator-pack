@@ -24,19 +24,6 @@ export declare const regexpValidation: (control: AbstractControl, config: RegExp
 /**
  * @internal
  * @description
- * A validation function which preforms a RegEx check on value in the
- * given FromControl / AbstractControl.
- *
- * @param control                      - form control
- * @param config                       - config parameter, consists of a
- *                                       regexp to check and optional error and
- *                                       error name string
- * @returns {ValidationErrors | null}          - Validation error
- */
-export declare const regexpNotValidation: (control: AbstractControl, config: RegExpValidationConfig) => ValidationErrors | null;
-/**
- * @internal
- * @description
  * A validation function which checks if the date in the given
  * FromControl / AbstractControl is earlier then the value in the specified
  * FromControl / AbstractControl.

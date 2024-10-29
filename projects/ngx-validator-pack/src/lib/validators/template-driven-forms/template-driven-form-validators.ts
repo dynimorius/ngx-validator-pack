@@ -26,7 +26,6 @@ import {
   laterThenValidation,
   linkToValidation,
   linkedToValidation,
-  regexpNotValidation,
   regexpValidation,
   requiredWhenValidation,
 } from "../../validations/validations";
@@ -68,47 +67,6 @@ export class RegExpValidatorDirective implements Validator {
 
   validate(control: AbstractControl): ValidationErrors | null {
     return regexpValidation(control, { ...this.value });
-  }
-}
-
-/**
- * @publicApi
- * @description
- * A Directive that preforms a RegEx check on value in the given
- * FromControl / AbstractControl and returns an error if regex
- * found a match
- *
- * Has an input in which you specify the regular expression
- * and optionally you can give it a custom name and a custom
- * error content / message.
- *
- * @usageNotes
- *  <input
- *    type="text"
- *    formControlName="regexpNot"
- *   [regExpNot]="{
- *      regExp: /(s|regexp)/,
- *      errorName: 'regexpNotCheck',
- *      error: 'Failed regexpNot check.'
- *   }"
- * />
- */
-@Directive({
-  selector: "[regExpNot]",
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: RegExpNotValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class RegExpNotValidatorDirective implements Validator {
-  @Input("regExpNot") value!: RegExpValidationConfig;
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return regexpNotValidation(control, { ...this.value });
   }
 }
 

@@ -24,7 +24,7 @@ export declare const hasNumbers: RegExp;
 export declare const passport: RegExp;
 export declare const passwordStrength: RegExp;
 export declare const phoneNumber: RegExp;
-export declare const singleSpace: RegExp;
+export declare const space: RegExp;
 export declare const spaceRestriction: RegExp;
 export declare const ssn: RegExp;
 export declare const timeHH_MM_12: RegExp;

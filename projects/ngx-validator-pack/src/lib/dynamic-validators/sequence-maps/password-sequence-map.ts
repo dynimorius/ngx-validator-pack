@@ -9,7 +9,6 @@ import {
 import { SequenceConfig } from "../../interfaces/sequence-config.interface";
 import {
   lengthValidation,
-  regexpNotValidation,
   regexpValidation,
 } from "../../validations/validations";
 
@@ -47,17 +46,19 @@ export const PasswordConfigMap: { [key: string]: SequenceConfig } = {
     },
   },
   noSpecial: {
-    validationFun: regexpNotValidation,
+    validationFun: regexpValidation,
     validationFunConfig: {
       regExp: noSpecial,
+      logic: '!',
       error: "A password must contain special characters.",
       errorName: "noSpecial",
     },
   },
   greaterOrLessThen: {
-    validationFun: regexpNotValidation,
+    validationFun: regexpValidation,
     validationFunConfig: {
       regExp: greaterOrLessThen,
+      logic: '!',
       error: "A password must not contain < or > characters.",
       errorName: "greaterOrLessThen",
     },

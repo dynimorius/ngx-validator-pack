@@ -12,7 +12,7 @@ import {
   NG_VALIDATORS,
   ValidationErrors,
 } from "@angular/forms";
-import { RegExpNotValidatorDirective, RegExpValidatorDirective } from "./template-driven-form-validators";
+import { RegExpValidatorDirective } from "./template-driven-form-validators";
 import { RegExpValidatorInput } from "../../decorators/validator-input";
 import {
   IPAddressV4,
@@ -28,7 +28,7 @@ import {
   passport,
   passwordStrength,
   phoneNumber,
-  singleSpace,
+  space,
   spaceRestriction,
   ssn,
   timeHH_MM_12,
@@ -615,21 +615,22 @@ export class PhoneNumberValidatorDirective extends RegExpValidatorDirective {
  * />
  */
 @Directive({
-  selector: "[singleSpace]",
+  selector: "[space]",
   standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: SingleSpaceValidatorDirective,
+      useExisting: SpaceValidatorDirective,
       multi: true,
     },
   ],
 })
-export class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
+export class SpaceValidatorDirective extends RegExpValidatorDirective {
   @RegExpValidatorInput(
-    singleSpace,
-    "singleSpace",
-    "A single space character is not allowed."
+    space,
+    "space",
+    "A single space character is not allowed.",
+    '!'
   )
   @Input("singleSpace")
   override value!: any;

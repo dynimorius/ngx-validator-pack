@@ -5,7 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { ComparisonOperations } from "../types";
+import { ComparisonOperations, RegExpLogicalOperations } from "../types";
 /**
  * @internal
  * @description
@@ -25,6 +25,7 @@ export interface BaseValidationConfig {
  */
 export interface RegExpValidationConfig extends BaseValidationConfig {
     regExp: RegExp;
+    logic?: RegExpLogicalOperations;
 }
 /**
  * @publicApi

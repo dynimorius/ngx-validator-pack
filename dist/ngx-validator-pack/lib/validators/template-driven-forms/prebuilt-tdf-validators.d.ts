@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import { RegExpNotValidatorDirective, RegExpValidatorDirective } from "./template-driven-form-validators";
+import { RegExpValidatorDirective } from "./template-driven-form-validators";
 import * as i0 from "@angular/core";
 /**
  * @publicApi
@@ -347,11 +347,11 @@ export declare class PhoneNumberValidatorDirective extends RegExpValidatorDirect
  *   }"
  * />
  */
-export declare class SingleSpaceValidatorDirective extends RegExpNotValidatorDirective {
+export declare class SpaceValidatorDirective extends RegExpValidatorDirective {
     value: any;
     validate(control: AbstractControl): ValidationErrors | null;
-    static ɵfac: i0.ɵɵFactoryDeclaration<SingleSpaceValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<SingleSpaceValidatorDirective, "[singleSpace]", never, { "value": { "alias": "singleSpace"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SpaceValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<SpaceValidatorDirective, "[space]", never, { "value": { "alias": "singleSpace"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * @publicApi

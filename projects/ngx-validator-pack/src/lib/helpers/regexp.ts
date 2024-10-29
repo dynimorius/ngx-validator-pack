@@ -6,10 +6,12 @@
  * found at https://www.isc.org/licenses/
  */
 
+import { RegExpLogicalOperations } from "../types";
+
 /**
  * @internal
  */
-export const test = (regexp: RegExp, value: string, logic: '!' | "!!"): boolean => {
+export const test = (regexp: RegExp, value: string, logic: RegExpLogicalOperations): boolean => {
   const operations = {
     '!': (): boolean => !regexp.test(value),
     '!!': (): boolean => regexp.test(value),

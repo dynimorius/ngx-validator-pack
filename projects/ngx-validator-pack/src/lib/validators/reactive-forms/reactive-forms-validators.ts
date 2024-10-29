@@ -7,14 +7,13 @@
  */
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { ComparisonOperations } from "../../types";
+import { ComparisonOperations, RegExpLogicalOperations } from "../../types";
 import {
   compareToValidation,
   earlierThenValidation,
   laterThenValidation,
   linkToValidation,
   linkedToValidation,
-  regexpNotValidation,
   regexpValidation,
   requiredWhenValidation,
 } from "../../validations/validations";
@@ -25,30 +24,20 @@ import {
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
  *
  * @param regExp                      - Regular expression to check
+ * @param logic                       - what kind of logic to preform !! = match, ! = not a match
  * @param errorName                   - optional parameter representing error name
  * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
 export const regexpValidator =
-  (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
+  (
+    regExp: RegExp,
+    logic: RegExpLogicalOperations,
+    errorName?: string,
+    error?: string
+  ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
-    return regexpValidation(control, { regExp, error, errorName });
-  };
-
-/**
- * @publicApi
- * @description
- * Preforms a RegEx check on value in the given FromControl / AbstractControl.
- *
- * @param regExp                      - Regular expression to check
- * @param errorName                   - optional parameter representing error name
- * @param error                       - optional parameter representing error value
- * @returns {ValidationErrors | null} - Validation error
- */
-export const regexpNotValidator =
-  (regExp: RegExp, errorName?: string, error?: string): ValidatorFn =>
-  (control: AbstractControl): ValidationErrors | null => {
-    return regexpNotValidation(control, { regExp, error, errorName });
+    return regexpValidation(control, { regExp, error, errorName, logic });
   };
 
 /**

@@ -31,34 +31,6 @@ export declare class RegExpValidatorDirective implements Validator {
 /**
  * @publicApi
  * @description
- * A Directive that preforms a RegEx check on value in the given
- * FromControl / AbstractControl and returns an error if regex
- * found a match
- *
- * Has an input in which you specify the regular expression
- * and optionally you can give it a custom name and a custom
- * error content / message.
- *
- * @usageNotes
- *  <input
- *    type="text"
- *    formControlName="regexpNot"
- *   [regExpNot]="{
- *      regExp: /(s|regexp)/,
- *      errorName: 'regexpNotCheck',
- *      error: 'Failed regexpNot check.'
- *   }"
- * />
- */
-export declare class RegExpNotValidatorDirective implements Validator {
-    value: RegExpValidationConfig;
-    validate(control: AbstractControl): ValidationErrors | null;
-    static ɵfac: i0.ɵɵFactoryDeclaration<RegExpNotValidatorDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<RegExpNotValidatorDirective, "[regExpNot]", never, { "value": { "alias": "regExpNot"; "required": false; }; }, {}, never, never, true, never>;
-}
-/**
- * @publicApi
- * @description
  * A Directive that preforms a date comparison between a specified date
  * and a date in the given input and returns an error if the date in
  * the given input is later then the specified one.

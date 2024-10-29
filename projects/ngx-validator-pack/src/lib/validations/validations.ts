@@ -10,8 +10,15 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { compareDates } from "../helpers/date";
 import { compare } from "../helpers/numbers";
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
-import { regExpBase } from "./regexp.base";
-import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
+import {
+  CompareValidationConfig,
+  ConditionalValidationConfig,
+  DateValidationConfig,
+  LengthValidationConfig,
+  LinkValidationConfig,
+  RegExpValidationConfig,
+} from "../interfaces/validation-config.interface";
+import { test } from "../helpers/regexp";
 
 /**
  * @internal
@@ -31,30 +38,14 @@ export const regexpValidation = (
 ): ValidationErrors | null => {
   const error =
     config.error ?? "This control did not match a given regular expression.";
+  const errors: ValidationErrors = {
+    [config.errorName ?? "regexp"]: error,
+  };
 
-  return regExpBase(control, { ...config, error }, "!!");
-};
-
-/**
- * @internal
- * @description
- * A validation function which preforms a RegEx check on value in the
- * given FromControl / AbstractControl.
- *
- * @param control                      - form control
- * @param config                       - config parameter, consists of a
- *                                       regexp to check and optional error and
- *                                       error name string
- * @returns {ValidationErrors | null}          - Validation error
- */
-export const regexpNotValidation = (
-  control: AbstractControl,
-  config: RegExpValidationConfig
-): ValidationErrors | null => {
-  const error =
-    config.error ?? "This control matched a given regular expression.";
-
-  return regExpBase(control, { ...config, error }, "!");
+  return !control.value ||
+    test(config.regExp, control.value, config?.logic ?? "!!")
+    ? null
+    : errors;
 };
 
 /**

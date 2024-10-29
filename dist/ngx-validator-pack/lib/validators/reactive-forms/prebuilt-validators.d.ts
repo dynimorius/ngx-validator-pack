@@ -159,7 +159,7 @@ export declare const phoneNumberValidator: (errorName?: string, error?: string) 
  * @param error                       - optional parameter representing error value
  * @returns {ValidationErrors | null} - Validation error
  */
-export declare const singleSpaceValidator: (errorName?: string, error?: string) => ValidatorFn;
+export declare const spaceValidator: (errorName?: string, error?: string) => ValidatorFn;
 /**
  * @publicApi
  * @description
