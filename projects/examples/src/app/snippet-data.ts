@@ -12,7 +12,7 @@ ngOnInit(): void {
 
 export const addressHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="address" id="address" formControlName="address" showValidation>
+    <input type="text" formControlName="address" showValidation>
 </form>
 `;
 
@@ -30,7 +30,7 @@ ngOnInit(): void {
 
 export const alphabetHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="alphabet" id="alphabet" formControlName="alphabet" showValidation>
+    <input type="text" formControlName="alphabet" showValidation>
 </form>
 `;
 
@@ -48,7 +48,7 @@ ngOnInit(): void {
 
 export const dateDDMMYYYYHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="dateDDMMYYYY" id="dateDDMMYYYY" formControlName="dateDDMMYYYY" showValidation>
+    <input type="text" formControlName="dateDDMMYYYY" showValidation>
 </form>
 `;
 
@@ -66,7 +66,7 @@ ngOnInit(): void {
 
 export const dateYYYYMMDDHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="dateYYYYMMDD" id="dateYYYYMMDD" formControlName="dateYYYYMMDD" showValidation>
+    <input type="text" formControlName="dateYYYYMMDD" showValidation>
 </form>
 `;
 
@@ -84,7 +84,7 @@ ngOnInit(): void {
 
 export const emailHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="email" id="email" formControlName="email" showValidation>
+    <input type="text" formControlName="email" showValidation>
 </form>
 `;
 
@@ -102,7 +102,7 @@ ngOnInit(): void {
 
 export const ipAddressHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="ipAddress" id="ipAddress" formControlName="ipAddress" showValidation>
+    <input type="text" formControlName="ipAddress" showValidation>
 </form>
 `;
 
@@ -120,7 +120,7 @@ ngOnInit(): void {
 
 export const ipv4HTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="ipv4" id="ipv4" formControlName="ipv4" showValidation>
+    <input type="text" formControlName="ipv4" showValidation>
 </form>
 `;
 
@@ -138,7 +138,7 @@ ngOnInit(): void {
 
 export const ipv6HTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="ipv6" id="ipv6" formControlName="ipv6" showValidation>
+    <input type="text" formControlName="ipv6" showValidation>
 </form>
 `;
 
@@ -156,7 +156,7 @@ ngOnInit(): void {
 
 export const numericHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="numeric" id="numeric" formControlName="numeric" showValidation>
+    <input type="text" formControlName="numeric" showValidation>
 </form>
 `;
 
@@ -174,7 +174,7 @@ ngOnInit(): void {
 
 export const noSpecialHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="noSpecial" id="noSpecial" formControlName="noSpecial" showValidation>
+    <input type="text" formControlName="noSpecial" showValidation>
 </form>
 `;
 
@@ -192,7 +192,7 @@ ngOnInit(): void {
 
 export const passportHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="passport" id="passport" formControlName="passport" showValidation>
+    <input type="text" formControlName="passport" showValidation>
 </form>
 `;
 
@@ -210,7 +210,7 @@ ngOnInit(): void {
 
 export const passwordHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="password" id="password" formControlName="password" showValidation>
+    <input type="text" formControlName="password" showValidation>
 </form>
 `;
 
@@ -228,7 +228,7 @@ ngOnInit(): void {
 
 export const phoneHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="phone" id="phone" formControlName="phone" showValidation>
+    <input type="text" formControlName="phone" showValidation>
 </form>
 `;
 
@@ -239,14 +239,14 @@ constructor(private fb: FormBuilder) {}
 
 ngOnInit(): void {
     this.exampleForm.fb.group({
-        space: [null, [singleSpaceValidator()]]
+        space: [null, [spaceValidator()]]
     })
 }
 `;
 
 export const spaceHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="space" id="space" formControlName="space" showValidation>
+    <input type="text" formControlName="space" showValidation>
 </form>
 `;
 
@@ -264,7 +264,7 @@ ngOnInit(): void {
 
 export const spaceResHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="spaceRes" id="spaceRes" formControlName="spaceRes" showValidation>
+    <input type="text" formControlName="spaceRes" showValidation>
 </form>
 `;
 
@@ -282,7 +282,7 @@ ngOnInit(): void {
 
 export const ssnHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="ssn" id="ssn" formControlName="ssn" showValidation>
+    <input type="text" formControlName="ssn" showValidation>
 </form>
 `;
 
@@ -300,7 +300,7 @@ ngOnInit(): void {
 
 export const timeHHMM12HTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="timeHHMM12" id="timeHHMM12" formControlName="timeHHMM12" showValidation>
+    <input type="text" formControlName="timeHHMM12" showValidation>
 </form>
 `;
 
@@ -318,7 +318,7 @@ ngOnInit(): void {
 
 export const timeHHMM24HTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="timeHHMM24" id="timeHHMM24" formControlName="timeHHMM24" showValidation>
+    <input type="text" formControlName="timeHHMM24" showValidation>
 </form>
 `;
 
@@ -336,7 +336,7 @@ ngOnInit(): void {
 
 export const timeHHMMSS24HTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="timeHHMMSS24" id="timeHHMMSS24" formControlName="timeHHMMSS24" showValidation>
+    <input type="text" formControlName="timeHHMMSS24" showValidation>
 </form>
 `;
 
@@ -354,7 +354,7 @@ ngOnInit(): void {
 
 export const urlHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="url" id="url" formControlName="url" showValidation>
+    <input type="text" formControlName="url" showValidation>
 </form>
 `;
 
@@ -372,7 +372,7 @@ ngOnInit(): void {
 
 export const zipCodeHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="zipCode" id="zipCode" formControlName="zipCode" showValidation>
+    <input type="text" formControlName="zipCode" showValidation>
 </form>
 `;
 
@@ -390,7 +390,7 @@ ngOnInit(): void {
 
 export const earlierDateHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="date" name="laterDate" id="earlierDate" formControlName="earlierDate" showValidation>
+    <input type="date" formControlName="earlierDate" showValidation>
 </form>
 `;
 
@@ -408,7 +408,7 @@ ngOnInit(): void {
 
 export const laterDateHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="date" name="laterDate" id="earlierDate" formControlName="earlierDate" showValidation>
+    <input type="date" formControlName="earlierDate" showValidation>
 </form>
 `;
 
@@ -426,7 +426,7 @@ ngOnInit(): void {
 
 export const compareDateHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="date" name="compareDate" id="compareDate" formControlName="compareDate" showValidation>
+    <input type="date" formControlName="compareDate" showValidation>
 </form>
 `;
 
@@ -449,7 +449,7 @@ requireChange($event: MouseEvent) {
 
 export const requiredWhenHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="requiredWhen" id="requiredWhen" formControlName="requiredWhen" showValidation>
+    <input type="text" formControlName="requiredWhen" showValidation>
 </form>
 `;
 
@@ -467,7 +467,7 @@ ngOnInit(): void {
 
 export const linkToHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="linkTo" id="linkTo" formControlName="linkTo" showValidation>
+    <input type="text" formControlName="linkTo" showValidation>
 </form>
 `;
 
@@ -485,7 +485,7 @@ ngOnInit(): void {
 
 export const linkedToHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="linkedTo" id="linkedTo" formControlName="linkedTo" showValidation>
+    <input type="text" formControlName="linkedTo" showValidation>
 </form>
 `;
 
@@ -503,25 +503,7 @@ ngOnInit(): void {
 
 export const regexpToHTMLSnippet = `
 <form [formGroup]="exampleForm">
-    <input type="text" name="regexp" id="regexp" formControlName="regexp" showValidation>
-</form>
-`;
-
-export const regexpNotTSSnippet: string = `
-exampleForm!: FormGroup;
-
-constructor(private fb: FormBuilder) {}
-
-ngOnInit(): void {
-    this.exampleForm.fb.group({
-        regexpNot: [null, regexpNotAMatchValidator(/(s|regexp)/)]
-    })
-}
-`;
-
-export const regexpNotHTMLSnippet = `
-<form [formGroup]="exampleForm">
-    <input type="text" name="regexpNot" id="regexpNot" formControlName="regexpNot" showValidation>
+    <input type="text" formControlName="regexp" showValidation>
 </form>
 `;
 

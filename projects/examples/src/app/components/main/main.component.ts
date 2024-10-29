@@ -69,8 +69,6 @@ import {
   passwordTSSnippet,
   phoneHTMLSnippet,
   phoneTSSnippet,
-  regexpNotHTMLSnippet,
-  regexpNotTSSnippet,
   regexpTSSnippet,
   regexpToHTMLSnippet,
   requiredWhenHTMLSnippet,
@@ -162,8 +160,6 @@ export class MainComponent implements OnInit {
   linkedToHTMLSnippet: string = linkedToHTMLSnippet;
   regexpTSSnippet: string = regexpTSSnippet;
   regexpToHTMLSnippet: string = regexpToHTMLSnippet;
-  regexpNotTSSnippet: string = regexpNotTSSnippet;
-  regexpNotHTMLSnippet: string = regexpNotHTMLSnippet;
 
   constructor(private readonly fb: FormBuilder) {}
 
