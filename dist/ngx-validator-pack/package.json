@@ -1,6 +1,6 @@
 {
   "name": "@dynamize/ngx-validator-pack",
-  "version": "0.0.0-watch+1730182841081",
+  "version": "0.0.0-watch+1730183101382",
   "description": "An extension pack of Angular form validators.",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
