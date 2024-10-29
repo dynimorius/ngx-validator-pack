@@ -82,7 +82,18 @@ class ShowValidationDirective {
         this.renderer.setStyle(this.container, "display", "flex");
         this.renderer.setStyle(this.container, "flex-direction", "column");
         this.renderer.setStyle(this.container, "gap", "10px");
-        Object.entries(this.errorStyle).forEach((style) => {
+        const retrievedStyles = getComputedStyle(this.self);
+        const tempStyles = {
+            font_size: retrievedStyles.fontSize,
+            font_family: retrievedStyles.fontFamily,
+            color: retrievedStyles.color,
+            background_color: retrievedStyles.backgroundColor,
+            border: retrievedStyles.border,
+            border_radius: retrievedStyles.borderRadius,
+            width: retrievedStyles.width,
+            ...this.errorStyle
+        };
+        Object.entries(tempStyles).forEach((style) => {
             this.renderer.setStyle(this.container, style[0].replace('_', '-'), style[1]);
         });
     }
