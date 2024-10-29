@@ -661,7 +661,11 @@ import { requiredEther, requiredIf, requiredIfNot } from '@dynamize/ngx-validato
       ether: [null]
     }, {
         validators: [
-          requiredIf("if", "compare", "Compere input has a value"),
+          requiredIf(
+            "if", 
+            "compare", 
+            "Compere input has a value"
+            ),
           requiredIfNot(
             "ifNot",
             "compare",
