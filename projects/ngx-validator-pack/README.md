@@ -25,7 +25,7 @@
     - [Email](#email)
     - [IP Address](#ip-address)
     - [Numeric](#numeric)
-    - [Special Characters](#specials)
+    - [Special Characters](#special)
     - [Passport](#passport)
     - [Password](#password)
     - [Phone](#phone)
@@ -57,10 +57,7 @@ npm install --save @dynamize/ngx-validator-pack
 
 <a name="regexp-validators"></a>
 
-There are two types of RegExp validators in the Validator Pack, <mark>regexpValidator</mark> and <mark>regexpNotValidator</mark>.
-
-<mark>regexpValidator</mark> returns an error if the value does not match the regular expression, and
-opposite to it <mark>regexpNotValidator</mark> returns an error if the value matches the regular expression.
+<mark>regexpValidator</mark> returns an error if the value does not match the regular expression
 
 regexpValidator Example:
 
@@ -80,7 +77,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
-      regexpInput: [null, [regexpValidator(/(s|regexp)/)]]
+      regexpInput: [null, [regexpValidator(/(s|regexp)/, '!!')]]
     })
   }
 }
@@ -88,10 +85,10 @@ export class AppComponent implements OnInit{
 
 In this example we are checking if the input is a word regexp, if not we will get an error.
 
-regexpNotValidator Example:
+regexpValidator Example ?:
 
 ```javascript
-import { regexpNotValidator } from '@dynamize/ngx-validator-pack';
+import { regexpValidator } from '@dynamize/ngx-validator-pack';
 
 @Component({
   selector: 'app-root',
@@ -106,7 +103,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
-      regexpNotInput: [null, [regexpNotValidator(/(s|regexp)/)]]
+      regexpNotInput: [null, [regexpValidator(/(s|regexp)/, '!')]]
     })
   }
 }
@@ -509,7 +506,7 @@ Please check the example here: [additional parameters example](#additional-param
 
 ### Special Characters
 
-<a name="specials"></a>
+<a name="special"></a>
 
 <mark>noSpecialsValidator</mark> will return an error if any spacial charter are in the given input.
 
@@ -651,13 +648,12 @@ Please check the example here: [additional parameters example](#additional-param
 
 <a name="space"></a>
 
-<mark>singleSpaceValidator</mark> will return an error if an input consists of a single space
-charter.
+<mark>spaceValidator</mark> will return an error if an input has a space charter.
 
 <mark>spaceRestrictionValidator</mark> will return an error if a given input starts or ends with a space charter.
 
 ```javascript
-import { singleSpaceValidator, spaceRestrictionValidator } from '@dynamize/ngx-validator-pack';
+import { spaceValidator, spaceRestrictionValidator } from '@dynamize/ngx-validator-pack';
 
 @Component({
   selector: 'app-root',
@@ -674,7 +670,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
-      space: [null, [singleSpaceValidator()]],
+      space: [null, [spaceValidator()]],
       spaceRes: [null, [spaceRestrictionValidator()]]
     })
   }
