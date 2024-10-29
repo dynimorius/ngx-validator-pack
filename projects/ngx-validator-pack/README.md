@@ -64,23 +64,11 @@ regexpValidator Example:
 ```javascript
 import { regexpValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       regexpInput: [null, [regexpValidator(/(s|regexp)/, '!!')]]
     })
   }
-}
 ```
 
 In this example we are checking if the input is a word regexp, if not we will get an error.
@@ -90,23 +78,11 @@ regexpValidator Example ?:
 ```javascript
 import { regexpValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       regexpNotInput: [null, [regexpValidator(/(s|regexp)/, '!')]]
     })
   }
-}
 ```
 
 In this example we are checking if the input is not a word regexp, if not we will get an error.
@@ -133,23 +109,11 @@ earlierThenValidator Example:
 ```javascript
 import { earlierThenValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       earlierDate: [null, [earlierThenValidator(new Date())]]
     })
   }
-}
 ```
 
 laterThenValidator Example:
@@ -157,23 +121,11 @@ laterThenValidator Example:
 ```javascript
 import { laterThenValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       laterDate: [null, [laterThenValidator(new Date())]]
     })
   }
-}
 ```
 
 compareToValidator Example:
@@ -181,24 +133,12 @@ compareToValidator Example:
 ```javascript
 import { compareToValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       controlDate: [null],
       compareDate: [null, [compareToValidator("controlDate", ">=")]]
     })
   }
-}
 ```
 
 The available comparisons are: '<', '>', '==', '===', '<=', '>='.
@@ -227,25 +167,11 @@ requiredWhenValidator Example:
 ```javascript
 import { requiredWhenValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       requiredWhen: [null, [requiredWhenValidator(this.randomBool())]]
     })
   }
-}
 ```
 
 linkToValidator and linkedToValidator Example:
@@ -253,26 +179,12 @@ linkToValidator and linkedToValidator Example:
 ```javascript
 import { linkToValidator, linkedToValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       linkTo: [null, [linkToValidator("linkedTo")]],
       linkedTo: [null, [linkedToValidator("linkTo")]],
     })
   }
-}
 ```
 
 Additionally we can supply two other optional parameters, first being the name of the error and
@@ -295,25 +207,11 @@ We can use <marl>addressValidator</marl> to validate the most common USA address
 ```javascript
 import { addressValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       address: [null, [addressValidator()]]
     })
   }
-}
 ```
 
 ### Alphabet
@@ -326,25 +224,11 @@ in the given input.
 ```javascript
 import { alphabetOnlyValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       alphabet: [null, [alphabetOnlyValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -365,26 +249,12 @@ dd/MM/YYYY.
 ```javascript
 import { dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator} from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       dateDDMMYYYY: [null, [dateDD_MM_YYYYValidator()]],
       dateYYYYMMDD: [null, [dateYYYY_MM_DDValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -401,25 +271,11 @@ We can use <mark>emailValidator</mark> to validate a text input for an email for
 ```javascript
 import { emailValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       email: [null, [emailValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -446,19 +302,6 @@ import {
   iPv6Validator
   } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       ipAddress: [null, [ipAddressValidator()]],
@@ -466,7 +309,6 @@ export class AppComponent implements OnInit{
       ipv6: [null, [iPv6Validator()]]
     })
   }
-}
 ```
 
 ### Numeric
@@ -479,25 +321,11 @@ in the given input.
 ```javascript
 import { numericsOnlyValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       numeric: [null, [numericsOnlyValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -513,25 +341,11 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { noSpecialsValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       noSpecial: [null, [noSpecialsValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -548,25 +362,11 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { passportValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       passport: [null, [passportValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -584,25 +384,11 @@ length of at least 8 characters).
 ```javascript
 import { passwordValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       password: [null, [passwordValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -619,25 +405,11 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { phoneNumberValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       phone: [null, [phoneNumberValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -655,26 +427,12 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { spaceValidator, spaceRestrictionValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       space: [null, [spaceValidator()]],
       spaceRes: [null, [spaceRestrictionValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -690,25 +448,11 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { ssnValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       ssn: [null, [ssnValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -736,19 +480,6 @@ import {
   timeHH_MM_SS_24Validator
  } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       timeHHMM12: [null, [timeHH_MM_12Validator()]],
@@ -756,7 +487,6 @@ export class AppComponent implements OnInit{
       timeHHMMSS24: [null, [timeHH_MM_SS_24Validator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -772,25 +502,11 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { urlValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       url: [null, [urlValidator()]]
     })
   }
-}
 ```
 
 It has two optional parameters first being the name of the error and
@@ -807,25 +523,11 @@ Please check the example here: [additional parameters example](#additional-param
 ```javascript
 import { zipCodeValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       zipCode: [null, [zipCodeValidator()]]
     })
   }
-}
 ```
 
 ## Cross Field Validators
@@ -845,19 +547,6 @@ if the condition is met and the second parameter is the name of the control whic
 ```javascript
 import { requiredEther, requiredIf, requiredIfNot } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       compare: [null],
@@ -872,7 +561,6 @@ export class AppComponent implements OnInit{
       ]
     })
   }
-}
 ```
 
 ## Custom Messaging
@@ -898,17 +586,6 @@ identical for all other ngx validators.
 ```javascript
 import { regexpValidator, regexpNotValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit {
-  exampleForm!: FormGroup;
-  constructor(private readonly fb: FormBuilder) {}
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       regexpInput: [
@@ -933,7 +610,6 @@ export class AppComponent implements OnInit {
       ],
     });
   }
-}
 ```
 
 ### Custom Messages for Prebuilt Validators
@@ -955,19 +631,6 @@ identical for all other ngx validators.
 ```javascript
 import { addressValidator } from '@dynamize/ngx-validator-pack';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
       address: [null, [addressValidator(
@@ -976,7 +639,6 @@ export class AppComponent implements OnInit{
       )]]
     })
   }
-}
 ```
 
 ### Custom Messages for Cross Field Validator
@@ -990,19 +652,6 @@ The only take one optional parameter which is a custom error message.
 
 ```javascript
 import { requiredEther, requiredIf, requiredIfNot } from '@dynamize/ngx-validator-pack';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
-export class AppComponent implements OnInit{
-  exampleForm!: FormGroup;
-  randomBool = (): boolean => Math.random() >= 0.5;
-
-  constructor(private readonly fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.exampleForm = this.fb.group({
@@ -1026,7 +675,6 @@ export class AppComponent implements OnInit{
         ],
     })
   }
-}
 ```
 
 ## Showing validation
@@ -1043,8 +691,6 @@ showValidation Example:
 <form [formGroup]="exampleForm" id="examples-content">
   <input
     type="text"
-    name="address"
-    id="address"
     formControlName="address"
     showValidation
     />
@@ -1068,8 +714,6 @@ You can pass an <mark>errorStyle</mark> object to customize the look of the vali
 <form [formGroup]="exampleForm" id="examples-content">
   <input
     type="text"
-    name="address"
-    id="address"
     formControlName="address"
     showValidation
     [errorStyle]="{
@@ -1112,8 +756,6 @@ The available style options are:
     <label for="address">Address</label>
     <input
       type="text"
-      name="address"
-      id="address"
       formControlName="address"
       pInputText
       showValidation
