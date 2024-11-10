@@ -19,12 +19,34 @@ import { __decorate } from 'tslib';
  * {@link ShowValidationDirective}
  */
 const DefaultStyle = {
-    font_size: "small",
-    font_family: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
+    fontSize: "small",
+    fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
     color: "salmon",
-    background_color: "",
-    border: "none",
-    border_radius: "5px",
+    backgroundColor: "",
+    border: "1px solid salmon",
+    borderRadius: "0px 0px 5px 5px",
+};
+/**
+ * @internal
+ * @description
+ * Default styles for the showValidation Directive
+ * {@link ShowValidationDirective}
+ */
+const DefaultContainerStyles = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+};
+/**
+ * @internal
+ * @description
+ * Default styles for the showValidation Directive
+ * {@link ShowValidationDirective}
+ */
+const DefaultSpanStyles = {
+    position: "relative",
+    top: "-10px",
+    padding: "2px 0px 5px 10px",
 };
 
 /**
@@ -62,10 +84,11 @@ class ShowValidationDirective {
         const formControl = this.control.control;
         this.parent = this.elementRef.nativeElement.parentElement;
         this.self = this.elementRef.nativeElement;
+        this.retrievedStyles = getComputedStyle(this.self);
         this.container = this.renderer.createElement("div");
         this.renderer.appendChild(this.container, this.self);
         this.renderer.appendChild(this.parent, this.container);
-        this.setStyles();
+        this.setContainerStyles();
         this.controlSub.add(formControl.statusChanges.subscribe((status) => {
             this.hideError();
             if (status === "INVALID") {
@@ -78,30 +101,30 @@ class ShowValidationDirective {
     ngOnDestroy() {
         this.controlSub.unsubscribe();
     }
-    setStyles() {
-        this.renderer.setStyle(this.container, "display", "flex");
-        this.renderer.setStyle(this.container, "flex-direction", "column");
-        this.renderer.setStyle(this.container, "gap", "10px");
-        const retrievedStyles = getComputedStyle(this.self);
-        const tempStyles = {
-            font_size: retrievedStyles.fontSize,
-            font_family: retrievedStyles.fontFamily,
-            color: retrievedStyles.color,
-            background_color: retrievedStyles.backgroundColor,
-            border: retrievedStyles.border,
-            border_radius: retrievedStyles.borderRadius,
-            width: retrievedStyles.width,
-            ...this.errorStyle
-        };
-        Object.entries(tempStyles).forEach((style) => {
-            this.renderer.setStyle(this.container, style[0].replace('_', '-'), style[1]);
+    setContainerStyles() {
+        this.setStyles(this.container, DefaultContainerStyles);
+        this.renderer.setStyle(this.container, "width", this.retrievedStyles.width);
+    }
+    setSpanStyles() {
+        this.setZIndex();
+        this.setStyles(this.span, { ...DefaultSpanStyles, ...this.errorStyle });
+    }
+    setZIndex() {
+        const indexNum = Number.parseInt(this.retrievedStyles.zIndex);
+        const zIndex = Number.isNaN(indexNum) ? 1 : indexNum;
+        this.renderer.setStyle(this.self, "zIndex", `${zIndex}`);
+        this.renderer.setStyle(this.span, "zIndex", `${zIndex - 1}`);
+    }
+    setStyles(element, styles) {
+        Object.entries(styles).forEach((style) => {
+            this.renderer.setStyle(element, style[0], style[1]);
         });
     }
     showError(errors) {
         this.span = this.renderer.createElement("span");
         this.span.innerHTML = this.getValidationMessage(errors);
         this.renderer.appendChild(this.container, this.span);
-        this.renderer.setStyle(this.span, 'padding', '0px 0px 10px 10px');
+        this.setSpanStyles();
     }
     hideError() {
         if (this.container && this.span) {

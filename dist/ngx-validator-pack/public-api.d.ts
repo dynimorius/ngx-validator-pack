@@ -8,7 +8,6 @@
  * Public API Surface of ngx-validator-pack
  */
 export * from "./lib/directives/show-validation.directive";
-export * from "./lib/interfaces/show-validation-styles";
 export * from "./lib/interfaces/validation-config.interface";
 export * from "./lib/validators/reactive-forms/cross-field-validators";
 export * from "./lib/validators/reactive-forms/prebuilt-validators";

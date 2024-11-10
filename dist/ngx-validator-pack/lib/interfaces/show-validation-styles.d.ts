@@ -13,12 +13,12 @@
  * {@link ShowValidationDirective}
  */
 export interface ShowValidationStyle {
-    font_size?: string;
-    font_family?: string;
+    fontSize?: string;
+    fontFamily?: string;
     color?: string;
-    background_color?: string;
+    backgroundColor?: string;
     border?: string;
-    border_radius?: string;
+    borderRadius?: string;
     width?: string;
     height?: string;
 }

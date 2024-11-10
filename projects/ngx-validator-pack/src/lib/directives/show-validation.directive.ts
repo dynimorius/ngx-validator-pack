@@ -16,8 +16,11 @@ import {
 } from "@angular/core";
 import { FormControl, NgControl, ValidationErrors } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { ShowValidationStyle } from '../interfaces/show-validation-styles';
-import { DefaultStyle } from "../constant/default-show-validation-style";
+import {
+  DefaultContainerStyles,
+  DefaultSpanStyles,
+  DefaultStyle,
+} from "../constant/default-show-validation-style";
 
 /**
  * @publicApi
@@ -45,8 +48,9 @@ export class ShowValidationDirective implements OnInit, OnDestroy {
   self!: HTMLElement;
   container!: HTMLElement;
   span!: HTMLElement | null;
+  retrievedStyles!: CSSStyleDeclaration;
 
-  @Input() errorStyle: ShowValidationStyle = DefaultStyle;
+  @Input() errorStyle: {[key: string]: string} = DefaultStyle;
 
   constructor(
     private readonly elementRef: ElementRef,
@@ -58,10 +62,11 @@ export class ShowValidationDirective implements OnInit, OnDestroy {
     const formControl = this.control.control as FormControl;
     this.parent = this.elementRef.nativeElement.parentElement;
     this.self = this.elementRef.nativeElement;
+    this.retrievedStyles = getComputedStyle(this.self);
     this.container = this.renderer.createElement("div");
     this.renderer.appendChild(this.container, this.self);
     this.renderer.appendChild(this.parent, this.container);
-    this.setStyles();
+    this.setContainerStyles();
 
     this.controlSub.add(
       formControl.statusChanges.subscribe((status): void => {
@@ -79,36 +84,41 @@ export class ShowValidationDirective implements OnInit, OnDestroy {
     this.controlSub.unsubscribe();
   }
 
-  setStyles(): void {
-    this.renderer.setStyle(this.container, "display", "flex");
-    this.renderer.setStyle(this.container, "flex-direction", "column");
-    this.renderer.setStyle(this.container, "gap", "10px");
-    const retrievedStyles = getComputedStyle(this.self);
-    const tempStyles: ShowValidationStyle = {
-      font_size: retrievedStyles.fontSize,
-      font_family: retrievedStyles.fontFamily,
-      color: retrievedStyles.color,
-      background_color: retrievedStyles.backgroundColor,
-      border: retrievedStyles.border,
-      border_radius: retrievedStyles.borderRadius,
-      width: retrievedStyles.width,
-      ...this.errorStyle
-    }
+  setContainerStyles(): void {
+    this.setStyles(this.container, DefaultContainerStyles);
+    this.renderer.setStyle(this.container, "width", this.retrievedStyles.width);
+  }
 
-    Object.entries(tempStyles).forEach((style): void => {
-      this.renderer.setStyle(this.container, style[0].replace('_', '-'), style[1]);
-    })
+  setSpanStyles(): void {
+    this.setZIndex();
+    this.setStyles(this.span, { ...DefaultSpanStyles, ...this.errorStyle });
+  }
+
+  setZIndex(): void {
+    const indexNum = Number.parseInt(this.retrievedStyles.zIndex);
+    const zIndex = Number.isNaN(indexNum) ? 1 : indexNum;
+    this.renderer.setStyle(this.self, "zIndex", `${zIndex}`);
+    this.renderer.setStyle(this.span, "zIndex", `${zIndex - 1}`);
+  }
+
+  setStyles(
+    element: HTMLElement | null,
+    styles: { [key: string]: string }
+  ): void {
+    Object.entries(styles).forEach((style): void => {
+      this.renderer.setStyle(element, style[0], style[1]);
+    });
   }
 
   showError(errors: ValidationErrors | null): void {
     this.span = this.renderer.createElement("span");
     (this.span as HTMLElement).innerHTML = this.getValidationMessage(errors);
     this.renderer.appendChild(this.container, this.span);
-    this.renderer.setStyle(this.span, 'padding', '0px 0px 10px 10px');
+    this.setSpanStyles();
   }
 
   hideError(): void {
-    if(this.container && this.span) {
+    if (this.container && this.span) {
       this.renderer.removeChild(this.container, this.span);
       this.span = null;
     }

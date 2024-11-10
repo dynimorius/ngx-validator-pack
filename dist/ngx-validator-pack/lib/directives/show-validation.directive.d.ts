@@ -8,7 +8,6 @@
 import { ElementRef, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { NgControl, ValidationErrors } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { ShowValidationStyle } from '../interfaces/show-validation-styles';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
@@ -35,11 +34,19 @@ export declare class ShowValidationDirective implements OnInit, OnDestroy {
     self: HTMLElement;
     container: HTMLElement;
     span: HTMLElement | null;
-    errorStyle: ShowValidationStyle;
+    retrievedStyles: CSSStyleDeclaration;
+    errorStyle: {
+        [key: string]: string;
+    };
     constructor(elementRef: ElementRef, renderer: Renderer2, control: NgControl);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    setStyles(): void;
+    setContainerStyles(): void;
+    setSpanStyles(): void;
+    setZIndex(): void;
+    setStyles(element: HTMLElement | null, styles: {
+        [key: string]: string;
+    }): void;
     showError(errors: ValidationErrors | null): void;
     hideError(): void;
     getValidationMessage(errors: ValidationErrors | null): string;
