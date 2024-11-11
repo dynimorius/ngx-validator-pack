@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, Validator } from "@angular/forms";
-import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LinkValidationConfig, RegExpValidationConfig } from "../../interfaces/validation-config.interface";
+import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RangeValidationConfig, RegExpValidationConfig } from "../../interfaces/validation-config.interface";
 import * as i0 from "@angular/core";
 /**
  * @publicApi
@@ -198,4 +198,59 @@ export declare class LinkedToValidatorDirective implements Validator {
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<LinkedToValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LinkedToValidatorDirective, "[linkedTo]", never, { "value": { "alias": "linkedTo"; "required": false; }; }, {}, never, never, true, never>;
+}
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the given comparison fails.
+ *
+ * Has an input in which you specify the length to compere to and the comparison
+ * to preform. Optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="length"
+ *   [length]="{
+ *      length: 8,
+ *      comparison: ">",
+ *      errorName: 'length',
+ *      error: 'Value is not long enough.'
+ *   }"
+ * />
+ */
+export declare class LengthValidatorDirective implements Validator {
+    value: LengthValidationConfig;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LengthValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<LengthValidatorDirective, "[length]", never, { "value": { "alias": "length"; "required": false; }; }, {}, never, never, true, never>;
+}
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the value is not in the specified range.
+ *
+ * Has an input in which you specify the range start value, range end value
+ * and optionally you can give it a custom name and a custom error content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="range"
+ *   [range]="{
+ *      start: 8,
+ *      end: 14,
+ *      errorName: 'range',
+ *      error: 'Value is not in the specified range.'
+ *   }"
+ * />
+ */
+export declare class RangeValidatorDirective implements Validator {
+    value: RangeValidationConfig;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RangeValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<RangeValidatorDirective, "[range]", never, { "value": { "alias": "range"; "required": false; }; }, {}, never, never, true, never>;
 }

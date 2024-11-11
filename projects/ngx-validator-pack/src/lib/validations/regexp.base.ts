@@ -9,11 +9,12 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { test } from "../helpers/regexp";
 import { RegExpValidationConfig } from "../interfaces/validation-config.interface";
+import { RegExpLogicalOperations } from "../types";
 
 export function regExpBase(
   control: AbstractControl,
   config: RegExpValidationConfig,
-  logic: "!" | "!!"
+  logic: RegExpLogicalOperations
 ): ValidationErrors | null {
   const errors: ValidationErrors = {
     [config.errorName ?? "regexp"]: config.error,

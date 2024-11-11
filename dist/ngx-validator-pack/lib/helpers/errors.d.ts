@@ -5,7 +5,7 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, ValidationErrors } from "@angular/forms";
 /**
  * @internal
  * @description
@@ -14,9 +14,7 @@ import { AbstractControl } from "@angular/forms";
  * @param control                     - FromControl / AbstractControl to set the error to
  * @param error                       - error content { [key: string]: unknown }
  */
-export declare const setErrors: (control: AbstractControl, error: {
-    [key: string]: unknown;
-}) => void;
+export declare const setErrors: (control: AbstractControl, error: ValidationErrors) => void;
 /**
  * @internal
  * @description

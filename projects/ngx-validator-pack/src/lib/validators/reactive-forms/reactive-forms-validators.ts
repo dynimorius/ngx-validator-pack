@@ -1,3 +1,7 @@
+import {
+  lengthValidation,
+  rangeValidation,
+} from "./../../validations/validations";
 /**
  * @license
  * Copyright Slavko Mihajlovic All Rights Reserved.
@@ -150,4 +154,51 @@ export const linkedToValidator =
   (link: string, errorName?: string, error?: string): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
     return linkedToValidation(control, { link, error, errorName });
+  };
+
+/**
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that fails a given length comparison.
+ *
+ * @param length                      - numeric value of length to compere to
+ * @param comparison                  - numeric value of a comparison to preform
+ *                                      available options are:
+ *                                        "<" , ">" , "==" , "===" , "<=" and ">="
+ *                                      default is: "==="
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+export const lengthValidator =
+  (
+    length: number,
+    comparison: ComparisonOperations = "===",
+    errorName?: string,
+    error?: string
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return lengthValidation(control, { length, comparison, error, errorName });
+  };
+
+/**
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that is not in a given range.
+ *
+ * @param start                       - a minimum length value
+ * @param end                         - a maximum length value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+export const rangeValidator =
+  (
+    start: number,
+    end: number,
+    errorName?: string,
+    error?: string
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return rangeValidation(control, { start, end, error, errorName });
   };

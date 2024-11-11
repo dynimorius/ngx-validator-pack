@@ -187,9 +187,7 @@ const removeErrors = (control, keys) => {
     const remainingErrors = keys.reduce((errors, key) => {
         delete errors[key];
         return errors;
-    }, {
-        ...control.errors,
-    });
+    }, { ...control.errors });
     control.setErrors(Object.keys(remainingErrors).length > 0 ? remainingErrors : null);
 };
 
@@ -444,7 +442,7 @@ const prepareToCompare = (date, bufferYears) => {
         const year = p_Date.getFullYear() + (bufferYears ?? 0);
         const month = p_Date.getMonth() + 1;
         const day = p_Date.getDate();
-        return Number.parseInt(`${year}${month.toString().replace.length > 1 ? month : '0' + month}${day.toString().length > 1 ? day : '0' + day}`);
+        return Number.parseInt(`${year}${month.toString().replace.length > 1 ? month : "0" + month}${day.toString().length > 1 ? day : "0" + day}`);
     }
     else {
         return 0;
@@ -453,7 +451,7 @@ const prepareToCompare = (date, bufferYears) => {
 /**
  * @publicApi
  */
-const compareDates = (date1, date2, operation = '===') => {
+const compareDates = (date1, date2, operation = "===") => {
     return compare(prepareToCompare(date1), prepareToCompare(date2), operation);
 };
 
@@ -582,7 +580,7 @@ const compareToValidation = (control, config) => {
 const requiredWhenValidation = (control, config) => {
     const error = config.error ?? "This control has a conditional set on it.";
     const errors = {
-        [config.errorName ?? "requiredWhen"]: error,
+        [config.errorName ?? "required"]: error,
     };
     const outcome = typeof config.conditional === "function"
         ? config.conditional()
@@ -619,7 +617,7 @@ const linkToValidation = (control, config) => {
  * @param config                       - config parameter, consists of a
  *                                       field name to check and optional error and
  *                                       error name string
- * @returns {ValidationErrors | null}   - Validation error
+ * @returns {ValidationErrors | null}  - Validation error
  */
 const linkedToValidation = (control, config) => {
     const error = config.error ?? `This control is linked to ${config.link}.`;
@@ -627,14 +625,61 @@ const linkedToValidation = (control, config) => {
     const link = control.parent?.get(config.link);
     return !!control?.value && !link?.value ? errors : null;
 };
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value that fails a given
+ * length comparison.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       length to check, comparison to preform
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
 const lengthValidation = (control, config) => {
-    const error = config.error ?? `The minimum required length is ${config.length}.`;
+    const error = config.error ?? `The required length is ${config.length}.`;
     const errors = { [config.errorName ?? "length"]: error };
     return !!control?.value &&
-        compare(control?.value?.length, config.length, config.comparison ?? "<")
+        compare(control?.value?.length, config.length, config.comparison ?? "===")
         ? errors
         : null;
 };
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl value is not in a given range.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       start value to check and end value to check
+ *                                       as well as optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+const rangeValidation = (control, config) => {
+    const error = config.error ?? `Value must be in the range between ${config.start} and ${config.end}.`;
+    const errors = { [config.errorName ?? "length"]: error };
+    return !!control?.value &&
+        compare(control.value.length, config.start, ">=") &&
+        compare(control.value.length, config.end, '<=')
+        ? errors
+        : null;
+};
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if any
+ * of the validations from the given sequence return an error.
+ * The sequence order meters as the first fail will be returned.
+ *
+ * @param control                      - form control
+ * @param sequence                     - sequence of configs that consists of
+ *                                       validation functions and configs for those
+ *                                       functions.
+ * @returns {ValidationErrors | null}  - Validation error
+ */
 const sequentialValidation = (control, sequence) => {
     let validationError;
     const hasError = sequence.some((validation) => {
@@ -1037,13 +1082,6 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
 };
 
 /**
- * @license
- * Copyright Slavko Mihajlovic All Rights Reserved.
- *
- * Use of this source code is governed by an ISC-style license that can be
- * found at https://www.isc.org/licenses/
- */
-/**
  * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
@@ -1141,6 +1179,37 @@ const linkToValidator = (link, errorName, error) => (control) => {
  */
 const linkedToValidator = (link, errorName, error) => (control) => {
     return linkedToValidation(control, { link, error, errorName });
+};
+/**
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that fails a given length comparison.
+ *
+ * @param length                      - numeric value of length to compere to
+ * @param comparison                  - numeric value of a comparison to preform
+ *                                      available options are:
+ *                                        "<" , ">" , "==" , "===" , "<=" and ">="
+ *                                      default is: "==="
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const lengthValidator = (length, comparison = "===", errorName, error) => (control) => {
+    return lengthValidation(control, { length, comparison, error, errorName });
+};
+/**
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that is not in a given range.
+ *
+ * @param start                       - a minimum length value
+ * @param end                         - a maximum length value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const rangeValidator = (start, end, errorName, error) => (control) => {
+    return rangeValidation(control, { start, end, error, errorName });
 };
 
 /**
@@ -1666,6 +1735,109 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
         }], propDecorators: { value: [{
                 type: Input,
                 args: ["linkedTo"]
+            }] } });
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the given comparison fails.
+ *
+ * Has an input in which you specify the length to compere to and the comparison
+ * to preform. Optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="length"
+ *   [length]="{
+ *      length: 8,
+ *      comparison: ">",
+ *      errorName: 'length',
+ *      error: 'Value is not long enough.'
+ *   }"
+ * />
+ */
+class LengthValidatorDirective {
+    validate(control) {
+        return lengthValidation(control, { ...this.value });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LengthValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: LengthValidatorDirective, isStandalone: true, selector: "[length]", inputs: { value: ["length", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: LengthValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LengthValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[length]",
+                    standalone: true,
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: LengthValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["length"]
+            }] } });
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the value is not in the specified range.
+ *
+ * Has an input in which you specify the range start value, range end value
+ * and optionally you can give it a custom name and a custom error content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="range"
+ *   [range]="{
+ *      start: 8,
+ *      end: 14,
+ *      errorName: 'range',
+ *      error: 'Value is not in the specified range.'
+ *   }"
+ * />
+ */
+class RangeValidatorDirective {
+    validate(control) {
+        return rangeValidation(control, { ...this.value });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RangeValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RangeValidatorDirective, isStandalone: true, selector: "[range]", inputs: { value: ["range", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: RangeValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RangeValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: "[range]",
+                    standalone: true,
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: RangeValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ["range"]
             }] } });
 
 /**
@@ -2822,5 +2994,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
+export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map

@@ -6,23 +6,23 @@
  * found at https://www.isc.org/licenses/
  */
 
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 /**
  * @internal
  * @description
  * Sets an error on a given control
  *
- * @param control                     - FromControl / AbstractControl to set the error to 
+ * @param control                     - FromControl / AbstractControl to set the error to
  * @param error                       - error content { [key: string]: unknown }
  */
 export const setErrors = (
-    control: AbstractControl,
-    error: { [key: string]: unknown }
-  ): void => {
-    control.setErrors({ ...control.errors, ...error });
-}
-  
+  control: AbstractControl,
+  error: ValidationErrors
+): void => {
+  control.setErrors({ ...control.errors, ...error });
+};
+
 /**
  * @internal
  * @description
@@ -32,17 +32,19 @@ export const setErrors = (
  *                                      to remove error
  * @param keys                        - array of error names
  */
-export const removeErrors = (control: AbstractControl, keys: string[]): void => {
-    const remainingErrors = keys.reduce(
-      (errors, key): { [x: string]: unknown } => {
-        delete errors[key];
-        return errors;
-      },
-      {
-        ...control.errors,
-      }
-    );
-    control.setErrors(
-      Object.keys(remainingErrors).length > 0 ? remainingErrors : null
-    );
-  }
+export const removeErrors = (
+  control: AbstractControl,
+  keys: string[]
+): void => {
+  const remainingErrors: ValidationErrors = keys.reduce(
+    (errors: ValidationErrors, key: string): ValidationErrors => {
+      delete errors[key];
+      return errors;
+    },
+    { ...control.errors }
+  );
+
+  control.setErrors(
+    Object.keys(remainingErrors).length > 0 ? remainingErrors : null
+  );
+};

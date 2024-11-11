@@ -13,12 +13,12 @@ import { ComparisonOperations } from "../types";
  */
 export const compare = (num1: number, num2: number, comparison: ComparisonOperations): boolean => {
   const operations = {
-      '<': (a: number, b: number) => a < b,
-      '>': (a: number, b: number) => a > b,
-      '==': (a: number, b: number) => a == b,
-      '===': (a: number, b: number) => a === b,
-      '<=': (a: number, b: number) => a <= b,
-      '>=': (a: number, b: number) => a >= b,
+      '<': (a: number, b: number): boolean => a < b,
+      '>': (a: number, b: number): boolean => a > b,
+      '==': (a: number, b: number): boolean => a == b,
+      '===': (a: number, b: number): boolean => a === b,
+      '<=': (a: number, b: number): boolean => a <= b,
+      '>=': (a: number, b: number): boolean => a >= b,
   }
   return operations[comparison](num1, num2);
 }

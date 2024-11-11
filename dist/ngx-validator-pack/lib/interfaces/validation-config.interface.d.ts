@@ -75,9 +75,20 @@ export interface LinkValidationConfig extends BaseValidationConfig {
  * @description
  * An interface representing the value which can be passed to
  * lengthValidation Directive
- * TODO link to Directive
+ * {@link LengthValidatorDirective}
  */
 export interface LengthValidationConfig extends BaseValidationConfig {
     length: number;
     comparison: ComparisonOperations;
+}
+/**
+ * @publicApi
+ * @description
+ * An interface representing the value which can be passed to
+ * rangeValidation Directive
+ * {@link RangeValidatorDirective}
+ */
+export interface RangeValidationConfig extends BaseValidationConfig {
+    start: number;
+    end: number;
 }

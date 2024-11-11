@@ -17,15 +17,19 @@ import {
   CompareValidationConfig,
   ConditionalValidationConfig,
   DateValidationConfig,
+  LengthValidationConfig,
   LinkValidationConfig,
+  RangeValidationConfig,
   RegExpValidationConfig,
 } from "../../interfaces/validation-config.interface";
 import {
   compareToValidation,
   earlierThenValidation,
   laterThenValidation,
+  lengthValidation,
   linkToValidation,
   linkedToValidation,
+  rangeValidation,
   regexpValidation,
   requiredWhenValidation,
 } from "../../validations/validations";
@@ -312,5 +316,84 @@ export class LinkedToValidatorDirective implements Validator {
   @Input("linkedTo") value!: LinkValidationConfig;
   validate(control: AbstractControl): ValidationErrors | null {
     return linkedToValidation(control, { ...this.value });
+  }
+}
+
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the given comparison fails.
+ *
+ * Has an input in which you specify the length to compere to and the comparison
+ * to preform. Optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="length"
+ *   [length]="{
+ *      length: 8,                      
+ *      comparison: ">",
+ *      errorName: 'length',                     
+ *      error: 'Value is not long enough.'
+ *   }"
+ * />
+ */
+@Directive({
+  selector: "[length]",
+  standalone: true,
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: LengthValidatorDirective,
+      multi: true,
+    },
+  ],
+})
+export class LengthValidatorDirective implements Validator {
+  @Input("length") value!: LengthValidationConfig;
+  validate(control: AbstractControl): ValidationErrors | null {
+    return lengthValidation(control, { ...this.value });
+  }
+}
+
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the value is not in the specified range.
+ *
+ * Has an input in which you specify the range start value, range end value 
+ * and optionally you can give it a custom name and a custom error content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="range"
+ *   [range]="{
+ *      start: 8,                      
+ *      end: 14,
+ *      errorName: 'range',                     
+ *      error: 'Value is not in the specified range.'
+ *   }"
+ * />
+ */
+@Directive({
+  selector: "[range]",
+  standalone: true,
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: RangeValidatorDirective,
+      multi: true,
+    },
+  ],
+})
+export class RangeValidatorDirective implements Validator {
+  @Input("range") value!: RangeValidationConfig;
+  validate(control: AbstractControl): ValidationErrors | null {
+    return rangeValidation(control, { ...this.value });
   }
 }

@@ -16,6 +16,7 @@ import {
   DateValidationConfig,
   LengthValidationConfig,
   LinkValidationConfig,
+  RangeValidationConfig,
   RegExpValidationConfig,
 } from "../interfaces/validation-config.interface";
 import { test } from "../helpers/regexp";
@@ -145,7 +146,7 @@ export const requiredWhenValidation = (
 ): ValidationErrors | null => {
   const error = config.error ?? "This control has a conditional set on it.";
   const errors: ValidationErrors = {
-    [config.errorName ?? "requiredWhen"]: error,
+    [config.errorName ?? "required"]: error,
   };
 
   const outcome =
@@ -190,7 +191,7 @@ export const linkToValidation = (
  * @param config                       - config parameter, consists of a
  *                                       field name to check and optional error and
  *                                       error name string
- * @returns {ValidationErrors | null}   - Validation error
+ * @returns {ValidationErrors | null}  - Validation error
  */
 export const linkedToValidation = (
   control: AbstractControl,
@@ -203,20 +204,73 @@ export const linkedToValidation = (
   return !!control?.value && !link?.value ? errors : null;
 };
 
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value that fails a given
+ * length comparison.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       length to check, comparison to preform 
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
 export const lengthValidation = (
   control: AbstractControl,
   config: LengthValidationConfig
 ): ValidationErrors | null => {
   const error =
-    config.error ?? `The minimum required length is ${config.length}.`;
+    config.error ?? `The required length is ${config.length}.`;
   const errors: ValidationErrors = { [config.errorName ?? "length"]: error };
 
   return !!control?.value &&
-    compare(control?.value?.length, config.length, config.comparison ?? "<")
+    compare(control?.value?.length, config.length, config.comparison ?? "===")
     ? errors
     : null;
 };
 
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl value is not in a given range.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       start value to check and end value to check
+ *                                       as well as optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+export const rangeValidation = (
+  control: AbstractControl,
+  config: RangeValidationConfig
+): ValidationErrors | null => {
+  const error =
+    config.error ?? `Value must be in the range between ${config.start} and ${config.end}.`;
+  const errors: ValidationErrors = { [config.errorName ?? "length"]: error };
+
+  return !!control?.value &&
+    compare(control.value.length, config.start, ">=") &&
+    compare(control.value.length,config.end, '<=' )
+    ? errors
+    : null;
+};
+
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if any
+ * of the validations from the given sequence return an error.
+ * The sequence order meters as the first fail will be returned.
+ *
+ * @param control                      - form control
+ * @param sequence                     - sequence of configs that consists of
+ *                                       validation functions and configs for those 
+ *                                       functions.
+ * @returns {ValidationErrors | null}  - Validation error
+ */
 export const sequentialValidation = (
   control: AbstractControl,
   sequence: SequenceConfig[]

@@ -7,7 +7,7 @@
  */
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
-import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
+import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RangeValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
 /**
  * @internal
  * @description
@@ -100,8 +100,47 @@ export declare const linkToValidation: (control: AbstractControl, config: LinkVa
  * @param config                       - config parameter, consists of a
  *                                       field name to check and optional error and
  *                                       error name string
- * @returns {ValidationErrors | null}   - Validation error
+ * @returns {ValidationErrors | null}  - Validation error
  */
 export declare const linkedToValidation: (control: AbstractControl, config: LinkValidationConfig) => ValidationErrors | null;
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value that fails a given
+ * length comparison.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       length to check, comparison to preform
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
 export declare const lengthValidation: (control: AbstractControl, config: LengthValidationConfig) => ValidationErrors | null;
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl value is not in a given range.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       start value to check and end value to check
+ *                                       as well as optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+export declare const rangeValidation: (control: AbstractControl, config: RangeValidationConfig) => ValidationErrors | null;
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if any
+ * of the validations from the given sequence return an error.
+ * The sequence order meters as the first fail will be returned.
+ *
+ * @param control                      - form control
+ * @param sequence                     - sequence of configs that consists of
+ *                                       validation functions and configs for those
+ *                                       functions.
+ * @returns {ValidationErrors | null}  - Validation error
+ */
 export declare const sequentialValidation: (control: AbstractControl, sequence: SequenceConfig[]) => ValidationErrors | null;
