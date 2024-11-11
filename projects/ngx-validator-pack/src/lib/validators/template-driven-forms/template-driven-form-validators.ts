@@ -367,6 +367,8 @@ export class LengthValidatorDirective implements Validator {
  *
  * Has an input in which you specify the range start value, range end value 
  * and optionally you can give it a custom name and a custom error content / message.
+ * 
+ * NOTE: The range is inclusive.
  *
  * @usageNotes
  *  <input

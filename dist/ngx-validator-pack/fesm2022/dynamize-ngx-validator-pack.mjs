@@ -1797,6 +1797,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Has an input in which you specify the range start value, range end value
  * and optionally you can give it a custom name and a custom error content / message.
  *
+ * NOTE: The range is inclusive.
+ *
  * @usageNotes
  *  <input
  *    type="text"
