@@ -5,9 +5,9 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-import { ElementRef, OnDestroy, OnInit, Renderer2 } from "@angular/core";
-import { NgControl, ValidationErrors } from "@angular/forms";
-import { Subscription } from "rxjs";
+import { ElementRef, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { NgControl, ValidationErrors } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
@@ -26,30 +26,21 @@ import * as i0 from "@angular/core";
  * />
  */
 export declare class ShowValidationDirective implements OnInit, OnDestroy {
+    private viewContainerRef;
     private readonly elementRef;
-    private readonly renderer;
+    private renderer;
     private readonly control;
     controlSub: Subscription;
-    parent: HTMLElement;
     self: HTMLElement;
-    container: HTMLElement;
-    span: HTMLElement | null;
     retrievedStyles: CSSStyleDeclaration;
-    errorStyle: {
-        [key: string]: string;
-    };
-    constructor(elementRef: ElementRef, renderer: Renderer2, control: NgControl);
+    vClass: string;
+    vStyle: string;
+    constructor(viewContainerRef: ViewContainerRef, elementRef: ElementRef, renderer: Renderer2, control: NgControl);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    setContainerStyles(): void;
-    setSpanStyles(): void;
-    setZIndex(): void;
-    setStyles(element: HTMLElement | null, styles: {
-        [key: string]: string;
-    }): void;
     showError(errors: ValidationErrors | null): void;
     hideError(): void;
     getValidationMessage(errors: ValidationErrors | null): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<ShowValidationDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ShowValidationDirective, "[showValidation]", never, { "errorStyle": { "alias": "errorStyle"; "required": false; }; }, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ShowValidationDirective, "[showValidation]", never, { "vClass": { "alias": "vClass"; "required": false; }; "vStyle": { "alias": "vStyle"; "required": false; }; }, {}, never, never, true, never>;
 }

@@ -13,14 +13,12 @@ import {
   OnDestroy,
   OnInit,
   Renderer2,
-} from "@angular/core";
-import { FormControl, NgControl, ValidationErrors } from "@angular/forms";
-import { Subscription } from "rxjs";
-import {
-  DefaultContainerStyles,
-  DefaultSpanStyles,
-  DefaultStyle,
-} from "../constant/default-show-validation-style";
+  ViewContainerRef,
+} from '@angular/core'
+import { FormControl, NgControl, ValidationErrors } from '@angular/forms'
+import { Subscription } from 'rxjs'
+import { DefaultStyle } from '../constant/default-show-validation-style'
+import { ValidationErrorComponent } from '../components/validation-error/validation-error.component'
 
 /**
  * @publicApi
@@ -39,92 +37,61 @@ import {
  * />
  */
 @Directive({
-  selector: "[showValidation]",
+  selector: '[showValidation]',
   standalone: true,
 })
 export class ShowValidationDirective implements OnInit, OnDestroy {
-  controlSub: Subscription = new Subscription();
-  parent!: HTMLElement;
-  self!: HTMLElement;
-  container!: HTMLElement;
-  span!: HTMLElement | null;
-  retrievedStyles!: CSSStyleDeclaration;
+  controlSub: Subscription = new Subscription()
+  self!: HTMLElement
+  retrievedStyles!: CSSStyleDeclaration
 
-  @Input() errorStyle: {[key: string]: string} = DefaultStyle;
+  @Input() vClass!: string
+  @Input() vStyle!: string
 
   constructor(
+    private viewContainerRef: ViewContainerRef,
     private readonly elementRef: ElementRef,
-    private readonly renderer: Renderer2,
+    private renderer: Renderer2,
     private readonly control: NgControl
   ) {}
 
   ngOnInit(): void {
-    const formControl = this.control.control as FormControl;
-    this.parent = this.elementRef.nativeElement.parentElement;
-    this.self = this.elementRef.nativeElement;
-    this.retrievedStyles = getComputedStyle(this.self);
-    this.container = this.renderer.createElement("div");
-    this.renderer.appendChild(this.container, this.self);
-    this.renderer.appendChild(this.parent, this.container);
-    this.setContainerStyles();
+    const formControl = this.control.control as FormControl
+    this.self = this.elementRef.nativeElement
+    this.retrievedStyles = getComputedStyle(this.self)
 
     this.controlSub.add(
       formControl.statusChanges.subscribe((status): void => {
-        this.hideError();
-        if (status === "INVALID") {
-          if (!this.span) {
-            this.showError(formControl.errors);
-          }
+        this.hideError()
+        if (status === 'INVALID') {
+          this.showError(formControl.errors)
         }
       })
-    );
+    )
   }
 
   ngOnDestroy(): void {
-    this.controlSub.unsubscribe();
-  }
-
-  setContainerStyles(): void {
-    this.setStyles(this.container, DefaultContainerStyles);
-    this.renderer.setStyle(this.container, "width", this.retrievedStyles.width);
-  }
-
-  setSpanStyles(): void {
-    this.setZIndex();
-    this.setStyles(this.span, { ...DefaultSpanStyles, ...this.errorStyle });
-  }
-
-  setZIndex(): void {
-    const indexNum = Number.parseInt(this.retrievedStyles.zIndex);
-    const zIndex = Number.isNaN(indexNum) ? 1 : indexNum;
-    this.renderer.setStyle(this.self, "zIndex", `${zIndex}`);
-    this.renderer.setStyle(this.span, "zIndex", `${zIndex - 1}`);
-  }
-
-  setStyles(
-    element: HTMLElement | null,
-    styles: { [key: string]: string }
-  ): void {
-    Object.entries(styles).forEach((style): void => {
-      this.renderer.setStyle(element, style[0], style[1]);
-    });
+    this.controlSub.unsubscribe()
   }
 
   showError(errors: ValidationErrors | null): void {
-    this.span = this.renderer.createElement("span");
-    (this.span as HTMLElement).innerHTML = this.getValidationMessage(errors);
-    this.renderer.appendChild(this.container, this.span);
-    this.setSpanStyles();
+    const valErrorComponentRef = this.viewContainerRef.createComponent(
+      ValidationErrorComponent
+    )
+    valErrorComponentRef.setInput('error', this.getValidationMessage(errors))
+    const indexNum = Number.parseInt(this.retrievedStyles.zIndex)
+    const zIndex = Number.isNaN(indexNum) ? 1 : indexNum
+    this.renderer.setStyle(this.self, 'zIndex', `${zIndex}`)
+    valErrorComponentRef.setInput('zIndex', `${zIndex - 1}`)
+    valErrorComponentRef.setInput('class', this.vClass)
+    valErrorComponentRef.setInput('style', this.vStyle)
   }
 
   hideError(): void {
-    if (this.container && this.span) {
-      this.renderer.removeChild(this.container, this.span);
-      this.span = null;
-    }
+    this.viewContainerRef.clear()
   }
 
   getValidationMessage(errors: ValidationErrors | null): string {
-    return errors ? Object.values(errors)[0] : "Invalid Input.";
+    return errors ? Object.values(errors)[0] : 'Invalid Input.'
   }
 }

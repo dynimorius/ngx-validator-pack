@@ -1,53 +1,49 @@
 import * as i0 from '@angular/core';
-import { Directive, Input } from '@angular/core';
+import { Component, ViewChild, Input, Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as i1 from '@angular/forms';
 import { NG_VALIDATORS } from '@angular/forms';
 import { __decorate } from 'tslib';
 
 /**
- * @license
- * Copyright Slavko Mihajlovic All Rights Reserved.
- *
- * Use of this source code is governed by an ISC-style license that can be
- * found at https://www.isc.org/licenses/
- */
-/**
- * @publicApi
- * @description
- * Default styles for the showValidation Directive
- * {@link ShowValidationDirective}
- */
-const DefaultStyle = {
-    fontSize: "small",
-    fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
-    color: "salmon",
-    backgroundColor: "",
-    border: "1px solid salmon",
-    borderRadius: "0px 0px 5px 5px",
-};
-/**
  * @internal
  * @description
- * Default styles for the showValidation Directive
- * {@link ShowValidationDirective}
+ * A component showing the validation error to the user
  */
-const DefaultContainerStyles = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-};
-/**
- * @internal
- * @description
- * Default styles for the showValidation Directive
- * {@link ShowValidationDirective}
- */
-const DefaultSpanStyles = {
-    position: "relative",
-    top: "-10px",
-    padding: "2px 0px 5px 10px",
-};
+class ValidationErrorComponent {
+    set class(css) {
+        this._class = css ? css : 'dmz-validation-content';
+    }
+    ;
+    constructor(renderer, changeDetectorRef) {
+        this.renderer = renderer;
+        this.changeDetectorRef = changeDetectorRef;
+    }
+    ngDoCheck() {
+        if (!this.content) {
+            this.changeDetectorRef.detectChanges();
+            this.content = this.contentRef.nativeElement;
+        }
+        this.renderer.setStyle(this.content, 'zIndex', `${this.zIndex}`);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ValidationErrorComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error", zIndex: "zIndex", class: "class", style: "style" }, viewQueries: [{ propertyName: "contentRef", first: true, predicate: ["errorContent"], descendants: true }], ngImport: i0, template: "<div #errorContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ValidationErrorComponent, decorators: [{
+            type: Component,
+            args: [{ selector: '', standalone: true, imports: [], template: "<div #errorContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
+        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { contentRef: [{
+                type: ViewChild,
+                args: ['errorContent']
+            }], error: [{
+                type: Input
+            }], zIndex: [{
+                type: Input
+            }], class: [{
+                type: Input
+            }], style: [{
+                type: Input
+            }] } });
 
 /**
  * @license
@@ -73,78 +69,55 @@ const DefaultSpanStyles = {
  * />
  */
 class ShowValidationDirective {
-    constructor(elementRef, renderer, control) {
+    constructor(viewContainerRef, elementRef, renderer, control) {
+        this.viewContainerRef = viewContainerRef;
         this.elementRef = elementRef;
         this.renderer = renderer;
         this.control = control;
         this.controlSub = new Subscription();
-        this.errorStyle = DefaultStyle;
     }
     ngOnInit() {
         const formControl = this.control.control;
-        this.parent = this.elementRef.nativeElement.parentElement;
         this.self = this.elementRef.nativeElement;
         this.retrievedStyles = getComputedStyle(this.self);
-        this.container = this.renderer.createElement("div");
-        this.renderer.appendChild(this.container, this.self);
-        this.renderer.appendChild(this.parent, this.container);
-        this.setContainerStyles();
         this.controlSub.add(formControl.statusChanges.subscribe((status) => {
             this.hideError();
-            if (status === "INVALID") {
-                if (!this.span) {
-                    this.showError(formControl.errors);
-                }
+            if (status === 'INVALID') {
+                this.showError(formControl.errors);
             }
         }));
     }
     ngOnDestroy() {
         this.controlSub.unsubscribe();
     }
-    setContainerStyles() {
-        this.setStyles(this.container, DefaultContainerStyles);
-        this.renderer.setStyle(this.container, "width", this.retrievedStyles.width);
-    }
-    setSpanStyles() {
-        this.setZIndex();
-        this.setStyles(this.span, { ...DefaultSpanStyles, ...this.errorStyle });
-    }
-    setZIndex() {
+    showError(errors) {
+        const valErrorComponentRef = this.viewContainerRef.createComponent(ValidationErrorComponent);
+        valErrorComponentRef.setInput('error', this.getValidationMessage(errors));
         const indexNum = Number.parseInt(this.retrievedStyles.zIndex);
         const zIndex = Number.isNaN(indexNum) ? 1 : indexNum;
-        this.renderer.setStyle(this.self, "zIndex", `${zIndex}`);
-        this.renderer.setStyle(this.span, "zIndex", `${zIndex - 1}`);
-    }
-    setStyles(element, styles) {
-        Object.entries(styles).forEach((style) => {
-            this.renderer.setStyle(element, style[0], style[1]);
-        });
-    }
-    showError(errors) {
-        this.span = this.renderer.createElement("span");
-        this.span.innerHTML = this.getValidationMessage(errors);
-        this.renderer.appendChild(this.container, this.span);
-        this.setSpanStyles();
+        this.renderer.setStyle(this.self, 'zIndex', `${zIndex}`);
+        valErrorComponentRef.setInput('zIndex', `${zIndex - 1}`);
+        valErrorComponentRef.setInput('class', this.vClass);
+        valErrorComponentRef.setInput('style', this.vStyle);
     }
     hideError() {
-        if (this.container && this.span) {
-            this.renderer.removeChild(this.container, this.span);
-            this.span = null;
-        }
+        this.viewContainerRef.clear();
     }
     getValidationMessage(errors) {
-        return errors ? Object.values(errors)[0] : "Invalid Input.";
+        return errors ? Object.values(errors)[0] : 'Invalid Input.';
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ShowValidationDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i1.NgControl }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: ShowValidationDirective, isStandalone: true, selector: "[showValidation]", inputs: { errorStyle: "errorStyle" }, ngImport: i0 }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ShowValidationDirective, deps: [{ token: i0.ViewContainerRef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i1.NgControl }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: ShowValidationDirective, isStandalone: true, selector: "[showValidation]", inputs: { vClass: "vClass", vStyle: "vStyle" }, ngImport: i0 }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ShowValidationDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[showValidation]",
+                    selector: '[showValidation]',
                     standalone: true,
                 }]
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1.NgControl }], propDecorators: { errorStyle: [{
+        }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1.NgControl }], propDecorators: { vClass: [{
+                type: Input
+            }], vStyle: [{
                 type: Input
             }] } });
 
