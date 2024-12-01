@@ -17,7 +17,6 @@ import {
 } from '@angular/core'
 import { FormControl, NgControl, ValidationErrors } from '@angular/forms'
 import { Subscription } from 'rxjs'
-import { DefaultStyle } from '../constant/default-show-validation-style'
 import { ValidationErrorComponent } from '../components/validation-error/validation-error.component'
 
 /**

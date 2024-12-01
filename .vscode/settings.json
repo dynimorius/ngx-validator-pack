@@ -1,10 +1,10 @@
 {
-  "cSpell.words": ["dynamize", "primeng"],
+  "cSpell.words": ["dynamize", "Mihajlovic", "primeng", "Slavko"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-},
+  }
 }
