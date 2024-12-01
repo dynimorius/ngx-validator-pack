@@ -7,13 +7,25 @@
  */
 
 import { ValidationErrors } from "@angular/forms";
-import { LengthValidationConfig, RegExpValidationConfig } from "./validation-config.interface";
+import { CountValidationConfig, LengthValidationConfig, RegExpValidationConfig } from "./validation-config.interface";
 
+/**
+ * @publicApi
+ * @description
+ * Represents a config for a validation that will be preformed in
+ * a sequence.
+ *  
+ * Consists of a validation function and an option config for 
+ * that function.
+ */
 export interface SequenceConfig {
   validationFun: (...args: any[]) => ValidationErrors | null;
   validationFunConfig?: { [key: string]: any };
 }
 
+/**
+ * @publicApi
+ */
 export interface PasswordConfigs {
   noAlpha?: RegExpValidationConfig;
   noNumeric?:  RegExpValidationConfig;
@@ -22,4 +34,12 @@ export interface PasswordConfigs {
   noSpecial?:  RegExpValidationConfig;
   greaterOrLessThen?:  RegExpValidationConfig;
   minLength?: LengthValidationConfig;
+}
+
+/**
+ * @publicApi
+ */
+export interface WordCountConfigs {
+  min: CountValidationConfig,
+  max: CountValidationConfig
 }

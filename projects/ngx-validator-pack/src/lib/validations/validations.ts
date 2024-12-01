@@ -13,6 +13,7 @@ import { SequenceConfig } from "../interfaces/sequence-config.interface";
 import {
   CompareValidationConfig,
   ConditionalValidationConfig,
+  CountValidationConfig,
   DateValidationConfig,
   LengthValidationConfig,
   LinkValidationConfig,
@@ -222,7 +223,7 @@ export const lengthValidation = (
   config: LengthValidationConfig
 ): ValidationErrors | null => {
   const error =
-    config.error ?? `The required length is ${config.length}.`;
+    config.error ?? `The required length should be ${config.comparison} ${config.length}.`;
   const errors: ValidationErrors = { [config.errorName ?? "length"]: error };
 
   return !!control?.value &&
@@ -249,11 +250,67 @@ export const rangeValidation = (
 ): ValidationErrors | null => {
   const error =
     config.error ?? `Value must be in the range between ${config.start} and ${config.end}.`;
-  const errors: ValidationErrors = { [config.errorName ?? "length"]: error };
+  const errors: ValidationErrors = { [config.errorName ?? "range"]: error };
 
   return !!control?.value &&
     compare(control.value.length, config.start, ">=") &&
-    compare(control.value.length,config.end, '<=' )
+    compare(control.value.length, config.end, '<=' )
+    ? errors
+    : null;
+};
+
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value that fails a given
+ * word count comparison.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       word count to check, comparison to preform 
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+export const wordCountValidation = (
+  control: AbstractControl,
+  config: CountValidationConfig
+): ValidationErrors | null => {
+  const error =
+    config.error ?? `The required word count should be ${config.comparison} ${config.count}.`;
+  const errors: ValidationErrors = { [config.errorName ?? "wordCount"]: error };
+
+  const valueCount = control?.value?.split(' ');
+  return !!control?.value &&
+    compare(valueCount, config.count, config.comparison ?? "===")
+    ? errors
+    : null;
+}
+
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl value is not in a given word count range.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       start value to check and end value to check
+ *                                       as well as optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+export const wordCountRangeValidation = (
+  control: AbstractControl,
+  config: RangeValidationConfig
+): ValidationErrors | null => {
+  const error =
+    config.error ?? `The word count must be in the range between ${config.start} and ${config.end}.`;
+  const errors: ValidationErrors = { [config.errorName ?? "wordCountRange"]: error };
+  const valueCount = control?.value?.split(' ');
+
+  return !!control?.value &&
+    compare(valueCount, config.start, ">=") &&
+    compare(valueCount, config.end, '<=' )
     ? errors
     : null;
 };

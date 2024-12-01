@@ -10,11 +10,13 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import {
   PasswordConfigs,
   SequenceConfig,
+  WordCountConfigs,
 } from "../../interfaces/sequence-config.interface";
-import { PasswordValidations } from "../../types";
+import { PasswordValidations, WordCountValidations } from "../../types";
 import { sequentialValidation } from "../../validations/validations";
 import { SequenceConfigFactory } from "../sequence-config-factory";
 import { PasswordConfigMap } from "../sequence-maps/password-sequence-map";
+import { WordRangeConfigMap } from "../sequence-maps/word-range-sequence-map";
 
 export const sequentialValidator =
   (sequence: SequenceConfig[]): ValidatorFn =>
@@ -37,3 +39,14 @@ export const dynamicPasswordValidator = (
     SequenceConfigFactory(passwordSequence, PasswordConfigMap)
   );
 };
+
+export const dynamicWordCountValidator = (
+  wordCountSequence: (WordCountValidations | WordCountConfigs)[] = [
+    'min',
+    'max'
+  ]
+): ValidatorFn => {
+  return sequentialValidator(
+    SequenceConfigFactory(wordCountSequence, WordRangeConfigMap)
+  );
+}

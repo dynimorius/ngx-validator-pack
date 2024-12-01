@@ -32,6 +32,7 @@ export declare const regexpValidator: (regExp: RegExp, logic: RegExpLogicalOpera
  */
 export declare const earlierThenValidator: (date: Date, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl.
@@ -43,6 +44,7 @@ export declare const earlierThenValidator: (date: Date, errorName?: string, erro
  */
 export declare const laterThenValidator: (date: Date, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl.
@@ -55,6 +57,7 @@ export declare const laterThenValidator: (date: Date, errorName?: string, error?
  */
 export declare const compareToValidator: (fieldName: string, comparison: ComparisonOperations, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a condition is met.
  *
@@ -65,6 +68,7 @@ export declare const compareToValidator: (fieldName: string, comparison: Compari
  */
 export declare const requiredWhenValidator: (conditional: (() => boolean) | boolean, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it.
@@ -76,6 +80,7 @@ export declare const requiredWhenValidator: (conditional: (() => boolean) | bool
  */
 export declare const linkToValidator: (link: string, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not.
@@ -88,6 +93,7 @@ export declare const linkToValidator: (link: string, errorName?: string, error?:
  */
 export declare const linkedToValidator: (link: string, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * that fails a given length comparison.
@@ -103,6 +109,7 @@ export declare const linkedToValidator: (link: string, errorName?: string, error
  */
 export declare const lengthValidator: (length: number, comparison?: ComparisonOperations, errorName?: string, error?: string) => ValidatorFn;
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * that is not in a given range.
@@ -114,3 +121,32 @@ export declare const lengthValidator: (length: number, comparison?: ComparisonOp
  * @returns {ValidationErrors | null} - Validation error
  */
 export declare const rangeValidator: (start: number, end: number, errorName?: string, error?: string) => ValidatorFn;
+/**
+ * @publicApi
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that fails a given word count comparison.
+ *
+ * @param count                       - numeric value of word count to compere to
+ * @param comparison                  - numeric value of a comparison to preform
+ *                                      available options are:
+ *                                        "<" , ">" , "==" , "===" , "<=" and ">="
+ *                                      default is: "==="
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+export declare const wordCountValidator: (count: number, comparison?: ComparisonOperations, errorName?: string, error?: string) => ValidatorFn;
+/**
+ * @publicApi
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * whit a word count is not in a given range.
+ *
+ * @param start                       - a minimum word count value
+ * @param end                         - a maximum word count value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+export declare const wordCountRangeValidator: (start: number, end: number, errorName?: string, error?: string) => ValidatorFn;

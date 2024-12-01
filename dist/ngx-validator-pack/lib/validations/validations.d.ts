@@ -7,7 +7,7 @@
  */
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { SequenceConfig } from "../interfaces/sequence-config.interface";
-import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RangeValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
+import { CompareValidationConfig, ConditionalValidationConfig, CountValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RangeValidationConfig, RegExpValidationConfig } from "../interfaces/validation-config.interface";
 /**
  * @internal
  * @description
@@ -130,6 +130,33 @@ export declare const lengthValidation: (control: AbstractControl, config: Length
  * @returns {ValidationErrors | null}  - Validation error
  */
 export declare const rangeValidation: (control: AbstractControl, config: RangeValidationConfig) => ValidationErrors | null;
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value that fails a given
+ * word count comparison.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       word count to check, comparison to preform
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+export declare const wordCountValidation: (control: AbstractControl, config: CountValidationConfig) => ValidationErrors | null;
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl value is not in a given word count range.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       start value to check and end value to check
+ *                                       as well as optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+export declare const wordCountRangeValidation: (control: AbstractControl, config: RangeValidationConfig) => ValidationErrors | null;
 /**
  * @internal
  * @description

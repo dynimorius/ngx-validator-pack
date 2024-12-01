@@ -1,7 +1,3 @@
-import {
-  lengthValidation,
-  rangeValidation,
-} from "./../../validations/validations";
 /**
  * @license
  * Copyright Slavko Mihajlovic All Rights Reserved.
@@ -9,6 +5,13 @@ import {
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
+
+import {
+  lengthValidation,
+  rangeValidation,
+  wordCountRangeValidation,
+  wordCountValidation,
+} from "./../../validations/validations";
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { ComparisonOperations, RegExpLogicalOperations } from "../../types";
@@ -62,6 +65,7 @@ export const earlierThenValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl.
@@ -78,6 +82,7 @@ export const laterThenValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl.
@@ -105,6 +110,7 @@ export const compareToValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a condition is met.
  *
@@ -124,6 +130,7 @@ export const requiredWhenValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it.
@@ -140,6 +147,7 @@ export const linkToValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not.
@@ -157,6 +165,7 @@ export const linkedToValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * that fails a given length comparison.
@@ -182,6 +191,7 @@ export const lengthValidator =
   };
 
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * that is not in a given range.
@@ -201,4 +211,58 @@ export const rangeValidator =
   ): ValidatorFn =>
   (control: AbstractControl): ValidationErrors | null => {
     return rangeValidation(control, { start, end, error, errorName });
+  };
+
+/**
+ * @publicApi
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that fails a given word count comparison.
+ *
+ * @param count                       - numeric value of word count to compere to
+ * @param comparison                  - numeric value of a comparison to preform
+ *                                      available options are:
+ *                                        "<" , ">" , "==" , "===" , "<=" and ">="
+ *                                      default is: "==="
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+export const wordCountValidator =
+  (
+    count: number,
+    comparison: ComparisonOperations = "===",
+    errorName?: string,
+    error?: string
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return wordCountValidation(control, {
+      count,
+      comparison,
+      error,
+      errorName,
+    });
+  };
+
+/**
+ * @publicApi
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * whit a word count is not in a given range.
+ *
+ * @param start                       - a minimum word count value
+ * @param end                         - a maximum word count value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+export const wordCountRangeValidator =
+  (
+    start: number,
+    end: number,
+    errorName?: string,
+    error?: string
+  ): ValidatorFn =>
+  (control: AbstractControl): ValidationErrors | null => {
+    return wordCountRangeValidation(control, { start, end, error, errorName });
   };

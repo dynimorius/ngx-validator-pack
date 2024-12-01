@@ -85,6 +85,17 @@ export interface LengthValidationConfig extends BaseValidationConfig {
  * @publicApi
  * @description
  * An interface representing the value which can be passed to
+ * wordCountValidation Directive
+ * {@link }
+ */
+export interface CountValidationConfig extends BaseValidationConfig {
+    count: number;
+    comparison: ComparisonOperations;
+}
+/**
+ * @publicApi
+ * @description
+ * An interface representing the value which can be passed to
  * rangeValidation Directive
  * {@link RangeValidatorDirective}
  */

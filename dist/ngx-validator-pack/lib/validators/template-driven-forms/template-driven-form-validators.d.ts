@@ -1,5 +1,5 @@
-import { AbstractControl, ValidationErrors, Validator } from "@angular/forms";
-import { CompareValidationConfig, ConditionalValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RangeValidationConfig, RegExpValidationConfig } from "../../interfaces/validation-config.interface";
+import { AbstractControl, ValidationErrors, Validator } from '@angular/forms';
+import { CompareValidationConfig, ConditionalValidationConfig, CountValidationConfig, DateValidationConfig, LengthValidationConfig, LinkValidationConfig, RangeValidationConfig, RegExpValidationConfig } from '../../interfaces/validation-config.interface';
 import * as i0 from "@angular/core";
 /**
  * @publicApi
@@ -255,4 +255,61 @@ export declare class RangeValidatorDirective implements Validator {
     validate(control: AbstractControl): ValidationErrors | null;
     static ɵfac: i0.ɵɵFactoryDeclaration<RangeValidatorDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<RangeValidatorDirective, "[range]", never, { "value": { "alias": "range"; "required": false; }; }, {}, never, never, true, never>;
+}
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if it doesn't have a required word count.
+ *
+ * Has an input in which you specify the word count to compere to and the comparison
+ * to preform. Optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="wordCount"
+ *   [wordCount]="{
+ *      count: 8,
+ *      comparison: ">",
+ *      errorName: 'wordCount',
+ *      error: 'The minimum required word count is 8.'
+ *   }"
+ * />
+ */
+export declare class WordCountValidatorDirective implements Validator {
+    value: CountValidationConfig;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<WordCountValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<WordCountValidatorDirective, "[wordCount]", never, { "value": { "alias": "wordCount"; "required": false; }; }, {}, never, never, true, never>;
+}
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the value is not in the specified word count range.
+ *
+ * Has an input in which you specify the range start value, range end value
+ * and optionally you can give it a custom name and a custom error content / message.
+ *
+ * NOTE: The range is inclusive.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="wordCountRange"
+ *   [wordCountRange]="{
+ *      start: 8,
+ *      end: 14,
+ *      errorName: 'wordCountRange',
+ *      error: 'Value is not in the specified word count range.'
+ *   }"
+ * />
+ */
+export declare class WordCountRangeValidatorDirective implements Validator {
+    value: RangeValidationConfig;
+    validate(control: AbstractControl): ValidationErrors | null;
+    static ɵfac: i0.ɵɵFactoryDeclaration<WordCountRangeValidatorDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<WordCountRangeValidatorDirective, "[wordCountRange]", never, { "value": { "alias": "wordCountRange"; "required": false; }; }, {}, never, never, true, never>;
 }

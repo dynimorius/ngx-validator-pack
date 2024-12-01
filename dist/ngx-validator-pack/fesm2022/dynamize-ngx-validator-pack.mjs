@@ -639,7 +639,7 @@ const linkedToValidation = (control, config) => {
  * @returns {ValidationErrors | null}  - Validation error
  */
 const lengthValidation = (control, config) => {
-    const error = config.error ?? `The required length is ${config.length}.`;
+    const error = config.error ?? `The required length should be ${config.comparison} ${config.length}.`;
     const errors = { [config.errorName ?? "length"]: error };
     return !!control?.value &&
         compare(control?.value?.length, config.length, config.comparison ?? "===")
@@ -660,10 +660,54 @@ const lengthValidation = (control, config) => {
  */
 const rangeValidation = (control, config) => {
     const error = config.error ?? `Value must be in the range between ${config.start} and ${config.end}.`;
-    const errors = { [config.errorName ?? "length"]: error };
+    const errors = { [config.errorName ?? "range"]: error };
     return !!control?.value &&
         compare(control.value.length, config.start, ">=") &&
         compare(control.value.length, config.end, '<=')
+        ? errors
+        : null;
+};
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl has a value that fails a given
+ * word count comparison.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       word count to check, comparison to preform
+ *                                       and optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+const wordCountValidation = (control, config) => {
+    const error = config.error ?? `The required word count should be ${config.comparison} ${config.count}.`;
+    const errors = { [config.errorName ?? "wordCount"]: error };
+    const valueCount = control?.value?.split(' ');
+    return !!control?.value &&
+        compare(valueCount, config.count, config.comparison ?? "===")
+        ? errors
+        : null;
+};
+/**
+ * @internal
+ * @description
+ * A validation function which returns a validation error if a given
+ * FromControl / AbstractControl value is not in a given word count range.
+ *
+ * @param control                      - form control
+ * @param config                       - config parameter, consists of a
+ *                                       start value to check and end value to check
+ *                                       as well as optional error and error name string
+ * @returns {ValidationErrors | null}  - Validation error
+ */
+const wordCountRangeValidation = (control, config) => {
+    const error = config.error ?? `The word count must be in the range between ${config.start} and ${config.end}.`;
+    const errors = { [config.errorName ?? "wordCountRange"]: error };
+    const valueCount = control?.value?.split(' ');
+    return !!control?.value &&
+        compare(valueCount, config.start, ">=") &&
+        compare(valueCount, config.end, '<=')
         ? errors
         : null;
 };
@@ -1082,6 +1126,13 @@ const zipCodeValidator = (errorName = "zipCode", error = "Improper zip code form
 };
 
 /**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+/**
  * @publicApi
  * @description
  * Preforms a RegEx check on value in the given FromControl / AbstractControl.
@@ -1110,6 +1161,7 @@ const earlierThenValidator = (date, errorName, error) => (control) => {
     return earlierThenValidation(control, { date, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Checks if the date in the given FromControl / AbstractControl is greater then
  * the value in the specified FromControl / AbstractControl.
@@ -1123,6 +1175,7 @@ const laterThenValidator = (date, errorName, error) => (control) => {
     return laterThenValidation(control, { date, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Compares the date values of the given FromControl / AbstractControl and
  * specified FromControl / AbstractControl.
@@ -1142,6 +1195,7 @@ const compareToValidator = (fieldName, comparison, errorName, error) => (control
     });
 };
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a condition is met.
  *
@@ -1154,6 +1208,7 @@ const requiredWhenValidator = (conditional, errorName, error) => (control) => {
     return requiredWhenValidation(control, { conditional, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has no value
  * and specified FromControl / AbstractControl has it.
@@ -1167,6 +1222,7 @@ const linkToValidator = (link, errorName, error) => (control) => {
     return linkToValidation(control, { link, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * and specified FromControl / AbstractControl does not.
@@ -1181,6 +1237,7 @@ const linkedToValidator = (link, errorName, error) => (control) => {
     return linkedToValidation(control, { link, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * that fails a given length comparison.
@@ -1198,6 +1255,7 @@ const lengthValidator = (length, comparison = "===", errorName, error) => (contr
     return lengthValidation(control, { length, comparison, error, errorName });
 };
 /**
+ * @publicApi
  * @description
  * Returns a validation error if a given FromControl / AbstractControl has a value
  * that is not in a given range.
@@ -1210,6 +1268,44 @@ const lengthValidator = (length, comparison = "===", errorName, error) => (contr
  */
 const rangeValidator = (start, end, errorName, error) => (control) => {
     return rangeValidation(control, { start, end, error, errorName });
+};
+/**
+ * @publicApi
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * that fails a given word count comparison.
+ *
+ * @param count                       - numeric value of word count to compere to
+ * @param comparison                  - numeric value of a comparison to preform
+ *                                      available options are:
+ *                                        "<" , ">" , "==" , "===" , "<=" and ">="
+ *                                      default is: "==="
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const wordCountValidator = (count, comparison = "===", errorName, error) => (control) => {
+    return wordCountValidation(control, {
+        count,
+        comparison,
+        error,
+        errorName,
+    });
+};
+/**
+ * @publicApi
+ * @description
+ * Returns a validation error if a given FromControl / AbstractControl has a value
+ * whit a word count is not in a given range.
+ *
+ * @param start                       - a minimum word count value
+ * @param end                         - a maximum word count value
+ * @param errorName                   - optional parameter representing error name
+ * @param error                       - optional parameter representing error value
+ * @returns {ValidationErrors | null} - Validation error
+ */
+const wordCountRangeValidator = (start, end, errorName, error) => (control) => {
+    return wordCountRangeValidation(control, { start, end, error, errorName });
 };
 
 /**
@@ -1407,7 +1503,7 @@ class RegExpValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RegExpValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[regExp]",
+                    selector: '[regExp]',
                     standalone: true,
                     providers: [
                         {
@@ -1419,7 +1515,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["regExp"]
+                args: ['regExp']
             }] } });
 /**
  * @publicApi
@@ -1459,7 +1555,7 @@ class EarlierThenValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: EarlierThenValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[earlierThen]",
+                    selector: '[earlierThen]',
                     standalone: true,
                     providers: [
                         {
@@ -1471,7 +1567,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["earlierThen"]
+                args: ['earlierThen']
             }] } });
 /**
  * @publicApi
@@ -1511,7 +1607,7 @@ class LaterThenValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LaterThenValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[laterThen]",
+                    selector: '[laterThen]',
                     standalone: true,
                     providers: [
                         {
@@ -1523,7 +1619,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["laterThen"]
+                args: ['laterThen']
             }] } });
 /**
  * @publicApi
@@ -1566,7 +1662,7 @@ class CompareToValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CompareToValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[compareTo]",
+                    selector: '[compareTo]',
                     standalone: true,
                     providers: [
                         {
@@ -1578,7 +1674,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["compareTo"]
+                args: ['compareTo']
             }] } });
 /**
  * @publicApi
@@ -1620,7 +1716,7 @@ class RequiredWhenValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredWhenValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[requiredWhen]",
+                    selector: '[requiredWhen]',
                     standalone: true,
                     providers: [
                         {
@@ -1632,7 +1728,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["requiredWhen"]
+                args: ['requiredWhen']
             }] } });
 /**
  * @publicApi
@@ -1671,7 +1767,7 @@ class LinkToValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkToValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[linkTo]",
+                    selector: '[linkTo]',
                     standalone: true,
                     providers: [
                         {
@@ -1683,7 +1779,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["linkTo"]
+                args: ['linkTo']
             }] } });
 /**
  * @publicApi
@@ -1722,7 +1818,7 @@ class LinkedToValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LinkedToValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[linkedTo]",
+                    selector: '[linkedTo]',
                     standalone: true,
                     providers: [
                         {
@@ -1734,7 +1830,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["linkedTo"]
+                args: ['linkedTo']
             }] } });
 /**
  * @publicApi
@@ -1774,7 +1870,7 @@ class LengthValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: LengthValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[length]",
+                    selector: '[length]',
                     standalone: true,
                     providers: [
                         {
@@ -1786,7 +1882,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["length"]
+                args: ['length']
             }] } });
 /**
  * @publicApi
@@ -1827,7 +1923,7 @@ class RangeValidatorDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RangeValidatorDirective, decorators: [{
             type: Directive,
             args: [{
-                    selector: "[range]",
+                    selector: '[range]',
                     standalone: true,
                     providers: [
                         {
@@ -1839,7 +1935,112 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }], propDecorators: { value: [{
                 type: Input,
-                args: ["range"]
+                args: ['range']
+            }] } });
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if it doesn't have a required word count.
+ *
+ * Has an input in which you specify the word count to compere to and the comparison
+ * to preform. Optionally you can give it a custom name and a custom error
+ * content / message.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="wordCount"
+ *   [wordCount]="{
+ *      count: 8,
+ *      comparison: ">",
+ *      errorName: 'wordCount',
+ *      error: 'The minimum required word count is 8.'
+ *   }"
+ * />
+ */
+class WordCountValidatorDirective {
+    validate(control) {
+        return wordCountValidation(control, { ...this.value });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: WordCountValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: WordCountValidatorDirective, isStandalone: true, selector: "[wordCount]", inputs: { value: ["wordCount", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: WordCountValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: WordCountValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[wordCount]',
+                    standalone: true,
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: WordCountValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ['wordCount']
+            }] } });
+/**
+ * @publicApi
+ * @description
+ * A Directive that preforms a check on a specified FromControl / AbstractControl's
+ * value and returns an error if the value is not in the specified word count range.
+ *
+ * Has an input in which you specify the range start value, range end value
+ * and optionally you can give it a custom name and a custom error content / message.
+ *
+ * NOTE: The range is inclusive.
+ *
+ * @usageNotes
+ *  <input
+ *    type="text"
+ *    formControlName="wordCountRange"
+ *   [wordCountRange]="{
+ *      start: 8,
+ *      end: 14,
+ *      errorName: 'wordCountRange',
+ *      error: 'Value is not in the specified word count range.'
+ *   }"
+ * />
+ */
+class WordCountRangeValidatorDirective {
+    validate(control) {
+        return wordCountRangeValidation(control, { ...this.value });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: WordCountRangeValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: WordCountRangeValidatorDirective, isStandalone: true, selector: "[wordCountRange]", inputs: { value: ["wordCountRange", "value"] }, providers: [
+            {
+                provide: NG_VALIDATORS,
+                useExisting: WordCountRangeValidatorDirective,
+                multi: true,
+            },
+        ], ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: WordCountRangeValidatorDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[wordCountRange]',
+                    standalone: true,
+                    providers: [
+                        {
+                            provide: NG_VALIDATORS,
+                            useExisting: WordCountRangeValidatorDirective,
+                            multi: true,
+                        },
+                    ],
+                }]
+        }], propDecorators: { value: [{
+                type: Input,
+                args: ['wordCountRange']
             }] } });
 
 /**
@@ -2996,5 +3197,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, zipCodeValidator };
+export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, WordCountRangeValidatorDirective, WordCountValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, wordCountRangeValidator, wordCountValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map

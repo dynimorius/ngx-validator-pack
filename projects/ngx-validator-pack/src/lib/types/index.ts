@@ -27,3 +27,9 @@ export type PasswordValidations =
   | "noSpecial"
   | "greaterOrLessThen"
   | "minLength";
+
+
+/**
+ * @publicApi
+ */
+export type WordCountValidations = 'min' | 'max';
