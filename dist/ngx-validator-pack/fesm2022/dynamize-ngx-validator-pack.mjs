@@ -1,47 +1,74 @@
 import * as i0 from '@angular/core';
-import { Component, ViewChild, Input, Directive } from '@angular/core';
+import { Component, Input, ViewChild, Directive, Pipe } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as i1 from '@angular/forms';
 import { NG_VALIDATORS } from '@angular/forms';
+import { NgClass, NgFor } from '@angular/common';
 import { __decorate } from 'tslib';
 
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+class BaseComponent {
+    set class(css) {
+        this._class = css ? css : 'dmz-validation-content';
+        this.changeDetectorRef.detectChanges();
+    }
+    constructor(renderer, changeDetectorRef) {
+        this.renderer = renderer;
+        this.changeDetectorRef = changeDetectorRef;
+    }
+    ngAfterViewInit() {
+        this.changeDetectorRef.detectChanges();
+        this.content = this.contentRef.nativeElement;
+        this.renderer.setStyle(this.content, 'zIndex', `${this.zIndex}`);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BaseComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: BaseComponent, isStandalone: true, selector: "ng-component", inputs: { zIndex: "zIndex", style: "style", class: "class" }, viewQueries: [{ propertyName: "contentRef", first: true, predicate: ["validationContent"], descendants: true }], ngImport: i0, template: '', isInline: true, styles: [""] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BaseComponent, decorators: [{
+            type: Component,
+            args: [{ selector: '', standalone: true, imports: [], template: '' }]
+        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { zIndex: [{
+                type: Input
+            }], style: [{
+                type: Input
+            }], class: [{
+                type: Input
+            }], contentRef: [{
+                type: ViewChild,
+                args: ['validationContent']
+            }] } });
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
 /**
  * @internal
  * @description
  * A component showing the validation error to the user
  */
-class ValidationErrorComponent {
-    set class(css) {
-        this._class = css ? css : 'dmz-validation-content';
-    }
-    ;
+class ValidationErrorComponent extends BaseComponent {
     constructor(renderer, changeDetectorRef) {
+        super(renderer, changeDetectorRef);
         this.renderer = renderer;
         this.changeDetectorRef = changeDetectorRef;
     }
-    ngDoCheck() {
-        if (!this.content) {
-            this.changeDetectorRef.detectChanges();
-            this.content = this.contentRef.nativeElement;
-        }
-        this.renderer.setStyle(this.content, 'zIndex', `${this.zIndex}`);
-    }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ValidationErrorComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error", zIndex: "zIndex", class: "class", style: "style" }, viewQueries: [{ propertyName: "contentRef", first: true, predicate: ["errorContent"], descendants: true }], ngImport: i0, template: "<div #errorContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ValidationErrorComponent, decorators: [{
             type: Component,
-            args: [{ selector: '', standalone: true, imports: [], template: "<div #errorContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
-        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { contentRef: [{
-                type: ViewChild,
-                args: ['errorContent']
-            }], error: [{
-                type: Input
-            }], zIndex: [{
-                type: Input
-            }], class: [{
-                type: Input
-            }], style: [{
+            args: [{ selector: '', standalone: true, imports: [], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
+        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { error: [{
                 type: Input
             }] } });
 
@@ -62,10 +89,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *  type="text"
  *  formControlName="demoControlName"
  *  showValidation
- *  [errorStyle]="{                  - Optional style input
- *    font_size: 'medium',              used for customizing the look
- *    color: '#ad03fc',
- *  }"
+ *  [vClass]="customClass"            - Optional param of a custom class
  * />
  */
 class ShowValidationDirective {
@@ -116,6 +140,138 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                     standalone: true,
                 }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1.NgControl }], propDecorators: { vClass: [{
+                type: Input
+            }], vStyle: [{
+                type: Input
+            }] } });
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+/**
+ * @internal
+ */
+class CheckedPipe {
+    transform(value) {
+        return value ? '✗' : '✔';
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CheckedPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.3.12", ngImport: i0, type: CheckedPipe, isStandalone: true, name: "checked" }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: CheckedPipe, decorators: [{
+            type: Pipe,
+            args: [{
+                    name: 'checked',
+                    standalone: true,
+                }]
+        }] });
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+class ChecksComponent extends BaseComponent {
+    set checks(checkObj) {
+        Object.entries(checkObj).forEach((entry) => {
+            this._checks.push({
+                check: entry[0],
+                msg: entry[1],
+                hasError: false,
+            });
+        });
+        this.changeDetectorRef.detectChanges();
+    }
+    set errors(errArr) {
+        if (!errArr?.length) {
+            this._checks.forEach((check) => (check.hasError = false));
+            return;
+        }
+        errArr.forEach((error) => {
+            this._checks.map((check) => {
+                if (check.check === error) {
+                    check.hasError = true;
+                }
+            });
+        });
+    }
+    constructor(renderer, changeDetectorRef) {
+        super(renderer, changeDetectorRef);
+        this.renderer = renderer;
+        this.changeDetectorRef = changeDetectorRef;
+        this._checks = [];
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ChecksComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ChecksComponent, isStandalone: true, selector: "ng-component", inputs: { hasValue: "hasValue", checks: "checks", errors: "errors" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n    <div *ngFor=\"let check of _checks\">\n        <span>\n            <span [ngClass]=\"{\n            checked: hasValue && !check.hasError,\n            failed: check.hasError,\n            }\">{{check.hasError | checked }}</span> - {{ check.msg }}</span>\n    </div>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}.checked{color:#22cfad}.failed{color:salmon}\n"], dependencies: [{ kind: "directive", type: NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "pipe", type: CheckedPipe, name: "checked" }] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ChecksComponent, decorators: [{
+            type: Component,
+            args: [{ selector: '', standalone: true, imports: [NgClass, NgFor, CheckedPipe], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n    <div *ngFor=\"let check of _checks\">\n        <span>\n            <span [ngClass]=\"{\n            checked: hasValue && !check.hasError,\n            failed: check.hasError,\n            }\">{{check.hasError | checked }}</span> - {{ check.msg }}</span>\n    </div>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}.checked{color:#22cfad}.failed{color:salmon}\n"] }]
+        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { hasValue: [{
+                type: Input
+            }], checks: [{
+                type: Input
+            }], errors: [{
+                type: Input
+            }] } });
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+class ChecksDirective {
+    constructor(viewContainerRef, elementRef, renderer, control) {
+        this.viewContainerRef = viewContainerRef;
+        this.elementRef = elementRef;
+        this.renderer = renderer;
+        this.control = control;
+        this.controlSub = new Subscription();
+    }
+    ngOnInit() {
+        const formControl = this.control.control;
+        this.self = this.elementRef.nativeElement;
+        this.retrievedStyles = getComputedStyle(this.self);
+        this.controlSub.add(formControl.valueChanges.subscribe((data) => {
+            this.checkComponentRef.setInput('hasValue', !!data);
+            this.checkComponentRef.setInput('errors', null);
+            this.checkComponentRef.setInput('errors', Object.keys(formControl?.errors ?? {}));
+        }));
+    }
+    ngAfterViewInit() {
+        this.checkComponentRef = this.viewContainerRef.createComponent(ChecksComponent);
+        this.checkComponentRef.setInput('checks', this.checks);
+        const indexNum = Number.parseInt(this.retrievedStyles.zIndex);
+        const zIndex = Number.isNaN(indexNum) ? 1 : indexNum;
+        this.renderer.setStyle(this.self, 'zIndex', `${zIndex}`);
+        this.checkComponentRef.setInput('zIndex', `${zIndex - 1}`);
+        this.checkComponentRef.setInput('class', this.vClass);
+        this.checkComponentRef.setInput('style', this.vStyle);
+    }
+    ngOnDestroy() {
+        this.controlSub.unsubscribe();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ChecksDirective, deps: [{ token: i0.ViewContainerRef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i1.NgControl }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: ChecksDirective, isStandalone: true, selector: "[checks]", inputs: { checks: "checks", vClass: "vClass", vStyle: "vStyle" }, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ChecksDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[checks]',
+                    standalone: true,
+                }]
+        }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1.NgControl }], propDecorators: { checks: [{
+                type: Input,
+                args: ['checks']
+            }], vClass: [{
                 type: Input
             }], vStyle: [{
                 type: Input
@@ -3162,6 +3318,78 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  *
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
+ */
+const checkFactory = (configs) => {
+    const validators = [];
+    const checks = {};
+    configs.forEach((config) => {
+        validators.push(config.validator(...config.args, config.errorName));
+        checks[config.errorName] = config.errorMsg;
+    });
+    return {
+        validators,
+        checks,
+    };
+};
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+const PasswordChecks = checkFactory([
+    {
+        validator: regexpValidator,
+        args: [/[a-zA-Z]/, '!!'],
+        errorName: 'noAlpha',
+        errorMsg: 'A password must contain letters.',
+    },
+    {
+        validator: regexpValidator,
+        args: [/[a-z]/, '!!'],
+        errorName: 'noLowercase',
+        errorMsg: 'A password must contain lowercase letters.',
+    },
+    {
+        validator: regexpValidator,
+        args: [/[A-Z]/, '!!'],
+        errorName: 'noUppercase',
+        errorMsg: 'A password must contain uppercase letters.',
+    },
+    {
+        validator: regexpValidator,
+        args: [/\d/, '!!'],
+        errorName: 'noNumeric',
+        errorMsg: 'A password must contain numbers.',
+    },
+    {
+        validator: regexpValidator,
+        args: [/^[A-Za-z0-9 ]+$/, '!'],
+        errorName: 'noSpecial',
+        errorMsg: 'A password must contain special characters.',
+    },
+    {
+        validator: regexpValidator,
+        args: [/(?=.*[<>])/, '!'],
+        errorName: 'noAlpha',
+        errorMsg: 'A password must not contain < or > characters.',
+    },
+    {
+        validator: lengthValidator,
+        args: [8, '<'],
+        errorName: 'minLength',
+        errorMsg: 'A password is not long enough.',
+    },
+]);
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
  *
  * Public API Surface of ngx-validator-pack
  */
@@ -3170,5 +3398,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, WordCountRangeValidatorDirective, WordCountValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, wordCountRangeValidator, wordCountValidator, zipCodeValidator };
+export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, ChecksDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordChecks, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, WordCountRangeValidatorDirective, WordCountValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, checkFactory, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, wordCountRangeValidator, wordCountValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map

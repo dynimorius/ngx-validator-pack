@@ -1,0 +1,17 @@
+<form [formGroup]="checkedForm">
+  <div class="snippet-example-pair">
+    <div class="input-wrapper">
+      <h3>Checked Validator Directive Example:</h3>
+      <p>This input has two validator on it.</p>
+      <label for="address">Password Validation: </label>
+      <input
+        type="text"
+        name="checked"
+        id="checked"
+        formControlName="checked"
+        [checks]="passwordChecks.checks"
+      />
+    </div>
+    <app-snippets></app-snippets>
+  </div>
+</form>

@@ -19,16 +19,13 @@ import * as i0 from "@angular/core";
  *  type="text"
  *  formControlName="demoControlName"
  *  showValidation
- *  [errorStyle]="{                  - Optional style input
- *    font_size: 'medium',              used for customizing the look
- *    color: '#ad03fc',
- *  }"
+ *  [vClass]="customClass"            - Optional param of a custom class
  * />
  */
 export declare class ShowValidationDirective implements OnInit, OnDestroy {
-    private viewContainerRef;
+    private readonly viewContainerRef;
     private readonly elementRef;
-    private renderer;
+    private readonly renderer;
     private readonly control;
     controlSub: Subscription;
     self: HTMLElement;

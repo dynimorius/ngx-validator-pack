@@ -6,6 +6,13 @@
   <div id="header-tabs">
     <div
       class="header-tab"
+      [ngClass]="{ selected: selectedTabIndex === 3 }"
+      (click)="selectTab(3)"
+    >
+      Checked Validator Directive
+    </div>
+    <div
+      class="header-tab"
       [ngClass]="{ selected: selectedTabIndex === 0 }"
       (click)="selectTab(0)"
     >

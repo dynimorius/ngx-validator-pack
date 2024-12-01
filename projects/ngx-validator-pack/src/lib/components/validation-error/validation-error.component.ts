@@ -1,4 +1,18 @@
-import { ChangeDetectorRef, Component, DoCheck, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core'
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  Renderer2,
+} from '@angular/core';
+import { BaseComponent } from '../base/base.component';
 
 /**
  * @internal
@@ -12,29 +26,13 @@ import { ChangeDetectorRef, Component, DoCheck, ElementRef, Input, OnInit, Rende
   templateUrl: './validation-error.component.html',
   styleUrl: './validation-error.component.css',
 })
-export class ValidationErrorComponent implements DoCheck{
-  content!: HTMLDivElement;
-  _class!: string;
-  @ViewChild('errorContent') contentRef!: ElementRef;
-
-  @Input() error!: string
-  @Input() zIndex!: string | number;
-  @Input() set class(css: string | undefined | null) {
-    this._class = css ? css : 'dmz-validation-content'
-  };
-  @Input() style!: string;
+export class ValidationErrorComponent extends BaseComponent {
+  @Input() error!: string;
 
   constructor(
-    private readonly renderer: Renderer2,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
-
-  ngDoCheck(): void {
-    if(!this.content) {
-      this.changeDetectorRef.detectChanges();
-      this.content = this.contentRef.nativeElement;
-    }
-
-    this.renderer.setStyle(this.content, 'zIndex', `${this.zIndex}`);
+    override readonly renderer: Renderer2,
+    override readonly changeDetectorRef: ChangeDetectorRef
+  ) {
+    super(renderer, changeDetectorRef);
   }
 }
