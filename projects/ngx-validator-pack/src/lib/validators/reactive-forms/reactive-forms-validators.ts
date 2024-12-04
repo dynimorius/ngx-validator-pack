@@ -9,6 +9,7 @@
 import {
   lengthValidation,
   rangeValidation,
+  sequentialValidation,
   wordCountRangeValidation,
   wordCountValidation,
 } from "./../../validations/validations";
@@ -24,6 +25,7 @@ import {
   regexpValidation,
   requiredWhenValidation,
 } from "../../validations/validations";
+import { SequenceConfig } from "../../interfaces/sequence-config.interface";
 
 /**
  * @publicApi

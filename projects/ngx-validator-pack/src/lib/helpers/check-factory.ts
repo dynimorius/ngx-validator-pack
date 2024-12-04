@@ -14,7 +14,7 @@ export const checkFactory = (configs: CheckConfig[]): PreparedChecks  => {
   const checks: { [key: string]: string } = {};
   configs.forEach((config: CheckConfig) => {
     validators.push(
-      config.validator(...config.args, config.errorName)
+      config.validator(...config.args, config.errorName, config.errorMsg)
     );
     checks[config.errorName] = config.errorMsg;
   });

@@ -5,4 +5,4 @@
  * Use of this source code is governed by an ISC-style license that can be
  * found at https://www.isc.org/licenses/
  */
-export declare const PasswordChecks: () => import("../interfaces/check-config.interface").PreparedChecks;
+export declare const WordCountChecks: (min: number, max: number) => import("../interfaces/check-config.interface").PreparedChecks;

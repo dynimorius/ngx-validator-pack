@@ -13,7 +13,7 @@ import { SnippetsComponent } from '../snippets/snippets.component';
 export class CheckedExampleComponent implements OnInit {
   checkedForm!: FormGroup;
   constructor(private readonly fb: FormBuilder) {}
-  passwordChecks = PasswordChecks;
+  passwordChecks = PasswordChecks();
 
   ngOnInit(): void {
     this.checkedForm = this.fb.group({

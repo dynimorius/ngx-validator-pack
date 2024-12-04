@@ -9,7 +9,7 @@
 import { checkFactory } from "../helpers/check-factory";
 import { lengthValidator, regexpValidator } from "../validators/reactive-forms/reactive-forms-validators";
 
-export const PasswordChecks = checkFactory([
+export const PasswordChecks = () => checkFactory([
     {
       validator: regexpValidator,
       args: [/[a-zA-Z]/, '!!'],

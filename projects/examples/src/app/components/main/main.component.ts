@@ -29,8 +29,8 @@ import {
   timeHH_MM_SS_24Validator,
   urlValidator,
   zipCodeValidator,
+  PasswordChecks,
 } from "ngx-validator-pack";
-import { dynamicPasswordValidator } from "../../../../../ngx-validator-pack/src/lib/dynamic-validators/reactive-forms/dynamic-validators";
 import { ShowValidationDirective } from "../../../../../ngx-validator-pack/src/public-api";
 import {
   addressHTMLSnippet,
@@ -103,6 +103,7 @@ export class MainComponent implements OnInit {
   mainForm!: FormGroup;
   _controlDate = new Date();
   required: boolean = false;
+  passwordChecks = PasswordChecks();
 
   addressTSSnippet: string = addressTSSnippet;
   addressHTMLSnippet: string = addressHTMLSnippet;
@@ -193,7 +194,7 @@ export class MainComponent implements OnInit {
       linkTo: [null, [linkToValidator("linkedTo")]],
       linkedTo: [null, [linkedToValidator("linkTo")]],
       regexp: [null, regexpValidator(/(s|regexp)/, '!!')],
-      dynamicPassword: [null, dynamicPasswordValidator()],
+      dynamicPassword: [null, this.passwordChecks.validators],
     });
 
     this.mainForm.valueChanges.subscribe(() => {

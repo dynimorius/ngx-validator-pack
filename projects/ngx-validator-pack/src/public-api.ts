@@ -19,3 +19,4 @@ export * from './lib/validators/template-driven-forms/prebuilt-tdf-validators';
 export * from './lib/validators/template-driven-forms/template-driven-form-validators';
 export * from './lib/helpers/check-factory';
 export * from './lib/checks/password-checks';
+export * from './lib/checks/word-count-checks';
