@@ -15,7 +15,7 @@ import { __decorate } from 'tslib';
  */
 class BaseComponent {
     set class(css) {
-        this._class = css ? css : 'dmz-validation-content';
+        this._class = css ? css : this.defaultClass;
         this.changeDetectorRef.detectChanges();
     }
     constructor(renderer, changeDetectorRef) {
@@ -61,13 +61,14 @@ class ValidationErrorComponent extends BaseComponent {
         super(renderer, changeDetectorRef);
         this.renderer = renderer;
         this.changeDetectorRef = changeDetectorRef;
+        this.defaultClass = 'show-validation-content';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ValidationErrorComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".show-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ValidationErrorComponent, decorators: [{
             type: Component,
-            args: [{ selector: '', standalone: true, imports: [], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
+            args: [{ selector: '', standalone: true, imports: [], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".show-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
         }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { error: [{
                 type: Input
             }] } });
@@ -170,6 +171,21 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
                 }]
         }] });
 
+class ObjectValuesPipe {
+    transform(value) {
+        return Object.values(value);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ObjectValuesPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.3.12", ngImport: i0, type: ObjectValuesPipe, isStandalone: true, name: "objectValues" }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ObjectValuesPipe, decorators: [{
+            type: Pipe,
+            args: [{
+                    name: 'objectValues',
+                    standalone: true
+                }]
+        }] });
+
 /**
  * @license
  * Copyright Slavko Mihajlovic All Rights Reserved.
@@ -180,39 +196,39 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImpo
 class ChecksComponent extends BaseComponent {
     set checks(checkObj) {
         Object.entries(checkObj).forEach((entry) => {
-            this._checks.push({
-                check: entry[0],
+            this._checks[entry[0]] = {
                 msg: entry[1],
                 hasError: false,
-            });
+            };
         });
         this.changeDetectorRef.detectChanges();
     }
     set errors(errArr) {
         if (!errArr?.length) {
-            this._checks.forEach((check) => (check.hasError = false));
+            Object.keys(this._checks).forEach((key) => {
+                this._checks[key].hasError = false;
+            });
             return;
         }
         errArr.forEach((error) => {
-            this._checks.map((check) => {
-                if (check.check === error) {
-                    check.hasError = true;
-                }
-            });
+            if (this._checks[error]) {
+                this._checks[error].hasError = true;
+            }
         });
     }
     constructor(renderer, changeDetectorRef) {
         super(renderer, changeDetectorRef);
         this.renderer = renderer;
         this.changeDetectorRef = changeDetectorRef;
-        this._checks = [];
+        this.defaultClass = 'checks-validation-content';
+        this._checks = {};
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ChecksComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ChecksComponent, isStandalone: true, selector: "ng-component", inputs: { hasValue: "hasValue", checks: "checks", errors: "errors" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n    <div *ngFor=\"let check of _checks\">\n        <span>\n            <span [ngClass]=\"{\n            checked: hasValue && !check.hasError,\n            failed: check.hasError,\n            }\">{{check.hasError | checked }}</span> - {{ check.msg }}</span>\n    </div>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}.checked{color:#22cfad}.failed{color:salmon}\n"], dependencies: [{ kind: "directive", type: NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "pipe", type: CheckedPipe, name: "checked" }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: ChecksComponent, isStandalone: true, selector: "ng-component", inputs: { hasValue: "hasValue", checks: "checks", errors: "errors" }, usesInheritance: true, ngImport: i0, template: "<div id=\"checks\" #validationContent [class]=\"_class\" [style]=\"style\">\n    <span *ngFor=\"let check of _checks | objectValues; let i = index\">\n        <span id=\"{{'check' + i}}\" [ngClass]=\"{\n        checked: hasValue && !check.hasError,\n        failed: check.hasError,\n        }\">{{check.hasError | checked }}</span> - {{ check.msg }}\n    </span>\n</div>\n", styles: [".checks-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;display:flex;flex-direction:column}.checked{color:#22cfad}.failed{color:salmon}\n"], dependencies: [{ kind: "directive", type: NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "pipe", type: CheckedPipe, name: "checked" }, { kind: "pipe", type: ObjectValuesPipe, name: "objectValues" }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: ChecksComponent, decorators: [{
             type: Component,
-            args: [{ selector: '', standalone: true, imports: [NgClass, NgFor, CheckedPipe], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n    <div *ngFor=\"let check of _checks\">\n        <span>\n            <span [ngClass]=\"{\n            checked: hasValue && !check.hasError,\n            failed: check.hasError,\n            }\">{{check.hasError | checked }}</span> - {{ check.msg }}</span>\n    </div>\n</div>\n", styles: [".dmz-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}.checked{color:#22cfad}.failed{color:salmon}\n"] }]
+            args: [{ selector: '', standalone: true, imports: [NgClass, NgFor, CheckedPipe, ObjectValuesPipe], template: "<div id=\"checks\" #validationContent [class]=\"_class\" [style]=\"style\">\n    <span *ngFor=\"let check of _checks | objectValues; let i = index\">\n        <span id=\"{{'check' + i}}\" [ngClass]=\"{\n        checked: hasValue && !check.hasError,\n        failed: check.hasError,\n        }\">{{check.hasError | checked }}</span> - {{ check.msg }}\n    </span>\n</div>\n", styles: [".checks-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;display:flex;flex-direction:column}.checked{color:#22cfad}.failed{color:salmon}\n"] }]
         }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { hasValue: [{
                 type: Input
             }], checks: [{
@@ -3373,7 +3389,7 @@ const PasswordChecks = checkFactory([
     {
         validator: regexpValidator,
         args: [/(?=.*[<>])/, '!'],
-        errorName: 'noAlpha',
+        errorName: 'greaterOrLessThen',
         errorMsg: 'A password must not contain < or > characters.',
     },
     {

@@ -26,10 +26,11 @@ import {
 export class BaseComponent implements AfterViewInit {
   content!: HTMLDivElement;
   _class!: string;
+  defaultClass!: string;
   @Input() zIndex!: string | number;
   @Input() style!: string;
   @Input() set class(css: string | undefined | null) {
-    this._class = css ? css : 'dmz-validation-content';
+    this._class = css ? css : this.defaultClass;
     this.changeDetectorRef.detectChanges();
   }
 

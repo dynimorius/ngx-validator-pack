@@ -1,9 +1,8 @@
-<div #validationContent [class]="_class" [style]="style">
-    <div *ngFor="let check of _checks">
-        <span>
-            <span [ngClass]="{
-            checked: hasValue && !check.hasError,
-            failed: check.hasError,
-            }">{{check.hasError | checked }}</span> - {{ check.msg }}</span>
-    </div>
+<div id="checks" #validationContent [class]="_class" [style]="style">
+    <span *ngFor="let check of _checks | objectValues; let i = index">
+        <span id="{{'check' + i}}" [ngClass]="{
+        checked: hasValue && !check.hasError,
+        failed: check.hasError,
+        }">{{check.hasError | checked }}</span> - {{ check.msg }}
+    </span>
 </div>

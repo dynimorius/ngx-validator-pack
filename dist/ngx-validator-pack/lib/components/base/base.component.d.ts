@@ -12,6 +12,7 @@ export declare class BaseComponent implements AfterViewInit {
     readonly changeDetectorRef: ChangeDetectorRef;
     content: HTMLDivElement;
     _class: string;
+    defaultClass: string;
     zIndex: string | number;
     style: string;
     set class(css: string | undefined | null);

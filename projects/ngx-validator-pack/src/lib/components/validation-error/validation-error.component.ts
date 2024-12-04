@@ -27,6 +27,7 @@ import { BaseComponent } from '../base/base.component';
   styleUrl: './validation-error.component.css',
 })
 export class ValidationErrorComponent extends BaseComponent {
+  override defaultClass: string = 'show-validation-content';
   @Input() error!: string;
 
   constructor(

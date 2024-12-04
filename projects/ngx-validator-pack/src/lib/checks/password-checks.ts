@@ -43,7 +43,7 @@ export const PasswordChecks = checkFactory([
     {
       validator: regexpValidator,
       args: [/(?=.*[<>])/, '!'],
-      errorName: 'noAlpha',
+      errorName: 'greaterOrLessThen',
       errorMsg: 'A password must not contain < or > characters.',
     },
     {

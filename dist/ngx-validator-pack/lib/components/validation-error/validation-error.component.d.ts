@@ -16,6 +16,7 @@ import * as i0 from "@angular/core";
 export declare class ValidationErrorComponent extends BaseComponent {
     readonly renderer: Renderer2;
     readonly changeDetectorRef: ChangeDetectorRef;
+    defaultClass: string;
     error: string;
     constructor(renderer: Renderer2, changeDetectorRef: ChangeDetectorRef);
     static ɵfac: i0.ɵɵFactoryDeclaration<ValidationErrorComponent, never>;

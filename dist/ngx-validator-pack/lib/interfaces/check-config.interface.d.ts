@@ -11,3 +11,11 @@ export interface PreparedChecks {
         [key: string]: string;
     };
 }
+export interface Check {
+    [key: string]: CheckData;
+}
+interface CheckData {
+    msg: string;
+    hasError: boolean;
+}
+export {};

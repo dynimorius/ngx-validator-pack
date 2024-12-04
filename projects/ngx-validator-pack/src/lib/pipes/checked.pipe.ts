@@ -16,7 +16,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class CheckedPipe implements PipeTransform {
-  transform(value: boolean | null | undefined): unknown {
+  transform(value: boolean | null | undefined): string {
     return value ? '✗' : '✔';
   }
 }

@@ -6,7 +6,7 @@
     "start": "ng serve examples",
     "build": "ng build ngx-validator-pack",
     "watch": "ng build ngx-validator-pack --watch",
-    "test": "ng test"
+    "test": "ng test --project ngx-validator-pack"
   },
   "description": "An extension pack of Angular form validators.",
   "repository": {

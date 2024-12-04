@@ -7,47 +7,44 @@
  */
 
 import { NgClass, NgFor } from '@angular/common';
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  Renderer2,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, Renderer2 } from '@angular/core';
 import { CheckedPipe } from '../../pipes/checked.pipe';
 import { BaseComponent } from '../base/base.component';
+import { Check } from '../../interfaces/check-config.interface';
+import { ObjectValuesPipe } from '../../pipes/object-values.pipe';
 
 @Component({
   selector: '',
   standalone: true,
-  imports: [NgClass, NgFor, CheckedPipe],
+  imports: [NgClass, NgFor, CheckedPipe, ObjectValuesPipe],
   templateUrl: './checks.component.html',
   styleUrl: './checks.component.css',
 })
 export class ChecksComponent extends BaseComponent {
-  _checks: { check: string; msg: string; hasError: boolean }[] = [];
+  override defaultClass: string = 'checks-validation-content';
+  _checks: Check = {};
 
   @Input() hasValue!: boolean;
-  @Input() set checks(checkObj: string[]) {
+  @Input() set checks(checkObj: { [key: string]: string }) {
     Object.entries(checkObj).forEach((entry) => {
-      this._checks.push({
-        check: entry[0],
+      this._checks[entry[0]] = {
         msg: entry[1],
         hasError: false,
-      });
+      };
     });
     this.changeDetectorRef.detectChanges();
   }
   @Input() set errors(errArr: string[] | null) {
     if (!errArr?.length) {
-      this._checks.forEach((check) => (check.hasError = false));
+      Object.keys(this._checks).forEach((key: string) => {
+        this._checks[key].hasError = false;
+      });
       return;
     }
     errArr.forEach((error: string) => {
-      this._checks.map((check) => {
-        if (check.check === error) {
-          check.hasError = true;
-        }
-      });
+      if (this._checks[error]) {
+        this._checks[error].hasError = true;
+      }
     });
   }
 
