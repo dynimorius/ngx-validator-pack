@@ -26,8 +26,12 @@
     gap: 5px;
 }
 
+textarea,
 input {
-    height: 20px;
     border-radius: 5px;
     border: 1px solid gray;
+}
+
+input {
+    height: 20px;
 }

@@ -12,14 +12,14 @@ import { wordCountValidator } from "../validators/reactive-forms/reactive-forms-
 export const WordCountChecks = (min: number, max: number) => checkFactory([
     {
         validator: wordCountValidator,
-        args: [min, '>='],
+        args: [min, '>'],
         errorName: 'minWordCount',
-        errorMsg: 'The minimum number of words.'
+        errorMsg: `The minimum number of words is ${min}.`
     },
     {
         validator: wordCountValidator,
-        args: [max, '<='],
+        args: [max, '<'],
         errorName: 'maxWordCount',
-        errorMsg: 'The maximum number of words.'
+        errorMsg: `The maximum number of words is ${max}.`
     }
 ]);

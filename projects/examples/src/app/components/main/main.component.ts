@@ -30,8 +30,10 @@ import {
   urlValidator,
   zipCodeValidator,
   PasswordChecks,
+  wordCountValidator,
+  ShowValidationDirective,
 } from "ngx-validator-pack";
-import { ShowValidationDirective } from "../../../../../ngx-validator-pack/src/public-api";
+
 import {
   addressHTMLSnippet,
   addressTSSnippet,
@@ -195,6 +197,7 @@ export class MainComponent implements OnInit {
       linkedTo: [null, [linkedToValidator("linkTo")]],
       regexp: [null, regexpValidator(/(s|regexp)/, '!!')],
       dynamicPassword: [null, this.passwordChecks.validators],
+      wordCount: [null, wordCountValidator(5, '>')]
     });
 
     this.mainForm.valueChanges.subscribe(() => {

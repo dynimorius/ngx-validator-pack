@@ -20,3 +20,4 @@ export * from './lib/validators/template-driven-forms/template-driven-form-valid
 export * from './lib/helpers/check-factory';
 export * from './lib/checks/password-checks';
 export * from './lib/checks/word-count-checks';
+export * from './lib/checks/address-checks';

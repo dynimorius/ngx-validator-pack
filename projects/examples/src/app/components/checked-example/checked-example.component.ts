@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ChecksDirective, PasswordChecks } from 'ngx-validator-pack';
+import { AddressChecks, ChecksDirective, PasswordChecks, WordCountChecks } from 'ngx-validator-pack';
 import { SnippetsComponent } from '../snippets/snippets.component';
 
 @Component({
@@ -14,10 +14,13 @@ export class CheckedExampleComponent implements OnInit {
   checkedForm!: FormGroup;
   constructor(private readonly fb: FormBuilder) {}
   passwordChecks = PasswordChecks();
-
+  addressChecks = AddressChecks();
+  wordCountChecks = WordCountChecks(2, 10);
   ngOnInit(): void {
     this.checkedForm = this.fb.group({
-      checked: [null, this.passwordChecks.validators],
+      passwordChecks: [null, this.passwordChecks.validators],
+      addressChecks: [null, this.addressChecks.validators],
+      wordCountChecks: [null, this.wordCountChecks.validators]
     });
   }
 }

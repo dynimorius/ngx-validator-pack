@@ -31,7 +31,8 @@
             "polyfills": [
               "zone.js",
               "zone.js/testing"
-            ]
+            ],
+            "karmaConfig": "projects/ngx-validator-pack/karma.conf.js"
           }
         }
       }

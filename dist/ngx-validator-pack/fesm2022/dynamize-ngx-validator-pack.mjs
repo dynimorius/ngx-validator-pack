@@ -5,6 +5,7 @@ import * as i1 from '@angular/forms';
 import { NG_VALIDATORS } from '@angular/forms';
 import { NgClass, NgFor } from '@angular/common';
 import { __decorate } from 'tslib';
+import { checkFactory as checkFactory$1, regexpValidator as regexpValidator$1 } from 'ngx-validator-pack';
 
 /**
  * @license
@@ -864,11 +865,11 @@ const rangeValidation = (control, config) => {
 const wordCountValidation = (control, config) => {
     const error = config.error ?? `The required word count should be ${config.comparison} ${config.count}.`;
     const errors = { [config.errorName ?? "wordCount"]: error };
-    const valueCount = control?.value?.split(' ');
-    return !!control?.value &&
+    const valueCount = control?.value?.split(' ').length;
+    return control?.value &&
         compare(valueCount, config.count, config.comparison ?? "===")
-        ? errors
-        : null;
+        ? null
+        : errors;
 };
 /**
  * @internal
@@ -885,12 +886,12 @@ const wordCountValidation = (control, config) => {
 const wordCountRangeValidation = (control, config) => {
     const error = config.error ?? `The word count must be in the range between ${config.start} and ${config.end}.`;
     const errors = { [config.errorName ?? "wordCountRange"]: error };
-    const valueCount = control?.value?.split(' ');
+    const valueCount = control?.value?.split(' ').length;
     return !!control?.value &&
         compare(valueCount, config.start, ">=") &&
         compare(valueCount, config.end, '<=')
-        ? errors
-        : null;
+        ? null
+        : errors;
 };
 /**
  * @internal
@@ -3446,15 +3447,55 @@ const PasswordChecks = () => checkFactory([
 const WordCountChecks = (min, max) => checkFactory([
     {
         validator: wordCountValidator,
-        args: [min, '>='],
+        args: [min, '>'],
         errorName: 'minWordCount',
-        errorMsg: 'The minimum number of words.'
+        errorMsg: `The minimum number of words is ${min}.`
     },
     {
         validator: wordCountValidator,
-        args: [max, '<='],
+        args: [max, '<'],
         errorName: 'maxWordCount',
-        errorMsg: 'The maximum number of words.'
+        errorMsg: `The maximum number of words is ${max}.`
+    }
+]);
+
+/**
+ * @license
+ * Copyright Slavko Mihajlovic All Rights Reserved.
+ *
+ * Use of this source code is governed by an ISC-style license that can be
+ * found at https://www.isc.org/licenses/
+ */
+const AddressChecks = () => checkFactory$1([
+    {
+        validator: regexpValidator$1,
+        args: [/(\d{1,})/, '!!'],
+        errorName: 'streetNumber',
+        errorMsg: 'Street number.',
+    },
+    {
+        validator: regexpValidator$1,
+        args: [/(\d{1,}) [a-zA-Z0-9\s]+(\,)/, '!!'],
+        errorName: 'streetName',
+        errorMsg: 'Street name.',
+    },
+    {
+        validator: regexpValidator$1,
+        args: [/(\d{1,}) [a-zA-Z0-9\s]+(\,)? [a-zA-Z]+(\,)/, '!!'],
+        errorName: 'city',
+        errorMsg: 'City.',
+    },
+    {
+        validator: regexpValidator$1,
+        args: [/(\d{1,}) [a-zA-Z0-9\s]+(\,)? [a-zA-Z]+(\,)? [A-Z]{2}/, '!!'],
+        errorName: 'state',
+        errorMsg: 'State.',
+    },
+    {
+        validator: regexpValidator$1,
+        args: [/(\d{1,}) [a-zA-Z0-9\s]+(\,)? [a-zA-Z]+(\,)? [A-Z]{2} [0-9]{5,6}/, '!!'],
+        errorName: 'zip',
+        errorMsg: 'ZipCode.',
     }
 ]);
 
@@ -3472,5 +3513,5 @@ const WordCountChecks = (min, max) => checkFactory([
  * Generated bundle index. Do not edit.
  */
 
-export { AddressValidatorDirective, AlphabetOnlyValidatorDirective, ChecksDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordChecks, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, WordCountChecks, WordCountRangeValidatorDirective, WordCountValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, checkFactory, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, wordCountRangeValidator, wordCountValidator, zipCodeValidator };
+export { AddressChecks, AddressValidatorDirective, AlphabetOnlyValidatorDirective, ChecksDirective, CompareToValidatorDirective, DateDD_MM_YYYYValidatorDirective, DateYYYY_MM_DDValidatorDirective, EarlierThenValidatorDirective, EmailValidatorDirective, IPAddressValidatorDirective, IPv4ValidatorDirective, IPv6ValidatorDirective, LaterThenValidatorDirective, LengthValidatorDirective, LinkToValidatorDirective, LinkedToValidatorDirective, NoSpecialsValidatorDirective, NumericsOnlyValidatorDirective, PassportValidatorDirective, PasswordChecks, PasswordValidatorDirective, PhoneNumberValidatorDirective, RangeValidatorDirective, RegExpValidatorDirective, RequiredEtherValidatorDirective, RequiredIfNotValidatorDirective, RequiredIfValidatorDirective, RequiredWhenValidatorDirective, SSNValidatorDirective, ShowValidationDirective, SpaceRestrictionValidatorDirective, SpaceValidatorDirective, TimeHH_MM_12ValidatorDirective, TimeHH_MM_24ValidatorDirective, TimeHH_MM_SS_24ValidatorDirective, UrlValidatorDirective, WordCountChecks, WordCountRangeValidatorDirective, WordCountValidatorDirective, ZipCodeValidatorDirective, addressValidator, alphabetOnlyValidator, checkFactory, compareToValidator, dateDD_MM_YYYYValidator, dateYYYY_MM_DDValidator, earlierThenValidator, emailValidator, iPv4Validator, iPv6Validator, ipAddressValidator, laterThenValidator, lengthValidator, linkToValidator, linkedToValidator, noSpecialsValidator, numericsOnlyValidator, passportValidator, passwordValidator, phoneNumberValidator, rangeValidator, regexpValidator, requiredEther, requiredIf, requiredIfNot, requiredWhenValidator, spaceRestrictionValidator, spaceValidator, ssnValidator, timeHH_MM_12Validator, timeHH_MM_24Validator, timeHH_MM_SS_24Validator, urlValidator, wordCountRangeValidator, wordCountValidator, zipCodeValidator };
 //# sourceMappingURL=dynamize-ngx-validator-pack.mjs.map

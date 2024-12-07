@@ -1,16 +1,44 @@
 <form [formGroup]="checkedForm">
   <div class="snippet-example-pair">
     <div class="input-wrapper">
-      <h3>Checked Validator Directive Example:</h3>
-      <p>This input has two validator on it.</p>
-      <label for="address">Password Validation: </label>
+      <h3>Checks Validator Directive Example:</h3>
+      <label for="passwordChecks">Password Validation: </label>
       <input
         type="text"
-        name="checked"
-        id="checked"
-        formControlName="checked"
+        name="passwordChecks"
+        id="passwordChecks"
+        formControlName="passwordChecks"
         [checks]="passwordChecks.checks"
       />
+    </div>
+    <app-snippets></app-snippets>
+  </div>
+  <div class="snippet-example-pair">
+    <div class="input-wrapper">
+      <h3>Checks Validator Directive Example:</h3>
+      <label for="addressChecks">Address Validation: </label>
+      <input
+        type="text"
+        name="addressChecks"
+        id="addressChecks"
+        formControlName="addressChecks"
+        [checks]="addressChecks.checks"
+      />
+    </div>
+    <app-snippets></app-snippets>
+  </div>
+  <div class="snippet-example-pair">
+    <div class="input-wrapper">
+      <h3>Checks Validator Directive Example:</h3>
+      <label for="wordCountChecks">Word Count Validation: </label>
+      <textarea
+        rows="5"
+        cols="33"
+        name="wordCountChecks"
+        id="wordCountChecks"
+        formControlName="wordCountChecks"
+        [checks]="wordCountChecks.checks"
+      ></textarea>
     </div>
     <app-snippets></app-snippets>
   </div>

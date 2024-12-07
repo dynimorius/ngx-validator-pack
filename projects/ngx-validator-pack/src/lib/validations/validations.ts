@@ -280,11 +280,11 @@ export const wordCountValidation = (
     config.error ?? `The required word count should be ${config.comparison} ${config.count}.`;
   const errors: ValidationErrors = { [config.errorName ?? "wordCount"]: error };
 
-  const valueCount = control?.value?.split(' ');
-  return !!control?.value &&
+  const valueCount = control?.value?.split(' ').length;
+  return control?.value &&
     compare(valueCount, config.count, config.comparison ?? "===")
-    ? errors
-    : null;
+    ? null
+    : errors;
 }
 
 /**
@@ -306,13 +306,13 @@ export const wordCountRangeValidation = (
   const error =
     config.error ?? `The word count must be in the range between ${config.start} and ${config.end}.`;
   const errors: ValidationErrors = { [config.errorName ?? "wordCountRange"]: error };
-  const valueCount = control?.value?.split(' ');
+  const valueCount = control?.value?.split(' ').length;
 
   return !!control?.value &&
     compare(valueCount, config.start, ">=") &&
     compare(valueCount, config.end, '<=' )
-    ? errors
-    : null;
+    ? null
+    : errors;
 };
 
 /**
