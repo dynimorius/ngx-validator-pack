@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": "An extension pack of Angular form validators.",
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0",
-    "@angular/forms": "^17.3.0"
+    "@angular/common": "^18.2.13",
+    "@angular/core": "^18.2.13",
+    "@angular/forms": "^18.2.13"
   },
   "dependencies": {
     "@dynamize/ngx-validator-pack": "file:",
