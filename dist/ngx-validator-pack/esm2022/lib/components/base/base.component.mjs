@@ -21,10 +21,10 @@ export class BaseComponent {
         this.content = this.contentRef.nativeElement;
         this.renderer.setStyle(this.content, 'zIndex', `${this.zIndex}`);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BaseComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.3.12", type: BaseComponent, isStandalone: true, selector: "ng-component", inputs: { zIndex: "zIndex", style: "style", class: "class" }, viewQueries: [{ propertyName: "contentRef", first: true, predicate: ["validationContent"], descendants: true }], ngImport: i0, template: '', isInline: true, styles: [""] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: BaseComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: BaseComponent, isStandalone: true, selector: "ng-component", inputs: { zIndex: "zIndex", style: "style", class: "class" }, viewQueries: [{ propertyName: "contentRef", first: true, predicate: ["validationContent"], descendants: true }], ngImport: i0, template: '', isInline: true, styles: [""] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: BaseComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: BaseComponent, decorators: [{
             type: Component,
             args: [{ selector: '', standalone: true, imports: [], template: '' }]
         }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { zIndex: [{

@@ -31,8 +31,8 @@ export class RequiredIfValidatorDirective {
     validate(control) {
         return requiredIfValidation(control, { ...this.controls });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredIfValidatorDirective, isStandalone: true, selector: "[requiredIf]", inputs: { controls: ["requiredIf", "controls"] }, providers: [
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: RequiredIfValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.13", type: RequiredIfValidatorDirective, isStandalone: true, selector: "[requiredIf]", inputs: { controls: ["requiredIf", "controls"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: RequiredIfValidatorDirective,
@@ -40,7 +40,7 @@ export class RequiredIfValidatorDirective {
             },
         ], ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfValidatorDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: RequiredIfValidatorDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: "[requiredIf]",
@@ -79,8 +79,8 @@ export class RequiredIfNotValidatorDirective {
     validate(control) {
         return requiredIfNotValidation(control, { ...this.controls });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfNotValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredIfNotValidatorDirective, isStandalone: true, selector: "[requiredIfNot]", inputs: { controls: ["requiredIfNot", "controls"] }, providers: [
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: RequiredIfNotValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.13", type: RequiredIfNotValidatorDirective, isStandalone: true, selector: "[requiredIfNot]", inputs: { controls: ["requiredIfNot", "controls"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: RequiredIfNotValidatorDirective,
@@ -88,7 +88,7 @@ export class RequiredIfNotValidatorDirective {
             },
         ], ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredIfNotValidatorDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: RequiredIfNotValidatorDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: "[requiredIfNot]",
@@ -126,8 +126,8 @@ export class RequiredEtherValidatorDirective {
     validate(control) {
         return requiredEtherValidation(control, { ...this.controls });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredEtherValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.3.12", type: RequiredEtherValidatorDirective, isStandalone: true, selector: "[requiredEther]", inputs: { controls: ["requiredEther", "controls"] }, providers: [
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: RequiredEtherValidatorDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.13", type: RequiredEtherValidatorDirective, isStandalone: true, selector: "[requiredEther]", inputs: { controls: ["requiredEther", "controls"] }, providers: [
             {
                 provide: NG_VALIDATORS,
                 useExisting: RequiredIfNotValidatorDirective,
@@ -135,7 +135,7 @@ export class RequiredEtherValidatorDirective {
             },
         ], ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.12", ngImport: i0, type: RequiredEtherValidatorDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: RequiredEtherValidatorDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: "[requiredEther]",
