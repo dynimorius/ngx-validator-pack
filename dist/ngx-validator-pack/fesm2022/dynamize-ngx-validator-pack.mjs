@@ -654,7 +654,8 @@ const test = (regexp, value, logic) => {
     const operations = {
         '!': () => !regexp.test(value),
         '!!': () => regexp.test(value),
-        'match': () => !!regexp.exec(value)
+        'match': () => !!regexp.exec(value),
+        'noMatch': () => !regexp.exec(value)?.length,
     };
     return operations[logic]();
 };

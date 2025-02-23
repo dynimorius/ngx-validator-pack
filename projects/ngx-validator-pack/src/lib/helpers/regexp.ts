@@ -15,7 +15,8 @@ export const test = (regexp: RegExp, value: string, logic: RegExpLogicalOperatio
   const operations = {
     '!': (): boolean => !regexp.test(value),
     '!!': (): boolean => regexp.test(value),
-    'match': (): boolean => !!regexp.exec(value)
+    'match': (): boolean => !!regexp.exec(value),
+    'noMatch': (): boolean => !regexp.exec(value)?.length,
   };
 
   return operations[logic]();
