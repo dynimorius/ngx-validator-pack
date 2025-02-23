@@ -42,25 +42,20 @@ export class ChecksDirective implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    const formControl = this.control.control as FormControl;
     this.self = this.elementRef.nativeElement;
     this.retrievedStyles = getComputedStyle(this.self);
+    
+    const formControl = this.control.control as FormControl;
     this.controlSub.add(
       formControl.valueChanges.subscribe((data) => {
         this.checkComponentRef.setInput('hasValue', !!data);
-        this.checkComponentRef.setInput('errors', null);
-        this.checkComponentRef.setInput(
-          'errors',
-          Object.keys(formControl?.errors ?? {})
-        );
+        this.resetErrors(formControl);
       })
     );
   }
 
   ngAfterViewInit(): void {
-    this.checkComponentRef = this.viewContainerRef.createComponent(
-      ChecksComponent
-    );
+    this.checkComponentRef = this.viewContainerRef.createComponent(ChecksComponent);
     this.checkComponentRef.setInput('checks', this.checks);
     const indexNum = Number.parseInt(this.retrievedStyles.zIndex);
     const zIndex = Number.isNaN(indexNum) ? 1 : indexNum;
@@ -72,5 +67,10 @@ export class ChecksDirective implements OnInit, AfterViewInit {
 
   ngOnDestroy(): void {
     this.controlSub.unsubscribe();
+  }
+
+  resetErrors(formControl: FormControl): void {
+    this.checkComponentRef.setInput('errors', null);
+    this.checkComponentRef.setInput('errors', formControl.errors ? Object.keys(formControl.errors) : null);
   }
 }

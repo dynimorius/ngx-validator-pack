@@ -65,11 +65,11 @@ class ValidationErrorComponent extends BaseComponent {
         this.defaultClass = 'show-validation-content';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ValidationErrorComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".show-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: ValidationErrorComponent, isStandalone: true, selector: "ng-component", inputs: { error: "error" }, usesInheritance: true, ngImport: i0, template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\r\n  <span>{{ error }}</span>\r\n</div>\r\n", styles: [".show-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ValidationErrorComponent, decorators: [{
             type: Component,
-            args: [{ selector: '', standalone: true, imports: [], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\n  <span>{{ error }}</span>\n</div>\n", styles: [".show-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
+            args: [{ selector: '', standalone: true, imports: [], template: "<div #validationContent [class]=\"_class\" [style]=\"style\">\r\n  <span>{{ error }}</span>\r\n</div>\r\n", styles: [".show-validation-content{position:relative;top:-5px;color:salmon;border:1px solid salmon;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}\n"] }]
         }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { error: [{
                 type: Input
             }] } });
@@ -225,11 +225,11 @@ class ChecksComponent extends BaseComponent {
         this._checks = {};
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ChecksComponent, deps: [{ token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: ChecksComponent, isStandalone: true, selector: "ng-component", inputs: { hasValue: "hasValue", checks: "checks", errors: "errors" }, usesInheritance: true, ngImport: i0, template: "<div id=\"checks\" #validationContent [class]=\"_class\" [style]=\"style\">\n    <span *ngFor=\"let check of _checks | objectValues; let i = index\">\n        <span id=\"{{'check' + i}}\" [ngClass]=\"{\n        checked: hasValue && !check.hasError,\n        failed: check.hasError,\n        }\">{{check.hasError | checked }}</span> - {{ check.msg }}\n    </span>\n</div>\n", styles: [".checks-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;display:flex;flex-direction:column}.checked{color:#22cfad}.failed{color:salmon}\n"], dependencies: [{ kind: "directive", type: NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "pipe", type: CheckedPipe, name: "checked" }, { kind: "pipe", type: ObjectValuesPipe, name: "objectValues" }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: ChecksComponent, isStandalone: true, selector: "ng-component", inputs: { hasValue: "hasValue", checks: "checks", errors: "errors" }, usesInheritance: true, ngImport: i0, template: "<div id=\"checks\" #validationContent [class]=\"_class\" [style]=\"style\">\r\n    <span *ngFor=\"let check of _checks | objectValues; let i = index\">\r\n        <span id=\"{{'check' + i}}\" [ngClass]=\"{\r\n        checked: hasValue && !check.hasError,\r\n        failed: check.hasError,\r\n        }\">{{check.hasError | checked }}</span> - {{ check.msg }}\r\n    </span>\r\n</div>\r\n", styles: [".checks-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;display:flex;flex-direction:column}.checked{color:#22cfad}.failed{color:salmon}\n"], dependencies: [{ kind: "directive", type: NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "pipe", type: CheckedPipe, name: "checked" }, { kind: "pipe", type: ObjectValuesPipe, name: "objectValues" }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ChecksComponent, decorators: [{
             type: Component,
-            args: [{ selector: '', standalone: true, imports: [NgClass, NgFor, CheckedPipe, ObjectValuesPipe], template: "<div id=\"checks\" #validationContent [class]=\"_class\" [style]=\"style\">\n    <span *ngFor=\"let check of _checks | objectValues; let i = index\">\n        <span id=\"{{'check' + i}}\" [ngClass]=\"{\n        checked: hasValue && !check.hasError,\n        failed: check.hasError,\n        }\">{{check.hasError | checked }}</span> - {{ check.msg }}\n    </span>\n</div>\n", styles: [".checks-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;display:flex;flex-direction:column}.checked{color:#22cfad}.failed{color:salmon}\n"] }]
+            args: [{ selector: '', standalone: true, imports: [NgClass, NgFor, CheckedPipe, ObjectValuesPipe], template: "<div id=\"checks\" #validationContent [class]=\"_class\" [style]=\"style\">\r\n    <span *ngFor=\"let check of _checks | objectValues; let i = index\">\r\n        <span id=\"{{'check' + i}}\" [ngClass]=\"{\r\n        checked: hasValue && !check.hasError,\r\n        failed: check.hasError,\r\n        }\">{{check.hasError | checked }}</span> - {{ check.msg }}\r\n    </span>\r\n</div>\r\n", styles: [".checks-validation-content{position:relative;top:-5px;color:#969696;border:1px solid #d9d9d9;border-radius:0 0 5px 5px;padding:2px 0 5px 10px;font-size:small;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;display:flex;flex-direction:column}.checked{color:#22cfad}.failed{color:salmon}\n"] }]
         }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }], propDecorators: { hasValue: [{
                 type: Input
             }], checks: [{
@@ -254,13 +254,12 @@ class ChecksDirective {
         this.controlSub = new Subscription();
     }
     ngOnInit() {
-        const formControl = this.control.control;
         this.self = this.elementRef.nativeElement;
         this.retrievedStyles = getComputedStyle(this.self);
+        const formControl = this.control.control;
         this.controlSub.add(formControl.valueChanges.subscribe((data) => {
             this.checkComponentRef.setInput('hasValue', !!data);
-            this.checkComponentRef.setInput('errors', null);
-            this.checkComponentRef.setInput('errors', Object.keys(formControl?.errors ?? {}));
+            this.resetErrors(formControl);
         }));
     }
     ngAfterViewInit() {
@@ -275,6 +274,10 @@ class ChecksDirective {
     }
     ngOnDestroy() {
         this.controlSub.unsubscribe();
+    }
+    resetErrors(formControl) {
+        this.checkComponentRef.setInput('errors', null);
+        this.checkComponentRef.setInput('errors', formControl.errors ? Object.keys(formControl.errors) : null);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ChecksDirective, deps: [{ token: i0.ViewContainerRef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i1.NgControl }], target: i0.ɵɵFactoryTarget.Directive }); }
     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.13", type: ChecksDirective, isStandalone: true, selector: "[checks]", inputs: { checks: "checks", vClass: "vClass", vStyle: "vStyle" }, ngImport: i0 }); }
