@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CodeFormatterDirective, Formats } from './code-formatter.directive';
+import { CodeFormatterDirective } from './code-formatter.directive';
 import { NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase } from '@angular/common';
+import { Formats, FormatterService } from './formatter.service';
+import { Token } from './token.interface';
 
 export interface SnippetConfig {
   template: string;
@@ -18,6 +20,9 @@ export class SnippetsComponent {
   _snippets!: SnippetConfig[];
   snippetToCopy: string = '';
   tab: string = 'TypeScript';
+  classifiedTokens: Token[][] = [];
+
+  constructor(private formatter: FormatterService) {}
 
   @Input() style!: { [key: string]: any };
   @Input() styleClass!: string;
@@ -25,8 +30,11 @@ export class SnippetsComponent {
     this._snippets = snippets;
     this.tab = snippets[0].format;
     this.snippetToCopy = snippets[0].template;
+    snippets.forEach((snippet) => {
+      this.classifiedTokens.push(this.formatter.prep(snippet.template, snippet.format));
+    });
   }
- 
+
   switchSnippet(tab: string, i: number): void {
     this.tab = tab;
     this.snippetToCopy = this._snippets[i].template;

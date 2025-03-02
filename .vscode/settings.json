@@ -1,16 +1,13 @@
 {
-  "cSpell.words": [
-    "dynamize",
-    "Mihajlovic",
-    "primeng",
-    "remainer",
-    "Slavko"
-  ],
+  "cSpell.words": ["dynamize", "Mihajlovic", "primeng", "remainer", "Slavko"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }
