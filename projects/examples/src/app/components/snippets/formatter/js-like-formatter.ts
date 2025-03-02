@@ -1,7 +1,7 @@
-import { Token, TokenData } from './token.interface';
-import { DATA_TYPE_TOKENS, KEYWORD_TOKENS_A, KEYWORD_TOKENS_B, KEYWORD_TOKENS_C, OPERATOR_TOKENS } from './tokens';
+import { Token, TokenData } from '../token.interface';
+import { DATA_TYPE_TOKENS, KEYWORD_TOKENS_A, KEYWORD_TOKENS_B, KEYWORD_TOKENS_C, OPERATOR_TOKENS } from '../tokens';
 
-export function JSLikeFormatter(text: string): Token[] {
+export function jsLikeFormatter(text: string): Token[] {
   let scopeLevelRound!: number;
   let scopeLevelSquare!: number;
   let scopeLevelCurly!: number;
@@ -11,9 +11,6 @@ export function JSLikeFormatter(text: string): Token[] {
     scopeLevelSquare = 1;
     scopeLevelCurly = 1;
     const classifiedTokens: Token[] = [];
-    text = text.replaceAll('&lt;', '<');
-    text = text.replaceAll('&gt;', '>');
-    text = text.trim();
     const tokens = text.split(/(["'`\t\n\v\f\r !,.:;{}()\[\]])/g);
     tokens.forEach((token, index) => {
       classifiedTokens.push(

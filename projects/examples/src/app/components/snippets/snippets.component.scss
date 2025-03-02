@@ -18,6 +18,8 @@
   --var-token-color: #cfddd2;
   --comment-token-color: gray;
   --text-token-color: lightgray;
+  --element-token-color: salmon;
+  --attribute-color: rgb(255, 210, 85);
 
   --special-char-token-color: rgb(76, 218, 170);
 
@@ -163,6 +165,14 @@
 
 .special-char-token {
   color: var(--special-char-token-color);
+}
+
+.element-token {
+  color: var(--element-token-color);
+}
+
+.attribute-token {
+  color: var(--attribute-color);
 }
 
 @keyframes zoom-in-zoom-out {

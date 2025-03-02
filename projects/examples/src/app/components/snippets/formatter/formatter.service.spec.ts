@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { FormatterService } from './formatter.service';
 
 describe('FormatterService', () => {

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CodeFormatterDirective } from './code-formatter.directive';
 import { NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase } from '@angular/common';
-import { Formats, FormatterService } from './formatter.service';
+import { Formats, FormatterService } from './formatter/formatter.service';
 import { Token } from './token.interface';
 
 export interface SnippetConfig {
