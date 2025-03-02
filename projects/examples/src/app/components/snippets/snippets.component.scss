@@ -1,42 +1,178 @@
-.snippets-content {
-    width: 45vw;
-    min-height: 130px;
-    border: 1px solid rgb(170, 169, 169);
-    border-radius: 10px;
-    background-color: rgb(4, 58, 75) !important;
-    margin: 10px;
-    overflow: hidden;
+* {
+  --snippet-font-size: 15px;
+  --header-font-size: 14px;
 
-    * {
-        background: none;
-    }
+  --snippet-background-color: #2a3446;
+  --snippet-header-background-color: #1a212b;
+  --snippet-header-text-color: #61789e;
+  --ka-token-color: #e1955d;
+  --kb-token-color: #ff8c5f;
+  --kc-token-color: #22e2b8;
+  --quoted-token-color: #34ec71;
+  --data-token-color: #a98adf;
+  --function-token-color: #44b7ff;
+  --separator-token-color: #676e70;
+  --property-token-color: #ff8c5f;
+  --operator-token-color:  #f8c49e;
+  --parameter-token-color: #f371a6;
+  --var-token-color: #cfddd2;
+  --comment-token-color: gray;
+  --text-token-color: lightgray;
+
+  --special-char-token-color: rgb(76, 218, 170);
+
+  --snippet-font: system-ui;
+
+  font-family: var(--snippet-font);
+}
+
+.snippets-content {
+  width: inherit;
+  height: inherit;
+  min-height: 40px;
+  border-radius: 5px;
+  background-color: var(--snippet-background-color);
+  margin: 10px;
+
+  * {
+    background: none;
+  }
 }
 
 .snippets-header {
-    width: 45vw;
-    height: 30px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    background-color: rgb(30, 140, 148) !important;  
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background-color: var(--snippet-header-background-color) !important;
+  border-radius: 5px 5px 0 0;
+  font-size: var(--header-font-size);
 }
 
 .snippet-tab {
-    padding: 5px;
+  padding: 5px;
 }
 
 .copy,
 .snippet-tab {
-    background: none;
-    color: whitesmoke;
-    cursor: pointer;
-    border-radius: 0px 0px 10px 10px;
+  background: none;
+  color: var(--snippet-header-text-color);
+  cursor: pointer;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.copy-tab {
+  &:hover {
+    border-radius: 0 5px 5px 5px;
+  }
+
+  &:active {
+    animation: zoom-in-zoom-out 0.2s 1 linear;
+  }
+}
+
+.copy {
+  height: calc(var(--header-font-size) + 1px);
+  width: calc(var(--header-font-size) + 1px);
+  fill: var(--snippet-header-text-color);
 }
 
 .snippet-tab:hover {
-    background-color: rgba(0,0,0, 0.3);
+  background-color: lighten($color: #1a212b, $amount: 8%);
 }
 .snippets {
-    padding-left: 10px;
-    color: antiquewhite;
+  font-size: var(--snippet-font-size);
+  letter-spacing: 0.8px;
+  padding-left: 10px;
+  overflow: auto;
+}
+
+.snippets::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background-color: var(--snippet-header-background-color);
+}
+
+.snippets::-webkit-scrollbar {
+  background-color: var(--snippet-header-background-color);
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+.snippets::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: lighten($color: #1a212b, $amount: 8%);
+}
+
+.scope-level-1,
+.ka-token {
+  color: var(--ka-token-color);
+}
+
+.kb-token {
+  color: var(--kb-token-color);
+}
+.scope-level-2,
+.kc-token {
+  color: var(--kc-token-color);
+}
+
+.quoted-token {
+  color: var(--quoted-token-color);
+}
+
+.scope-level-3,
+.data-token {
+  color: var(--data-token-color);
+}
+
+.scope-level-4,
+.function-token {
+  color: var(--function-token-color);
+}
+
+.separator-token {
+  color: var(--separator-token-color);
+}
+
+.property-token {
+  color: var(--property-token-color);
+}
+
+.scope-level-5,
+.parameter-token {
+  color: var(--parameter-token-color);
+}
+
+.var-token {
+  color: var(--var-token-color);
+}
+
+.operator-token {
+  color: var(--operator-token-color);
+}
+
+.comment-token {
+  color: var(--comment-token-color);
+}
+
+.text-token {
+  color: var(--text-token-color);
+}
+
+.special-char-token {
+  color: var(--special-char-token-color);
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(0.7, 0.7);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

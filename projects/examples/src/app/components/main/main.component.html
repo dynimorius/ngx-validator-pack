@@ -4,510 +4,395 @@
       <div class="input-wrapper">
         <h3>addressValidator Example:</h3>
         <label for="address">Address Input Validation: </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          formControlName="address"
-          addressValidation
-          showValidation
-        />
+        <input type="text" name="address" id="address" formControlName="address" addressValidation showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="addressTSSnippet"
-        [htmlSnippet]="addressHTMLSnippet"
+        [snippets]="[
+          { template: addressTSSnippet, format: 'TypeScript' },
+          { template: addressHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>alphabetOnlyValidator Example:</h3>
         <label for="alphabet">Alphabet Only Input Validation: </label>
-        <input
-          type="text"
-          name="alphabet"
-          id="alphabet"
-          formControlName="alphabet"
-          showValidation
-        />
+        <input type="text" name="alphabet" id="alphabet" formControlName="alphabet" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="alphabetTSSnippet"
-        [htmlSnippet]="alphabetHTMLSnippet"
-      ></app-snippets>
+        [snippets]="[
+          { template: alphabetTSSnippet, format: 'TypeScript' },
+          { template: alphabetHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
+      >
+      </app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>dateDD_MM_YYYYValidator Example:</h3>
-        <label for="dateDDMMYYYY"
-          >Date format dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY Input Validation:
-        </label>
-        <input
-          type="text"
-          name="dateDDMMYYYY"
-          id="dateDDMMYYYY"
-          formControlName="dateDDMMYYYY"
-          showValidation
-        />
+        <label for="dateDDMMYYYY">Date format dd-MM-YYYY or dd.MM.YYYY or dd/MM/YYYY Input Validation: </label>
+        <input type="text" name="dateDDMMYYYY" id="dateDDMMYYYY" formControlName="dateDDMMYYYY" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="dateDDMMYYYYTSSnippet"
-        [htmlSnippet]="dateDDMMYYYYTSSnippet"
+        [snippets]="[
+          { template: dateDDMMYYYYTSSnippet, format: 'TypeScript' },
+          { template: dateDDMMYYYYTSSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>dateYYYY_MM_DDValidator Example:</h3>
-        <label for="dateYYYYMMDD"
-          >Date format YYYY-MM-dd Input Validation:
-        </label>
-        <input
-          type="text"
-          name="dateYYYYMMDD"
-          id="dateYYYYMMDD"
-          formControlName="dateYYYYMMDD"
-          showValidation
-        />
+        <label for="dateYYYYMMDD">Date format YYYY-MM-dd Input Validation: </label>
+        <input type="text" name="dateYYYYMMDD" id="dateYYYYMMDD" formControlName="dateYYYYMMDD" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="dateYYYYMMDDTSSnippet"
-        [htmlSnippet]="dateYYYYMMDDHTMLSnippet"
+        [snippets]="[
+          { template: dateYYYYMMDDTSSnippet, format: 'TypeScript' },
+          { template: dateYYYYMMDDHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>emailValidator Example:</h3>
         <label for="email">Email Input Validation: </label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          formControlName="email"
-          showValidation
-        />
+        <input type="text" name="email" id="email" formControlName="email" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="emailTSSnippet"
-        [htmlSnippet]="emailHTMLSnippet"
+        [snippets]="[
+          { template: emailTSSnippet, format: 'TypeScript' },
+          { template: emailHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>ipAddressValidator Example:</h3>
         <label for="ipAddress">IP Address Input Validation: </label>
-        <input
-          type="text"
-          name="ipAddress"
-          id="ipAddress"
-          formControlName="ipAddress"
-          showValidation
-        />
+        <input type="text" name="ipAddress" id="ipAddress" formControlName="ipAddress" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="ipAddressTSSnippet"
-        [htmlSnippet]="ipAddressHTMLSnippet"
+        [snippets]="[
+          { template: ipAddressTSSnippet, format: 'TypeScript' },
+          { template: ipAddressHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>iPv4Validator Example:</h3>
         <label for="ipv4">IPv4 Input Validation: </label>
-        <input
-          type="text"
-          name="ipv4"
-          id="ipv4"
-          formControlName="ipv4"
-          showValidation
-        />
+        <input type="text" name="ipv4" id="ipv4" formControlName="ipv4" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="ipv4TSSnippet"
-        [htmlSnippet]="ipv4HTMLSnippet"
+        [snippets]="[
+          { template: ipv4TSSnippet, format: 'TypeScript' },
+          { template: ipv4HTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>iPv6Validator Example:</h3>
         <label for="ipv6">IPv6 Input Validation: </label>
-        <input
-          type="text"
-          name="ipv6"
-          id="ipv"
-          formControlName="ipv6"
-          showValidation
-        />
+        <input type="text" name="ipv6" id="ipv" formControlName="ipv6" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="ipv6TSSnippet"
-        [htmlSnippet]="ipv6HTMLSnippet"
+        [snippets]="[
+          { template: ipv6TSSnippet, format: 'TypeScript' },
+          { template: ipv6HTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>numericsOnlyValidator Example:</h3>
         <label for="numeric">Numeric Only Input Validation: </label>
-        <input
-          type="text"
-          name="numeric"
-          id="numeric"
-          formControlName="numeric"
-          showValidation
-        />
+        <input type="text" name="numeric" id="numeric" formControlName="numeric" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="numericTSSnippet"
-        [htmlSnippet]="numericHTMLSnippet"
+        [snippets]="[
+          { template: numericTSSnippet, format: 'TypeScript' },
+          { template: numericHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>noSpecialsValidator Example:</h3>
-        <label for="noSpecial"
-          >No Special Characters allowed Input Validation:
-        </label>
-        <input
-          type="text"
-          name="noSpecial"
-          id="noSpecial"
-          formControlName="noSpecial"
-          showValidation
-        />
+        <label for="noSpecial">No Special Characters allowed Input Validation: </label>
+        <input type="text" name="noSpecial" id="noSpecial" formControlName="noSpecial" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="noSpecialTSSnippet"
-        [htmlSnippet]="noSpecialHTMLSnippet"
+        [snippets]="[
+          { template: noSpecialTSSnippet, format: 'TypeScript' },
+          { template: noSpecialHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>passportValidator Example:</h3>
         <label for="passport">Passport Input Validation: </label>
-        <input
-          type="text"
-          name="passport"
-          id="passport"
-          formControlName="passport"
-          showValidation
-        />
+        <input type="text" name="passport" id="passport" formControlName="passport" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="passportTSSnippet"
-        [htmlSnippet]="passportHTMLSnippet"
+        [snippets]="[
+          { template: passportTSSnippet, format: 'TypeScript' },
+          { template: passportHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>passwordValidator Example:</h3>
         <label for="password">Password Input Validation: </label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          formControlName="password"
-          showValidation
-        />
+        <input type="text" name="password" id="password" formControlName="password" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="passwordTSSnippet"
-        [htmlSnippet]="passwordHTMLSnippet"
+        [snippets]="[
+          { template: passwordTSSnippet, format: 'TypeScript' },
+          { template: passwordHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>phoneNumberValidator Example:</h3>
         <label for="phone">Phone Input Validation: </label>
-        <input
-          type="text"
-          name="phone"
-          id="phone"
-          formControlName="phone"
-          showValidation
-        />
+        <input type="text" name="phone" id="phone" formControlName="phone" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="phoneTSSnippet"
-        [htmlSnippet]="phoneHTMLSnippet"
+        [snippets]="[
+          { template: phoneTSSnippet, format: 'TypeScript' },
+          { template: phoneHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>spaceValidator Example:</h3>
         <label for="space">Space Input Validation: </label>
-        <input
-          type="text"
-          name="space"
-          id="space"
-          formControlName="space"
-          showValidation
-        />
+        <input type="text" name="space" id="space" formControlName="space" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="spaceTSSnippet"
-        [htmlSnippet]="spaceHTMLSnippet"
+        [snippets]="[
+          { template: spaceTSSnippet, format: 'TypeScript' },
+          { template: spaceHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>spaceRestrictionValidator Example:</h3>
-        <label for="spaceRes"
-          >Leading and trailing Space Input Validation:
-        </label>
-        <input
-          type="text"
-          name="spaceRes"
-          id="spaceRes"
-          formControlName="spaceRes"
-          showValidation
-        />
+        <label for="spaceRes">Leading and trailing Space Input Validation: </label>
+        <input type="text" name="spaceRes" id="spaceRes" formControlName="spaceRes" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="spaceResTSSnippet"
-        [htmlSnippet]="spaceResHTMLSnippet"
+        [snippets]="[
+          { template: spaceResTSSnippet, format: 'TypeScript' },
+          { template: spaceResHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>ssnValidator Example:</h3>
         <label for="ssn">SSN Input Validation: </label>
-        <input
-          type="text"
-          name="ssn"
-          id="ssn"
-          formControlName="ssn"
-          showValidation
-        />
+        <input type="text" name="ssn" id="ssn" formControlName="ssn" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="ssnTSSnippet"
-        [htmlSnippet]="ssnHTMLSnippet"
+        [snippets]="[
+          { template: ssnTSSnippet, format: 'TypeScript' },
+          { template: ssnHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>timeHH_MM_12Validator Example:</h3>
-        <label for="timeHHMM12"
-          >Time HH:MM 12 hour format Input Validation:
-        </label>
-        <input
-          type="text"
-          name="timeHHMM12"
-          id="timeHHMM12"
-          formControlName="timeHHMM12"
-          showValidation
-        />
+        <label for="timeHHMM12">Time HH:MM 12 hour format Input Validation: </label>
+        <input type="text" name="timeHHMM12" id="timeHHMM12" formControlName="timeHHMM12" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="timeHHMM12TSSnippet"
-        [htmlSnippet]="timeHHMM12HTMLSnippet"
+        [snippets]="[
+          { template: timeHHMM12TSSnippet, format: 'TypeScript' },
+          { template: timeHHMM12HTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>timeHH_MM_24Validator Example:</h3>
-        <label for="timeHHMM24"
-          >Time HH:MM 24 hour format Input Validation:
-        </label>
-        <input
-          type="text"
-          name="timeHHMM24"
-          id="timeHHMM24"
-          formControlName="timeHHMM24"
-          showValidation
-        />
+        <label for="timeHHMM24">Time HH:MM 24 hour format Input Validation: </label>
+        <input type="text" name="timeHHMM24" id="timeHHMM24" formControlName="timeHHMM24" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="timeHHMM24TSSnippet"
-        [htmlSnippet]="timeHHMM24HTMLSnippet"
+        [snippets]="[
+          { template: timeHHMM24TSSnippet, format: 'TypeScript' },
+          { template: timeHHMM24HTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>timeHH_MM_SS_24Validator Example:</h3>
-        <label for="timeHHMMSS24"
-          >Time HH:MM:SS 24 hour format Input Validation:
-        </label>
-        <input
-          type="text"
-          name="timeHHMMSS24"
-          id="timeHHMMSS24"
-          formControlName="timeHHMMSS24"
-          showValidation
-        />
+        <label for="timeHHMMSS24">Time HH:MM:SS 24 hour format Input Validation: </label>
+        <input type="text" name="timeHHMMSS24" id="timeHHMMSS24" formControlName="timeHHMMSS24" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="timeHHMMSS24TSSnippet"
-        [htmlSnippet]="timeHHMMSS24HTMLSnippet"
+        [snippets]="[
+          { template: timeHHMMSS24TSSnippet, format: 'TypeScript' },
+          { template: timeHHMMSS24HTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>urlValidator Example:</h3>
         <label for="url">URL Input Validation: </label>
-        <input
-          type="text"
-          name="url"
-          id="url"
-          formControlName="url"
-          showValidation
-        />
+        <input type="text" name="url" id="url" formControlName="url" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="urlTSSnippet"
-        [htmlSnippet]="urlHTMLSnippet"
+        [snippets]="[
+          { template: urlTSSnippet, format: 'TypeScript' },
+          { template: urlHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>zipCodeValidator Example:</h3>
         <label for="zipCode">Zip Code Input Validation: </label>
-        <input
-          type="text"
-          name="zipCode"
-          id="zipCode"
-          formControlName="zipCode"
-          showValidation
-        />
+        <input type="text" name="zipCode" id="zipCode" formControlName="zipCode" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="zipCodeTSSnippet"
-        [htmlSnippet]="zipCodeHTMLSnippet"
+        [snippets]="[
+          { template: zipCodeTSSnippet, format: 'TypeScript' },
+          { template: zipCodeHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>compareToValidator Example:</h3>
-        <label for="compareDate"
-          >Compares if the value is greater then or equal to to the previous
-          input:
-        </label>
-        <input
-          type="date"
-          name="compareDate"
-          id="compareDate"
-          formControlName="compareDate"
-          showValidation
-        />
+        <label for="compareDate">Compares if the value is greater then or equal to to the previous input: </label>
+        <input type="date" name="compareDate" id="compareDate" formControlName="compareDate" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="compareDateTSSnippet"
-        [htmlSnippet]="compareDateHTMLSnippet"
+        [snippets]="[
+          { template: compareDateTSSnippet, format: 'TypeScript' },
+          { template: compareDateHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>earlierThenValidator Example:</h3>
-        <label for="earlierDate"
-          >Compares if the value is earlier then today:
-        </label>
-        <input
-          type="date"
-          name="laterDate"
-          id="earlierDate"
-          formControlName="earlierDate"
-          showValidation
-        />
+        <label for="earlierDate">Compares if the value is earlier then today: </label>
+        <input type="date" name="laterDate" id="earlierDate" formControlName="earlierDate" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="earlierDateTSSnippet"
-        [htmlSnippet]="earlierDateHTMLSnippet"
+        [snippets]="[
+          { template: earlierDateTSSnippet, format: 'TypeScript' },
+          { template: earlierDateHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>laterThenValidator Example:</h3>
-        <label for="laterDate"
-          >Compares if the value is later then or equal to to the previous
-          input:
-        </label>
-        <input
-          type="date"
-          name="laterDate"
-          id="laterDate"
-          formControlName="laterDate"
-          showValidation
-        />
+        <label for="laterDate">Compares if the value is later then or equal to to the previous input: </label>
+        <input type="date" name="laterDate" id="laterDate" formControlName="laterDate" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="laterDateTSSnippet"
-        [htmlSnippet]="laterDateHTMLSnippet"
+        [snippets]="[
+          { template: laterDateTSSnippet, format: 'TypeScript' },
+          { template: laterDateHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>requiredWhenValidator Example:</h3>
-        <label for="requiredCheck"
-          >This triggers validation on a following input:
-        </label>
-        <input
-          type="checkbox"
-          name="requiredCheck"
-          id="requiredCheck"
-          (click)="requireChange($event)"
-        />
+        <label for="requiredCheck">This triggers validation on a following input: </label>
+        <input type="checkbox" name="requiredCheck" id="requiredCheck" (click)="requireChange($event)" />
         <label for="requiredWhen">Conditional validation on an input: </label>
-        <input
-          type="text"
-          name="requiredWhen"
-          id="requiredWhen"
-          formControlName="requiredWhen"
-          showValidation
-        />
+        <input type="text" name="requiredWhen" id="requiredWhen" formControlName="requiredWhen" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="requiredWhenTSSnippet"
-        [htmlSnippet]="requiredWhenHTMLSnippet"
+        [snippets]="[
+          { template: requiredWhenTSSnippet, format: 'TypeScript' },
+          { template: requiredWhenHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>linkToValidator Example:</h3>
         <label for="linkTo">This input is linked to the following one: </label>
-        <input
-          type="text"
-          name="linkTo"
-          id="linkTo"
-          formControlName="linkTo"
-          showValidation
-        />
+        <input type="text" name="linkTo" id="linkTo" formControlName="linkTo" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="linkToTSSnippet"
-        [htmlSnippet]="linkToHTMLSnippet"
+        [snippets]="[
+          { template: linkToTSSnippet, format: 'TypeScript' },
+          { template: linkToHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>linkedToValidator Example:</h3>
-        <label for="linkedTo"
-          >This input has been linked to by the previous one:
-        </label>
-        <input
-          type="text"
-          name="linkedTo"
-          id="linkedTo"
-          formControlName="linkedTo"
-          showValidation
-        />
+        <label for="linkedTo">This input has been linked to by the previous one: </label>
+        <input type="text" name="linkedTo" id="linkedTo" formControlName="linkedTo" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="linkedToTSSnippet"
-        [htmlSnippet]="linkedToHTMLSnippet"
+        [snippets]="[
+          { template: linkedToTSSnippet, format: 'TypeScript' },
+          { template: linkedToHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>regexpValidator Example:</h3>
         <label for="regexp">RegExp Validation: </label>
-        <input
-          type="text"
-          name="regexp"
-          id="regexp"
-          formControlName="regexp"
-          showValidation
-        />
+        <input type="text" name="regexp" id="regexp" formControlName="regexp" showValidation />
       </div>
       <app-snippets
-        [tsSnippet]="regexpTSSnippet"
-        [htmlSnippet]="regexpToHTMLSnippet"
+        [snippets]="[
+          { template: regexpTSSnippet, format: 'TypeScript' },
+          { template: regexpToHTMLSnippet, format: 'HTML' }
+        ]"
+        [style]="{ width: '45vw' }"
       ></app-snippets>
     </div>
     <div class="snippet-example-pair">
@@ -522,25 +407,15 @@
           showValidation
         />
       </div>
-      <app-snippets
-
-      ></app-snippets>
+      <app-snippets [style]="{ width: '45vw' }"></app-snippets>
     </div>
     <div class="snippet-example-pair">
       <div class="input-wrapper">
         <h3>Word count Example:</h3>
         <label for="wordCount">Word Count Validation: </label>
-        <input
-          type="text"
-          name="wordCount"
-          id="wordCount"
-          formControlName="wordCount"
-          showValidation
-        />
+        <input type="text" name="wordCount" id="wordCount" formControlName="wordCount" showValidation />
       </div>
-      <app-snippets
-
-      ></app-snippets>
+      <app-snippets [style]="{ width: '45vw' }"></app-snippets>
     </div>
   </form>
 </div>

@@ -513,7 +513,7 @@ exampleForm!: FormGroup;
 constructor(private fb: FormBuilder) {}
 
 ngOnInit(): void {
-    this.exampleForm.fb.group{
+    this.exampleForm.fb.group({
         compare: [null],
         if: [null],
         ifNot: [null],
